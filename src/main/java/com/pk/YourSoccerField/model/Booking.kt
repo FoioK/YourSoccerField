@@ -11,7 +11,7 @@ data class Booking(
         val id: Long,
 
         @ManyToOne
-        val user: User,
+        val user: UserEntity,
 
         val startDate: LocalDateTime,
 
