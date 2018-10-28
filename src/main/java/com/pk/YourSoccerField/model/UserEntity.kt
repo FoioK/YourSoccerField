@@ -33,7 +33,7 @@ class UserEntity {
     var secondName: String? = null
 
     @Column(nullable = false, length = 32, table = "user_detail")
-    var nickName: String? = null
+    var nickname: String? = null
 
     @Column(nullable = false, table = "user_detail")
     var createTime: LocalDateTime? = null

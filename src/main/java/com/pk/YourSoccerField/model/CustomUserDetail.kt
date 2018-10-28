@@ -8,9 +8,9 @@ class CustomUserDetail(user: UserEntity) :
         User(user.email, user.password, user.grantedAuthorityList) {
 
     var id: Long? = null
-    private val code: Long?
+    val code: Long?
     var email: String? = null
-    private val isActive: Boolean
+    val isActive: Boolean
     var createTime: LocalDateTime? = null
 
     init {

@@ -16,5 +16,5 @@ interface PermissionRepository {
     }
 
     @Query(value = getPermissionQuery, nativeQuery = true)
-    fun getPermissions(login: String): List<String>
+    fun getPermissions(email: String): List<String>
 }
