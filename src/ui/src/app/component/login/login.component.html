@@ -1,18 +1,15 @@
-<div>
-  <form [formGroup]="loginForm"
-        (submit)="logIn()">
-    <input class="form-control"
-           formControlName="email"
-           type="email"
-           placeholder="Enter email"><br>
-    <input class="form-control"
-           formControlName="password"
-           type="password"
-           placeholder="Enter password"><br>
-    <button class="btn btn-success"
-            type="submit"
-            [disabled]="loginForm.invalid">
-      LOG IN
-    </button>
-  </form>
+<div class="container-body">
+  <section class="container container-center">
+    <form id="login-form" [formGroup]="loginForm" (submit)="logIn()">
+      <div class="row justify-content-center">
+        <input class="form-control col-5 col-sm-5" type="email" placeholder="Email" formControlName="email">
+      </div>
+      <div class="row justify-content-center">
+        <input class="form-control col-5 col-sm-5" type="password" placeholder="password" formControlName="password">
+      </div>
+      <div class="row justify-content-center">
+        <button class="col-5 col-sm-5" type="submit" [disabled]="loginForm.invalid">Log In</button>
+      </div>
+    </form>
+  </section>
 </div>
