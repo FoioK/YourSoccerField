@@ -13,7 +13,7 @@ data class UserRole(
         val id: Long,
 
         @ManyToOne
-        val user: User,
+        val user: UserEntity,
 
         @ManyToOne
         val role: Role
