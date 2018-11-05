@@ -1,13 +1,14 @@
 package com.pk.YourSoccerField.service.dtoModel;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 public class UserDTO {
 
     private Long id;
     private Long code;
-    @NotBlank private String email;
-    @NotBlank private String password;
+    @NotBlank  @Email private String email;
+    private String password;
     private boolean isActive;
     @NotBlank private String firstName;
     @NotBlank private String secondName;
