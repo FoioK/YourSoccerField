@@ -17,4 +17,11 @@ data class Role(
 
         @OneToMany(mappedBy = "permission")
         val permissions: List<RolePermission>
-)
+) {
+        constructor() : this (
+                0,
+                "",
+                emptyList(),
+                emptyList()
+        )
+}
