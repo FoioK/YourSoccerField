@@ -1,7 +1,9 @@
 package com.pk.YourSoccerField.repository
 
 import org.springframework.data.jpa.repository.Query
+import org.springframework.stereotype.Repository
 
+@Repository
 interface PermissionRepository {
 
     companion object {
