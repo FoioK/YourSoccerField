@@ -1,0 +1,82 @@
+*{
+  margin:0;
+  padding:0;
+  border:none;
+  box-sizing: border-box;
+}
+
+.container-body{
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background: url("https://images.pexels.com/photos/54567/pexels-photo-54567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+.container-body::before{
+  content: '';
+	position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: linear-gradient(to bottom right,#065888,#077a3b,#09a750);
+	opacity: .4;
+}
+
+.container-center{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  background-color: rgba(46, 46, 46, 0.79);
+  padding:30px 10px 20px 10px;
+  border-radius: 5px;
+}
+
+.form-item{
+  padding: 5px;
+}
+
+.btn-submit{
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.form-title{
+  text-align: center;
+  line-height: 20px;
+  font-size:24px;
+  color:#fff;
+  margin: 10px 0px 10px 0px;
+}
+
+.form-logo{
+  position: absolute;
+  top:-35px;
+  left:50%;
+  transform: translate(-50%,0%);
+  font-size: 70px;
+  color: #fff;
+  animation-name: bounce;
+  animation-duration: 2s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+@keyframes bounce{
+  0%{
+    transform: translate(-50%,-80px);
+  }
+  25%{
+    transform: translate(-50%,10px);
+  }
+  50%{
+    transform: translate(-50%,-40px);
+  }
+  75%,100%{
+    transform: translate(-50%,0px);
+  }
+}
