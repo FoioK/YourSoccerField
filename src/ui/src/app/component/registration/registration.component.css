@@ -1,0 +1,118 @@
+*{
+  margin:0;
+  padding:0;
+  border:none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container-body{
+  min-height: 100vh;
+  background: url("https://images.pexels.com/photos/54567/pexels-photo-54567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+.container-body::before{
+  content: '';
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right: 0;
+  background-image: -webkit-gradient(linear,left top, right bottom,from(#065888),color-stop(#077a3b),to(#09a750));
+  background-image: linear-gradient(to bottom right,#065888,#077a3b,#09a750);
+	opacity: .4;
+}
+
+.container-center{
+  background-color: rgba(46, 46, 46, 0.79);
+  padding:20px 20px 20px 20px;
+  border-radius: 5px;
+  margin:20px;
+}
+
+.form-item{
+  margin: 5px;
+  height: 60px;
+}
+
+.form-title{
+  text-align: center;
+  line-height: 20px;
+  font-size:24px;
+  color:#fff;
+  margin: 20px 0px 20px 0px;
+}
+
+.form-input{
+  height: 45px;
+}
+
+.form-btn{
+  height: 50px;
+}
+
+.form-logo{
+  position: absolute;
+  top:-35px;
+  left:50%;
+  -webkit-transform: translate(-50%,0%);
+          transform: translate(-50%,0%);
+  font-size: 70px;
+  color: #fff;
+  -webkit-animation-name: bounce;
+          animation-name: bounce;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+.form-qustion{
+  margin-left: 10px;
+  margin-right: 10px;
+  color:#fff;
+}
+
+@-webkit-keyframes bounce{
+  0%{
+    -webkit-transform: translate(-50%,-80px);
+            transform: translate(-50%,-80px);
+  }
+  25%{
+    -webkit-transform: translate(-50%,10px);
+            transform: translate(-50%,10px);
+  }
+  50%{
+    -webkit-transform: translate(-50%,-40px);
+            transform: translate(-50%,-40px);
+  }
+  75%,100%{
+    -webkit-transform: translate(-50%,0px);
+            transform: translate(-50%,0px);
+  }
+}
+
+@keyframes bounce{
+  0%{
+    -webkit-transform: translate(-50%,-80px);
+            transform: translate(-50%,-80px);
+  }
+  25%{
+    -webkit-transform: translate(-50%,10px);
+            transform: translate(-50%,10px);
+  }
+  50%{
+    -webkit-transform: translate(-50%,-40px);
+            transform: translate(-50%,-40px);
+  }
+  75%,100%{
+    -webkit-transform: translate(-50%,0px);
+            transform: translate(-50%,0px);
+  }
+}

@@ -1,0 +1,32 @@
+<div class="d-flex align-items-center justify-content-center container-body">
+  <section class="col-8 col-sm-8 col-lg-4 container-center ">
+    <div class="justify-content-center">
+          <h1 class="form-title">Sign Up</h1>
+      </div>
+    <form id="login-form" [formGroup]="loginForm" (submit)="logIn()">
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input" type="text" placeholder="Nickname" formControlName="nickname">
+      </div>
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input" type="text" placeholder="First Name" formControlName="firstName">
+      </div>
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input" type="text" placeholder="Second Name" formControlName="secondName">
+      </div>
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input" type="email" placeholder="Email" formControlName="email">
+      </div>
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input" type="password" placeholder="password" formControlName="password">
+      </div>
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input" type="password" placeholder="password">
+      </div>
+      <div class="justify-content-center form-item">
+        <button class=" btn btn-primary form-btn" type="submit" [disabled]="loginForm.invalid">Sign Up</button>
+          <span class="form-qustion">Are you member ?</span>
+          <span>Click here to login</span>
+      </div>
+    </form>
+  </section>
+</div>
