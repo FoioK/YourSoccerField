@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(rollbackFor = SQLException.class)
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public UserDTO createUser(UserDTO userDTO) {
         if (userDTO == null || userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
             throw new CreateEntityException(
@@ -84,12 +84,14 @@ public class UserServiceImpl implements UserService {
 
         userDTO.setActive(true);
         userDTO.setCreateTime(LocalDateTime.now().toString());
-        userDTO.setCode(this.findNextUserCode());
-        UserEntity userEntity = userRepository.save(userFromDTO.createFromDTO(userDTO));
 
-        this.updateNextUserCode(userEntity.getCode());
+        Long userCode = this.findNextUserCode();
         Role role = this.findRoleByName("user");
-        insertUserRole(userEntity.getId(), role.getId());
+        insertUserRole(userCode, role.getId());
+
+        userDTO.setCode(userCode);
+        UserEntity userEntity = userRepository.save(userFromDTO.createFromDTO(userDTO));
+        this.updateNextUserCode(userEntity.getCode());
 
         return this.userToDTO.createFromEntity(userEntity);
     }
@@ -103,15 +105,6 @@ public class UserServiceImpl implements UserService {
                 )).longValue();
     }
 
-    private void updateNextUserCode(Long actualCode) {
-        if (this.userRepository.updateNextUserCode(actualCode + 1) == 0) {
-            throw new UpdateEntityException(
-                    "Cannot update next user code",
-                    ErrorCode.UPDATE_NEXT_USER_CODE
-            );
-        }
-    }
-
     private Role findRoleByName(String name) {
         return this.roleRepository
                 .findByName(name)
@@ -121,12 +114,21 @@ public class UserServiceImpl implements UserService {
                 ));
     }
 
-    private void insertUserRole(Long userId, long roleId) {
-        if (userRepository.insertUserRole(userId, roleId) < 1) {
+    private void insertUserRole(Long userCode, long roleId) {
+        if (userRepository.insertUserRole(userCode, roleId) < 1) {
             new AppException(
                     "Error inserting data into the user_role table",
                     HttpStatus.INSUFFICIENT_STORAGE,
                     ErrorCode.INSERT_ERROR);
+        }
+    }
+
+    private void updateNextUserCode(Long actualCode) {
+        if (this.userRepository.updateNextUserCode(actualCode + 1) == 0) {
+            throw new UpdateEntityException(
+                    "Cannot update next user code",
+                    ErrorCode.UPDATE_NEXT_USER_CODE
+            );
         }
     }
 }

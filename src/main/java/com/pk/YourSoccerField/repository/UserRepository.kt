@@ -28,7 +28,7 @@ interface UserRepository : PermissionRepository, JpaRepository<UserEntity, Long>
     @Transactional
     @Query(value = insertUserRole, nativeQuery = true)
     fun insertUserRole(
-            @Param("userId") userId: Long,
+            @Param("userCode") userCode: Long,
             @Param("roleId") roleId: Long): Int
 
     companion object {
@@ -37,7 +37,7 @@ interface UserRepository : PermissionRepository, JpaRepository<UserEntity, Long>
 
         const val updateNextUserCode = "UPDATE UserCode uc SET next_code = :code WHERE id = 1"
 
-        const val insertUserRole = "INSERT INTO user_role (user_id, role_id) " +
-                "VALUES (:userId, :roleId)"
+        const val insertUserRole = "INSERT INTO user_role (user_code, role_id) " +
+                "VALUES (:userCode, :roleId)"
     }
 }
