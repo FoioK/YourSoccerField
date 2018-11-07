@@ -3,7 +3,7 @@ spring:
     name: your soccer field
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: "jdbc:mysql://149.156.136.151:3306"
+    url: "jdbc:mysql://149.156.136.151:3306/kkopacz"
     username: "kkopacz"
     password: "1234567890."
     testOnBorrow: true
