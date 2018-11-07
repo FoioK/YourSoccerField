@@ -12,8 +12,7 @@ data class UserRole(
         @GeneratedValue
         val id: Long?,
 
-        @ManyToOne
-        val user: UserEntity,
+        val userCode: Long,
 
         @ManyToOne
         val role: Role

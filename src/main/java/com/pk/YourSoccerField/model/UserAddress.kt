@@ -12,8 +12,7 @@ data class UserAddress(
         @GeneratedValue
         val id: Long,
 
-        @ManyToOne
-        val user: UserEntity,
+        val userCode: Long,
 
         @ManyToOne
         val address: Address

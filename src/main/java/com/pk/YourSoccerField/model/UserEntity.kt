@@ -38,15 +38,6 @@ class UserEntity {
     @Column(nullable = false, table = "user_detail")
     var createTime: LocalDateTime? = null
 
-    @OneToMany(mappedBy = "user")
-    var roles: Set<UserRole>? = null
-
-    @OneToMany(mappedBy = "user")
-    var addresses: List<UserAddress>? = null
-
-    @OneToMany(mappedBy = "user")
-    var bookings: List<Booking>? = null
-
     @Transient
     var grantedAuthorityList: Collection<GrantedAuthority> = ArrayList()
 }
