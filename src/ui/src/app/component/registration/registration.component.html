@@ -22,10 +22,10 @@
       <div class="justify-content-center form-item">
         <input class="form-control form-input" type="password" placeholder="password">
       </div>
-      <div class="justify-content-center form-item">
-        <button class=" btn btn-primary form-btn" type="submit" [disabled]="loginForm.invalid">Sign Up</button>
-          <span class="form-qustion">Are you member ?</span>
-          <span>Click here to login</span>
+      <div class="row h-100 no-gutters justify-content-center align-items-center form-item">
+        <div class="col-12 col-sm-4 col-lg-4"><button class=" btn btn-primary w-100 form-btn" type="submit" [disabled]="loginForm.invalid">Sign Up</button></div>
+        <div class="col-6 col-sm-4 col-lg-4 text-center my-1"><span class="form-qustion">Are you member ?</span></div>
+        <div class="col-6 col-sm-4 col-lg-4 text-center my-1"><a class="form-qustion form-link" href="#">Click here to login</a></div>
       </div>
     </form>
   </section>

@@ -33,6 +33,7 @@
 }
 
 .form-item{
+  height: 100%;
   margin: 5px;
   height: 60px;
 }
@@ -74,9 +75,21 @@
 }
 
 .form-qustion{
-  margin-left: 10px;
-  margin-right: 10px;
+  font-size:14px;
+  text-align: center;
+  height: 100%;
+  width:100%;
+  margin-left:8px;
+  margin-right: 8px;
   color:#fff;
+}
+
+.form-link{
+  color:#0069d9;
+}
+
+.form-link:hover{
+  color:#2d94fc;
 }
 
 @-webkit-keyframes bounce{
