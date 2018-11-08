@@ -34,8 +34,8 @@
 
 .form-item{
   height: 100%;
-  margin: 5px;
-  height: 60px;
+  margin: 15px 5px 15px 5px;
+  position: relative;
 }
 
 .form-title{
@@ -51,27 +51,7 @@
 }
 
 .form-btn{
-  height: 50px;
-}
-
-.form-logo{
-  position: absolute;
-  top:-35px;
-  left:50%;
-  -webkit-transform: translate(-50%,0%);
-          transform: translate(-50%,0%);
-  font-size: 70px;
-  color: #fff;
-  -webkit-animation-name: bounce;
-          animation-name: bounce;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-delay: 0s;
-          animation-delay: 0s;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
+  height: 45px;
 }
 
 .form-qustion{
@@ -92,40 +72,20 @@
   color:#2d94fc;
 }
 
-@-webkit-keyframes bounce{
-  0%{
-    -webkit-transform: translate(-50%,-80px);
-            transform: translate(-50%,-80px);
-  }
-  25%{
-    -webkit-transform: translate(-50%,10px);
-            transform: translate(-50%,10px);
-  }
-  50%{
-    -webkit-transform: translate(-50%,-40px);
-            transform: translate(-50%,-40px);
-  }
-  75%,100%{
-    -webkit-transform: translate(-50%,0px);
-            transform: translate(-50%,0px);
-  }
+.form-icons{
+  position: absolute;
+  top:-7px;
+  right:13px;
+  transform: translate(0,50%);
+  font-size: 30px;
+  color: #000;
+  opacity: 0.3;
 }
 
-@keyframes bounce{
-  0%{
-    -webkit-transform: translate(-50%,-80px);
-            transform: translate(-50%,-80px);
-  }
-  25%{
-    -webkit-transform: translate(-50%,10px);
-            transform: translate(-50%,10px);
-  }
-  50%{
-    -webkit-transform: translate(-50%,-40px);
-            transform: translate(-50%,-40px);
-  }
-  75%,100%{
-    -webkit-transform: translate(-50%,0px);
-            transform: translate(-50%,0px);
-  }
+.form-input:focus + .form-icons{
+  color: #007bff;
+  opacity: 0.9;
+  transition:1.5s all;
 }
+
+

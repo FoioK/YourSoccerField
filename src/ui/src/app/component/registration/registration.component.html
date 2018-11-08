@@ -6,21 +6,27 @@
     <form id="login-form" [formGroup]="loginForm" (submit)="logIn()">
       <div class="justify-content-center form-item">
         <input class="form-control form-input" type="text" placeholder="Nickname" formControlName="nickname">
+        <i class="fas fa-user-tie form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
         <input class="form-control form-input" type="text" placeholder="First Name" formControlName="firstName">
+        <i class="fas fa-user-tie form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
         <input class="form-control form-input" type="text" placeholder="Second Name" formControlName="secondName">
+        <i class="fas fa-user-tie form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
         <input class="form-control form-input" type="email" placeholder="Email" formControlName="email">
+        <i class="fas fa-at form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
         <input class="form-control form-input" type="password" placeholder="password" formControlName="password">
+        <i class="fas fa-key form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
         <input class="form-control form-input" type="password" placeholder="password">
+        <i class="fas fa-key form-icons"></i>
       </div>
       <div class="row h-100 no-gutters justify-content-center align-items-center form-item">
         <div class="col-12 col-sm-4 col-lg-4"><button class=" btn btn-primary w-100 form-btn" type="submit" [disabled]="loginForm.invalid">Sign Up</button></div>
