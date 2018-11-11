@@ -1,5 +1,8 @@
 package com.pk.YourSoccerField.service;
 
+import com.pk.YourSoccerField.exception.ErrorCode;
+import com.pk.YourSoccerField.exception.MissingEntityException;
+import com.pk.YourSoccerField.exception.UnactivatedUserException;
 import com.pk.YourSoccerField.model.CustomUserDetail;
 import com.pk.YourSoccerField.model.UserEntity;
 import com.pk.YourSoccerField.repository.UserRepository;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
@@ -26,8 +30,10 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByEmail(email)
+        List<UserEntity> users = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User email not found!"));
+
+        UserEntity userEntity = findActiveUser(users);
 
         Collection<GrantedAuthority> permissions = new ArrayList<>();
         userRepository.getPermissions(email)
@@ -38,5 +44,23 @@ public class CustomUserDetailService implements UserDetailsService {
         userEntity.setGrantedAuthorityList(permissions);
 
         return new CustomUserDetail(userEntity);
+    }
+
+    private UserEntity findActiveUser(List<UserEntity> users) {
+        UserEntity userEntity = users.stream()
+                .filter(UserEntity::isActive)
+                .findAny().orElse(null);
+
+        if (userEntity != null) {
+            return userEntity;
+        } else if (users.size() == 1) {
+            throw new UnactivatedUserException(
+                    "Login operation is not allowed for non-activated users",
+                    ErrorCode.UNACTIVATED_USER);
+        } else {
+            throw new MissingEntityException(
+                    "User email not found",
+                    ErrorCode.NOT_FOUND_BY_EMAIL);
+        }
     }
 }
