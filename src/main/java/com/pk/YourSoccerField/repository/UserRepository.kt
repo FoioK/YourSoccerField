@@ -13,7 +13,7 @@ import java.util.*
 @Repository
 interface UserRepository : PermissionRepository, JpaRepository<UserEntity, Long> {
 
-    fun findByEmail(email: String): Optional<UserEntity>
+    fun findByEmail(email: String): Optional<List<UserEntity>>
 
     @Query(value = findNextUserCode, nativeQuery = true)
     @Transactional

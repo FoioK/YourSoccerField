@@ -14,7 +14,7 @@ class UserEntity {
     @GeneratedValue
     var id: Long? = null
 
-    @Column(nullable = false, updatable = false, unique = true)
+    @Column(nullable = false, updatable = false)
     var code: Long? = null
 
     @Column(nullable = false, length = 64)
