@@ -8,6 +8,7 @@ public enum ErrorCode {
     UPDATE_NEXT_USER_CODE,
     UNACTIVATED_USER,
     NOT_FOUND_BY_EMAIL,
+    DUPLICAT_USER_EMAIL,
 
     //ROLE
     NOT_FOUND_BY_NAME,

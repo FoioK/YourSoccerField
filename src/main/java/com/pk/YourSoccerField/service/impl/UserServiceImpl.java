@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Service
@@ -82,6 +83,12 @@ public class UserServiceImpl implements UserService {
             );
         }
 
+        if (isUserWithSameEMail(userDTO.getEmail())) {
+            throw new DuplicatEntityException(
+                    "Alredy exist user with this email address",
+                    ErrorCode.DUPLICAT_USER_EMAIL);
+        }
+
         userDTO.setActive(true);
         userDTO.setCreateTime(LocalDateTime.now().toString());
 
@@ -94,6 +101,12 @@ public class UserServiceImpl implements UserService {
         this.updateNextUserCode(userEntity.getCode());
 
         return this.userToDTO.createFromEntity(userEntity);
+    }
+
+    private boolean isUserWithSameEMail(String email) {
+        return userRepository.findByEmail(email)
+                .orElse(new ArrayList<>())
+                .size() != 0;
     }
 
     private Long findNextUserCode() {
