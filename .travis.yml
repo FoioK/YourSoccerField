@@ -3,6 +3,7 @@ language: java
 install: true
 
 script:
+- mvn kotlin:compile
 - mvn install
 
 dist: trusty
