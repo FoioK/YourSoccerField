@@ -6,9 +6,7 @@
 }
 
 .container-body{
-  height: 100vh;
-  width: 100vw;
-  position: relative;
+  min-height: 100vh;
   background: url("https://images.pexels.com/photos/54567/pexels-photo-54567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
   background-size: cover;
   position: relative;
@@ -26,22 +24,16 @@
 }
 
 .container-center{
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
   background-color: rgba(46, 46, 46, 0.79);
-  padding:30px 10px 20px 10px;
+  padding:20px 20px 20px 20px;
   border-radius: 5px;
+  margin:20px;
 }
 
 .form-item{
-  padding: 5px;
-}
-
-.btn-submit{
-  border-radius: 5px;
-  background-color: #ffffff;
+  height: 100%;
+  margin: 15px 5px 15px 5px;
+  position: relative;
 }
 
 .form-title{
@@ -49,7 +41,52 @@
   line-height: 20px;
   font-size:24px;
   color:#fff;
-  margin: 10px 0px 10px 0px;
+  margin: 20px 0px 20px 0px;
+}
+
+.form-input{
+  height: 45px;
+  padding-left: 50px;
+}
+
+.form-btn{
+  height: 45px;
+}
+
+.form-qustion{
+  font-size:14px;
+  text-align: center;
+  height: 100%;
+  width:100%;
+  margin-left:8px;
+  margin-right: 8px;
+  color:#fff;
+}
+
+.form-link{
+  color:#0069d9;
+  cursor: pointer;
+}
+
+.form-link:hover{
+  color:#2d94fc;
+}
+
+.form-icons{
+  position: absolute;
+  top:-7px;
+  left:11px;
+  transform: translate(0,50%);
+  width: 30px;
+  font-size: 30px;
+  color: #000;
+  opacity: 0.3;
+}
+
+.form-input:focus + .form-icons{
+  color: #007bff;
+  opacity: 0.9;
+  transition:1.5s all;
 }
 
 .form-logo{

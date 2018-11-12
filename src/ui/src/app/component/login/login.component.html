@@ -1,18 +1,22 @@
-<div class="container-body">
-  <section class="col-8 col-sm-8 col-lg-6 container-center">
+<div class="d-flex align-items-center justify-content-center container-body">
+  <section class="col-8 col-sm-8 col-lg-4 container-center ">
     <div class="justify-content-center">
         <i class="fas fa-futbol form-logo"></i>
           <h1 class="form-title">Your Socer Field</h1>
       </div>
-    <form id="login-form" [formGroup]="loginForm" (submit)="logIn()">
+    <form [formGroup]="loginForm" (submit)="logIn()">
       <div class="justify-content-center form-item">
-        <input class="form-control" type="email" placeholder="Email" formControlName="email">
+        <input class="form-control form-input" type="email" placeholder="Email" formControlName="email">
+        <i class="fas fa-at form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
-        <input class="form-control " type="password" placeholder="password" formControlName="password">
+        <input class="form-control form-input" type="password" placeholder="Password" formControlName="password">
+        <i class="fas fa-key form-icons"></i>
       </div>
-      <div class="justify-content-center form-item">
-        <button class=" btn btn-primary" type="submit" [disabled]="loginForm.invalid">Log In</button>
+      <div class="row h-100 no-gutters justify-content-center align-items-center form-item">
+        <div class="col-12 col-sm-4 col-lg-12"><button class=" btn btn-primary w-100 form-btn" type="submit" [disabled]="loginForm.invalid">Login</button></div>
+        <div class="col-6 col-sm-4 col-lg-6 text-center mt-3"><span class="form-qustion">Not a member yet?</span></div>
+        <div class="col-6 col-sm-4 col-lg-6 text-center mt-3"><span class="form-qustion form-link"><a [routerLink]="['/registration']">Create your account</a></span></div>
       </div>
     </form>
   </section>
