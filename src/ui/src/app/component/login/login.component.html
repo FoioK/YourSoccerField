@@ -16,7 +16,7 @@
       <div class="row h-100 no-gutters justify-content-center align-items-center form-item">
         <div class="col-12 col-sm-4 col-lg-12"><button class=" btn btn-primary w-100 form-btn" type="submit" [disabled]="loginForm.invalid">Login</button></div>
         <div class="col-6 col-sm-4 col-lg-6 text-center mt-3"><span class="form-qustion">Not a member yet?</span></div>
-        <div class="col-6 col-sm-4 col-lg-6 text-center mt-3"><span class="form-qustion form-link"><a [routerLink]="['/registration']">Create your account</a></span></div>
+        <div class="col-6 col-sm-4 col-lg-6 text-center mt-3"><span class="form-qustion form-link"><a [routerLink]="[getRegisterRoute()]">Create your account</a></span></div>
       </div>
     </form>
   </section>

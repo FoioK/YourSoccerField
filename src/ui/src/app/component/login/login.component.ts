@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../service/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Configuration} from "../../service/configuration";
+import {AppRoute} from "../../module/app-route";
 
 @Component({
   selector: 'app-login',
@@ -10,20 +12,18 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private configuration: Configuration) {
   }
 
   loginForm: FormGroup;
-
-  private emailReqExp: RegExp =
-    RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: [
         '', [
           Validators.required,
-          Validators.pattern(this.emailReqExp)
+          Validators.pattern(this.configuration.getEmailRegExp())
         ]
       ],
       password: ['', Validators.required,]
@@ -35,5 +35,9 @@ export class LoginComponent implements OnInit {
       this.loginForm.get('email').value,
       this.loginForm.get('password').value
     );
+  }
+
+  getRegisterRoute(): string {
+    return '/' + AppRoute.registration;
   }
 }
