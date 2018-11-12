@@ -3,7 +3,7 @@ spring:
     name: your soccer field
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: "jdbc:mysql://149.156.136.151:3306"
+    url: "jdbc:mysql://149.156.136.151:3306/kkopacz"
     username: "kkopacz"
     password: "1234567890."
     testOnBorrow: true
@@ -20,3 +20,44 @@ spring:
 
 server:
   port: 8080
+
+config:
+  oauth2:
+    privateKey: -----BEGIN RSA PRIVATE KEY-----
+      MIIEpgIBAAKCAQEA2dhkCFy8zchY2W7GzVjGo+QBcoluOXRXmtwNffjLZp9KyTQ4
+      Z0fY1n1pYn9ARAT/CJrMH75XIZxF53Kr6sI31ZR1KHlLCcqg7R4Z3koCTblAVJPD
+      KfSswG6eboW6bg+bc2/omwxhUpdzxGwtAtOGO5qXzwJg6sTMozbQn6T3xzWdKFws
+      rtDV6mLIt4jY5myM/DWXFEIGrh171R85LGCDngjSzQrMMvzgAbmSVLWMOjfPVOoL
+      MiOzUZJgc0zqdHO7VHaxYm/bVeyPAOqWzR72xUAP2zrpF/57XswuTmck4VyHcs4i
+      xHvqa44VPTVY9sahLxtf8crv/Baj0igLuZriowIDAQABAoIBAQDG7M+jxzNtYkan
+      /n0xZKC3Zexgb9ikRHX+5nS3lKoAQvNiufnLbhM3AfxqwjKoKjvM2rYNQp2EBpTa
+      3Z7ZV5LuyIsXc3MvNMYw4KzUjJZ/7OsukGPF+zSI4DpySFFOUZgtGIK6mtqANeaz
+      9ehATXGlGe0ITm670wve+p4VOeo9ECr5uVo3xMhQocEGU2OXHFZaIkmhDWvHtegN
+      VIhjK+323SqryB8aq7R9p1HtTt30h9TfnlZPMcUfwWZ6g9CwyK5aP2T5Qk93gq4x
+      FhzkJQwMj4sieMaHxS5NxTW9ZFHNbZvLBh9630Ji482mlsqUiB/DVB90cTROmvl8
+      4VZeIfh5AoGBAPx7gMI7GeRld+Ws5OKAbZuTFq/VgJZsOQZKbkJa0+YCEIC6GwK2
+      5cLTcWOb2ESsIKSZ8uk+tIcAh+b91nzOWSoRJuHCaE4i21vT9qk7HgQOj6xxjaju
+      5esem26qLGWNjtJiH7CEJabbdPuPhAcfQNejFDYculYEeS9jYYx/eCqHAoGBANzh
+      WhIbqpbKlHG5eBG2usNE5x91CQ1v8YHX7V75QyMAkHJgD351b1qjIO19EBFWaaKj
+      GVz8RHVwB95KDivAmBaBbfjm/K/06mTLOQn13x58IypCFj0XUJEpf8xzYcj1I+Ke
+      wfNV8vkDs9pcwIfRFf3+gAxgtl9jlVxo4I0u6wIFAoGBAKeYl7TWpG5OyJLF/L05
+      gQiHT8TyVUQEnKnHWH9laUlBz5CTeQCJReTYlGkJdzrGg3if1HXtsMn4mT3E+86m
+      7tsUvZmYgcJ0MuY2woI9gsQwokBWtDESO76h940zGvtiRw7yIZT7cz7aaEHgV0Sf
+      A1zgnLb6xNn6aDMDpiosJykbAoGBAMxb53TXihZnqb4qhi+Fa/hcmKYfJ1f6WWzz
+      tZfocThCPmLEA7HRv0wRn9Z6nlIcLDIgSsggUsqA85az17adQ1mXOINQWzwFEpRc
+      /hH8HQncesCPUnoFRzJ3PdmQa0l9nUz/65xSyjGgPlfq9uryBTHxtNE+7Z0Fytwr
+      4I5feWltAoGBAO2XiT97nDB+HseMoc20Jc1s4yZpDeAGNj9xL+rqeWw+G4H8Af4p
+      H9pJGnUACiWH6hSHxvotmMlrR4XXoaj1TwaS79qrq5H0Ey5A8Ha5VzrQ7624bee4
+      tlVn4t3FhFFvTk4mxPxHu5Ledi9QQxu3v65YdxsFAl1XQPMsDLK7pDV4
+      -----END RSA PRIVATE KEY-----
+    publicKey: -----BEGIN PUBLIC KEY-----
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2dhkCFy8zchY2W7GzVjG
+      o+QBcoluOXRXmtwNffjLZp9KyTQ4Z0fY1n1pYn9ARAT/CJrMH75XIZxF53Kr6sI3
+      1ZR1KHlLCcqg7R4Z3koCTblAVJPDKfSswG6eboW6bg+bc2/omwxhUpdzxGwtAtOG
+      O5qXzwJg6sTMozbQn6T3xzWdKFwsrtDV6mLIt4jY5myM/DWXFEIGrh171R85LGCD
+      ngjSzQrMMvzgAbmSVLWMOjfPVOoLMiOzUZJgc0zqdHO7VHaxYm/bVeyPAOqWzR72
+      xUAP2zrpF/57XswuTmck4VyHcs4ixHvqa44VPTVY9sahLxtf8crv/Baj0igLuZri
+      owIDAQAB
+      -----END PUBLIC KEY-----
+    clientid: ysf_id
+    clientSecret: ysf_secret

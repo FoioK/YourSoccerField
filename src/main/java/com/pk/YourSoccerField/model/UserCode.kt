@@ -1,19 +1,17 @@
 package com.pk.YourSoccerField.model
 
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
-import javax.persistence.ManyToOne
 
 @Entity
-data class UserAddress(
+data class UserCode (
 
         @Id
         @GeneratedValue
         val id: Long,
 
-        val userCode: Long,
-
-        @ManyToOne
-        val address: Address
+        @Column(nullable = false, insertable = false)
+        val nextCode: Long
 )

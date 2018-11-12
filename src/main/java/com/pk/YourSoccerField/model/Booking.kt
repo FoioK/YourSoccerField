@@ -10,8 +10,7 @@ data class Booking(
         @GeneratedValue
         val id: Long,
 
-        @ManyToOne
-        val user: User,
+        val userCode: Long,
 
         val startDate: LocalDateTime,
 

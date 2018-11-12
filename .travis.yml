@@ -1,0 +1,28 @@
+language: java
+
+install: true
+
+script:
+- mvn kotlin:compile
+- mvn install
+
+dist: trusty
+
+sudo: true
+
+services:
+- mysql
+
+addons:
+  apt:
+    sources:
+    - mysql-5.7-trusty
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+
+before_script:
+- mysql -u root -e 'CREATE DATABASE ysf;'
+- mysql -u root -e "CREATE USER 'ysf_user'@'127.0.0.1' IDENTIFIED BY 'admin';"
+- mysql -u root -e "GRANT ALL ON ysf.* TO 'ysf_user'@'localhost';"

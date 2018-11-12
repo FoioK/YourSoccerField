@@ -24,7 +24,7 @@ data class SoccerField(
         val length: Int,
 
         @Column(scale = 2)
-        val price: BigDecimal,
+        val price: BigDecimal?,
 
         val isLighting: Boolean,
 
