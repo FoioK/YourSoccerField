@@ -2,6 +2,9 @@ package com.pk.YourSoccerField.exception;
 
 public enum ErrorCode {
 
+    //INPUT VALIDATION
+    INVALID_INPUT,
+
     //USER
     INCORRECT_PASSWORD,
     NOT_FOUND_NEXT_USER_CODE,
