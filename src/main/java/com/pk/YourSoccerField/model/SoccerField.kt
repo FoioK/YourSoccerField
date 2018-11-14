@@ -14,10 +14,10 @@ data class SoccerField(
         val name: String,
 
         @ManyToOne
-        val address: Address,
+        val address: Address?,
 
         @ManyToOne
-        val surface: Surface,
+        val surface: Surface?,
 
         val width: Int,
 
