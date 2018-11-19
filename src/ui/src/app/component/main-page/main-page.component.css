@@ -1,0 +1,40 @@
+.container-body{
+  min-height: 100%;
+  height: 100vh;
+  background: url("https://images.pexels.com/photos/220444/pexels-photo-220444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  padding:20px;
+}
+
+.form-item{
+  height: 100%;
+  margin: 15px 5px 15px 5px;
+  position: relative;
+}
+
+.form-input{
+  height: 45px;
+  padding: 0px 50px 0px 15px;
+}
+
+.form-icons{
+  position: absolute;
+  top:-7px;
+  right:11px;
+  transform: translate(0,50%);
+  transform: translate(0,50%);
+  width: 30px;
+  font-size: 30px;
+  color: #000;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.form-title{
+  text-align: center;
+  line-height: 16px;
+  font-size:16px;
+  color:#fff;
+  margin: 20px 0px 20px 0px;
+}
