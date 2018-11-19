@@ -11,12 +11,14 @@ import {AppRoutingModule} from "./module/app-routing.module";
 import {RegistrationComponent} from './component/registration/registration.component';
 import {RegisterService} from "./service/register.service";
 import {ApiMapping} from "./service/api-mapping";
+import { MainPageComponent } from './component/main-page/main-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
