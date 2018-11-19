@@ -11,6 +11,7 @@ import {AppRoutingModule} from "./module/app-routing.module";
 import {RegistrationComponent} from './component/registration/registration.component';
 import {RegisterService} from "./service/register.service";
 import {ApiMapping} from "./service/api-mapping";
+import {NavbarComponent} from './component/navbar/navbar.component';
 import { MainPageComponent } from './component/main-page/main-page.component';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MainPageComponent } from './component/main-page/main-page.component';
     AppComponent,
     LoginComponent,
     RegistrationComponent,
+    NavbarComponent,
     MainPageComponent
   ],
   imports: [
