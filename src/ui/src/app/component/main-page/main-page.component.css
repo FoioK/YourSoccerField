@@ -38,3 +38,68 @@
   color:#fff;
   margin: 20px 0px 20px 0px;
 }
+
+.custom-dropdown{
+  background:#f3f3f3;
+}
+
+.filter-checkbox{
+  position: relative;
+  display: inline-block;
+  width:40px;
+  height: 20px;
+  border-radius: 10px;
+  background: #c6c6c6;
+  -webkit-appearance: none;
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  transition:1s;
+}
+
+.filter-checkbox:checked{
+  background: #17a1c4;
+}
+
+.filter-checkbox::before{
+  content: "\f00d";
+  font-family: "Font Awesome 5 Free";
+  font-size: 10px;
+  line-height: 20px;
+  text-align: center;
+  color: rgb(172, 14, 14);
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  top:0;
+  left: 0;
+  background: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: 0.5s;
+}
+
+.filter-checkbox:checked::before{
+  content: "\f00c";
+  font-family: "Font Awesome 5 Free";
+  font-size:10px;
+  line-height: 20px;
+  text-align: center;
+  color:#17a1c4;
+  left:20px;
+}
+
+.filter-label{
+  width: 100%;
+  height: 30px;
+  margin:0;
+  cursor: pointer;
+}
+
+.filter-label:hover{
+  background:#fff;
+}
+
+.filter-label-title{
+  display: block;
+}
