@@ -3,6 +3,8 @@ import {AuthService} from "../../service/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Configuration} from "../../service/configuration";
 import {AppRoute} from "../../module/app-route";
+import {UserService} from "../../service/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private formBuilder: FormBuilder,
-              private configuration: Configuration) {
+              private configuration: Configuration,
+              private userService: UserService,
+              private router: Router) {
   }
 
   loginForm: FormGroup;
@@ -35,9 +39,17 @@ export class LoginComponent implements OnInit {
       this.loginForm.get('email').value,
       this.loginForm.get('password').value
     );
+
+    this.userService
+      .isLogged()
+      .subscribe(response => {
+        if (response) {
+          this.router.navigateByUrl(AppRoute.mainPage);
+        }
+      })
   }
 
-  getRegisterRoute(): string {
-    return '/' + AppRoute.registration;
+  goToRegistration() {
+    this.router.navigateByUrl(AppRoute.registration);
   }
 }

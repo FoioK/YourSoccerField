@@ -1,8 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 menu-bar">
   <a class="navbar-brand p-0 ml-2 ysf-2" href="#">YSF</a>
   <ul class="navbar-nav ml-auto mr-4">
+    <li *ngIf="!isLogged; else logOutButton" class="nav-item">
+      <a class="nav-link py-0" (click)="goToLogin()">Login</a>
+    </li>
+    <ng-template #logOutButton>
       <li class="nav-item">
-        <a class="nav-link py-0" (click)="goToLogin()">Login</a>
+        <a class="nav-link py-0" (click)="logOut()">Log out</a>
       </li>
-    </ul>
+    </ng-template>
+  </ul>
 </nav>

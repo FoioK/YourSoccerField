@@ -13,6 +13,7 @@ import {RegisterService} from "./service/register.service";
 import {ApiMapping} from "./service/api-mapping";
 import {NavbarComponent} from './component/navbar/navbar.component';
 import { MainPageComponent } from './component/main-page/main-page.component';
+import {UserService} from "./service/user.service";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MainPageComponent } from './component/main-page/main-page.component';
     Configuration,
     RegisterService,
     ApiMapping,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
