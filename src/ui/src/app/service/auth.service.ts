@@ -3,6 +3,7 @@ import {Configuration} from "./configuration";
 import {TokenModel} from "../model/token-model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,13 @@ export class AuthService {
   private oauthAddress = "/oauth/token";
 
   constructor(private http: HttpClient,
-              private configuration: Configuration) {
+              private configuration: Configuration,
+              private userService: UserService) {
   }
 
   getAccessToken(email: string, password: string) {
     this.postUserDetails(email, password)
-      .subscribe(token => AuthService.store(token),
+      .subscribe(token => this.store(token),
         error => console.log(error))
   }
 
@@ -44,7 +46,8 @@ export class AuthService {
     };
   }
 
-  private static store(token: TokenModel) {
+  private store(token: TokenModel) {
     localStorage.setItem('token', JSON.stringify(token));
+    this.userService.setLogged(token != null);
   }
 }
