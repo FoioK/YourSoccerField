@@ -1,6 +1,7 @@
 package com.pk.YourSoccerField.service.impl;
 
 import com.pk.YourSoccerField.model.SoccerField;
+import com.pk.YourSoccerField.repository.AddressRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.SoccerFieldService;
 import com.pk.YourSoccerField.service.dtoModel.SoccerFieldDTO;
@@ -18,12 +19,14 @@ import java.util.Objects;
 public class SoccerFieldServiceImpl implements SoccerFieldService {
 
     private SoccerFieldRepository soccerFieldRepository;
+    private AddressRepository addressRepository;
     private BaseToDTO<SoccerField, SoccerFieldDTO> soccerFieldToDTO;
     private BaseFromDTO<SoccerField, SoccerFieldDTO> soccerFieldFromDTO;
 
     @Autowired
     public SoccerFieldServiceImpl(
-            SoccerFieldRepository soccerFieldRepository) {
+            SoccerFieldRepository soccerFieldRepository,
+            AddressRepository addressRepository) {
         this.soccerFieldRepository = soccerFieldRepository;
         setSoccerFieldMapper();
     }
@@ -33,8 +36,10 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
             SoccerFieldDTO soccerFieldDTO = new SoccerFieldDTO();
             soccerFieldDTO.setId(entity.getId());
             soccerFieldDTO.setName(entity.getName());
-            soccerFieldDTO.setAddressId(entity.getAddress().getId());
-            soccerFieldDTO.setSurfaceId(entity.getSurface().getId());
+            soccerFieldDTO.setAddressId(
+                    Objects.requireNonNull(entity.getAddress()).getId());
+            soccerFieldDTO.setSurfaceId(
+                    Objects.requireNonNull(entity.getSurface()).getId());
             soccerFieldDTO.setWidth(entity.getWidth());
             soccerFieldDTO.setLength(entity.getLength());
             soccerFieldDTO.setPrice(Objects.requireNonNull(entity.getPrice()).toString());
@@ -45,6 +50,8 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
 
             return soccerFieldDTO;
         };
+
+
 
         this.soccerFieldFromDTO = dto -> {
             SoccerField soccerField = new SoccerField(
