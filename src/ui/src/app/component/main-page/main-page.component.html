@@ -1,33 +1,116 @@
 <div class="container-body">
   <section class="col-12 col-sm-12 col-lg-12">
-    <div class="col-4 col-sm-4 col-lg-4">
-      <div class="justify-content-center form-item">
-        <input class="form-control form-input" type="text" placeholder="Write location">
+    <!-- container for input search by location -->
+    <div class="col-12 col-sm-6 col-lg-4 px-0">
+      <div class="justify-content-center form-item mx-0">
+        <input
+          class="form-control form-input"
+          type="text"
+          placeholder="Write location"
+        />
         <i class="fas fa-search-location form-icons"></i>
       </div>
     </div>
-    <div class="row">
-      <div class="col-3 col-sm-3 col-lg-3">
-        <!-- dropdown for district -->
-        <div class="dropdown show">
-          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Surface
-          </a>
-          <div class="dropdown-menu custom-dropdown" aria-labelledby="dropdownMenuLink">
-            <label class="d-flex align-items-center filter-label"><input class="filter-checkbox ml-2" type="checkbox" value="synthetic grass"><span
-                class="filter-label-title mx-auto">
-                synthetic grass</span></label>
-            <label class="d-flex align-items-center filter-label"><input class="filter-checkbox ml-2" type="checkbox" value="synthetic grass"><span
-                class="filter-label-title mx-auto">
-                rubber</span></label>
-            <label class="d-flex align-items-center filter-label"><input class="filter-checkbox ml-2" type="checkbox" value="synthetic grass"><span
-                class="filter-label-title mx-auto">
-                tartan</span></label>
-          </div>
-        </div>
-        <!-- end dropdown for district -->
+    <!-- end container for input search by location -->
+    <!-- container for filter -->
+    <div class="col-12 col-sm-6 col-lg-4 px-0 ">
+      <button class="btn filter-btn-white my-2 mx-0" (click)="filterShow = !filterShow">Filter</button>
+    </div>
+    <div class="row filter-row no-gutters mx-0 col-12 col-sm-12 col-lg-12" [hidden]="filterShow === false" [@showHide]="filterShow ? 'show' : 'hide'">
+      <!-- column for surface -->
+      <div class="col-12 col-sm-12 col-md-3 col-lg-3 my-1">
+        <!--
+          <button class="btn btn-secondary dropdown-toggle" href="#">Surface</button>
+        -->
+        <div class="d-flex h-100 justify-content-center align-items-center flex-column">
+          <label class="d-flex align-items-center w-100 filter-label">
+            <input class="filter-checkbox ml-2" type="checkbox" value="synthetic grass"/>
+            <span class="filter-label-title mx-auto">synthetic grass</span>
+            </label>
+          <label class="d-flex align-items-center filter-label">
+            <input class="filter-checkbox ml-2" type="checkbox" value="rubber"/>
+            <span class="filter-label-title mx-auto">rubber</span>
+          </label>
+          <label class="d-flex align-items-center filter-label">
+            <input class="filter-checkbox ml-2" type="checkbox" value="tartan"/>
+            <span class="filter-label-title mx-auto">tartan</span>
+          </label>
         </div>
       </div>
+       <!-- end column for surface -->
+      <div class="row col-12 col-sm-12 col-md-9 col-lg-9 my-1 no-gutters">
+         <!-- column for paid -->
+        <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
+          <label class="d-flex align-items-center mb-0 filter-label">
+            <input class="filter-checkbox ml-2" type="checkbox" value="paid"/>
+              <span class="filter-label-title mx-auto">paid</span>
+            </label>
+      </div>
+      <!-- end column for paid -->
+      <!-- column for lighting -->
+      <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
+          <label class="d-flex align-items-center mb-0 filter-label">
+            <input class="filter-checkbox ml-2" type="checkbox" value="lighting"/>
+              <span class="filter-label-title mx-auto">lighting</span>
+          </label>
+      </div>
+      <!-- end column for lighting -->
+      <!-- column for fance -->
+      <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
+          <label class="d-flex align-items-center mb-0 filter-label"
+            ><input class="filter-checkbox ml-2" type="checkbox" value="fance"/>
+            <span class="filter-label-title mx-auto">fance</span>
+            </label>
+      </div>
+      <!-- end column for fance -->
+      <!-- column for lockerRoom -->
+      <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
+        <div class="d-flex h-100 justify-content-center align-items-center flex-column">
+          <label class="d-flex align-items-center mb-0 filter-label">
+            <input class="filter-checkbox ml-2" type="checkbox" value="locker room"/>
+            <span class="filter-label-title mx-auto">locker room</span>
+          </label>
+        </div>
+      </div>
+      <!-- end column for lockerRoom -->
+      <!-- column for width -->
+      <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
+            <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
+              Width :
+            </label>
+          <label class="d-flex align-items-center mb-0 filter-label">
+            <input class="filter-slider ml-2" type="range" value="0" min="0" max="100" step="1" [(ngModel)]="minWidth"/>
+            <span class="filter-label-title mx-auto">min {{minWidth}}m</span>
+          </label>
+          <label class="d-flex align-items-center mb-0 filter-label">
+              <input class="filter-slider ml-2" type="range" value="100" min="0" max="100" step="1" [(ngModel)]="maxWidth"/>
+              <span class="filter-label-title mx-auto">max {{maxWidth}}m</span>
+            </label>
+      </div>
+      <!-- end column for width -->
+      <!-- column for height -->
+      <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
+              <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
+                  Length :
+                </label>
+            <label class="d-flex align-items-center mb-0 filter-label">
+              <input class="filter-slider ml-2" type="range" value="0" min="0" max="100" step="1" [(ngModel)]="minLength"/>
+              <span class="filter-label-title mx-auto">min {{minLength}}m</span>
+            </label>
+            <label class="d-flex align-items-center mb-0 filter-label">
+                <input class="filter-slider ml-2" type="range" value="100" min="0" max="100" step="1" [(ngModel)]="maxLength"/>
+                <span class="filter-label-title mx-auto">max {{maxLength}}m</span>
+              </label>
+        </div>
+         <!-- end column for height -->
+      </div>
+
+       <!-- column for hide button -->
+       <div class="col-12 col-sm-12 col-lg-12 mb-3 h-100">
+            <button class="btn filter-btn" (click)="filterShow = !filterShow">Hide</button>
+      </div>
+      <!-- end column for hide button -->
+    </div>
+    <!-- end container for filter -->
   </section>
 </div>
