@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { trigger, state, style, animate, transition } from "@angular/animations";
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 @Component({
   selector: "app-main-page",
   templateUrl: "./main-page.component.html",
@@ -22,13 +23,44 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
   ]
 })
 export class MainPageComponent implements OnInit {
+
+  constructor(private formBuilder: FormBuilder) {}
+
   filterShow: boolean = false;
-  maxWidth: number = 100;
-  minWidth: number = 0;
-  maxLength: number = 100;
-  minLength: number = 0;
 
-  constructor() {}
+  filterForm: FormGroup;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.filterForm = this.formBuilder.group({
+      surfaces : this.getSurfaces(),
+      paid : [false],
+      lighting : [false],
+      fance : [false],
+      lockerRoom : [false],
+      width : this.getWidth(),
+      length : this.getLength()
+    });
+  }
+
+  getSurfaces(): FormGroup {
+    return this.formBuilder.group({
+      syntheticGrass : [false],
+      rubber : [false],
+      tartan : [false]
+    });
+  }
+
+  getWidth(): FormGroup {
+    return this.formBuilder.group({
+      widthMin : [0],
+      widthMax : [100],
+    });
+  }
+
+  getLength(): FormGroup {
+    return this.formBuilder.group({
+      lengthMin : [0],
+      lengthMax : [100]
+    });
+  }  
 }

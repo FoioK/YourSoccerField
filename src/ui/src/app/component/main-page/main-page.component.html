@@ -12,6 +12,7 @@
       </div>
     </div>
     <!-- end container for input search by location -->
+    <form [formGroup]="filterForm">
     <!-- container for filter -->
     <div class="col-12 col-sm-6 col-lg-4 px-0 ">
       <button class="btn filter-btn-white my-2 mx-0" (click)="filterShow = !filterShow">Filter</button>
@@ -22,17 +23,17 @@
         <!--
           <button class="btn btn-secondary dropdown-toggle" href="#">Surface</button>
         -->
-        <div class="d-flex h-100 justify-content-center align-items-center flex-column">
+        <div class="d-flex h-100 justify-content-center align-items-center flex-column" formGroupName="surfaces">
           <label class="d-flex align-items-center w-100 filter-label">
-            <input class="filter-checkbox ml-2" type="checkbox" value="synthetic grass"/>
+            <input class="filter-checkbox ml-2" type="checkbox" value="synthetic grass" formControlName="syntheticGrass"/>
             <span class="filter-label-title mx-auto">synthetic grass</span>
             </label>
           <label class="d-flex align-items-center filter-label">
-            <input class="filter-checkbox ml-2" type="checkbox" value="rubber"/>
+            <input class="filter-checkbox ml-2" type="checkbox" value="rubber" formControlName="rubber"/>
             <span class="filter-label-title mx-auto">rubber</span>
           </label>
           <label class="d-flex align-items-center filter-label">
-            <input class="filter-checkbox ml-2" type="checkbox" value="tartan"/>
+            <input class="filter-checkbox ml-2" type="checkbox" value="tartan" formControlName="tartan"/>
             <span class="filter-label-title mx-auto">tartan</span>
           </label>
         </div>
@@ -42,7 +43,7 @@
          <!-- column for paid -->
         <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
           <label class="d-flex align-items-center mb-0 filter-label">
-            <input class="filter-checkbox ml-2" type="checkbox" value="paid"/>
+            <input class="filter-checkbox ml-2" type="checkbox" value="paid" formControlName="paid"/>
               <span class="filter-label-title mx-auto">paid</span>
             </label>
       </div>
@@ -50,7 +51,7 @@
       <!-- column for lighting -->
       <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
           <label class="d-flex align-items-center mb-0 filter-label">
-            <input class="filter-checkbox ml-2" type="checkbox" value="lighting"/>
+            <input class="filter-checkbox ml-2" type="checkbox" value="lighting" formControlName="lighting"/>
               <span class="filter-label-title mx-auto">lighting</span>
           </label>
       </div>
@@ -58,7 +59,7 @@
       <!-- column for fance -->
       <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
           <label class="d-flex align-items-center mb-0 filter-label"
-            ><input class="filter-checkbox ml-2" type="checkbox" value="fance"/>
+            ><input class="filter-checkbox ml-2" type="checkbox" value="fance" formControlName="fance"/>
             <span class="filter-label-title mx-auto">fance</span>
             </label>
       </div>
@@ -67,39 +68,39 @@
       <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
         <div class="d-flex h-100 justify-content-center align-items-center flex-column">
           <label class="d-flex align-items-center mb-0 filter-label">
-            <input class="filter-checkbox ml-2" type="checkbox" value="locker room"/>
+            <input class="filter-checkbox ml-2" type="checkbox" value="locker room" formControlName="lockerRoom"/>
             <span class="filter-label-title mx-auto">locker room</span>
           </label>
         </div>
       </div>
       <!-- end column for lockerRoom -->
       <!-- column for width -->
-      <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
+      <div class="col-12 col-sm-6 col-lg-4 my-2 px-0" formGroupName="width">
             <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
               Width :
             </label>
           <label class="d-flex align-items-center mb-0 filter-label">
-            <input class="filter-slider ml-2" type="range" value="0" min="0" max="100" step="1" [(ngModel)]="minWidth"/>
-            <span class="filter-label-title mx-auto">min {{minWidth}}m</span>
+            <input class="filter-slider ml-2" type="range" value="0" min="0" max="100" step="1" formControlName="widthMin"/>
+            <span class="filter-label-title mx-auto">min {{filterForm.value.width.widthMin}}m</span>
           </label>
           <label class="d-flex align-items-center mb-0 filter-label">
-              <input class="filter-slider ml-2" type="range" value="100" min="0" max="100" step="1" [(ngModel)]="maxWidth"/>
-              <span class="filter-label-title mx-auto">max {{maxWidth}}m</span>
+              <input class="filter-slider ml-2" type="range" value="100" min="0" max="100" step="1" formControlName="widthMax"/>
+              <span class="filter-label-title mx-auto">max {{filterForm.value.width.widthMax}}m</span>
             </label>
       </div>
       <!-- end column for width -->
       <!-- column for height -->
-      <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
+      <div class="col-12 col-sm-6 col-lg-4 my-2 px-0" formGroupName="length">
               <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
                   Length :
                 </label>
             <label class="d-flex align-items-center mb-0 filter-label">
-              <input class="filter-slider ml-2" type="range" value="0" min="0" max="100" step="1" [(ngModel)]="minLength"/>
-              <span class="filter-label-title mx-auto">min {{minLength}}m</span>
+              <input class="filter-slider ml-2" type="range" value="0" min="0" max="100" step="1" formControlName="lengthMin"/>
+              <span class="filter-label-title mx-auto">min {{filterForm.value.length.lengthMin}}m</span>
             </label>
             <label class="d-flex align-items-center mb-0 filter-label">
-                <input class="filter-slider ml-2" type="range" value="100" min="0" max="100" step="1" [(ngModel)]="maxLength"/>
-                <span class="filter-label-title mx-auto">max {{maxLength}}m</span>
+                <input class="filter-slider ml-2" type="range" value="100" min="0" max="100" step="1" formControlName="lengthMax"/>
+                <span class="filter-label-title mx-auto">max {{filterForm.value.length.lengthMax}}m</span>
               </label>
         </div>
          <!-- end column for height -->
@@ -112,5 +113,6 @@
       <!-- end column for hide button -->
     </div>
     <!-- end container for filter -->
+    </form>
   </section>
 </div>
