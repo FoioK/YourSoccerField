@@ -23,4 +23,13 @@ data class Address(
 
         @OneToMany(mappedBy = "address")
         val SoccerFields: List<SoccerField>
-)
+) {
+    constructor() : this(
+            0,
+            "",
+            "",
+            "",
+            emptyList(),
+            emptyList()
+    )
+}

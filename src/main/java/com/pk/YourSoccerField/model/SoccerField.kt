@@ -36,4 +36,19 @@ data class SoccerField(
 
         @OneToMany(mappedBy = "soccerField")
         val bookingsId: List<Booking>
-)
+) {
+        constructor() : this (
+                0,
+                "",
+                null,
+                null,
+                0,
+                0,
+                null,
+                false,
+                false,
+                false,
+                "",
+                emptyList()
+        )
+}

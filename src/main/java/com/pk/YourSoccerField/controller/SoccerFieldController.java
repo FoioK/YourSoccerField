@@ -22,7 +22,7 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
-            value = "/soccerfelds",
+            value = "/soccerfields",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(
@@ -32,7 +32,7 @@ public class SoccerFieldController {
     }
 
     @PostMapping(
-            value = "/soccerfelds",
+            value = "/soccerfields",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createSoccerField(
