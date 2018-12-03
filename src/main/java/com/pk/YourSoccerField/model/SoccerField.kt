@@ -14,10 +14,10 @@ data class SoccerField(
         val name: String,
 
         @ManyToOne
-        val address: Address,
+        val address: Address?,
 
         @ManyToOne
-        val surface: Surface,
+        val surface: Surface?,
 
         val width: Int,
 
@@ -36,4 +36,19 @@ data class SoccerField(
 
         @OneToMany(mappedBy = "soccerField")
         val bookingsId: List<Booking>
-)
+) {
+        constructor() : this (
+                0,
+                "",
+                null,
+                null,
+                0,
+                0,
+                null,
+                false,
+                false,
+                false,
+                "",
+                emptyList()
+        )
+}
