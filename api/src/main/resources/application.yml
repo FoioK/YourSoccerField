@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: authorization-server
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: "jdbc:mysql://149.156.136.151:3306/kkopacz"
+    username: "kkopacz"
+    password: "1234567890."
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 800
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+      jwt:
+        key-value: -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2dhkCFy8zchY2W7GzVjG
+          o+QBcoluOXRXmtwNffjLZp9KyTQ4Z0fY1n1pYn9ARAT/CJrMH75XIZxF53Kr6sI3
+          1ZR1KHlLCcqg7R4Z3koCTblAVJPDKfSswG6eboW6bg+bc2/omwxhUpdzxGwtAtOG
+          O5qXzwJg6sTMozbQn6T3xzWdKFwsrtDV6mLIt4jY5myM/DWXFEIGrh171R85LGCD
+          ngjSzQrMMvzgAbmSVLWMOjfPVOoLMiOzUZJgc0zqdHO7VHaxYm/bVeyPAOqWzR72
+          xUAP2zrpF/57XswuTmck4VyHcs4ixHvqa44VPTVY9sahLxtf8crv/Baj0igLuZri
+          owIDAQAB
+          -----END PUBLIC KEY-----
