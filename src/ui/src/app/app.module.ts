@@ -14,6 +14,7 @@ import {ApiMapping} from "./service/api-mapping";
 import {NavbarComponent} from './component/navbar/navbar.component';
 import { MainPageComponent } from './component/main-page/main-page.component';
 import {UserService} from "./service/user.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {UserService} from "./service/user.service";
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
