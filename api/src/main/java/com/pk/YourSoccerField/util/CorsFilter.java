@@ -1,4 +1,4 @@
-package com.pk.YourSoccerField.config;
+package com.pk.YourSoccerField.util;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
