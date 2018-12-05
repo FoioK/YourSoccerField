@@ -46,13 +46,4 @@ public class SoccerFieldController {
                 HttpStatus.CREATED
         );
     }
-
-    @GetMapping("/users")
-    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_ALL')")
-    public CustomUserDetail context() {
-
-        return (CustomUserDetail) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
-    }
 }
