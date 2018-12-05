@@ -1,6 +1,10 @@
 package com.pk.YourSoccerField.service.impl;
 
+import com.pk.YourSoccerField.exception.ErrorCode;
+import com.pk.YourSoccerField.exception.MissingEntityException;
+import com.pk.YourSoccerField.model.Address;
 import com.pk.YourSoccerField.model.SoccerField;
+import com.pk.YourSoccerField.model.Surface;
 import com.pk.YourSoccerField.repository.AddressRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.SoccerFieldService;
@@ -28,6 +32,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
             SoccerFieldRepository soccerFieldRepository,
             AddressRepository addressRepository) {
         this.soccerFieldRepository = soccerFieldRepository;
+        this.addressRepository = addressRepository;
         setSoccerFieldMapper();
     }
 
@@ -42,7 +47,8 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                     Objects.requireNonNull(entity.getSurface()).getId());
             soccerFieldDTO.setWidth(entity.getWidth());
             soccerFieldDTO.setLength(entity.getLength());
-            soccerFieldDTO.setPrice(Objects.requireNonNull(entity.getPrice()).toString());
+            soccerFieldDTO.setPrice(
+                    entity.getPrice() != null ? entity.getPrice().toString() : null);
             soccerFieldDTO.setLighting(entity.isLighting());
             soccerFieldDTO.setFenced(entity.isFenced());
             soccerFieldDTO.setLockerRom(entity.isLockerRoom());
@@ -51,26 +57,38 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
             return soccerFieldDTO;
         };
 
+        this.soccerFieldFromDTO = dto -> new SoccerField(
+                dto.getId(),
+                dto.getName(),
+                this.getAddressById(dto.getAddressId()),
+                this.getSurfaceById(dto.getSurfaceId()),
+                dto.getWidth(),
+                dto.getLength(),
+                dto.getPrice() != null ? new BigDecimal(dto.getPrice()) : null,
+                dto.isLighting(),
+                dto.isFenced(),
+                dto.isLockerRom(),
+                dto.getDescription(),
+                new ArrayList<>()
+        );
+    }
 
+    private Address getAddressById(Long addressId) {
+        return this.addressRepository
+                .findById(addressId)
+                .orElseThrow(() -> new MissingEntityException(
+                        "Cannot find address with id " + addressId,
+                        ErrorCode.NOT_FOUND_BY_ID
+                ));
+    }
 
-        this.soccerFieldFromDTO = dto -> {
-            SoccerField soccerField = new SoccerField(
-                    dto.getId(),
-                    dto.getName(),
-                    null,
-                    null,
-                    dto.getWidth(),
-                    dto.getLength(),
-                    new BigDecimal(dto.getPrice()),
-                    dto.isLighting(),
-                    dto.isFenced(),
-                    dto.isLockerRom(),
-                    dto.getDescription(),
-                    new ArrayList<>()
-            );
-
-            return soccerField;
-        };
+    private Surface getSurfaceById(Long surfaceId) {
+        return this.soccerFieldRepository
+                .findSurfaceById(surfaceId)
+                .orElseThrow(() -> new MissingEntityException(
+                        "Cannot find surface with id " + surfaceId,
+                        ErrorCode.NOT_FOUND_BY_ID
+                ));
     }
 
     @Override
@@ -81,6 +99,9 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
 
     @Override
     public SoccerFieldDTO createSoccerField(SoccerFieldDTO soccerFieldDTO) {
-        return null;
+        SoccerField soccerField = this.soccerFieldFromDTO.createFromDTO(soccerFieldDTO);
+
+        return this.soccerFieldToDTO
+                .createFromEntity(this.soccerFieldRepository.save(soccerField));
     }
 }
