@@ -39,7 +39,7 @@ public class CustomUserDetailService implements UserDetailsService {
         userRepository.getPermissions(email)
                 .stream()
                 .map(SimpleGrantedAuthority::new)
-                .forEach(permission -> permissions.add(new SimpleGrantedAuthority("ROLE_" + permission)));
+                .forEach(permission -> permissions.add(new SimpleGrantedAuthority(permission + "")));
 
         userEntity.setGrantedAuthorityList(permissions);
 

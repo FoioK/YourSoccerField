@@ -30,9 +30,9 @@ logging:
 security:
   oauth2:
     resource:
-      filter-order: 3
       jwt:
-        key-value: -----BEGIN PUBLIC KEY-----
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2dhkCFy8zchY2W7GzVjG
           o+QBcoluOXRXmtwNffjLZp9KyTQ4Z0fY1n1pYn9ARAT/CJrMH75XIZxF53Kr6sI3
           1ZR1KHlLCcqg7R4Z3koCTblAVJPDKfSswG6eboW6bg+bc2/omwxhUpdzxGwtAtOG
