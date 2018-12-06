@@ -8,10 +8,10 @@ data class SoccerField(
 
         @Id
         @GeneratedValue
-        val id: Long,
+        val id: Long?,
 
         @Column(nullable = false, length = 32)
-        val name: String,
+        val name: String?,
 
         @ManyToOne
         val address: Address?,
@@ -19,36 +19,41 @@ data class SoccerField(
         @ManyToOne
         val surface: Surface?,
 
-        val width: Int,
+        @Column(nullable = false)
+        val width: Int?,
 
-        val length: Int,
+        @Column(nullable = false)
+        val length: Int?,
 
         @Column(scale = 2)
         val price: BigDecimal?,
 
-        val isLighting: Boolean,
+        @Column(nullable = false)
+        val isLighting: Boolean?,
 
-        val isFenced: Boolean,
+        @Column(nullable = false)
+        val isFenced: Boolean?,
 
-        val isLockerRoom: Boolean,
+        @Column(nullable = false)
+        val isLockerRoom: Boolean?,
 
-        val description: String,
+        val description: String?,
 
         @OneToMany(mappedBy = "soccerField")
         val bookingsId: List<Booking>
 ) {
-        constructor() : this (
-                0,
-                "",
-                null,
-                null,
-                0,
-                0,
-                null,
-                false,
-                false,
-                false,
-                "",
-                emptyList()
-        )
+    constructor() : this(
+            0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            emptyList()
+    )
 }

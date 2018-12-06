@@ -1,6 +1,5 @@
 package com.pk.YourSoccerField.controller;
 
-import com.pk.YourSoccerField.model.CustomUserDetail;
 import com.pk.YourSoccerField.service.SoccerFieldService;
 import com.pk.YourSoccerField.service.dtoModel.SoccerFieldDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/api")
@@ -39,11 +38,27 @@ public class SoccerFieldController {
             value = "/soccerfields",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('SOCCERFIELDS_POST_CREATE')")
     public ResponseEntity<?> createSoccerField(
-            @RequestBody @Valid SoccerFieldDTO soccerFieldDTO) {
+            @Valid @RequestBody SoccerFieldDTO soccerFieldDTO) {
         return new ResponseEntity<>(
                 this.soccerFieldService.createSoccerField(soccerFieldDTO),
                 HttpStatus.CREATED
+        );
+    }
+
+    @GetMapping(
+            value = "/soccerfields/{street}",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_ADDRESS_CONTAINS')")
+    public ResponseEntity<?> getByAddressContains(
+            @PathVariable @NotBlank String street) {
+        System.out.println(street);
+        return new ResponseEntity<>(
+                this.soccerFieldService.getByAddressContains(street),
+                HttpStatus.OK
         );
     }
 }
