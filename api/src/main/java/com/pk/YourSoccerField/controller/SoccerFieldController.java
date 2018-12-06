@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/api")
@@ -43,6 +44,21 @@ public class SoccerFieldController {
         return new ResponseEntity<>(
                 this.soccerFieldService.createSoccerField(soccerFieldDTO),
                 HttpStatus.CREATED
+        );
+    }
+
+    @GetMapping(
+            value = "/soccerfields/{street}",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_ADDRESS_CONTAINS')")
+    public ResponseEntity<?> getByAddressContains(
+            @PathVariable @NotBlank String street) {
+        System.out.println(street);
+        return new ResponseEntity<>(
+                this.soccerFieldService.getByAddressContains(street),
+                HttpStatus.OK
         );
     }
 }

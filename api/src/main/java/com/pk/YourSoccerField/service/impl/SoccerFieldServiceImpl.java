@@ -94,7 +94,8 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     @Override
     public List<SoccerFieldDTO> getAll() {
         return new ArrayList<>(
-                this.soccerFieldToDTO.mapAllFromEntities(this.soccerFieldRepository.findAll()));
+                this.soccerFieldToDTO.mapAllFromEntities(this.soccerFieldRepository.findAll())
+        );
     }
 
     @Override
@@ -103,5 +104,15 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
 
         return this.soccerFieldToDTO
                 .createFromEntity(this.soccerFieldRepository.save(soccerField));
+    }
+
+    @Override
+    public List<SoccerFieldDTO> getByAddressContains(String street) {
+        List<SoccerField> soccerFields = this.soccerFieldRepository
+                .findByAddressContains(street);
+
+        return new ArrayList<>(
+                this.soccerFieldToDTO.mapAllFromEntities(soccerFields)
+        );
     }
 }

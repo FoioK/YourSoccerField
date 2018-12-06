@@ -9,4 +9,6 @@ public interface SoccerFieldService {
     List<SoccerFieldDTO> getAll();
 
     SoccerFieldDTO createSoccerField(SoccerFieldDTO soccerFieldDTO);
+
+    List<SoccerFieldDTO> getByAddressContains(String street);
 }
