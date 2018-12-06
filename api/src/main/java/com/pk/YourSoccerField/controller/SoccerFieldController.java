@@ -39,7 +39,7 @@ public class SoccerFieldController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('SOCCERFIELDS_POST_CREATE')")
     public ResponseEntity<?> createSoccerField(
-            @RequestBody @Valid SoccerFieldDTO soccerFieldDTO) {
+            @Valid @RequestBody SoccerFieldDTO soccerFieldDTO) {
         return new ResponseEntity<>(
                 this.soccerFieldService.createSoccerField(soccerFieldDTO),
                 HttpStatus.CREATED

@@ -2,6 +2,7 @@ package com.pk.YourSoccerField.service.dtoModel;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class SoccerFieldDTO {
 
@@ -11,21 +12,25 @@ public class SoccerFieldDTO {
     private String name;
 
     @NotNull
+    @Positive
     private Long addressId;
 
     @NotNull
+    @Positive
     private Long surfaceId;
+
+    @NotNull
+    @Positive
     private Integer width;
+
+    @NotNull
+    @Positive
     private Integer length;
     private String price;
 
-    @NotNull
     private boolean isLighting;
-
-    @NotNull
     private boolean isFenced;
-
-    @NotNull private boolean isLockerRom;
+    private boolean isLockerRoom;
     private String description;
 
     public Long getId() {
@@ -100,12 +105,12 @@ public class SoccerFieldDTO {
         isFenced = fenced;
     }
 
-    public boolean isLockerRom() {
-        return isLockerRom;
+    public boolean isLockerRoom() {
+        return isLockerRoom;
     }
 
-    public void setLockerRom(boolean lockerRom) {
-        isLockerRom = lockerRom;
+    public void setLockerRoom(boolean lockerRoom) {
+        isLockerRoom = lockerRoom;
     }
 
     public String getDescription() {

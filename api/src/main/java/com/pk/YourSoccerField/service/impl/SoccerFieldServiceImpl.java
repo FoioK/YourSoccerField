@@ -51,7 +51,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                     entity.getPrice() != null ? entity.getPrice().toString() : null);
             soccerFieldDTO.setLighting(entity.isLighting());
             soccerFieldDTO.setFenced(entity.isFenced());
-            soccerFieldDTO.setLockerRom(entity.isLockerRoom());
+            soccerFieldDTO.setLockerRoom(entity.isLockerRoom());
             soccerFieldDTO.setDescription(entity.getDescription());
 
             return soccerFieldDTO;
@@ -67,7 +67,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                 dto.getPrice() != null ? new BigDecimal(dto.getPrice()) : null,
                 dto.isLighting(),
                 dto.isFenced(),
-                dto.isLockerRom(),
+                dto.isLockerRoom(),
                 dto.getDescription(),
                 new ArrayList<>()
         );
