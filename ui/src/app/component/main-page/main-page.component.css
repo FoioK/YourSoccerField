@@ -14,14 +14,13 @@
 
 .form-input {
   height: 45px;
-  padding: 0px 50px 0px 15px;
+  padding: 0 50px 0 15px;
 }
 
 .form-icons {
   position: absolute;
   top: -7px;
   right: 11px;
-  transform: translate(0, 50%);
   transform: translate(0, 50%);
   width: 30px;
   font-size: 30px;
@@ -56,6 +55,7 @@
 
 .filter-checkbox::before {
   content: "\f00d";
+  /*noinspection CssNoGenericFontName*/
   font-family: "Font Awesome 5 Free";
   font-size: 10px;
   line-height: 20px;
@@ -75,6 +75,7 @@
 
 .filter-checkbox:checked::before {
   content: "\f00c";
+  /*noinspection CssNoGenericFontName*/
   font-family: "Font Awesome 5 Free";
   font-size: 10px;
   line-height: 20px;
@@ -108,7 +109,7 @@
   background: #fff;
 }
 
-.filter-btn:focus, .filter-btn:active{
+.filter-btn:focus, .filter-btn:active {
   box-shadow: none !important;
 }
 
