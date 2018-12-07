@@ -1,8 +1,10 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class ApiMapping {
 
-  createUser: string = '/register';
+  user_create = '/register';
 
+  // @PathVariable {street}
+  soccerField_findByAddressContains = '/soccerfields/';
 }
