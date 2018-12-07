@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {trigger, state, style, animate, transition} from '@angular/animations';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {SoccerField} from '../../model/SoccerField';
+import {SoccerFieldService} from '../../service/soccer-field.service';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-page',
@@ -26,14 +29,32 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private soccerFieldService: SoccerFieldService) {
 
   }
 
   filterShow = false;
   filterForm: FormGroup;
+  addressControl: FormControl;
+
+  promptSoccerFieldList: Array<SoccerField>;
 
   ngOnInit() {
+    this.initAddressControl();
+    this.buildFilterForm();
+  }
+
+  private initAddressControl() {
+    this.addressControl = new FormControl('');
+
+    this.addressControl
+      .valueChanges
+      .pipe(switchMap(street => this.soccerFieldService.findByAddressContains(street)))
+      .subscribe(result => this.promptSoccerFieldList = result);
+  }
+
+  private buildFilterForm() {
     this.filterForm = this.formBuilder
       .group({
         surfaces: this.getSurfaces(),
@@ -46,7 +67,7 @@ export class MainPageComponent implements OnInit {
       });
   }
 
-  getSurfaces(): FormGroup {
+  private getSurfaces(): FormGroup {
     return this.formBuilder
       .group({
         syntheticGrass: false,
@@ -55,7 +76,7 @@ export class MainPageComponent implements OnInit {
       });
   }
 
-  getWidth(): FormGroup {
+  private getWidth(): FormGroup {
     return this.formBuilder
       .group({
         widthMin: 0,
@@ -63,7 +84,7 @@ export class MainPageComponent implements OnInit {
       });
   }
 
-  getLength(): FormGroup {
+  private getLength(): FormGroup {
     return this.formBuilder
       .group({
         lengthMin: 0,
