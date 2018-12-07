@@ -1,6 +1,6 @@
 spring:
   application:
-    name: your soccer field
+    name: ysf-authorization-server
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: "jdbc:mysql://149.156.136.151:3306/kkopacz"
