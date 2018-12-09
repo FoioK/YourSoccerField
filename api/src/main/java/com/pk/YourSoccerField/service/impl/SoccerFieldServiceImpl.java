@@ -115,4 +115,13 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                 this.soccerFieldToDTO.mapAllFromEntities(soccerFields)
         );
     }
+
+    @Override
+    public List<SoccerFieldDTO> getExampleTen() {
+        return new ArrayList<>(
+                this.soccerFieldToDTO.mapAllFromEntities(
+                        this.soccerFieldRepository.findExampleTen()
+                )
+        );
+    }
 }
