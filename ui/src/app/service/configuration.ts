@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {HttpHeaders} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class Configuration {
 
-  server: string = "http://localhost:8081";
-  api: string = "/api";
+  server = 'http://localhost:8080';
+  api = '/api';
   serverWithApiUrl: string = this.server + this.api;
 
   private emailRegExp: RegExp = RegExp(

@@ -3,11 +3,14 @@
     <!-- container for input search by location -->
     <div class="col-12 col-sm-6 col-lg-4 px-0">
       <div class="justify-content-center form-item mx-0">
-        <input
-          class="form-control form-input"
-          type="text"
-          placeholder="Write location"
-        />
+        <form [formGroup]="addressGroup">
+          <input
+            class="form-control form-input"
+            type="text"
+            placeholder="Write location"
+            formControlName="address"
+          />
+        </form>
         <i class="fas fa-search-location form-icons"></i>
       </div>
     </div>
