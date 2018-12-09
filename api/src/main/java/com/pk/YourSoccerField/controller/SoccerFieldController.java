@@ -52,7 +52,6 @@ public class SoccerFieldController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_ADDRESS_CONTAINS')")
     public ResponseEntity<?> getByAddressContains(
             @PathVariable @NotBlank String street) {
         return new ResponseEntity<>(
@@ -66,7 +65,6 @@ public class SoccerFieldController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_EXAMPLE_TEN')")
     public ResponseEntity<?> getExampleTen() {
         return new ResponseEntity<>(
                 this.soccerFieldService.getExampleTen(),
