@@ -36,22 +36,30 @@ export class MainPageComponent implements OnInit {
 
   filterShow = false;
   filterForm: FormGroup;
-  addressControl: FormControl;
 
+  addressGroup: FormGroup;
   promptSoccerFieldList: Array<SoccerField>;
 
   ngOnInit() {
-    this.initAddressControl();
+    this.initAddressForm();
     this.buildFilterForm();
   }
 
-  private initAddressControl() {
-    this.addressControl = new FormControl('');
+  private initAddressForm() {
+    this.addressGroup = this.formBuilder
+      .group({
+        address: ''
+      });
 
-    this.addressControl
+    this.addressGroup
+      .get('address')
       .valueChanges
-      .pipe(switchMap(street => this.soccerFieldService.findByAddressContains(street)))
-      .subscribe(result => this.promptSoccerFieldList = result);
+      .pipe(switchMap(street =>
+        this.soccerFieldService.findByAddressContains(street)))
+      .subscribe(result => {
+        this.promptSoccerFieldList = result;
+        console.log(this.promptSoccerFieldList);
+      });
   }
 
   private buildFilterForm() {

@@ -52,12 +52,22 @@ public class SoccerFieldController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_ADDRESS_CONTAINS')")
     public ResponseEntity<?> getByAddressContains(
             @PathVariable @NotBlank String street) {
-        System.out.println(street);
         return new ResponseEntity<>(
                 this.soccerFieldService.getByAddressContains(street),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping(
+            value = "/soccerfields/exampleTen",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> getExampleTen() {
+        return new ResponseEntity<>(
+                this.soccerFieldService.getExampleTen(),
                 HttpStatus.OK
         );
     }

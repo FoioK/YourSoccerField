@@ -11,4 +11,6 @@ public interface SoccerFieldService {
     SoccerFieldDTO createSoccerField(SoccerFieldDTO soccerFieldDTO);
 
     List<SoccerFieldDTO> getByAddressContains(String street);
+
+    List<SoccerFieldDTO> getExampleTen();
 }

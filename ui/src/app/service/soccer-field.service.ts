@@ -21,6 +21,9 @@ export class SoccerFieldService {
       .get<Array<SoccerField>>(
         this.configuration.serverWithApiUrl +
         this.apiMapping.soccerField_findByAddressContains +
-        street);
+        street,
+        {
+          headers: Configuration.getJSONContentType()
+        });
   }
 }
