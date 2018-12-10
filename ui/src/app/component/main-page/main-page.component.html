@@ -105,61 +105,29 @@
           </div>
           <!-- end column for lockerRoom -->
           <!-- column for width -->
-          <div class="col-12 col-sm-6 col-lg-4 my-2 px-0"
-               formGroupName="width">
+          <div class="col-12 col-sm-6 col-lg-4 my-2 px-0" formGroupName="width">
             <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
-              Width :
+                Width :
             </label>
+            <app-multirange-slider (emitMin)="getWidthMin($event)" (emitMax)="getWidthMax($event)"></app-multirange-slider>
             <label class="d-flex align-items-center mb-0 filter-label">
-              <input class="filter-slider ml-2"
-                     type="range"
-                     value="0"
-                     min="0"
-                     max="100"
-                     step="1"
-                     formControlName="widthMin"/>
-              <span class="filter-label-title mx-auto">min {{filterForm.value.width.widthMin}}m</span>
+                <span class="filter-label-title mx-auto">min {{filterForm.value.width.widthMin}}m</span>
+                <span class="filter-label-title mx-auto">max {{filterForm.value.width.widthMax}}m</span>
             </label>
-            <label class="d-flex align-items-center mb-0 filter-label">
-              <input class="filter-slider ml-2"
-                     type="range"
-                     value="100"
-                     min="0"
-                     max="100"
-                     step="1"
-                     formControlName="widthMax"/>
-              <span class="filter-label-title mx-auto">max {{filterForm.value.width.widthMax}}m</span>
-            </label>
-          </div>
+        </div>
           <!-- end column for width -->
-          <!-- column for height -->
-          <div class="col-12 col-sm-6 col-lg-4 my-2 px-0"
-               formGroupName="length">
+          <!-- column for length -->
+          <div class="col-12 col-sm-6 col-lg-4 my-2 px-0" formGroupName="length">
             <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
-              Length :
+                Length :
             </label>
+            <app-multirange-slider (emitMin)="getLengthMin($event)" (emitMax)="getLengthMax($event)"></app-multirange-slider>
             <label class="d-flex align-items-center mb-0 filter-label">
-              <input class="filter-slider ml-2"
-                     type="range"
-                     value="0"
-                     min="0"
-                     max="100"
-                     step="1"
-                     formControlName="lengthMin"/>
-              <span class="filter-label-title mx-auto">min {{filterForm.value.length.lengthMin}}m</span>
+                <span class="filter-label-title mx-auto">min {{filterForm.value.length.lengthMin}}m</span>
+                <span class="filter-label-title mx-auto">max {{filterForm.value.length.lengthMax}}m</span>
             </label>
-            <label class="d-flex align-items-center mb-0 filter-label">
-              <input class="filter-slider ml-2"
-                     type="range"
-                     value="100"
-                     min="0"
-                     max="100"
-                     step="1"
-                     formControlName="lengthMax"/>
-              <span class="filter-label-title mx-auto">max {{filterForm.value.length.lengthMax}}m</span>
-            </label>
-          </div>
-          <!-- end column for height -->
+        </div>
+          <!-- end column for length -->
         </div>
 
         <!-- column for hide button -->
