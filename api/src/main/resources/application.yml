@@ -19,7 +19,14 @@ spring:
       ddl-auto: update
 
 server:
+  address: 127.0.0.37
   port: 8080
+
+project:
+  name: YourSoccerField
+  version: 0.2
+  description: Idea assumes that, the user registering to our application and loging into it, can book a place, where
+    he can play football.
 
 logging:
   level:

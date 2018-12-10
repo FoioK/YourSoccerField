@@ -4,14 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pk</groupId>
-    <artifactId>YourSoccerField</artifactId>
-    <version>0.2</version>
+    <artifactId>${project.name}</artifactId>
+    <version>${project.version}</version>
     <packaging>jar</packaging>
 
     <name>YourSoccerField</name>
-    <description>Idea assumes that, the user registering to our application and loging into it, can book a place, where
-        he can play football.
-    </description>
+    <description>${project.description}</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
