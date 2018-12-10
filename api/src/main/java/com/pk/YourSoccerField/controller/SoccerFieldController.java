@@ -2,6 +2,7 @@ package com.pk.YourSoccerField.controller;
 
 import com.pk.YourSoccerField.service.SoccerFieldService;
 import com.pk.YourSoccerField.service.dtoModel.SoccerFieldDTO;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +24,21 @@ public class SoccerFieldController {
         this.soccerFieldService = soccerFieldService;
     }
 
+    @ApiOperation(
+            value = "get all soccer field",
+            authorizations = {
+                    @Authorization(
+                            value = "ysf_oauth",
+                            scopes = @AuthorizationScope(
+                                    scope = "SOCCERFIELDS_GET_ALL",
+                                    description = "allows get all soccer field"
+                            )
+                    )
+            })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "Dostęp zabroniony"),
+    })
     @GetMapping(
             value = "/soccerfields",
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,6 +50,23 @@ public class SoccerFieldController {
         );
     }
 
+    @ApiOperation(
+            value = "create soccer field",
+            authorizations = {
+                    @Authorization(
+                            value = "ysf_oauth",
+                            scopes = @AuthorizationScope(
+                                    scope = "SOCCERFIELDS_POST_CREATE",
+                                    description = "allows create soccer field"
+                            )
+                    )
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "CREATED"),
+            @ApiResponse(code = 401, message = "Dostęp zabroniony"),
+            @ApiResponse(code = 404, message = "Missing entity exception")
+    })
     @PostMapping(
             value = "/soccerfields",
             produces = MediaType.APPLICATION_JSON_VALUE,
