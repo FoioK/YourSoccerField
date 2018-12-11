@@ -101,16 +101,8 @@
 }
 
 .filter-btn {
-  min-width: 140px;
-}
-
-.filter-btn-white {
-  min-width: 140px;
-  background: #fff;
-}
-
-.filter-btn:focus, .filter-btn:active {
-  box-shadow: none !important;
+  max-width: 140px;
+  cursor: pointer;
 }
 
 .filter-slider {

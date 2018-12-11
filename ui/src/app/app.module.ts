@@ -17,6 +17,7 @@ import {UserService} from './service/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SoccerFieldService} from './service/soccer-field.service';
 import { MultirangeSliderComponent } from './component/multirange-slider/multirange-slider.component';
+import { MiniSocerfieldComponent } from './component/mini-socerfield/mini-socerfield.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MultirangeSliderComponent } from './component/multirange-slider/multira
     RegistrationComponent,
     NavbarComponent,
     MainPageComponent,
-    MultirangeSliderComponent
+    MultirangeSliderComponent,
+    MiniSocerfieldComponent
   ],
   imports: [
     BrowserModule,
