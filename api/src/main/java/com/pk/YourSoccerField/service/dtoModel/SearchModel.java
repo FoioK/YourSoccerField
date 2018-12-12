@@ -6,10 +6,10 @@ public class SearchModel {
 
     private String name;
     private List<String> surface;
-    private boolean paid;
-    private boolean lighting;
-    private boolean fenced;
-    private boolean lockerRoom;
+    private Boolean paid;
+    private Boolean lighting;
+    private Boolean fenced;
+    private Boolean lockerRoom;
     private Integer minWidth;
     private Integer maxWidth;
     private Integer minLength;
@@ -31,35 +31,35 @@ public class SearchModel {
         this.surface = surface;
     }
 
-    public boolean isPaid() {
+    public Boolean getPaid() {
         return paid;
     }
 
-    public void setPaid(boolean paid) {
+    public void setPaid(Boolean paid) {
         this.paid = paid;
     }
 
-    public boolean isLighting() {
+    public Boolean getLighting() {
         return lighting;
     }
 
-    public void setLighting(boolean lighting) {
+    public void setLighting(Boolean lighting) {
         this.lighting = lighting;
     }
 
-    public boolean isFenced() {
+    public Boolean getFenced() {
         return fenced;
     }
 
-    public void setFenced(boolean fenced) {
+    public void setFenced(Boolean fenced) {
         this.fenced = fenced;
     }
 
-    public boolean isLockerRoom() {
+    public Boolean getLockerRoom() {
         return lockerRoom;
     }
 
-    public void setLockerRoom(boolean lockerRoom) {
+    public void setLockerRoom(Boolean lockerRoom) {
         this.lockerRoom = lockerRoom;
     }
 

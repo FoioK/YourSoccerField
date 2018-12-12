@@ -13,6 +13,7 @@ import com.pk.YourSoccerField.service.dtoModel.SearchModel;
 import com.pk.YourSoccerField.service.dtoModel.SoccerFieldDTO;
 import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
+import com.pk.YourSoccerField.util.SearchFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -131,8 +132,12 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     @Override
     public List<SoccerFieldDTO> getByCustomCriteria(String encodedObject) {
         SearchModel searchModel = this.parseToModel(encodedObject);
+        String whereClause = SearchFactory.buildWhereClause(searchModel);
 
-        return null;
+        List<SoccerField> soccerFields = this.soccerFieldRepository
+                .findByCustomCriteria(whereClause);
+
+        return new ArrayList<>(this.soccerFieldToDTO.mapAllFromEntities(soccerFields));
     }
 
     private SearchModel parseToModel(String encodedObject) {

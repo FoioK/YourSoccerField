@@ -20,6 +20,9 @@ interface SoccerFieldRepository : JpaRepository<SoccerField, Long> {
     @Query(value = findExampleTenQuery, nativeQuery = true)
     fun findExampleTen(): List<SoccerField>
 
+    @Query(value = findByCustomCriteriaQuery, nativeQuery = true)
+    fun findByCustomCriteria(whereClause: String): List<SoccerField>
+
     companion object {
 
         const val findSurfaceByIdQuery = "SELECT s FROM Surface s " +
@@ -31,5 +34,8 @@ interface SoccerFieldRepository : JpaRepository<SoccerField, Long> {
 
         const val findExampleTenQuery = "SELECT * FROM soccer_field " +
                 "ORDER BY RAND() LIMIT 10"
+
+        const val findByCustomCriteriaQuery = "SELECT * FROM soccer_field " +
+                "WHERE :whereClause"
     }
 }
