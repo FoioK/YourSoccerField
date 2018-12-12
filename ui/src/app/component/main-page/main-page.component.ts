@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {SoccerField} from '../../model/SoccerField';
 import {SoccerFieldService} from '../../service/soccer-field.service';
 import {switchMap} from 'rxjs/operators';
