@@ -87,15 +87,15 @@ export class MainPageComponent implements OnInit {
   private getWidth(): FormGroup {
     return this.formBuilder
       .group({
-        widthMin: 0,
-        widthMax: 100,
+        minWidth: 0,
+        maxWidth: 100,
       });
   }
 
   private getLength(): FormGroup {
     return this.formBuilder
       .group({
-        lengthMin: 0,
+        minLength: 0,
         lengthMax: 100
       });
   }
