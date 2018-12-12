@@ -73,7 +73,8 @@ public class SoccerFieldController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('SOCCERFIELDS_POST_CREATE')")
     public ResponseEntity<?> createSoccerField(
-            @Valid @RequestBody SoccerFieldDTO soccerFieldDTO) {
+            @Valid @RequestBody SoccerFieldDTO soccerFieldDTO
+    ) {
         return new ResponseEntity<>(
                 this.soccerFieldService.createSoccerField(soccerFieldDTO),
                 HttpStatus.CREATED
@@ -86,7 +87,8 @@ public class SoccerFieldController {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<?> getByAddressContains(
-            @PathVariable @NotBlank String street) {
+            @PathVariable @NotBlank String street
+    ) {
         return new ResponseEntity<>(
                 this.soccerFieldService.getByAddressContains(street),
                 HttpStatus.OK
@@ -101,6 +103,20 @@ public class SoccerFieldController {
     public ResponseEntity<?> getExampleTen() {
         return new ResponseEntity<>(
                 this.soccerFieldService.getExampleTen(),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping(
+            value = "/soccerfields/advancedSearch",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> getByCustomCriteria(
+            @RequestParam String encodedObject
+    ) {
+        return new ResponseEntity<>(
+                this.soccerFieldService.getByCustomCriteria(encodedObject),
                 HttpStatus.OK
         );
     }

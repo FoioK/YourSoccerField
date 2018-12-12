@@ -13,4 +13,6 @@ public interface SoccerFieldService {
     List<SoccerFieldDTO> getByAddressContains(String street);
 
     List<SoccerFieldDTO> getExampleTen();
+
+    List<SoccerFieldDTO> getByCustomCriteria(String encodedObject);
 }

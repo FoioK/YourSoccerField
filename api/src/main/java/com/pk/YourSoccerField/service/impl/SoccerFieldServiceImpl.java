@@ -1,5 +1,6 @@
 package com.pk.YourSoccerField.service.impl;
 
+import com.google.gson.Gson;
 import com.pk.YourSoccerField.exception.ErrorCode;
 import com.pk.YourSoccerField.exception.MissingEntityException;
 import com.pk.YourSoccerField.model.Address;
@@ -8,6 +9,7 @@ import com.pk.YourSoccerField.model.Surface;
 import com.pk.YourSoccerField.repository.AddressRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.SoccerFieldService;
+import com.pk.YourSoccerField.service.dtoModel.SearchModel;
 import com.pk.YourSoccerField.service.dtoModel.SoccerFieldDTO;
 import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
@@ -123,5 +126,19 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                         this.soccerFieldRepository.findExampleTen()
                 )
         );
+    }
+
+    @Override
+    public List<SoccerFieldDTO> getByCustomCriteria(String encodedObject) {
+        SearchModel searchModel = this.parseToModel(encodedObject);
+
+        return null;
+    }
+
+    private SearchModel parseToModel(String encodedObject) {
+        String decodedObject = new String(Base64.getDecoder().decode(encodedObject));
+        Gson gson = new Gson();
+
+        return gson.fromJson(decodedObject, SearchModel.class);
     }
 }
