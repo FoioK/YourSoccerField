@@ -96,7 +96,7 @@ export class MainPageComponent implements OnInit {
     return this.formBuilder
       .group({
         minLength: 0,
-        lengthMax: 100
+        maxLength: 100
       });
   }
 }
