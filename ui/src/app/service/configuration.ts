@@ -4,7 +4,7 @@ import {HttpHeaders} from '@angular/common/http';
 @Injectable()
 export class Configuration {
 
-  server = 'http://localhost:8080';
+  server = 'http://127.0.0.37:8080';
   api = '/api';
   serverWithApiUrl: string = this.server + this.api;
 
