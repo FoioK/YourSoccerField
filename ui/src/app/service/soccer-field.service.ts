@@ -19,7 +19,7 @@ export class SoccerFieldService {
   findByAddressContains(street: string): Observable<Array<SoccerField>> {
     return this.http
       .get<Array<SoccerField>>(
-        this.configuration.serverWithApiUrl +
+        this.configuration.apiServer +
         this.apiMapping.soccerField_findByAddressContains +
         street,
         {

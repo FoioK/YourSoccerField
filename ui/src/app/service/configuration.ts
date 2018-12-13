@@ -4,9 +4,8 @@ import {HttpHeaders} from '@angular/common/http';
 @Injectable()
 export class Configuration {
 
-  server = 'http://localhost:8080';
-  api = '/api';
-  serverWithApiUrl: string = this.server + this.api;
+  authServer = 'http://127.0.0.37:8081';
+  apiServer = 'http://127.0.0.37:8080/api';
 
   private emailRegExp: RegExp = RegExp(
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
