@@ -4,6 +4,7 @@ import {Configuration} from './configuration';
 import {ApiMapping} from './api-mapping';
 import {Observable} from 'rxjs';
 import {SoccerField} from '../model/SoccerField';
+import {SearchModel} from "../model/search-model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,25 @@ export class SoccerFieldService {
         street,
         {
           headers: Configuration.getJSONContentType()
-        });
+        }
+      );
+  }
+
+  findByCustomCriteria(searchModel: SearchModel): Observable<Array<SoccerField>> {
+    const stringJson: string = JSON.stringify(searchModel);
+    console.log(searchModel);
+    console.log('---');
+    console.log(stringJson);
+    console.log('---');
+
+    return this.http
+      .get<Array<SoccerField>>(
+        this.configuration.serverWithApiUrl +
+        this.apiMapping.soccerField_findByCustomCriteria +
+        btoa(stringJson),
+        {
+          headers: Configuration.getJSONContentType()
+        }
+      )
   }
 }
