@@ -1,7 +1,7 @@
 export interface SearchModel {
 
   name?: string;
-  surface?: Array<string>;
+  surfaces?: Array<number>;
   paid?: boolean;
   lighting?: boolean;
   fenced?: boolean;

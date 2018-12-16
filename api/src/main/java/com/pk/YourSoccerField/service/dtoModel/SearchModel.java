@@ -5,7 +5,7 @@ import java.util.List;
 public class SearchModel {
 
     private String name;
-    private List<String> surface;
+    private List<Long> surfaces;
     private Boolean paid;
     private Boolean lighting;
     private Boolean fenced;
@@ -23,12 +23,12 @@ public class SearchModel {
         this.name = name;
     }
 
-    public List<String> getSurface() {
-        return surface;
+    public List<Long> getSurfaces() {
+        return surfaces;
     }
 
-    public void setSurface(List<String> surface) {
-        this.surface = surface;
+    public void setSurfaces(List<Long> surfaces) {
+        this.surfaces = surfaces;
     }
 
     public Boolean getPaid() {
