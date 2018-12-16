@@ -19,6 +19,7 @@ spring:
       ddl-auto: update
 
 server:
+  address: 127.0.0.37
   port: 8081
 
 config:
