@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {SoccerField} from '../../model/SoccerField';
 import {SoccerFieldService} from '../../service/soccer-field.service';
 import {switchMap} from 'rxjs/operators';
@@ -87,16 +87,16 @@ export class MainPageComponent implements OnInit {
   private getWidth(): FormGroup {
     return this.formBuilder
       .group({
-        widthMin: 0,
-        widthMax: 100,
+        minWidth: 0,
+        maxWidth: 100,
       });
   }
 
   private getLength(): FormGroup {
     return this.formBuilder
       .group({
-        lengthMin: 0,
-        lengthMax: 100
+        minLength: 0,
+        maxLength: 100
       });
   }
 }

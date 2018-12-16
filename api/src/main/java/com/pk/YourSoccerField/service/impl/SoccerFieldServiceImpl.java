@@ -1,5 +1,6 @@
 package com.pk.YourSoccerField.service.impl;
 
+import com.google.gson.Gson;
 import com.pk.YourSoccerField.exception.ErrorCode;
 import com.pk.YourSoccerField.exception.MissingEntityException;
 import com.pk.YourSoccerField.model.Address;
@@ -8,16 +9,17 @@ import com.pk.YourSoccerField.model.Surface;
 import com.pk.YourSoccerField.repository.AddressRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.SoccerFieldService;
+import com.pk.YourSoccerField.service.dtoModel.SearchModel;
 import com.pk.YourSoccerField.service.dtoModel.SoccerFieldDTO;
 import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
+import com.pk.YourSoccerField.util.SearchFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SoccerFieldServiceImpl implements SoccerFieldService {
@@ -26,13 +28,15 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     private AddressRepository addressRepository;
     private BaseToDTO<SoccerField, SoccerFieldDTO> soccerFieldToDTO;
     private BaseFromDTO<SoccerField, SoccerFieldDTO> soccerFieldFromDTO;
+    private SearchFactory searchFactory;
 
     @Autowired
     public SoccerFieldServiceImpl(
             SoccerFieldRepository soccerFieldRepository,
-            AddressRepository addressRepository) {
+            AddressRepository addressRepository, SearchFactory searchFactory) {
         this.soccerFieldRepository = soccerFieldRepository;
         this.addressRepository = addressRepository;
+        this.searchFactory = searchFactory;
         setSoccerFieldMapper();
     }
 
@@ -123,5 +127,38 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                         this.soccerFieldRepository.findExampleTen()
                 )
         );
+    }
+
+    @Override
+    public List<SoccerFieldDTO> getByCustomCriteria(String encodedObject) {
+        SearchModel searchModel = this.parseToModel(encodedObject);
+        List<SoccerField> soccerFields = this.searchFactory
+                .getSoccerFieldByCustomCriteria(searchModel);
+
+        return new ArrayList<>(
+                this.soccerFieldToDTO
+                        .mapAllFromEntities(searchModel.getSurfaces() != null ?
+                                this.filterSurfaces(
+                                        searchModel,
+                                        soccerFields
+                                ) :
+                                soccerFields)
+        );
+    }
+
+    private SearchModel parseToModel(String encodedObject) {
+        String decodedObject = new String(Base64.getDecoder().decode(encodedObject));
+        Gson gson = new Gson();
+
+        return gson.fromJson(decodedObject, SearchModel.class);
+    }
+
+    private Collection<SoccerField> filterSurfaces(SearchModel searchModel, List<SoccerField> soccerFields) {
+        List<Surface> surfaces = this.soccerFieldRepository
+                .findSurfaceByIdIn(searchModel.getSurfaces());
+
+        return soccerFields.stream()
+                .filter(soccerField -> surfaces.contains(soccerField.getSurface()))
+                .collect(Collectors.toList());
     }
 }
