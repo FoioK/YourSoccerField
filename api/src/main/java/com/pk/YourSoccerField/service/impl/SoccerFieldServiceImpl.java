@@ -18,10 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SoccerFieldServiceImpl implements SoccerFieldService {
@@ -30,13 +28,15 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     private AddressRepository addressRepository;
     private BaseToDTO<SoccerField, SoccerFieldDTO> soccerFieldToDTO;
     private BaseFromDTO<SoccerField, SoccerFieldDTO> soccerFieldFromDTO;
+    private SearchFactory searchFactory;
 
     @Autowired
     public SoccerFieldServiceImpl(
             SoccerFieldRepository soccerFieldRepository,
-            AddressRepository addressRepository) {
+            AddressRepository addressRepository, SearchFactory searchFactory) {
         this.soccerFieldRepository = soccerFieldRepository;
         this.addressRepository = addressRepository;
+        this.searchFactory = searchFactory;
         setSoccerFieldMapper();
     }
 
@@ -132,12 +132,18 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     @Override
     public List<SoccerFieldDTO> getByCustomCriteria(String encodedObject) {
         SearchModel searchModel = this.parseToModel(encodedObject);
-        String whereClause = SearchFactory.buildWhereClause(searchModel);
+        List<SoccerField> soccerFields = this.searchFactory
+                .getSoccerFieldByCustomCriteria(searchModel);
 
-        List<SoccerField> soccerFields = this.soccerFieldRepository
-                .findByCustomCriteria(whereClause);
-
-        return new ArrayList<>(this.soccerFieldToDTO.mapAllFromEntities(soccerFields));
+        return new ArrayList<>(
+                this.soccerFieldToDTO
+                        .mapAllFromEntities(searchModel.getSurfaces() != null ?
+                                this.filterSurfaces(
+                                        searchModel,
+                                        soccerFields
+                                ) :
+                                soccerFields)
+        );
     }
 
     private SearchModel parseToModel(String encodedObject) {
@@ -145,5 +151,14 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
         Gson gson = new Gson();
 
         return gson.fromJson(decodedObject, SearchModel.class);
+    }
+
+    private Collection<SoccerField> filterSurfaces(SearchModel searchModel, List<SoccerField> soccerFields) {
+        List<Surface> surfaces = this.soccerFieldRepository
+                .findSurfaceByIdIn(searchModel.getSurfaces());
+
+        return soccerFields.stream()
+                .filter(soccerField -> surfaces.contains(soccerField.getSurface()))
+                .collect(Collectors.toList());
     }
 }
