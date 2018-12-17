@@ -31,14 +31,10 @@ export class SoccerFieldService {
 
   findByCustomCriteria(searchModel: SearchModel): Observable<Array<SoccerField>> {
     const stringJson: string = JSON.stringify(searchModel);
-    console.log(searchModel);
-    console.log('---');
-    console.log(stringJson);
-    console.log('---');
 
     return this.http
       .get<Array<SoccerField>>(
-        this.configuration.serverWithApiUrl +
+        this.configuration.apiServer +
         this.apiMapping.soccerField_findByCustomCriteria +
         btoa(stringJson),
         {
