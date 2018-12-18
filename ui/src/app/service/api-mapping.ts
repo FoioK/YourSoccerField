@@ -3,8 +3,11 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class ApiMapping {
 
-  user_create = '/register';
+  user_create = '/users/register';
 
   // @PathVariable {street}
   soccerField_findByAddressContains = '/soccerfields/';
+
+  // @RequestParam {encodedObject}
+  soccerField_findByCustomCriteria = '/soccerfields/advancedSearch?encodedObject=';
 }
