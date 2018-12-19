@@ -1,45 +1,53 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Configuration} from './configuration';
-import {ApiMapping} from './api-mapping';
-import {Observable} from 'rxjs';
-import {SoccerField} from '../model/SoccerField';
-import {SearchModel} from "../model/search-model";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Configuration } from "./configuration";
+import { ApiMapping } from "./api-mapping";
+import { Observable } from "rxjs";
+import { SoccerField } from "../model/SoccerField";
+import { SearchModel } from "../model/search-model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class SoccerFieldService {
-
-  constructor(private http: HttpClient,
-              private configuration: Configuration,
-              private apiMapping: ApiMapping) {
-
-  }
+  constructor(
+    private http: HttpClient,
+    private configuration: Configuration,
+    private apiMapping: ApiMapping
+  ) {}
 
   findByAddressContains(street: string): Observable<Array<SoccerField>> {
-    return this.http
-      .get<Array<SoccerField>>(
-        this.configuration.apiServer +
+    return this.http.get<Array<SoccerField>>(
+      this.configuration.apiServer +
         this.apiMapping.soccerField_findByAddressContains +
         street,
-        {
-          headers: Configuration.getJSONContentType()
-        }
-      );
+      {
+        headers: Configuration.getJSONContentType()
+      }
+    );
   }
 
-  findByCustomCriteria(searchModel: SearchModel): Observable<Array<SoccerField>> {
+  findByCustomCriteria(
+    searchModel: SearchModel
+  ): Observable<Array<SoccerField>> {
     const stringJson: string = JSON.stringify(searchModel);
 
-    return this.http
-      .get<Array<SoccerField>>(
-        this.configuration.apiServer +
+    return this.http.get<Array<SoccerField>>(
+      this.configuration.apiServer +
         this.apiMapping.soccerField_findByCustomCriteria +
         btoa(stringJson),
-        {
-          headers: Configuration.getJSONContentType()
-        }
-      )
+      {
+        headers: Configuration.getJSONContentType()
+      }
+    );
+  }
+
+  getExampleTen(): Observable<Array<SoccerField>> {
+    return this.http.get<Array<SoccerField>>(
+      this.configuration.apiServer + "/soccerfields/exampleTen",
+      {
+        headers: Configuration.getJSONContentType()
+      }
+    );
   }
 }

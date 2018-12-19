@@ -44,10 +44,17 @@ export class MainPageComponent implements OnInit {
 
   addressGroup: FormGroup;
   promptSoccerFieldList: Array<SoccerField>;
-
   ngOnInit() {
+    this.getExampleSocerfields();
     this.initAddressForm();
     this.buildFilterForm();
+  }
+
+  private getExampleSocerfields() {
+    this.soccerFieldService.getExampleTen().subscribe(result => {
+      this.promptSoccerFieldList = result;
+      console.log(this.filterForm.value);
+    });
   }
 
   private initAddressForm() {
@@ -70,51 +77,39 @@ export class MainPageComponent implements OnInit {
 
   private buildFilterForm() {
     this.filterForm = this.formBuilder.group({
-      surfaces: this.getSurfaces(),
+      surfaces: this.formBuilder.array(['','','']),
       paid: false,
       lighting: false,
       fenced: false,
       lockerRoom: false,
-      width: this.getWidth(),
-      length: this.getLength()
-    });
-  }
-
-  private getSurfaces(): FormGroup {
-    return this.formBuilder.group({
-      syntheticGrass: false,
-      rubber: false,
-      tartan: false
-    });
-  }
-
-  private getWidth(): FormGroup {
-    return this.formBuilder.group({
       widthMin: 0,
-      widthMax: 100
-    });
-  }
-
-  private getLength(): FormGroup {
-    return this.formBuilder.group({
+      widthMax: 100,
       lengthMin: 0,
       lengthMax: 100
     });
   }
 
+  private setSurfaces(index: number, value: string): void {
+    if (this.filterForm.controls["surfaces"].value[index] === "") {
+      this.filterForm.controls["surfaces"].value[index] = value;
+    } else {
+      this.filterForm.controls["surfaces"].value[index] = "";
+    }
+  }
+
   private getWidthMin(value: number): void {
-    this.filterForm.controls["width"].patchValue({ widthMin: value });
+    this.filterForm.controls["widthMin"].setValue(value);
   }
 
   private getWidthMax(value: number): void {
-    this.filterForm.controls["width"].patchValue({ widthMax: value });
+    this.filterForm.controls["widthMax"].setValue(value);
   }
 
   private getLengthMin(value: number): void {
-    this.filterForm.controls["length"].patchValue({ lengthMin: value });
+    this.filterForm.controls["lengthMin"].setValue(value);
   }
 
   private getLengthMax(value: number): void {
-    this.filterForm.controls["length"].patchValue({ lengthMax: value });
+    this.filterForm.controls["lengthMax"].setValue(value);
   }
 }
