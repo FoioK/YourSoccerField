@@ -11,6 +11,9 @@ import java.util.*
 @Repository
 interface SoccerFieldRepository : JpaRepository<SoccerField, Long> {
 
+    @Query(value = findAllSurfaceQuery)
+    fun findAllSurface(): MutableList<Surface>
+
     @Query(value = findSurfaceByIdQuery)
     fun findSurfaceById(surfaceId: Long): Optional<Surface>
 
@@ -27,6 +30,8 @@ interface SoccerFieldRepository : JpaRepository<SoccerField, Long> {
     fun findByCustomCriteria(whereClause: String): List<SoccerField>
 
     companion object {
+
+        const val findAllSurfaceQuery = "SELECT s FROM Surface s"
 
         const val findSurfaceByIdQuery = "SELECT s FROM Surface s " +
                 "WHERE s.id = ?1"
