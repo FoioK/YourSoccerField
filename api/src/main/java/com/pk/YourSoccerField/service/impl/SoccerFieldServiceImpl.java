@@ -11,6 +11,7 @@ import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.SoccerFieldService;
 import com.pk.YourSoccerField.service.dtoModel.SearchModel;
 import com.pk.YourSoccerField.service.dtoModel.SoccerFieldDTO;
+import com.pk.YourSoccerField.service.dtoModel.SurfaceDTO;
 import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
 import com.pk.YourSoccerField.util.SearchFactory;
@@ -28,16 +29,20 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     private AddressRepository addressRepository;
     private BaseToDTO<SoccerField, SoccerFieldDTO> soccerFieldToDTO;
     private BaseFromDTO<SoccerField, SoccerFieldDTO> soccerFieldFromDTO;
+    private BaseToDTO<Surface, SurfaceDTO> surfaceToDTO;
     private SearchFactory searchFactory;
 
     @Autowired
     public SoccerFieldServiceImpl(
             SoccerFieldRepository soccerFieldRepository,
-            AddressRepository addressRepository, SearchFactory searchFactory) {
+            AddressRepository addressRepository,
+            SearchFactory searchFactory) {
+
         this.soccerFieldRepository = soccerFieldRepository;
         this.addressRepository = addressRepository;
         this.searchFactory = searchFactory;
         setSoccerFieldMapper();
+        setSurfaceMapper();
     }
 
     private void setSoccerFieldMapper() {
@@ -75,6 +80,16 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                 dto.getDescription(),
                 new ArrayList<>()
         );
+    }
+
+    private void setSurfaceMapper() {
+        this.surfaceToDTO = entity -> {
+            SurfaceDTO surfaceDTO = new SurfaceDTO();
+            surfaceDTO.setId(entity.getId());
+            surfaceDTO.setName(entity.getName());
+
+            return surfaceDTO;
+        };
     }
 
     private Address getAddressById(Long addressId) {
@@ -160,5 +175,11 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
         return soccerFields.stream()
                 .filter(soccerField -> surfaces.contains(soccerField.getSurface()))
                 .collect(Collectors.toList());
+    }
+
+    public List<SurfaceDTO> getAllSurface() {
+        List<Surface> surfaces = this.soccerFieldRepository.findAllSurface();
+
+        return new ArrayList<>(surfaceToDTO.mapAllFromEntities(surfaces));
     }
 }
