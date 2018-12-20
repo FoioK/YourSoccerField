@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Configuration} from './configuration';
 import {ApiMapping} from './api-mapping';
 import {Observable} from 'rxjs';
-import {SoccerField} from '../model/SoccerField';
+import {SoccerField} from '../model/soccer-field';
 import {SearchModel} from "../model/search-model";
 
 @Injectable({

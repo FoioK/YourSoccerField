@@ -6,8 +6,8 @@ import {
   transition,
   trigger
 } from "@angular/animations";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { SoccerField } from "../../model/SoccerField";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { SoccerField } from "../../model/soccer-field";
 import { SoccerFieldService } from "../../service/soccer-field.service";
 import { switchMap } from "rxjs/operators";
 

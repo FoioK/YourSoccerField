@@ -9,6 +9,7 @@ import com.pk.YourSoccerField.model.Surface;
 import com.pk.YourSoccerField.repository.AddressRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.SoccerFieldService;
+import com.pk.YourSoccerField.service.dtoModel.AddressDTO;
 import com.pk.YourSoccerField.service.dtoModel.SearchModel;
 import com.pk.YourSoccerField.service.dtoModel.SoccerFieldDTO;
 import com.pk.YourSoccerField.service.dtoModel.SurfaceDTO;
@@ -30,6 +31,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     private BaseToDTO<SoccerField, SoccerFieldDTO> soccerFieldToDTO;
     private BaseFromDTO<SoccerField, SoccerFieldDTO> soccerFieldFromDTO;
     private BaseToDTO<Surface, SurfaceDTO> surfaceToDTO;
+    private BaseToDTO<Address, AddressDTO> addressToDTO;
     private SearchFactory searchFactory;
 
     @Autowired
@@ -43,6 +45,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
         this.searchFactory = searchFactory;
         setSoccerFieldMapper();
         setSurfaceMapper();
+        setAddressMapper();
     }
 
     private void setSoccerFieldMapper() {
@@ -50,10 +53,8 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
             SoccerFieldDTO soccerFieldDTO = new SoccerFieldDTO();
             soccerFieldDTO.setId(entity.getId());
             soccerFieldDTO.setName(entity.getName());
-            soccerFieldDTO.setAddressId(
-                    Objects.requireNonNull(entity.getAddress()).getId());
-            soccerFieldDTO.setSurfaceId(
-                    Objects.requireNonNull(entity.getSurface()).getId());
+            soccerFieldDTO.setAddress(this.addressToDTO.createFromEntity(entity.getAddress()));
+            soccerFieldDTO.setSurface(this.surfaceToDTO.createFromEntity(entity.getSurface()));
             soccerFieldDTO.setWidth(entity.getWidth());
             soccerFieldDTO.setLength(entity.getLength());
             soccerFieldDTO.setPrice(
@@ -69,8 +70,8 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
         this.soccerFieldFromDTO = dto -> new SoccerField(
                 dto.getId(),
                 dto.getName(),
-                this.getAddressById(dto.getAddressId()),
-                this.getSurfaceById(dto.getSurfaceId()),
+                this.getAddressById(dto.getAddress().getId()),
+                this.getSurfaceById(dto.getSurface().getId()),
                 dto.getWidth(),
                 dto.getLength(),
                 dto.getPrice() != null ? new BigDecimal(dto.getPrice()) : null,
@@ -89,6 +90,18 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
             surfaceDTO.setName(entity.getName());
 
             return surfaceDTO;
+        };
+    }
+
+    private void setAddressMapper() {
+        this.addressToDTO = entity -> {
+            AddressDTO addressDTO = new AddressDTO();
+            addressDTO.setId(entity.getId());
+            addressDTO.setCity(entity.getCity());
+            addressDTO.setStreet(entity.getStreet());
+            addressDTO.setApartmentNumber(entity.getApartmentNumber());
+
+            return addressDTO;
         };
     }
 
