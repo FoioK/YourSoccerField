@@ -40,7 +40,10 @@ data class SoccerField(
         val description: String?,
 
         @OneToMany(mappedBy = "soccerField")
-        val bookingsId: List<Booking>
+        val bookingsId: List<Booking>,
+
+        @OneToOne()
+        val openHour: OpenHour?
 ) {
     constructor() : this(
             0,
@@ -54,6 +57,7 @@ data class SoccerField(
             null,
             null,
             null,
-            emptyList()
+            emptyList(),
+            null
     )
 }
