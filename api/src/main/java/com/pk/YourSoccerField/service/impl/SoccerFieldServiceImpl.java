@@ -4,15 +4,13 @@ import com.google.gson.Gson;
 import com.pk.YourSoccerField.exception.ErrorCode;
 import com.pk.YourSoccerField.exception.MissingEntityException;
 import com.pk.YourSoccerField.model.Address;
+import com.pk.YourSoccerField.model.OpenHour;
 import com.pk.YourSoccerField.model.SoccerField;
 import com.pk.YourSoccerField.model.Surface;
 import com.pk.YourSoccerField.repository.AddressRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.SoccerFieldService;
-import com.pk.YourSoccerField.service.dtoModel.AddressDTO;
-import com.pk.YourSoccerField.service.dtoModel.SearchModel;
-import com.pk.YourSoccerField.service.dtoModel.SoccerFieldDTO;
-import com.pk.YourSoccerField.service.dtoModel.SurfaceDTO;
+import com.pk.YourSoccerField.service.dtoModel.*;
 import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
 import com.pk.YourSoccerField.util.SearchFactory;
@@ -20,7 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +33,8 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     private BaseFromDTO<SoccerField, SoccerFieldDTO> soccerFieldFromDTO;
     private BaseToDTO<Surface, SurfaceDTO> surfaceToDTO;
     private BaseToDTO<Address, AddressDTO> addressToDTO;
+    private BaseToDTO<OpenHour, OpenHourDTO> openHourToDTO;
+    private BaseFromDTO<OpenHour, OpenHourDTO> openHourFromDTO;
     private SearchFactory searchFactory;
 
     @Autowired
@@ -46,6 +49,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
         setSoccerFieldMapper();
         setSurfaceMapper();
         setAddressMapper();
+        setOpenHourMapper();
     }
 
     private void setSoccerFieldMapper() {
@@ -63,6 +67,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
             soccerFieldDTO.setFenced(entity.isFenced());
             soccerFieldDTO.setLockerRoom(entity.isLockerRoom());
             soccerFieldDTO.setDescription(entity.getDescription());
+            soccerFieldDTO.setOpenHour(this.openHourToDTO.createFromEntity(entity.getOpenHour()));
 
             return soccerFieldDTO;
         };
@@ -79,7 +84,8 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                 dto.isFenced(),
                 dto.isLockerRoom(),
                 dto.getDescription(),
-                new ArrayList<>()
+                new ArrayList<>(),
+                this.openHourFromDTO.createFromDTO(dto.getOpenHour())
         );
     }
 
@@ -102,6 +108,65 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
             addressDTO.setApartmentNumber(entity.getApartmentNumber());
 
             return addressDTO;
+        };
+    }
+
+    @SuppressWarnings("Duplicates")
+    private void setOpenHourMapper() {
+        this.openHourToDTO = entity -> {
+            OpenHourDTO openHourDTO = new OpenHourDTO();
+            openHourDTO.setId(entity.getId());
+
+            openHourDTO.setS1(entity.getS1());
+            openHourDTO.setE1(entity.getE1());
+
+            openHourDTO.setS2(entity.getS2());
+            openHourDTO.setE2(entity.getE2());
+
+            openHourDTO.setS3(entity.getS3());
+            openHourDTO.setE3(entity.getE3());
+
+            openHourDTO.setS4(entity.getS4());
+            openHourDTO.setE4(entity.getE4());
+
+            openHourDTO.setS5(entity.getS5());
+            openHourDTO.setE5(entity.getE5());
+
+            openHourDTO.setS6(entity.getS6());
+            openHourDTO.setE6(entity.getE6());
+
+            openHourDTO.setS7(entity.getS7());
+            openHourDTO.setE7(entity.getE7());
+
+            return openHourDTO;
+        };
+
+        this.openHourFromDTO = dto -> {
+            OpenHour openHour = new OpenHour();
+            openHour.setId(dto.getId());
+
+            openHour.setS1(dto.getS1());
+            openHour.setE1(dto.getE1());
+
+            openHour.setS2(dto.getS2());
+            openHour.setE2(dto.getE2());
+
+            openHour.setS3(dto.getS3());
+            openHour.setE3(dto.getE3());
+
+            openHour.setS4(dto.getS4());
+            openHour.setE4(dto.getE4());
+
+            openHour.setS5(dto.getS5());
+            openHour.setE5(dto.getE5());
+
+            openHour.setS6(dto.getS6());
+            openHour.setE6(dto.getE6());
+
+            openHour.setS7(dto.getS7());
+            openHour.setE7(dto.getE7());
+
+            return openHour;
         };
     }
 
