@@ -1,6 +1,7 @@
 package com.pk.YourSoccerField.model
 
 import java.time.LocalDateTime
+import java.time.LocalTime
 import javax.persistence.*
 
 @Entity
@@ -15,7 +16,7 @@ data class Booking(
         val startDate: LocalDateTime,
 
         @Column(nullable = false)
-        val executionTime: Int,
+        val executionTime: LocalTime,
 
         @ManyToOne
         val soccerField: SoccerField,
