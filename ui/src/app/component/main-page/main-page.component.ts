@@ -1,15 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from "@angular/animations";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { SoccerField } from "../../model/SoccerField";
-import { SoccerFieldService } from "../../service/soccer-field.service";
-import { switchMap } from "rxjs/operators";
+import {Component, OnInit} from "@angular/core";
+import {animate, state, style, transition, trigger} from "@angular/animations";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {SoccerField} from "../../model/soccer-field";
+import {SoccerFieldService} from "../../service/soccer-field.service";
+import {switchMap} from "rxjs/operators";
+import {EMPTY} from "rxjs";
 
 @Component({
   selector: "app-main-page",
@@ -65,9 +60,11 @@ export class MainPageComponent implements OnInit {
     this.addressGroup
       .get("address")
       .valueChanges.pipe(
-        switchMap(street =>
-          this.soccerFieldService.findByAddressContains(street)
-        )
+      switchMap(street =>
+        street.toString().length > 0 ?
+          this.soccerFieldService.findByAddressContains(street) :
+          EMPTY
+      )
       )
       .subscribe(result => {
         this.promptSoccerFieldList = result;

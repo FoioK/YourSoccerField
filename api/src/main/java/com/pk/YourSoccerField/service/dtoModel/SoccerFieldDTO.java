@@ -12,12 +12,10 @@ public class SoccerFieldDTO {
     private String name;
 
     @NotNull
-    @Positive
-    private Long addressId;
+    private AddressDTO address;
 
     @NotNull
-    @Positive
-    private Long surfaceId;
+    private SurfaceDTO surface;
 
     @NotNull
     @Positive
@@ -49,20 +47,20 @@ public class SoccerFieldDTO {
         this.name = name;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public AddressDTO getAddress() {
+        return address;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddress(AddressDTO address) {
+        this.address = address;
     }
 
-    public Long getSurfaceId() {
-        return surfaceId;
+    public SurfaceDTO getSurface() {
+        return surface;
     }
 
-    public void setSurfaceId(Long surfaceId) {
-        this.surfaceId = surfaceId;
+    public void setSurface(SurfaceDTO surface) {
+        this.surface = surface;
     }
 
     public Integer getWidth() {

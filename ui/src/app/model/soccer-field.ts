@@ -1,9 +1,12 @@
+import {Address} from "./address";
+import {Surface} from "./surface";
+
 export interface SoccerField {
 
   id?: number;
   name: string;
-  addressId: number;
-  surfaceId: number;
+  address: Address;
+  surface: Surface;
   width: number;
   length: number;
   price?: number;
