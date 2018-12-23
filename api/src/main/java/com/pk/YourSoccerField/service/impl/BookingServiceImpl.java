@@ -1,33 +1,49 @@
 package com.pk.YourSoccerField.service.impl;
 
+import com.pk.YourSoccerField.exception.AppException;
+import com.pk.YourSoccerField.exception.BookingException;
 import com.pk.YourSoccerField.exception.ErrorCode;
 import com.pk.YourSoccerField.exception.MissingEntityException;
+import com.pk.YourSoccerField.model.Booking;
 import com.pk.YourSoccerField.model.OpenHour;
 import com.pk.YourSoccerField.model.SoccerField;
+import com.pk.YourSoccerField.repository.BookingRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.BookingService;
 import com.pk.YourSoccerField.service.dtoModel.BookingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BookingServiceImpl implements BookingService {
 
     private SoccerFieldRepository soccerFieldRepository;
+    private BookingRepository bookingRepository;
 
     @Autowired
-    public BookingServiceImpl(SoccerFieldRepository soccerFieldRepository) {
+    public BookingServiceImpl(
+            SoccerFieldRepository soccerFieldRepository,
+            BookingRepository bookingRepository
+    ) {
         this.soccerFieldRepository = soccerFieldRepository;
+        this.bookingRepository = bookingRepository;
     }
 
     @Override
     public BookingDTO create(BookingDTO bookingDTO) {
         if (!this.validation(bookingDTO)) {
-            return new BookingDTO();
+            throw new AppException(
+                    "Error occurred during data validation",
+                    HttpStatus.PRECONDITION_FAILED,
+                    ErrorCode.INVALID_INPUT
+            );
         }
 
         return null;
@@ -40,11 +56,13 @@ public class BookingServiceImpl implements BookingService {
         OpenHour openHour = soccerField.getOpenHour();
 
         if (!this.checkIsSoccerFieldOpen(bookingStartDate, executionTime, openHour)) {
-            // TODO nie jest wtedy otwarty
             return false;
         }
 
-        return true;
+        return this.checkIsSoccerFieldFree(
+                bookingDTO.getSoccerField(),
+                bookingStartDate,
+                executionTime);
     }
 
     private SoccerField getSoccerFieldById(Long soccerFieldId) {
@@ -66,14 +84,18 @@ public class BookingServiceImpl implements BookingService {
         LocalTime closeTime = findCloseTimeByDayOfWeek(dayOfWeek, openHour);
         LocalTime bookingStartTime = bookingStartDate.toLocalTime();
 
-        if (openTime.isAfter(bookingStartDate.toLocalTime())) {
-            // TODO jeszcze nie otwarty
-            return false;
+        if (openTime.isAfter(bookingStartTime)) {
+            throw new BookingException(
+                    "Soccer field is not open yet",
+                    ErrorCode.SOCCER_FIELD_NOT_OPEN
+            );
         }
 
         if (closeTime.isBefore(this.sumLocalTimes(bookingStartTime, executionTime))) {
-            // TODO już zamknięty
-            return false;
+            throw new BookingException(
+                    "Soccer field is then closed",
+                    ErrorCode.SOCCER_FIELD_CLOSED
+            );
         }
 
         return true;
@@ -97,8 +119,11 @@ public class BookingServiceImpl implements BookingService {
                 return openHour.getS7();
         }
 
-        // TODO blad (zly dzien tygodnia)
-        return LocalTime.now();
+        throw new AppException(
+                "Error occurred while find open time by day of week",
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                ErrorCode.OPEN_HOUR_GET_VALUE
+        );
     }
 
     private LocalTime findCloseTimeByDayOfWeek(DayOfWeek dayOfWeek, OpenHour openHour) {
@@ -119,11 +144,70 @@ public class BookingServiceImpl implements BookingService {
                 return openHour.getE7();
         }
 
-        // TODO blad (zly dzien tygodnia)
-        return LocalTime.now();
+        throw new AppException(
+                "Error occurred while find open time by day of week",
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                ErrorCode.OPEN_HOUR_GET_VALUE
+        );
+    }
+
+    private boolean checkIsSoccerFieldFree(
+            Long soccerFieldId,
+            LocalDateTime bookingStartDate,
+            LocalTime executionTime
+    ) {
+        LocalTime bookingStartTime = bookingStartDate.toLocalTime();
+        LocalTime bookingEndTime = this.sumLocalTimes(bookingStartTime, executionTime);
+
+        List<Booking> bookings = this.bookingRepository
+                .findAllByDate(
+                        soccerFieldId,
+                        bookingStartDate.getYear(),
+                        bookingStartDate.getMonthValue(),
+                        bookingStartDate.getDayOfMonth()
+                );
+
+        if (this.filterBookingsByStartAndEndTime(
+                bookings,
+                bookingStartTime,
+                bookingEndTime) != 0
+        ) {
+            throw new BookingException(
+                    "Is another booking on this time",
+                    ErrorCode.BOOKING_CONFLICT
+            );
+        }
+
+        return true;
+    }
+
+    private Long filterBookingsByStartAndEndTime(
+            List<Booking> bookings,
+            LocalTime bookingStartTime,
+            LocalTime bookingEndTime
+    ) {
+        return bookings.stream()
+                .filter(booking -> {
+                    LocalTime startTime = Objects.requireNonNull(booking.component3()).toLocalTime();
+                    LocalTime endTime = this.sumLocalTimes(
+                            startTime,
+                            Objects.requireNonNull(booking.getExecutionTime())
+                    );
+
+                    if (bookingStartTime.isAfter(startTime) && bookingStartTime.isBefore(endTime)) {
+                        return true;
+                    }
+
+                    return bookingEndTime.isAfter(startTime) && bookingEndTime.isBefore(endTime);
+                })
+                .count();
     }
 
     private LocalTime sumLocalTimes(LocalTime one, LocalTime two) {
-        return one.plusHours(two.getHour()).plusMinutes(two.getMinute());
+        LocalTime sum = one.plusHours(two.getHour()).plusMinutes(two.getMinute());
+
+        return sum.isBefore(one) ?
+                LocalTime.of(23, 59, 59, 59) :
+                sum;
     }
 }
