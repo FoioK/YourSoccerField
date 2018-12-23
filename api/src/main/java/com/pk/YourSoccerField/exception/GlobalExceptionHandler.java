@@ -88,8 +88,19 @@ public class GlobalExceptionHandler {
         exception.setPath(request.getRequestURI());
 
         return new ResponseEntity<>(
-                exception,
+                this.map(exception),
                 exception.getHttpStatus()
         );
+    }
+
+    @SuppressWarnings("Duplicates")
+    private <E extends AppException> Map<String, Object> map(E exception) {
+        return new HashMap<String, Object>() {{
+            put("timestamp", exception.getTimestamp());
+            put("status", exception.getHttpStatus());
+            put("error", exception.getError());
+            put("message", exception.getMessage());
+            put("path", exception.getPath());
+        }};
     }
 }
