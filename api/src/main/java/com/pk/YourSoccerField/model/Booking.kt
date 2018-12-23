@@ -13,13 +13,22 @@ data class Booking(
 
         val userCode: Long,
 
-        val startDate: LocalDateTime,
+        val startDate: LocalDateTime?,
 
         @Column(nullable = false)
-        val executionTime: LocalTime,
+        val executionTime: LocalTime?,
 
         @ManyToOne
-        val soccerField: SoccerField,
+        val soccerField: SoccerField?,
 
         val isPayed: Boolean
-)
+) {
+        constructor() : this (
+                0,
+                0,
+                null,
+                null,
+                null,
+                false
+        )
+}
