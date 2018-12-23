@@ -1,5 +1,6 @@
 package com.pk.YourSoccerField.oauth2server.model
 
+import java.util.Collections.emptyList
 import javax.persistence.*
 
 @Entity

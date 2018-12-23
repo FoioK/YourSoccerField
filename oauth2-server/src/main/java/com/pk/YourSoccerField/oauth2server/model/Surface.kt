@@ -14,4 +14,10 @@ data class Surface(
 
         @OneToMany(mappedBy = "surface")
         val SoccerFields: List<SoccerField>
-)
+) {
+    constructor() : this(
+            0,
+            "",
+            emptyList()
+    )
+}
