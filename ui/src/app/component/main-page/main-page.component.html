@@ -1,15 +1,22 @@
 <div class="container-body">
   <section class="col-12 col-sm-12 col-lg-12">
-    <!-- container for input search by location -->
-    <div class="col-12 col-sm-6 col-lg-4 px-0">
-      <div class="justify-content-center form-item mx-0">
-        <form [formGroup]="addressGroup">
-          <input class="form-control form-input" type="text" placeholder="Write location" formControlName="address" />
-          <i class="fas fa-search-location form-icons"></i>
-        </form>
+    <div class="row no-gutters p-0 col-12 col-sm-12 col-lg-12">
+      <!-- container for input search by location -->
+      <div class="order-sm-1 order-2 col-12 col-sm-6 col-lg-4 px-0">
+        <div class="justify-content-center form-item mx-0">
+          <form [formGroup]="addressGroup">
+            <input class="form-control form-input" type="text" placeholder="Write location" formControlName="address" />
+            <i class="fas fa-search-location form-icons"></i>
+          </form>
+        </div>
       </div>
+      <!-- end container for input search by location -->
+      <!-- container for input search by location -->
+      <div class="order-1 order-sm-2 col-12 col-sm-6 col-lg-8 px-0 d-flex align-items-center justify-content-center">
+        <h1 class="form-title m-0 px-4">Welcome in best place to look for active rest</h1>
+      </div>
+      <!-- end container for input search by location -->
     </div>
-    <!-- end container for input search by location -->
     <form [formGroup]="filterForm">
       <!-- container for filter -->
       <div class="col-12 col-sm-6 col-lg-4 px-0 ">
@@ -25,17 +32,9 @@
             <button class="btn btn-secondary dropdown-toggle" href="#">Surface</button>
           -->
           <div class="d-flex h-100 justify-content-center align-items-center flex-column">
-            <label class="d-flex align-items-center w-100 filter-label">
-              <input class="filter-checkbox ml-2" type="checkbox" (input)="setSurfaces(0,'synthetic grass')"/>
-              <span class="filter-label-title mx-auto">synthetic grass</span>
-            </label>
-            <label class="d-flex align-items-center filter-label">
-              <input class="filter-checkbox ml-2" type="checkbox" (input)="setSurfaces(1,'rubber')"/>
-              <span class="filter-label-title mx-auto">rubber</span>
-            </label>
-            <label class="d-flex align-items-center filter-label">
-              <input class="filter-checkbox ml-2" type="checkbox"  (input)="setSurfaces(2,'tartan')"/>
-              <span class="filter-label-title mx-auto">tartan</span>
+            <label class="d-flex align-items-center w-100 filter-label" *ngFor="let surface of surfacesList">
+              <input class="filter-checkbox ml-2" type="checkbox" (input)="setSomething(surface.name,surface.id)" />
+              <span class="filter-label-title mx-auto">{{surface.name}}</span>
             </label>
           </div>
         </div>
@@ -115,12 +114,17 @@
   <!-- main content -->
   <section>
     <div class="row no-gutters col-12 col-sm-12 col-lg-12 my-4">
-      <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4">
-        <app-mini-socerfield></app-mini-socerfield>
-      </div>
-      <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4">
-        <app-mini-socerfield></app-mini-socerfield>
-      </div>
+      <ng-container *ngIf="promptSoccerFieldList?.length > 0; then prompt; else examples"></ng-container>
+      <ng-template #prompt>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4" *ngFor="let field of promptSoccerFieldList; let i = even">
+          <app-mini-socerfield [field]="field" [even]="i ? true: false"></app-mini-socerfield>
+        </div>
+      </ng-template>
+      <ng-template #examples>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4" *ngFor="let field of exampleSoccerFieldList; let i = even">
+          <app-mini-socerfield [field]="field" [even]="i ? true: false"></app-mini-socerfield>
+        </div>
+      </ng-template>
     </div>
   </section>
 </div>

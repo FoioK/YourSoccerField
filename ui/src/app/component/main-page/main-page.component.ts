@@ -1,10 +1,22 @@
-import {Component, OnInit} from "@angular/core";
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {SoccerField} from "../../model/soccer-field";
-import {SoccerFieldService} from "../../service/soccer-field.service";
-import {switchMap} from "rxjs/operators";
-import {EMPTY} from "rxjs";
+import { Component, OnInit } from "@angular/core";
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from "@angular/animations";
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  FormArray,
+} from "@angular/forms";
+import { SoccerField } from "../../model/soccer-field";
+import { SoccerFieldService } from "../../service/soccer-field.service";
+import { switchMap } from "rxjs/operators";
+import { Observable, of } from 'rxjs';
+import { Surface } from "src/app/model/surface";
 
 @Component({
   selector: "app-main-page",
@@ -35,20 +47,32 @@ export class MainPageComponent implements OnInit {
     private soccerFieldService: SoccerFieldService
   ) {}
   filterShow = false;
-  filterForm: FormGroup;
 
+  filterForm: FormGroup;
+  surfaces: FormArray = this.formBuilder.array([]);
   addressGroup: FormGroup;
+
+  exampleSoccerFieldList: Array<SoccerField>;
   promptSoccerFieldList: Array<SoccerField>;
+  surfacesList: Array<Surface>;
   ngOnInit() {
     this.getExampleSocerfields();
+    this.getAllSurfaces();
     this.initAddressForm();
     this.buildFilterForm();
   }
 
   private getExampleSocerfields() {
     this.soccerFieldService.getExampleTen().subscribe(result => {
-      this.promptSoccerFieldList = result;
-      console.log(this.filterForm.value);
+      this.exampleSoccerFieldList = result;
+      // console.log(this.exampleSoccerFieldList);
+    });
+  }
+
+  private getAllSurfaces() {
+    this.soccerFieldService.getAllSurfaces().subscribe(result => {
+      this.surfacesList = result;
+      // console.log(this.surfacesList);
     });
   }
 
@@ -60,21 +84,20 @@ export class MainPageComponent implements OnInit {
     this.addressGroup
       .get("address")
       .valueChanges.pipe(
-      switchMap(street =>
-        street.toString().length > 0 ?
-          this.soccerFieldService.findByAddressContains(street) :
-          EMPTY
-      )
+        switchMap(street =>
+          street.toString().length > 0
+            ? this.soccerFieldService.findByAddressContains(street)
+            : of([])
+        )
       )
       .subscribe(result => {
-        this.promptSoccerFieldList = result;
-        console.log(this.promptSoccerFieldList);
-      });
+          this.promptSoccerFieldList = result;
+        });
   }
 
   private buildFilterForm() {
     this.filterForm = this.formBuilder.group({
-      surfaces: this.formBuilder.array(['','','']),
+      surfaces: this.surfaces,
       paid: false,
       lighting: false,
       fenced: false,
@@ -84,13 +107,25 @@ export class MainPageComponent implements OnInit {
       lengthMin: 0,
       lengthMax: 100
     });
+
+    this.filterForm.valueChanges.subscribe(value => {
+      this.soccerFieldService.findByCustomCriteria(value).subscribe(result => {
+        this.exampleSoccerFieldList = result;
+      });
+    });
   }
 
-  private setSurfaces(index: number, value: string): void {
-    if (this.filterForm.controls["surfaces"].value[index] === "") {
-      this.filterForm.controls["surfaces"].value[index] = value;
+  private createNewControl(id: number) {
+    return new FormControl(id);
+  }
+
+  private setSomething(name: string, id: number): void {
+    let index = -1;
+    index = this.surfaces.value.findIndex(control => control === id);
+    if (index === -1) {
+      this.surfaces.push(this.createNewControl(id));
     } else {
-      this.filterForm.controls["surfaces"].value[index] = "";
+      this.surfaces.removeAt(index);
     }
   }
 
