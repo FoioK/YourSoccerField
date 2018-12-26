@@ -182,8 +182,14 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     }
 
     private Collection<SoccerField> filterSurfaces(SearchModel searchModel, List<SoccerField> soccerFields) {
+        List<Long> ids = searchModel.getSurfaces();
+
+        if (ids.isEmpty()) {
+            return Collections.emptyList();
+        }
+
         List<Surface> surfaces = this.soccerFieldRepository
-                .findSurfaceByIdIn(searchModel.getSurfaces());
+                .findSurfaceByIdIn(ids);
 
         return soccerFields.stream()
                 .filter(soccerField -> surfaces.contains(soccerField.getSurface()))
