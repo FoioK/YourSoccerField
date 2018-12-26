@@ -18,7 +18,7 @@ export class RegisterService {
 
   createUser(user: User): Observable<HttpResponse<User>> {
     return this.http.post<User>(
-      this.configuration.serverWithApiUrl + this.apiMapping.createUser,
+      this.configuration.apiServer + this.apiMapping.user_create,
       user,
       {
         headers: Configuration.getJSONContentType(),

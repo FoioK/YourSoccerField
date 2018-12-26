@@ -1,8 +1,15 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class ApiMapping {
 
-  createUser: string = '/register';
+  user_create = '/users/register';
 
+  // @PathVariable {street}
+  soccerField_findByAddressContains = '/soccerfields/';
+  // @RequestParam {encodedObject}
+  soccerField_findByCustomCriteria = '/soccerfields/advancedSearch?encodedObject=';
+  soccerField_exampleTen = '/soccerfields/exampleTen';
+
+  surfaces = '/surfaces'
 }

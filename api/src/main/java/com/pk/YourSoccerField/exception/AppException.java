@@ -4,20 +4,39 @@ import org.springframework.http.HttpStatus;
 
 public class AppException extends RuntimeException {
 
+    private final Long timestamp;
     private final HttpStatus httpStatus;
-    private final ErrorCode errorCode;
+    private final ErrorCode error;
+    private String path = "";
 
-    public AppException(String message, HttpStatus httpStatus, ErrorCode errorCode) {
+    public AppException(
+            String message,
+            HttpStatus httpStatus,
+            ErrorCode error
+    ) {
         super(message);
+        this.timestamp = System.currentTimeMillis();
         this.httpStatus = httpStatus;
-        this.errorCode = errorCode;
+        this.error = error;
     }
 
-    public HttpStatus getHttpStatus() {
+    Long getTimestamp() {
+        return timestamp;
+    }
+
+    HttpStatus getHttpStatus() {
         return httpStatus;
     }
 
-    public ErrorCode getErrorCode() {
-        return errorCode;
+    ErrorCode getError() {
+        return error;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

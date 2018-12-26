@@ -14,7 +14,7 @@
 
 .form-input {
   height: 45px;
-  padding: 0px 50px 0px 15px;
+  padding: 0 50px 0 15px;
 }
 
 .form-icons {
@@ -22,12 +22,19 @@
   top: -7px;
   right: 11px;
   transform: translate(0, 50%);
-  transform: translate(0, 50%);
   width: 30px;
   font-size: 30px;
   color: #000;
   opacity: 0.3;
   cursor: pointer;
+}
+
+.form-title{
+  font-family: 'Carter One', cursive;
+  text-align: center;
+  line-height: 20px;
+  font-size:30px;
+  color:#fff;
 }
 
 .filter-row {
@@ -56,6 +63,7 @@
 
 .filter-checkbox::before {
   content: "\f00d";
+  /*noinspection CssNoGenericFontName*/
   font-family: "Font Awesome 5 Free";
   font-size: 10px;
   line-height: 20px;
@@ -75,6 +83,7 @@
 
 .filter-checkbox:checked::before {
   content: "\f00c";
+  /*noinspection CssNoGenericFontName*/
   font-family: "Font Awesome 5 Free";
   font-size: 10px;
   line-height: 20px;
@@ -100,16 +109,8 @@
 }
 
 .filter-btn {
-  min-width: 140px;
-}
-
-.filter-btn-white {
-  min-width: 140px;
-  background: #fff;
-}
-
-.filter-btn:focus, .filter-btn:active{
-  box-shadow: none !important;
+  max-width: 140px;
+  cursor: pointer;
 }
 
 .filter-slider {
@@ -138,3 +139,12 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: 0.5s;
 }
+
+@media only screen and (max-width: 992px){
+  .form-title{
+    font-size: 22px;
+  }
+
+}
+
+

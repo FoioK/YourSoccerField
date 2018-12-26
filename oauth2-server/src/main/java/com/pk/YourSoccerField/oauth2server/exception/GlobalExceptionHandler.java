@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @ControllerAdvice
 @Component
 public class GlobalExceptionHandler {
@@ -17,15 +14,15 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public <E extends AppException> ResponseEntity<?> handle(E exception) {
         return new ResponseEntity<>(
-                error(exception.getMessage(), exception.getErrorCode()),
+                formatException(exception),
                 exception.getHttpStatus()
         );
     }
 
-    private Map error(Object message, ErrorCode errorCode) {
-        return new HashMap<String, Object>() {{
-            put("message", message);
-            put("errorCode", errorCode);
-        }};
+    private <E extends AppException> ResponseEntity<?> formatException(E exception) {
+        return new ResponseEntity<>(
+                exception,
+                exception.getHttpStatus()
+        );
     }
 }

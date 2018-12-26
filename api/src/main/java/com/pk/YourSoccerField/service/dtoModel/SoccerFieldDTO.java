@@ -1,6 +1,8 @@
 package com.pk.YourSoccerField.service.dtoModel;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class SoccerFieldDTO {
 
@@ -9,23 +11,24 @@ public class SoccerFieldDTO {
     @NotBlank
     private String name;
 
-    @NotBlank
-    private Long addressId;
+    @NotNull
+    private AddressDTO address;
 
-    @NotBlank
-    private Long surfaceId;
+    @NotNull
+    private SurfaceDTO surface;
+
+    @NotNull
+    @Positive
     private Integer width;
+
+    @NotNull
+    @Positive
     private Integer length;
     private String price;
 
-    @NotBlank
     private boolean isLighting;
-
-    @NotBlank
     private boolean isFenced;
-
-    @NotBlank
-    private boolean isLockerRom;
+    private boolean isLockerRoom;
     private String description;
 
     public Long getId() {
@@ -44,20 +47,20 @@ public class SoccerFieldDTO {
         this.name = name;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public AddressDTO getAddress() {
+        return address;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddress(AddressDTO address) {
+        this.address = address;
     }
 
-    public Long getSurfaceId() {
-        return surfaceId;
+    public SurfaceDTO getSurface() {
+        return surface;
     }
 
-    public void setSurfaceId(Long surfaceId) {
-        this.surfaceId = surfaceId;
+    public void setSurface(SurfaceDTO surface) {
+        this.surface = surface;
     }
 
     public Integer getWidth() {
@@ -100,12 +103,12 @@ public class SoccerFieldDTO {
         isFenced = fenced;
     }
 
-    public boolean isLockerRom() {
-        return isLockerRom;
+    public boolean isLockerRoom() {
+        return isLockerRoom;
     }
 
-    public void setLockerRom(boolean lockerRom) {
-        isLockerRom = lockerRom;
+    public void setLockerRoom(boolean lockerRoom) {
+        isLockerRoom = lockerRoom;
     }
 
     public String getDescription() {

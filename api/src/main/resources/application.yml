@@ -1,6 +1,6 @@
 spring:
   application:
-    name: authorization-server
+    name: Your Soccer Field
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: "jdbc:mysql://149.156.136.151:3306/kkopacz"
@@ -19,7 +19,14 @@ spring:
       ddl-auto: update
 
 server:
+  address: 127.0.0.37
   port: 8080
+
+project:
+  name: YourSoccerField
+  version: 0.3.0
+  description: Idea assumes that, the user registering to our application and loging into it, can book a place, where
+    he can play football.
 
 logging:
   level:
@@ -30,9 +37,9 @@ logging:
 security:
   oauth2:
     resource:
-      filter-order: 3
       jwt:
-        key-value: -----BEGIN PUBLIC KEY-----
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2dhkCFy8zchY2W7GzVjG
           o+QBcoluOXRXmtwNffjLZp9KyTQ4Z0fY1n1pYn9ARAT/CJrMH75XIZxF53Kr6sI3
           1ZR1KHlLCcqg7R4Z3koCTblAVJPDKfSswG6eboW6bg+bc2/omwxhUpdzxGwtAtOG
