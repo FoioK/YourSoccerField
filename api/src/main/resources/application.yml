@@ -24,7 +24,7 @@ server:
 
 project:
   name: YourSoccerField
-  version: 0.2
+  version: 0.3.0
   description: Idea assumes that, the user registering to our application and loging into it, can book a place, where
     he can play football.
 
