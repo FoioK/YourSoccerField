@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SoccerFieldService} from './service/soccer-field.service';
 import { MultirangeSliderComponent } from './component/multirange-slider/multirange-slider.component';
 import { MiniSocerfieldComponent } from './component/mini-socerfield/mini-socerfield.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MiniSocerfieldComponent } from './component/mini-socerfield/mini-socerf
     NavbarComponent,
     MainPageComponent,
     MultirangeSliderComponent,
-    MiniSocerfieldComponent
+    MiniSocerfieldComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

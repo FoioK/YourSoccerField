@@ -110,7 +110,12 @@ export class MainPageComponent implements OnInit {
 
     this.filterForm.valueChanges.subscribe(value => {
       this.soccerFieldService.findByCustomCriteria(value).subscribe(result => {
-        this.exampleSoccerFieldList = result;
+        this.promptSoccerFieldList = result;
+      }, (err) => {
+        console.log(err);
+      },
+      () => {
+        console.log("complete");
       });
     });
   }
