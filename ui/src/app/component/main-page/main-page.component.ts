@@ -65,14 +65,12 @@ export class MainPageComponent implements OnInit {
   private getExampleSocerfields() {
     this.soccerFieldService.getExampleTen().subscribe(result => {
       this.exampleSoccerFieldList = result;
-      // console.log(this.exampleSoccerFieldList);
     });
   }
 
   private getAllSurfaces() {
     this.soccerFieldService.getAllSurfaces().subscribe(result => {
       this.surfacesList = result;
-      // console.log(this.surfacesList);
     });
   }
 
@@ -112,10 +110,8 @@ export class MainPageComponent implements OnInit {
       this.soccerFieldService.findByCustomCriteria(value).subscribe(result => {
         this.promptSoccerFieldList = result;
       }, (err) => {
-        console.log(err);
       },
       () => {
-        console.log("complete");
       });
     });
   }

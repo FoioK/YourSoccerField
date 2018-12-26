@@ -7,7 +7,9 @@ export class ApiMapping {
 
   // @PathVariable {street}
   soccerField_findByAddressContains = '/soccerfields/';
-
   // @RequestParam {encodedObject}
   soccerField_findByCustomCriteria = '/soccerfields/advancedSearch?encodedObject=';
+  soccerField_exampleTen = '/soccerfields/exampleTen';
+
+  surfaces = '/surfaces'
 }

@@ -45,7 +45,7 @@ export class SoccerFieldService {
 
   getExampleTen(): Observable<Array<SoccerField>> {
     return this.http.get<Array<SoccerField>>(
-      this.configuration.apiServer + "/soccerfields/exampleTen",
+      this.configuration.apiServer + this.apiMapping.soccerField_exampleTen,
       {
         headers: Configuration.getJSONContentType()
       }
@@ -53,7 +53,7 @@ export class SoccerFieldService {
   }
 
   getAllSurfaces(): Observable<Array<Surface>> {
-    return this.http.get<Array<Surface>>(this.configuration.apiServer + "/surfaces",
+    return this.http.get<Array<Surface>>(this.configuration.apiServer + this.apiMapping.surfaces,
     {
       headers: Configuration.getJSONContentType()
     }
