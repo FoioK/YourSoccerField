@@ -11,6 +11,8 @@ import com.pk.YourSoccerField.repository.BookingRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.BookingService;
 import com.pk.YourSoccerField.service.dtoModel.BookingDTO;
+import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
+import com.pk.YourSoccerField.service.mapper.BaseToDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,8 @@ public class BookingServiceImpl implements BookingService {
 
     private SoccerFieldRepository soccerFieldRepository;
     private BookingRepository bookingRepository;
+    private BaseFromDTO<Booking, BookingDTO> bookingFromDTO;
+    private BaseToDTO<Booking, BookingDTO> bookingToDTO;
 
     @Autowired
     public BookingServiceImpl(
@@ -34,6 +38,30 @@ public class BookingServiceImpl implements BookingService {
     ) {
         this.soccerFieldRepository = soccerFieldRepository;
         this.bookingRepository = bookingRepository;
+        setBookingMapper();
+    }
+
+    private void setBookingMapper() {
+        this.bookingFromDTO = dto -> new Booking(
+                dto.getId(),
+                dto.getUserCode(),
+                LocalDateTime.parse(dto.getStartDate()),
+                LocalTime.parse(dto.getExecutionTime()),
+                this.getSoccerFieldById(dto.getSoccerField()),
+                dto.getPayed() == null ? false : dto.getPayed()
+        );
+
+        this.bookingToDTO = entity -> {
+            BookingDTO bookingDTO = new BookingDTO();
+            bookingDTO.setId(entity.getId());
+            bookingDTO.setUserCode(entity.getUserCode());
+            bookingDTO.setStartDate(Objects.requireNonNull(entity.getStartDate()).toString());
+            bookingDTO.setExecutionTime(Objects.requireNonNull(entity.getExecutionTime()).toString());
+            bookingDTO.setSoccerField(Objects.requireNonNull(entity.getSoccerField()).getId());
+            bookingDTO.setPayed(entity.isPayed());
+
+            return bookingDTO;
+        };
     }
 
     @Override
@@ -46,7 +74,10 @@ public class BookingServiceImpl implements BookingService {
             );
         }
 
-        return null;
+        Booking booking = this.bookingFromDTO.createFromDTO(bookingDTO);
+
+        return this.bookingToDTO
+                .createFromEntity(this.bookingRepository.save(booking));
     }
 
     private boolean validation(BookingDTO bookingDTO) {
@@ -193,6 +224,10 @@ public class BookingServiceImpl implements BookingService {
                             startTime,
                             Objects.requireNonNull(booking.getExecutionTime())
                     );
+
+                    if (bookingStartTime.equals(startTime) || bookingEndTime.equals(endTime)) {
+                        return true;
+                    }
 
                     if (bookingStartTime.isAfter(startTime) && bookingStartTime.isBefore(endTime)) {
                         return true;
