@@ -19,6 +19,8 @@ public class BookingDTO {
     @Positive
     private Long soccerField;
 
+    private Boolean isPayed;
+
     public Long getId() {
         return id;
     }
@@ -57,5 +59,13 @@ public class BookingDTO {
 
     public void setSoccerField(Long soccerField) {
         this.soccerField = soccerField;
+    }
+
+    public Boolean getPayed() {
+        return isPayed;
+    }
+
+    public void setPayed(Boolean payed) {
+        isPayed = payed;
     }
 }

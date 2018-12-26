@@ -9,7 +9,7 @@ data class Booking(
 
         @Id
         @GeneratedValue
-        val id: Long,
+        val id: Long?,
 
         val userCode: Long,
 
@@ -21,7 +21,7 @@ data class Booking(
         @ManyToOne
         val soccerField: SoccerField?,
 
-        val isPayed: Boolean
+        val isPayed: Boolean?
 ) {
         constructor() : this (
                 0,
