@@ -18,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +29,9 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     private BaseToDTO<SoccerField, SoccerFieldDTO> soccerFieldToDTO;
     private BaseFromDTO<SoccerField, SoccerFieldDTO> soccerFieldFromDTO;
     private BaseToDTO<Surface, SurfaceDTO> surfaceToDTO;
+    private BaseFromDTO<Surface, SurfaceDTO> surfaceFromDTO;
     private BaseToDTO<Address, AddressDTO> addressToDTO;
+    private BaseFromDTO<Address, AddressDTO> addressFromDTO;
     private BaseToDTO<OpenHour, OpenHourDTO> openHourToDTO;
     private BaseFromDTO<OpenHour, OpenHourDTO> openHourFromDTO;
     private SearchFactory searchFactory;
@@ -72,21 +71,30 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
             return soccerFieldDTO;
         };
 
-        this.soccerFieldFromDTO = dto -> new SoccerField(
-                dto.getId(),
-                dto.getName(),
-                this.getAddressById(dto.getAddress().getId()),
-                this.getSurfaceById(dto.getSurface().getId()),
-                dto.getWidth(),
-                dto.getLength(),
-                dto.getPrice() != null ? new BigDecimal(dto.getPrice()) : null,
-                dto.isLighting(),
-                dto.isFenced(),
-                dto.isLockerRoom(),
-                dto.getDescription(),
-                new ArrayList<>(),
-                this.openHourFromDTO.createFromDTO(dto.getOpenHour())
-        );
+        this.soccerFieldFromDTO = dto -> {
+            boolean addressExist = dto.getAddress().getId() != null;
+            boolean surfaceExist = dto.getSurface().getId() != null;
+
+            return new SoccerField(
+                    dto.getId(),
+                    dto.getName(),
+                    addressExist ?
+                            this.getAddressById(dto.getAddress().getId()) :
+                            this.addressFromDTO.createFromDTO(dto.getAddress()),
+                    surfaceExist ?
+                            this.getSurfaceById(dto.getSurface().getId()) :
+                            this.surfaceFromDTO.createFromDTO(dto.getSurface()),
+                    dto.getWidth(),
+                    dto.getLength(),
+                    dto.getPrice() != null ? new BigDecimal(dto.getPrice()) : null,
+                    dto.isLighting(),
+                    dto.isFenced(),
+                    dto.isLockerRoom(),
+                    dto.getDescription(),
+                    new ArrayList<>(),
+                    this.openHourFromDTO.createFromDTO(dto.getOpenHour())
+            );
+        };
     }
 
     private void setSurfaceMapper() {
@@ -97,6 +105,12 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
 
             return surfaceDTO;
         };
+
+        this.surfaceFromDTO = dto -> new Surface(
+                dto.getId(),
+                dto.getName(),
+                Collections.emptyList()
+        );
     }
 
     private void setAddressMapper() {
@@ -109,6 +123,15 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
 
             return addressDTO;
         };
+
+        this.addressFromDTO = dto -> new Address(
+                dto.getId(),
+                dto.getCity(),
+                dto.getStreet(),
+                dto.getApartmentNumber(),
+                Collections.emptyList(),
+                Collections.emptyList()
+        );
     }
 
     @SuppressWarnings("Duplicates")
