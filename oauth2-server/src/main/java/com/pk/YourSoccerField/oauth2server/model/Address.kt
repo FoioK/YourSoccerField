@@ -8,7 +8,7 @@ data class Address(
 
         @Id
         @GeneratedValue
-        val id: Long,
+        val id: Long?,
 
         @Column(nullable = false, length = 64)
         val city: String,

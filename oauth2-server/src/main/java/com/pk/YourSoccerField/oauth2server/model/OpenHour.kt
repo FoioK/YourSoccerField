@@ -45,6 +45,6 @@ class OpenHour {
     @Column(nullable = false)
     var e7: LocalTime? = null
 
-    @OneToOne(mappedBy = "openHour")
-    var soccerField: SoccerField? = null
+    @OneToMany(mappedBy = "openHour")
+    var soccerField: List<SoccerField>? = null
 }
