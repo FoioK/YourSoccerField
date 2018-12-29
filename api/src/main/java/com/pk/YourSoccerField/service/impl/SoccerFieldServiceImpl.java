@@ -16,6 +16,7 @@ import com.pk.YourSoccerField.service.mapper.BaseToDTO;
 import com.pk.YourSoccerField.util.SearchFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -26,6 +27,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
 
     private SoccerFieldRepository soccerFieldRepository;
     private AddressRepository addressRepository;
+
     private BaseToDTO<SoccerField, SoccerFieldDTO> soccerFieldToDTO;
     private BaseFromDTO<SoccerField, SoccerFieldDTO> soccerFieldFromDTO;
     private BaseToDTO<Surface, SurfaceDTO> surfaceToDTO;
@@ -34,6 +36,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     private BaseFromDTO<Address, AddressDTO> addressFromDTO;
     private BaseToDTO<OpenHour, OpenHourDTO> openHourToDTO;
     private BaseFromDTO<OpenHour, OpenHourDTO> openHourFromDTO;
+
     private SearchFactory searchFactory;
 
     @Autowired
@@ -74,6 +77,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
         this.soccerFieldFromDTO = dto -> {
             boolean addressExist = dto.getAddress().getId() != null;
             boolean surfaceExist = dto.getSurface().getId() != null;
+            boolean openHourExist = dto.getOpenHour().getId() != null;
 
             return new SoccerField(
                     dto.getId(),
@@ -92,7 +96,9 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                     dto.isLockerRoom(),
                     dto.getDescription(),
                     new ArrayList<>(),
-                    this.openHourFromDTO.createFromDTO(dto.getOpenHour())
+                    openHourExist ?
+                            this.getOpenHourById(dto.getOpenHour().getId()) :
+                            this.openHourFromDTO.createFromDTO(dto.getOpenHour())
             );
         };
     }
@@ -211,6 +217,15 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
                 ));
     }
 
+    private OpenHour getOpenHourById(Long openHourId) {
+        return this.soccerFieldRepository
+                .findOpenHourById(openHourId)
+                .orElseThrow(() -> new MissingEntityException(
+                        "Cannot find open hour with id " + openHourId,
+                        ErrorCode.NOT_FOUND_BY_ID
+                ));
+    }
+
     @Override
     public List<SoccerFieldDTO> getAll() {
         return new ArrayList<>(
@@ -219,6 +234,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     }
 
     @Override
+    @Transactional
     public SoccerFieldDTO createSoccerField(SoccerFieldDTO soccerFieldDTO) {
         SoccerField soccerField = this.soccerFieldFromDTO.createFromDTO(soccerFieldDTO);
 
