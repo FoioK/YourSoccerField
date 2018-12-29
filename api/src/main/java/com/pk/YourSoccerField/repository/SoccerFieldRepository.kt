@@ -1,5 +1,6 @@
 package com.pk.YourSoccerField.repository
 
+import com.pk.YourSoccerField.model.OpenHour
 import com.pk.YourSoccerField.model.SoccerField
 import com.pk.YourSoccerField.model.Surface
 import org.springframework.data.jpa.repository.JpaRepository
@@ -11,15 +12,6 @@ import java.util.*
 @Repository
 interface SoccerFieldRepository : JpaRepository<SoccerField, Long> {
 
-    @Query(value = findAllSurfaceQuery)
-    fun findAllSurface(): MutableList<Surface>
-
-    @Query(value = findSurfaceByIdQuery)
-    fun findSurfaceById(surfaceId: Long): Optional<Surface>
-
-    @Query(value = findSurfaceByIdInQuery)
-    fun findSurfaceByIdIn(@Param("ids") surfaces: List<Long>): List<Surface>
-
     @Query(value = findByAddressContainsQuery, nativeQuery = true)
     fun findByAddressContains(@Param("street") street: String): List<SoccerField>
 
@@ -29,15 +21,21 @@ interface SoccerFieldRepository : JpaRepository<SoccerField, Long> {
     @Query(value = findByCustomCriteriaQuery, nativeQuery = true)
     fun findByCustomCriteria(whereClause: String): List<SoccerField>
 
+
+    @Query(value = findAllSurfaceQuery)
+    fun findAllSurface(): MutableList<Surface>
+
+    @Query(value = findSurfaceByIdQuery)
+    fun findSurfaceById(surfaceId: Long): Optional<Surface>
+
+    @Query(value = findSurfaceByIdInQuery)
+    fun findSurfaceByIdIn(@Param("ids") surfaces: List<Long>): List<Surface>
+
+
+    @Query(value = findOpenHourByIdQuery)
+    fun findOpenHourById(openHourId: Long): Optional<OpenHour>
+
     companion object {
-
-        const val findAllSurfaceQuery = "SELECT s FROM Surface s"
-
-        const val findSurfaceByIdQuery = "SELECT s FROM Surface s " +
-                "WHERE s.id = ?1"
-
-        const val findSurfaceByIdInQuery = "SELECT s FROM Surface s " +
-                "WHERE s.id IN :ids"
 
         const val findByAddressContainsQuery = "SELECT * FROM soccer_field sf " +
                 "JOIN address a ON a.id = sf.address_id " +
@@ -48,5 +46,18 @@ interface SoccerFieldRepository : JpaRepository<SoccerField, Long> {
 
         const val findByCustomCriteriaQuery = "SELECT * FROM soccer_field sf " +
                 "WHERE :whereClause"
+
+
+        const val findAllSurfaceQuery = "SELECT s FROM Surface s"
+
+        const val findSurfaceByIdQuery = "SELECT s FROM Surface s " +
+                "WHERE s.id = ?1"
+
+        const val findSurfaceByIdInQuery = "SELECT s FROM Surface s " +
+                "WHERE s.id IN :ids"
+
+
+        const val findOpenHourByIdQuery = "SELECT o FROM OpenHour o " +
+                "WHERE o.id = ?1"
     }
 }

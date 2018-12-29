@@ -1,5 +1,6 @@
 import {Address} from "./address";
 import {Surface} from "./surface";
+import {OpenHour} from "./open-hour";
 
 export interface SoccerField {
 
@@ -14,5 +15,6 @@ export interface SoccerField {
   isFenced?: boolean;
   isLockerRoom?: boolean;
   description?: string;
+  openHour: OpenHour;
 
 }

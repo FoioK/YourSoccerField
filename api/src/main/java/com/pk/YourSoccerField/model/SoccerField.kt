@@ -13,10 +13,10 @@ data class SoccerField(
         @Column(nullable = false, length = 64)
         val name: String?,
 
-        @ManyToOne
+        @ManyToOne(cascade = [CascadeType.ALL])
         val address: Address?,
 
-        @ManyToOne
+        @ManyToOne(cascade = [CascadeType.ALL])
         val surface: Surface?,
 
         @Column(nullable = false)
@@ -40,7 +40,10 @@ data class SoccerField(
         val description: String?,
 
         @OneToMany(mappedBy = "soccerField")
-        val bookingsId: List<Booking>
+        val bookingsId: List<Booking>,
+
+        @ManyToOne(cascade = [CascadeType.ALL])
+        val openHour: OpenHour?
 ) {
     constructor() : this(
             0,
@@ -54,6 +57,7 @@ data class SoccerField(
             null,
             null,
             null,
-            emptyList()
+            emptyList(),
+            null
     )
 }

@@ -31,6 +31,9 @@ public class SoccerFieldDTO {
     private boolean isLockerRoom;
     private String description;
 
+    @NotNull
+    private OpenHourDTO openHour;
+
     public Long getId() {
         return id;
     }
@@ -117,5 +120,13 @@ public class SoccerFieldDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public OpenHourDTO getOpenHour() {
+        return openHour;
+    }
+
+    public void setOpenHour(OpenHourDTO openHour) {
+        this.openHour = openHour;
     }
 }
