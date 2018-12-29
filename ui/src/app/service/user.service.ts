@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from "rxjs";
+import {Observable, BehaviorSubject} from "rxjs";
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class UserService {
   constructor() {
   }
 
-  private isLoggedSubject = new Subject<Boolean>();
+  private isLoggedSubject = new BehaviorSubject<Boolean>(false);
 
   isLogged(): Observable<Boolean> {
     return this.isLoggedSubject.asObservable();

@@ -6,17 +6,15 @@ import {
   transition,
   trigger
 } from "@angular/animations";
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  FormArray,
-} from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl, FormArray } from "@angular/forms";
 import { SoccerField } from "../../model/soccer-field";
 import { SoccerFieldService } from "../../service/soccer-field.service";
 import { switchMap } from "rxjs/operators";
-import { Observable, of } from 'rxjs';
+import { Observable, of } from "rxjs";
 import { Surface } from "src/app/model/surface";
+import { UserService } from "../../service/user.service";
+import { Router } from "@angular/router";
+import { AppRoute } from "../../module/app-route";
 
 @Component({
   selector: "app-main-page",
@@ -44,7 +42,9 @@ import { Surface } from "src/app/model/surface";
 export class MainPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private soccerFieldService: SoccerFieldService
+    private soccerFieldService: SoccerFieldService,
+    private userService: UserService,
+    private router: Router
   ) {}
   filterShow = false;
 
@@ -89,8 +89,8 @@ export class MainPageComponent implements OnInit {
         )
       )
       .subscribe(result => {
-          this.promptSoccerFieldList = result;
-        });
+        this.promptSoccerFieldList = result;
+      });
   }
 
   private buildFilterForm() {
@@ -107,12 +107,13 @@ export class MainPageComponent implements OnInit {
     });
 
     this.filterForm.valueChanges.subscribe(value => {
-      this.soccerFieldService.findByCustomCriteria(value).subscribe(result => {
-        this.promptSoccerFieldList = result;
-      }, (err) => {
-      },
-      () => {
-      });
+      this.soccerFieldService.findByCustomCriteria(value).subscribe(
+        result => {
+          this.promptSoccerFieldList = result;
+        },
+        err => {},
+        () => {}
+      );
     });
   }
 
