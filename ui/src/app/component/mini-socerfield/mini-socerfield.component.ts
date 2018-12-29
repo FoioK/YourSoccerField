@@ -1,21 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SoccerField } from '../../model/soccer-field';
+import { Component, OnInit, Input } from "@angular/core";
+import { SoccerField } from "../../model/soccer-field";
+import { UserService } from "../../service/user.service";
+import { Router } from "@angular/router";
+import { AppRoute } from "../../module/app-route";
 
 @Component({
-  selector: 'app-mini-socerfield',
-  templateUrl: './mini-socerfield.component.html',
-  styleUrls: ['./mini-socerfield.component.css']
+  selector: "app-mini-socerfield",
+  templateUrl: "./mini-socerfield.component.html",
+  styleUrls: ["./mini-socerfield.component.css"]
 })
 export class MiniSocerfieldComponent implements OnInit {
-
   @Input()
-  private field : SoccerField;
+  field: SoccerField;
   @Input()
-  private even : boolean = false;
+  private even: boolean = false;
 
-  constructor() { }
+  constructor(private userService: UserService, private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  private book(data: SoccerField) {
+    this.userService.isLogged().subscribe(result => {
+      if (result) {
+        this.router.navigateByUrl(AppRoute.registration);
+      } else {
+        this.router.navigateByUrl(AppRoute.login);
+      }
+    });
   }
-
 }

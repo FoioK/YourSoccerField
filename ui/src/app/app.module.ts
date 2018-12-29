@@ -19,6 +19,7 @@ import {SoccerFieldService} from './service/soccer-field.service';
 import { MultirangeSliderComponent } from './component/multirange-slider/multirange-slider.component';
 import { MiniSocerfieldComponent } from './component/mini-socerfield/mini-socerfield.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { DetailsSoccerfieldComponent } from './component/details-soccerfield/details-soccerfield.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FooterComponent } from './component/footer/footer.component';
     MainPageComponent,
     MultirangeSliderComponent,
     MiniSocerfieldComponent,
-    FooterComponent
+    FooterComponent,
+    DetailsSoccerfieldComponent
   ],
   imports: [
     BrowserModule,

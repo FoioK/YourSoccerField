@@ -1,0 +1,13 @@
+*{
+  margin:0;
+  padding:0;
+  border:none;
+  box-sizing: border-box;
+}
+
+.container-body{
+  min-height: 100vh;
+  background: url("https://images.pexels.com/photos/54567/pexels-photo-54567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
