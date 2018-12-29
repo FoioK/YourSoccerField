@@ -4,6 +4,7 @@ import {LoginComponent} from "../component/login/login.component";
 import {RegistrationComponent} from "../component/registration/registration.component";
 import {AppRoute} from "./app-route";
 import {MainPageComponent} from "../component/main-page/main-page.component";
+import { DetailsSoccerfieldComponent } from '../component/details-soccerfield/details-soccerfield.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: AppRoute.mainPage,
     component: MainPageComponent
+  },
+  {
+    path: AppRoute.reservation,
+    component: DetailsSoccerfieldComponent
   }
 ];
 
