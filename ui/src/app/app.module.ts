@@ -20,6 +20,7 @@ import { MultirangeSliderComponent } from './component/multirange-slider/multira
 import { MiniSocerfieldComponent } from './component/mini-socerfield/mini-socerfield.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { DetailsSoccerfieldComponent } from './component/details-soccerfield/details-soccerfield.component';
+import { AuthGuard } from './module/auth.guard';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { DetailsSoccerfieldComponent } from './component/details-soccerfield/det
     ApiMapping,
     UserService,
     SoccerFieldService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

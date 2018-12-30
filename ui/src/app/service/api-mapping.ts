@@ -11,5 +11,5 @@ export class ApiMapping {
   soccerField_findByCustomCriteria = '/soccerfields/advancedSearch?encodedObject=';
   soccerField_exampleTen = '/soccerfields/exampleTen';
 
-  surfaces = '/surfaces'
+  surfaces = '/surfaces';
 }

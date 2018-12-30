@@ -1,4 +1,8 @@
-import { Component, OnInit, ElementRef, Renderer2 } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Renderer2
+} from "@angular/core";
 import { Router } from "@angular/router";
 import { AppRoute } from "../../module/app-route";
 import { UserService } from "../../service/user.service";
@@ -12,27 +16,25 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private el: ElementRef,
     private render: Renderer2
   ) {}
 
-  private window: ElementRef;
   private arrow: Boolean = false;
-  isLogged: Boolean;
+  isLogged: Boolean = false;
 
   ngOnInit() {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem('token')) {
       this.isLogged = true;
+    } else {
+      this.userService.isLogged().subscribe(response => {
+        this.isLogged = response;
+      }); //TODO error handle
     }
-
-    this.userService.isLogged().subscribe(response => {
-      this.isLogged = response;
-    }); //TODO error handle
     this.topArrow();
   }
 
   private topArrow() {
-    this.render.listen(window, 'scroll', () => {
+    this.render.listen(window, "scroll", () => {
       if (window.scrollY > 50) {
         this.arrow = true;
       } else {
@@ -41,8 +43,12 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  private scrollTop(){
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  private scrollTop() {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
+
+  goToMain() {
+    this.router.navigateByUrl("/" + AppRoute.mainPage);
   }
 
   goToLogin() {
@@ -55,7 +61,9 @@ export class NavbarComponent implements OnInit {
 
   logOutProcess(isMainPage: Boolean) {
     this.userService.logOut();
-
+    this.userService.isLogged().subscribe(result => {
+      this.isLogged = result;
+    });
     if (isMainPage) {
       window.location.reload();
     } else {
