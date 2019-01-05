@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ReservationService } from '../../service/reservation.service';
+
 @Component({
   selector: 'app-details-soccerfield',
   templateUrl: './details-soccerfield.component.html',
@@ -7,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsSoccerfieldComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private reservation: ReservationService) { }
 
   ngOnInit() {
     console.log(this.route.snapshot.paramMap.get('id'));

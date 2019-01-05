@@ -21,6 +21,7 @@ import { MiniSocerfieldComponent } from './component/mini-socerfield/mini-socerf
 import { FooterComponent } from './component/footer/footer.component';
 import { DetailsSoccerfieldComponent } from './component/details-soccerfield/details-soccerfield.component';
 import { AuthGuard } from './module/auth.guard';
+import { ReservationService } from './service/reservation.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AuthGuard } from './module/auth.guard';
     UserService,
     SoccerFieldService,
     AuthGuard,
+    ReservationService,
   ],
   bootstrap: [AppComponent]
 })
