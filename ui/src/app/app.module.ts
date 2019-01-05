@@ -40,7 +40,7 @@ import { AuthGuard } from './module/auth.guard';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthService,
@@ -49,7 +49,7 @@ import { AuthGuard } from './module/auth.guard';
     ApiMapping,
     UserService,
     SoccerFieldService,
-    AuthGuard
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

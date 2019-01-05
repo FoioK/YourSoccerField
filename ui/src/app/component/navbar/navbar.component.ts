@@ -6,6 +6,7 @@ import {
 import { Router } from "@angular/router";
 import { AppRoute } from "../../module/app-route";
 import { UserService } from "../../service/user.service";
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: "navbar-page",
@@ -16,16 +17,18 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private render: Renderer2
+    private render: Renderer2,
+    private authService: AuthService,
   ) {}
 
   private arrow: Boolean = false;
   isLogged: Boolean = false;
 
   ngOnInit() {
-    if (localStorage.getItem('token')) {
+    if (this.authService.isAuthenticated()) {
       this.isLogged = true;
     } else {
+      localStorage.removeItem('token');
       this.userService.isLogged().subscribe(response => {
         this.isLogged = response;
       }); //TODO error handle

@@ -20,12 +20,6 @@ export class MiniSocerfieldComponent implements OnInit {
   ngOnInit() {}
 
   private book(data: SoccerField) {
-    this.userService.isLogged().subscribe(result => {
-      if (result) {
-        this.router.navigate([AppRoute.reservation, data.id]);
-      } else {
-        this.router.navigateByUrl(AppRoute.login);
-      }
-    });
+    this.router.navigate([AppRoute.reservation, data.id]);
   }
 }
