@@ -9,7 +9,7 @@ data class Permission (
         @GeneratedValue
         val id: Long,
 
-        @Column(nullable = false, length = 32)
+        @Column(nullable = false, length = 64)
         val name: String,
 
         @OneToMany(mappedBy = "role")

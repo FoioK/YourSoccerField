@@ -1,11 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Configuration } from "./configuration";
-import { TokenModel } from '../model/token-model';
-import { HttpClient } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { JwtHelperService } from "@auth0/angular-jwt";
-import { UserService } from "./user.service";
+import {Injectable} from '@angular/core';
+import {Configuration} from './configuration';
+import {TokenModel} from '../model/token-model';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {UserService} from './user.service';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root"
@@ -21,34 +20,36 @@ export class AuthService {
   ) {}
 
   getAccessToken(email: string, password: string) {
-    this.postUserDetails(email, password).subscribe(
-      token => this.store(token),
-      error => console.log(error)
-    );
+    this.postUserDetails(AuthService.getCredentialsByPassword(email, password))
+      .subscribe(token => this.store(token),
+        error => console.log(error)
+      );
   }
 
-  private errorHandler(errorResponse: any) {
-    return throwError(errorResponse);
+  refreshAccessToken(refreshToken: string) {
+    this.postUserDetails(AuthService.getCredentialsByRefreshToken(refreshToken))
   }
 
-  private postUserDetails(
-    email: string,
-    password: string
-  ): Observable<TokenModel> {
-    return this.http
-      .post<TokenModel>(
-        this.configuration.authServer + this.oauthAddress,
-        AuthService.getCredentials(email, password),
-        AuthService.getOptions()
-      )
-      .pipe(catchError(this.errorHandler));
+  private postUserDetails(credentials: string): Observable<TokenModel> {
+    return this.http.post<TokenModel>(
+      this.configuration.authServer + this.oauthAddress,
+      credentials,
+      AuthService.getOptions()
+      ).pipe(catchError(AuthService.errorHandler));
   }
+
 
   private static getCredentials(email: string, password: string): string {
     return (
       "username=" + email + "&password=" + password + "&grant_type=password"
     );
   }
+
+  private static getCredentialsByRefreshToken(refreshToken: string): string {
+    return 'refresh_token=' + refreshToken
+      + '&grant_type=refresh_token';
+  }
+
 
   private static getOptions() {
     return {
@@ -67,5 +68,9 @@ export class AuthService {
   public isAuthenticated(): boolean {
     const token: TokenModel = JSON.parse(localStorage.getItem("token"));
     return token != null && !this.jwtHelper.isTokenExpired(token.access_token);
+  }
+
+  private static errorHandler(errorResponse: any) {
+    return throwError(errorResponse);
   }
 }

@@ -1,5 +1,6 @@
 package com.pk.YourSoccerField.oauth2server.model
 
+import java.util.Collections.emptyList
 import javax.persistence.*
 
 @Entity
@@ -7,7 +8,7 @@ data class Address(
 
         @Id
         @GeneratedValue
-        val id: Long,
+        val id: Long?,
 
         @Column(nullable = false, length = 64)
         val city: String,

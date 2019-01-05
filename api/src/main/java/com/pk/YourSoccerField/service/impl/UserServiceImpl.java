@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
         if (isUserWithSameEMail(userDTO.getEmail())) {
             throw new DuplicatEntityException(
                     "Already exist user with this email address",
-                    ErrorCode.DUPLICAT_USER_EMAIL);
+                    ErrorCode.DUPLICATE_USER_EMAIL);
         }
 
         userDTO.setActive(true);
