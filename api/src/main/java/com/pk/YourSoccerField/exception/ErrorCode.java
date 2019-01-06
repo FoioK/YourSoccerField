@@ -13,6 +13,7 @@ public enum ErrorCode {
     NOT_FOUND_BY_EMAIL,
     NOT_FOUND_BY_NAME,
     NOT_FOUND_BY_ID,
+    NOT_FOUND_LAST_USER_CODE,
 
     //USER
     UPDATE_NEXT_USER_CODE,

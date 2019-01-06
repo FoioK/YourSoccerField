@@ -1,6 +1,7 @@
 package com.pk.YourSoccerField.repository
 
 import com.pk.YourSoccerField.model.UserEntity
+import com.pk.YourSoccerField.model.UserRole
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
@@ -24,12 +25,18 @@ interface UserRepository : JpaRepository<UserEntity, Long> {
     @Query(value = updateNextUserCode)
     fun updateNextUserCode(@Param("code") code: Long): Int
 
+    @Transactional
+    @Query(value = findLastUserCodeQuery, nativeQuery = true)
+    fun findLastUserCode(): Optional<BigInteger>
+
     @Modifying
     @Transactional
-    @Query(value = insertUserRole, nativeQuery = true)
-    fun insertUserRole(
-            @Param("userCode") userCode: Long,
-            @Param("roleId") roleId: Long): Int
+    @Query(value = insertNextUserCodeQuery, nativeQuery = true)
+    fun insertNextUserCode(@Param("code") code: Long): Int
+
+    @Suppress("SpringDataRepositoryMethodReturnTypeInspection")
+    @Query(value = findUserRoleByUserCodeQuery)
+    fun findUserRoleByUserCode(@Param("userCode") userCode: Long): Optional<UserRole>
 
     companion object {
 
@@ -37,7 +44,11 @@ interface UserRepository : JpaRepository<UserEntity, Long> {
 
         const val updateNextUserCode = "UPDATE UserCode uc SET next_code = :code WHERE id = 1"
 
-        const val insertUserRole = "INSERT INTO user_role (user_code, role_id) " +
-                "VALUES (:userCode, :roleId)"
+        const val findLastUserCodeQuery = "SELECT u.code FROM user u ORDER BY u.code DESC LIMIT 1"
+
+        const val insertNextUserCodeQuery = "INSERT INTO user_code (id, next_code) VALUES (1, :code)"
+
+        const val findUserRoleByUserCodeQuery = "SELECT ur FROM UserRole ur " +
+                "WHERE ur.userCode = :userCode"
     }
 }

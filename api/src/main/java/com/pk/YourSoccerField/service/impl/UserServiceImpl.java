@@ -3,6 +3,7 @@ package com.pk.YourSoccerField.service.impl;
 import com.pk.YourSoccerField.exception.*;
 import com.pk.YourSoccerField.model.Role;
 import com.pk.YourSoccerField.model.UserEntity;
+import com.pk.YourSoccerField.model.UserRole;
 import com.pk.YourSoccerField.repository.RoleRepository;
 import com.pk.YourSoccerField.repository.UserRepository;
 import com.pk.YourSoccerField.service.UserService;
@@ -11,15 +12,18 @@ import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,6 +34,9 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
     private BaseFromDTO<UserEntity, UserDTO> userFromDTO;
     private BaseToDTO<UserEntity, UserDTO> userToDTO;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     public UserServiceImpl(
@@ -92,9 +99,9 @@ public class UserServiceImpl implements UserService {
         userDTO.setActive(true);
         userDTO.setCreateTime(LocalDateTime.now().toString());
 
-        Long userCode = this.findNextUserCode();
+        Long userCode = this.findNextUserCode(true);
         Role role = this.findRoleByName("user");
-        insertUserRole(userCode, role.getId());
+        this.insertUserRole(userCode, role);
 
         userDTO.setCode(userCode);
         UserEntity userEntity = userRepository.save(userFromDTO.createFromDTO(userDTO));
@@ -109,13 +116,34 @@ public class UserServiceImpl implements UserService {
                 .size() != 0;
     }
 
-    private Long findNextUserCode() {
-        return this.userRepository
-                .findNextUserCode()
+    private Long findNextUserCode(boolean isFirst) {
+        Optional<BigInteger> nextUserCode = this.userRepository.findNextUserCode();
+
+        if (nextUserCode.isPresent()) {
+            return nextUserCode.get().longValue();
+        }
+
+        if (isFirst) {
+            insertNewNextUserCode();
+
+            return this.findNextUserCode(false);
+        }
+
+        throw new MissingEntityException(
+                "Cannot find next user code value",
+                ErrorCode.NOT_FOUND_NEXT_USER_CODE
+        );
+    }
+
+    private void insertNewNextUserCode() {
+        Long lastUserCode = this.userRepository
+                .findLastUserCode()
                 .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find next user code value",
-                        ErrorCode.NOT_FOUND_NEXT_USER_CODE
+                        "Cannot find last user code",
+                        ErrorCode.NOT_FOUND_LAST_USER_CODE
                 )).longValue();
+
+        this.userRepository.insertNextUserCode(lastUserCode + 1);
     }
 
     private Role findRoleByName(String name) {
@@ -127,12 +155,15 @@ public class UserServiceImpl implements UserService {
                 ));
     }
 
-    private void insertUserRole(Long userCode, long roleId) {
-        if (userRepository.insertUserRole(userCode, roleId) < 1) {
-            new AppException(
-                    "Error inserting data into the user_role table",
-                    HttpStatus.INSUFFICIENT_STORAGE,
-                    ErrorCode.INSERT_ERROR);
+    private void insertUserRole(Long userCode, Role role) {
+        this.entityManager.persist(new UserRole(null, userCode, role));
+        Optional<UserRole> userRole = this.userRepository.findUserRoleByUserCode(userCode);
+
+        if (!userRole.isPresent()) {
+            throw new CreateEntityException(
+                    "Error occurred while insert user role record",
+                    ErrorCode.INSERT_ERROR
+            );
         }
     }
 
