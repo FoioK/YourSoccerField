@@ -82,6 +82,18 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
+            value = "/soccerfields/{soccerFieldId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_BY_ID')")
+    public ResponseEntity<?> getById(@PathVariable Long soccerFieldId) {
+        return new ResponseEntity<>(
+                this.soccerFieldService.getById(soccerFieldId),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping(
             value = "/soccerfields/{street}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE

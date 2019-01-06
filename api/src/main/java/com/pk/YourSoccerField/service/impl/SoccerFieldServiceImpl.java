@@ -243,6 +243,18 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     }
 
     @Override
+    public SoccerFieldDTO getById(Long soccerFieldId) {
+        SoccerField soccerField = this.soccerFieldRepository
+                .findById(soccerFieldId)
+                .orElseThrow(() -> new MissingEntityException(
+                        "Cannot find soccer field with id " + soccerFieldId,
+                        ErrorCode.NOT_FOUND_BY_ID
+                ));
+
+        return this.soccerFieldToDTO.createFromEntity(soccerField);
+    }
+
+    @Override
     public List<SoccerFieldDTO> getByAddressContains(String street) {
         List<SoccerField> soccerFields = this.soccerFieldRepository
                 .findByAddressContains(street);
