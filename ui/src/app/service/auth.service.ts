@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {UserService} from './user.service';
 import {catchError} from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: "root"
@@ -39,7 +40,7 @@ export class AuthService {
   }
 
 
-  private static getCredentials(email: string, password: string): string {
+  private static getCredentialsByPassword(email: string, password: string): string {
     return (
       "username=" + email + "&password=" + password + "&grant_type=password"
     );
