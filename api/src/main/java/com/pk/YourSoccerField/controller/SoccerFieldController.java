@@ -85,7 +85,7 @@ public class SoccerFieldController {
             value = "/soccerfields/{soccerFieldId}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-//    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_BY_ID')")
+    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_BY_ID')")
     public ResponseEntity<?> getById(@PathVariable Long soccerFieldId) {
         return new ResponseEntity<>(
                 this.soccerFieldService.getById(soccerFieldId),
