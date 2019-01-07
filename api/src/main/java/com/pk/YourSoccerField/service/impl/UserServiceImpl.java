@@ -1,5 +1,6 @@
 package com.pk.YourSoccerField.service.impl;
 
+import com.pk.YourSoccerField.domain.Constants;
 import com.pk.YourSoccerField.exception.*;
 import com.pk.YourSoccerField.model.Role;
 import com.pk.YourSoccerField.model.UserEntity;
@@ -89,7 +90,7 @@ public class UserServiceImpl implements UserService {
         userDTO.setCreateTime(LocalDateTime.now().toString());
 
         Long userCode = this.findNextUserCode(true);
-        Role role = this.findRoleByName("user");
+        Role role = this.findRoleByName(Constants.USER_ROLE.getValue(), true);
         this.insertUserRole(userCode, role);
 
         userDTO.setCode(userCode);
@@ -163,13 +164,34 @@ public class UserServiceImpl implements UserService {
         this.userRepository.insertNextUserCode(lastUserCode + 1);
     }
 
-    private Role findRoleByName(String name) {
-        return this.roleRepository
-                .findByName(name)
-                .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find role with name " + name,
-                        ErrorCode.NOT_FOUND_BY_NAME
-                ));
+    private Role findRoleByName(String name, boolean isUserRoleAndFirstSearch) {
+        Optional<Role> role = this.roleRepository.findByName(name);
+
+        if (role.isPresent()) {
+            return role.get();
+        }
+
+        if (isUserRoleAndFirstSearch) {
+            if (this.insertRole(name) == null) {
+                throw new CreateEntityException(
+                        "Error occurred while insert user role record",
+                        ErrorCode.INSERT_ERROR
+                );
+            }
+
+            return findRoleByName(name, false);
+        }
+
+        throw new MissingEntityException(
+                "Cannot find role with name " + name,
+                ErrorCode.NOT_FOUND_BY_NAME
+        );
+    }
+
+    private Role insertRole(String name) {
+        Role role = new Role(null, name, Collections.emptyList(), Collections.emptyList());
+
+        return this.roleRepository.save(role);
     }
 
     private void insertUserRole(Long userCode, Role role) {
@@ -178,7 +200,7 @@ public class UserServiceImpl implements UserService {
 
         if (!userRole.isPresent()) {
             throw new CreateEntityException(
-                    "Error occurred while insert user role record",
+                    "Error occurred while map user to role",
                     ErrorCode.INSERT_ERROR
             );
         }
