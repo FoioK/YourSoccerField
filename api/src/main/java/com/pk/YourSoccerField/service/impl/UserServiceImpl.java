@@ -2,15 +2,19 @@ package com.pk.YourSoccerField.service.impl;
 
 import com.pk.YourSoccerField.domain.Constants;
 import com.pk.YourSoccerField.exception.*;
+import com.pk.YourSoccerField.model.Booking;
 import com.pk.YourSoccerField.model.Role;
 import com.pk.YourSoccerField.model.UserEntity;
 import com.pk.YourSoccerField.model.UserRole;
+import com.pk.YourSoccerField.repository.BookingRepository;
 import com.pk.YourSoccerField.repository.RoleRepository;
 import com.pk.YourSoccerField.repository.UserRepository;
 import com.pk.YourSoccerField.service.UserService;
+import com.pk.YourSoccerField.service.dtoModel.BookingDTO;
 import com.pk.YourSoccerField.service.dtoModel.UserDTO;
 import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,19 +26,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final BookingRepository bookingRepository;
 
     private PasswordEncoder passwordEncoder;
     private BaseFromDTO<UserEntity, UserDTO> userFromDTO;
     private BaseToDTO<UserEntity, UserDTO> userToDTO;
+    private BaseToDTO<Booking, BookingDTO> bookingToDTO;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -43,11 +47,13 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
-            @Qualifier("encoder") PasswordEncoder passwordEncoder) {
+            BookingRepository bookingRepository, @Qualifier("encoder") PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.bookingRepository = bookingRepository;
         this.passwordEncoder = passwordEncoder;
         this.setUserMapper();
+        this.setBookingMapper();
     }
 
     private void setUserMapper() {
@@ -81,6 +87,20 @@ public class UserServiceImpl implements UserService {
         };
     }
 
+    private void setBookingMapper() {
+        this.bookingToDTO = entity -> {
+            BookingDTO bookingDTO = new BookingDTO();
+            bookingDTO.setId(entity.getId());
+            bookingDTO.setUserCode(entity.getUserCode());
+            bookingDTO.setStartDate(Objects.requireNonNull(entity.getStartDate()).toString());
+            bookingDTO.setExecutionTime(Objects.requireNonNull(entity.getExecutionTime()).toString());
+            bookingDTO.setSoccerField(Objects.requireNonNull(entity.getSoccerField()).getId());
+            bookingDTO.setPayed(entity.isPayed());
+
+            return bookingDTO;
+        };
+    }
+
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public UserDTO createUser(UserDTO userDTO) {
@@ -99,6 +119,7 @@ public class UserServiceImpl implements UserService {
 
         return this.userToDTO.createFromEntity(userEntity);
     }
+
 
     private void validationUserDTOModel(UserDTO userDTO) {
         if (userDTO == null || userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
@@ -213,5 +234,23 @@ public class UserServiceImpl implements UserService {
                     ErrorCode.UPDATE_NEXT_USER_CODE
             );
         }
+    }
+
+    @Override
+    public List<BookingDTO> getAllBookingsByUserId(Long userId) {
+        UserEntity user = this.userRepository.findById(userId)
+                .orElseThrow(() -> new MissingEntityException(
+                        "Cannot find user with id " + userId,
+                        ErrorCode.NOT_FOUND_BY_ID
+                ));
+
+        if (user.getCode() == null) {
+            return Collections.emptyList();
+        }
+
+        List<Booking> bookings = this.bookingRepository
+                .findAllByUserCode(user.getCode());
+
+        return new ArrayList<>(this.bookingToDTO.mapAllFromEntities(bookings));
     }
 }
