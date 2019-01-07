@@ -1,27 +1,24 @@
-import {Injectable} from '@angular/core';
-import {Observable, BehaviorSubject} from "rxjs";
-import { catchError } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Observable, BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class UserService {
+  constructor() {}
 
-  constructor() {
-  }
+  private isLoggedSubject = new BehaviorSubject<boolean>(false);
 
-  private isLoggedSubject = new BehaviorSubject<Boolean>(false);
-
-  isLogged(): Observable<Boolean> {
+  isLogged(): Observable<boolean> {
     return this.isLoggedSubject.asObservable();
   }
 
-  setLogged(isLogged: Boolean) {
+  setLogged(isLogged: boolean) {
     this.isLoggedSubject.next(isLogged);
   }
 
   logOut() {
-    localStorage.clear();
+    localStorage.removeItem('token');
     this.setLogged(false);
   }
 }
