@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map handle(
+    public ResponseEntity<Map<String, Object>> handle(
             MethodArgumentNotValidException exception,
             HttpServletRequest request
     ) {
@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map handle(
+    public ResponseEntity<Map<String, Object>> handle(
             ConstraintViolationException exception,
             HttpServletRequest request
     ) {
@@ -62,23 +62,17 @@ public class GlobalExceptionHandler {
             E exception,
             HttpServletRequest request
     ) {
-        return new ResponseEntity<>(
-                formatException(exception, request),
-                exception.getHttpStatus()
-        );
+        return formatException(exception, request);
     }
 
-    private Map<String, Object> formatException(
+    private ResponseEntity<Map<String, Object>> formatException(
             Object message,
             HttpServletRequest request
     ) {
-        return new HashMap<String, Object>() {{
-            put("timestamp", System.currentTimeMillis());
-            put("status", HttpStatus.BAD_REQUEST);
-            put("error", ErrorCode.INVALID_INPUT);
-            put("message", message);
-            put("path", request.getRequestURI());
-        }};
+        return new ResponseEntity<>(
+                map(message, request),
+                HttpStatus.BAD_REQUEST
+        );
     }
 
     private <E extends AppException> ResponseEntity<?> formatException(
@@ -91,6 +85,16 @@ public class GlobalExceptionHandler {
                 this.map(exception),
                 exception.getHttpStatus()
         );
+    }
+
+    private Map<String, Object> map(Object message, HttpServletRequest request) {
+        return new HashMap<String, Object>() {{
+            put("timestamp", System.currentTimeMillis());
+            put("status", HttpStatus.BAD_REQUEST);
+            put("error", ErrorCode.INVALID_INPUT);
+            put("message", message);
+            put("path", request.getRequestURI());
+        }};
     }
 
     @SuppressWarnings("Duplicates")

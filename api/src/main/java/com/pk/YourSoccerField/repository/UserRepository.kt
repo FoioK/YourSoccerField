@@ -16,6 +16,13 @@ interface UserRepository : JpaRepository<UserEntity, Long> {
 
     fun findByEmail(email: String): Optional<List<UserEntity>>
 
+    fun findByNickname(nickname: String): Optional<List<UserEntity>>
+
+    @Transactional
+    @Query(value = findLastUserCodeQuery, nativeQuery = true)
+    fun findLastUserCode(): Optional<BigInteger>
+
+
     @Query(value = findNextUserCode, nativeQuery = true)
     @Transactional
     fun findNextUserCode(): Optional<BigInteger>
@@ -25,14 +32,11 @@ interface UserRepository : JpaRepository<UserEntity, Long> {
     @Query(value = updateNextUserCode)
     fun updateNextUserCode(@Param("code") code: Long): Int
 
-    @Transactional
-    @Query(value = findLastUserCodeQuery, nativeQuery = true)
-    fun findLastUserCode(): Optional<BigInteger>
-
     @Modifying
     @Transactional
     @Query(value = insertNextUserCodeQuery, nativeQuery = true)
     fun insertNextUserCode(@Param("code") code: Long): Int
+
 
     @Suppress("SpringDataRepositoryMethodReturnTypeInspection")
     @Query(value = findUserRoleByUserCodeQuery)
@@ -40,13 +44,15 @@ interface UserRepository : JpaRepository<UserEntity, Long> {
 
     companion object {
 
+        const val findLastUserCodeQuery = "SELECT u.code FROM user u ORDER BY u.code DESC LIMIT 1"
+
+
         const val findNextUserCode = "SELECT next_code FROM user_code WHERE id = 1"
 
         const val updateNextUserCode = "UPDATE UserCode uc SET next_code = :code WHERE id = 1"
 
-        const val findLastUserCodeQuery = "SELECT u.code FROM user u ORDER BY u.code DESC LIMIT 1"
-
         const val insertNextUserCodeQuery = "INSERT INTO user_code (id, next_code) VALUES (1, :code)"
+
 
         const val findUserRoleByUserCodeQuery = "SELECT ur FROM UserRole ur " +
                 "WHERE ur.userCode = :userCode"

@@ -21,7 +21,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -83,18 +83,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public UserDTO createUser(UserDTO userDTO) {
-        if (userDTO == null || userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
-            throw new CreateEntityException(
-                    "Cannot create user with incorrect password",
-                    ErrorCode.INCORRECT_PASSWORD
-            );
-        }
-
-        if (isUserWithSameEMail(userDTO.getEmail())) {
-            throw new DuplicatEntityException(
-                    "Already exist user with this email address",
-                    ErrorCode.DUPLICATE_USER_EMAIL);
-        }
+        this.validationUserDTOModel(userDTO);
 
         userDTO.setActive(true);
         userDTO.setCreateTime(LocalDateTime.now().toString());
@@ -110,9 +99,37 @@ public class UserServiceImpl implements UserService {
         return this.userToDTO.createFromEntity(userEntity);
     }
 
+    private void validationUserDTOModel(UserDTO userDTO) {
+        if (userDTO == null || userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
+            throw new CreateEntityException(
+                    "Cannot create user with incorrect password",
+                    ErrorCode.INCORRECT_PASSWORD
+            );
+        }
+
+        if (isUserWithSameEMail(userDTO.getEmail())) {
+            throw new DuplicatEntityException(
+                    "Already exist user with this email address",
+                    ErrorCode.DUPLICATE_USER_EMAIL);
+        }
+
+        if (isUserWithSameNickname(userDTO.getNickname())) {
+            throw new DuplicatEntityException(
+                    "Alery exist user with this nickname",
+                    ErrorCode.DUPLICATE_USER_NICKNAME
+            );
+        }
+    }
+
     private boolean isUserWithSameEMail(String email) {
         return userRepository.findByEmail(email)
-                .orElse(new ArrayList<>())
+                .orElse(Collections.emptyList())
+                .size() != 0;
+    }
+
+    private boolean isUserWithSameNickname(String nickname) {
+        return userRepository.findByNickname(nickname)
+                .orElse(Collections.emptyList())
                 .size() != 0;
     }
 
