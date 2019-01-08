@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BookingRepository : JpaRepository<Booking, Long> {
 
+    fun findAllByUserCode(userCode: Long): List<Booking>
+
     @Query(value = findAllByDateQuery, nativeQuery = true)
     fun findAllByDate(
             @Param("soccerFieldId") soccerFieldId: Long,
