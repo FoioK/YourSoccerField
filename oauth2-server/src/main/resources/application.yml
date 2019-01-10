@@ -3,9 +3,9 @@ spring:
     name: ysf-authorization-server
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: "jdbc:mysql://149.156.136.151:3306/kkopacz"
-    username: "kkopacz"
-    password: "1234567890."
+    url: "jdbc:mysql://127.0.0.1:3306/ysf"
+    username: "ysf_user"
+    password: "admin"
     testOnBorrow: true
     testWhileIdle: true
     timeBetweenEvictionRunsMillis: 60000

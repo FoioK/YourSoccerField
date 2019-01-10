@@ -1,12 +1,6 @@
 package com.pk.YourSoccerField.service.impl;
 
 import com.google.gson.Gson;
-import com.pk.YourSoccerField.exception.ErrorCode;
-import com.pk.YourSoccerField.exception.MissingEntityException;
-import com.pk.YourSoccerField.model.Address;
-import com.pk.YourSoccerField.model.OpenHour;
-import com.pk.YourSoccerField.model.SoccerField;
-import com.pk.YourSoccerField.model.Surface;
 import com.pk.YourSoccerField.repository.AddressRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.SoccerFieldService;
@@ -14,6 +8,12 @@ import com.pk.YourSoccerField.service.dtoModel.*;
 import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
 import com.pk.YourSoccerField.util.SearchFactory;
+import com.pk.ysf.apimodels.exception.ErrorCode;
+import com.pk.ysf.apimodels.exception.MissingEntityException;
+import com.pk.ysf.apimodels.model.Address;
+import com.pk.ysf.apimodels.model.OpenHour;
+import com.pk.ysf.apimodels.model.SoccerField;
+import com.pk.ysf.apimodels.model.Surface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,7 @@
 package com.pk.YourSoccerField.repository
 
-import com.pk.YourSoccerField.model.UserEntity
-import com.pk.YourSoccerField.model.UserRole
+import com.pk.ysf.apimodels.model.UserEntity
+import com.pk.ysf.apimodels.model.UserRole
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query

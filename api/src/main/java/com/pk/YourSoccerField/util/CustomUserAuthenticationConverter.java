@@ -1,7 +1,7 @@
 package com.pk.YourSoccerField.util;
 
-import com.pk.YourSoccerField.model.CustomUserDetail;
-import com.pk.YourSoccerField.model.UserEntity;
+import com.pk.ysf.apimodels.model.CustomUserDetail;
+import com.pk.ysf.apimodels.model.UserEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

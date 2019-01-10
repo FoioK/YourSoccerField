@@ -1,11 +1,6 @@
 package com.pk.YourSoccerField.service.impl;
 
 import com.pk.YourSoccerField.domain.Constants;
-import com.pk.YourSoccerField.exception.*;
-import com.pk.YourSoccerField.model.Booking;
-import com.pk.YourSoccerField.model.Role;
-import com.pk.YourSoccerField.model.UserEntity;
-import com.pk.YourSoccerField.model.UserRole;
 import com.pk.YourSoccerField.repository.BookingRepository;
 import com.pk.YourSoccerField.repository.RoleRepository;
 import com.pk.YourSoccerField.repository.UserRepository;
@@ -14,7 +9,11 @@ import com.pk.YourSoccerField.service.dtoModel.BookingDTO;
 import com.pk.YourSoccerField.service.dtoModel.UserDTO;
 import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
-import org.apache.catalina.User;
+import com.pk.ysf.apimodels.exception.*;
+import com.pk.ysf.apimodels.model.Booking;
+import com.pk.ysf.apimodels.model.Role;
+import com.pk.ysf.apimodels.model.UserEntity;
+import com.pk.ysf.apimodels.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -137,7 +136,7 @@ public class UserServiceImpl implements UserService {
 
         if (isUserWithSameNickname(userDTO.getNickname())) {
             throw new DuplicatEntityException(
-                    "Alery exist user with this nickname",
+                    "Already exist user with this nickname",
                     ErrorCode.DUPLICATE_USER_NICKNAME
             );
         }
