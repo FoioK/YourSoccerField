@@ -1,10 +1,10 @@
 package com.pk.ysf.oauth2server.service;
 
-import com.pk.ysf.oauth2server.exception.ErrorCode;
-import com.pk.ysf.oauth2server.exception.MissingEntityException;
-import com.pk.ysf.oauth2server.exception.UnactivatedUserException;
-import com.pk.ysf.oauth2server.model.CustomUserDetail;
-import com.pk.ysf.oauth2server.model.UserEntity;
+import com.pk.ysf.apimodels.exception.ErrorCode;
+import com.pk.ysf.apimodels.exception.MissingEntityException;
+import com.pk.ysf.apimodels.exception.UnactivatedUserException;
+import com.pk.ysf.apimodels.model.CustomUserDetail;
+import com.pk.ysf.apimodels.model.UserEntity;
 import com.pk.ysf.oauth2server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

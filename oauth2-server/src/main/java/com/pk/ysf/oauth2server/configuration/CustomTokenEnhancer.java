@@ -1,7 +1,6 @@
 package com.pk.ysf.oauth2server.configuration;
 
-import com.pk.ysf.oauth2server.model.CustomUserDetail;
-import com.pk.ysf.oauth2server.model.CustomUserDetail;
+import com.pk.ysf.apimodels.model.CustomUserDetail;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
