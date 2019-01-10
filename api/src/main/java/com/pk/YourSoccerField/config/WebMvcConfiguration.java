@@ -1,13 +1,13 @@
 package com.pk.YourSoccerField.config;
 
-import com.pk.YourSoccerField.model.CustomUserDetail;
+import com.pk.ysf.apimodels.model.CustomUserDetail;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -18,6 +18,8 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
+@ComponentScan(basePackages = {"com.pk.ysf"})
+@EntityScan("com.pk.ysf.apimodels.*")
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Override

@@ -1,18 +1,18 @@
 package com.pk.YourSoccerField.service.impl;
 
-import com.pk.YourSoccerField.exception.AppException;
-import com.pk.YourSoccerField.exception.BookingException;
-import com.pk.YourSoccerField.exception.ErrorCode;
-import com.pk.YourSoccerField.exception.MissingEntityException;
-import com.pk.YourSoccerField.model.Booking;
-import com.pk.YourSoccerField.model.OpenHour;
-import com.pk.YourSoccerField.model.SoccerField;
 import com.pk.YourSoccerField.repository.BookingRepository;
 import com.pk.YourSoccerField.repository.SoccerFieldRepository;
 import com.pk.YourSoccerField.service.BookingService;
 import com.pk.YourSoccerField.service.dtoModel.BookingDTO;
 import com.pk.YourSoccerField.service.mapper.BaseFromDTO;
 import com.pk.YourSoccerField.service.mapper.BaseToDTO;
+import com.pk.ysf.apimodels.exception.AppException;
+import com.pk.ysf.apimodels.exception.BookingException;
+import com.pk.ysf.apimodels.exception.ErrorCode;
+import com.pk.ysf.apimodels.exception.MissingEntityException;
+import com.pk.ysf.apimodels.model.Booking;
+import com.pk.ysf.apimodels.model.OpenHour;
+import com.pk.ysf.apimodels.model.SoccerField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

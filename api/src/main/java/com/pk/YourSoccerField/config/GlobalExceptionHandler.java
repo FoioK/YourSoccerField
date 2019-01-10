@@ -1,5 +1,7 @@
-package com.pk.YourSoccerField.exception;
+package com.pk.YourSoccerField.config;
 
+import com.pk.ysf.apimodels.exception.AppException;
+import com.pk.ysf.apimodels.exception.ErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

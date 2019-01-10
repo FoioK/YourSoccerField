@@ -1,6 +1,6 @@
 package com.pk.YourSoccerField.repository
 
-import com.pk.YourSoccerField.model.Role
+import com.pk.ysf.apimodels.model.Role
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.*

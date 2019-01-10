@@ -1,8 +1,8 @@
 package com.pk.YourSoccerField.repository
 
-import com.pk.YourSoccerField.model.OpenHour
-import com.pk.YourSoccerField.model.SoccerField
-import com.pk.YourSoccerField.model.Surface
+import com.pk.ysf.apimodels.model.OpenHour
+import com.pk.ysf.apimodels.model.SoccerField
+import com.pk.ysf.apimodels.model.Surface
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
