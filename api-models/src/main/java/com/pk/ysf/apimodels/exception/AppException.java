@@ -20,15 +20,15 @@ public class AppException extends RuntimeException {
         this.error = error;
     }
 
-    Long getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    HttpStatus getHttpStatus() {
+    public HttpStatus getHttpStatus() {
         return httpStatus;
     }
 
-    ErrorCode getError() {
+    public ErrorCode getError() {
         return error;
     }
 
