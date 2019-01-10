@@ -1,4 +1,4 @@
-package com.pk.ysf.exception;
+package com.pk.ysf.apimodels.exception;
 
 public enum ErrorCode {
 

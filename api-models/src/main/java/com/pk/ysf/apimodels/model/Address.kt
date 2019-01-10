@@ -1,4 +1,4 @@
-package com.pk.ysf.model
+package com.pk.ysf.apimodels.model
 
 import java.util.Collections.emptyList
 import javax.persistence.*

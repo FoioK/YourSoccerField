@@ -1,4 +1,4 @@
-package com.pk.ysf.model
+package com.pk.ysf.apimodels.model
 
 import org.springframework.security.core.userdetails.User
 import java.time.LocalDateTime

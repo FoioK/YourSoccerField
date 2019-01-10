@@ -1,4 +1,4 @@
-package com.pk.ysf.model
+package com.pk.ysf.apimodels.model
 
 import javax.persistence.Column
 import javax.persistence.Entity
