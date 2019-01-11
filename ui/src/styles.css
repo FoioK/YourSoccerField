@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
 .ysf-2{
   font-family: 'Carter One', cursive;
   font-size:2rem !important;
@@ -16,4 +19,18 @@
   color: #007bff;
   opacity: 0.9;
   transition:1.5s all;
+}
+
+.cal-week-view .cal-time {
+  padding-top: 0px;
+  line-height: 20px;
+}
+
+.cal-week-view .cal-hour-segment.cal-after-hour-start .cal-time {
+  display: block;
+}
+
+.cal-day-segment-disabled, .cal-day-segment-disabled:hover {
+  background-color: grey !important;
+  cursor: not-allowed;
 }

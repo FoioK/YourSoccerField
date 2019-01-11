@@ -22,7 +22,11 @@ import { FooterComponent } from './component/footer/footer.component';
 import { DetailsSoccerfieldComponent } from './component/details-soccerfield/details-soccerfield.component';
 import { AuthGuard } from './module/auth.guard';
 import { ReservationService } from './service/reservation.service';
-
+import { CalendarModule, DateAdapter, CalendarDateFormatter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarComponent } from './component/calendar/calendar.component';
+import { CalendarHeaderComponent } from './component/calendar/calendar-header/calendar-header.component';
+import { CustomDateFormatter } from './component/calendar/custom-classes/twentyFourHours';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +37,9 @@ import { ReservationService } from './service/reservation.service';
     MultirangeSliderComponent,
     MiniSocerfieldComponent,
     FooterComponent,
-    DetailsSoccerfieldComponent
+    DetailsSoccerfieldComponent,
+    CalendarComponent,
+    CalendarHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +48,15 @@ import { ReservationService } from './service/reservation.service';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }, {
+      dateFormatter: {
+        provide: CalendarDateFormatter,
+        useClass: CustomDateFormatter
+      }
+    }),
   ],
   providers: [
     AuthService,
