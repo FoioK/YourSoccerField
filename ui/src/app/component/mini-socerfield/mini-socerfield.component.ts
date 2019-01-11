@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { SoccerField } from "../../model/soccer-field";
-import { UserService } from "../../service/user.service";
 import { Router } from "@angular/router";
 import { AppRoute } from "../../module/app-route";
-
+import { ReservationService } from '../../service/reservation.service';
 @Component({
   selector: "app-mini-socerfield",
   templateUrl: "./mini-socerfield.component.html",
@@ -15,17 +14,11 @@ export class MiniSocerfieldComponent implements OnInit {
   @Input()
   private even: boolean = false;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private router: Router, private reservation: ReservationService) {}
 
   ngOnInit() {}
 
   private book(data: SoccerField) {
-    this.userService.isLogged().subscribe(result => {
-      if (result) {
-        this.router.navigateByUrl(AppRoute.registration);
-      } else {
-        this.router.navigateByUrl(AppRoute.login);
-      }
-    });
+    this.router.navigate([AppRoute.reservation, data.id]);
   }
 }

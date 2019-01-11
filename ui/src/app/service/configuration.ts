@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpHeaders} from '@angular/common/http';
+import { TokenModel } from '../model/token-model';
 
 @Injectable()
 export class Configuration {
@@ -18,6 +19,15 @@ export class Configuration {
   static getJSONContentType(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json'
+    });
+  }
+
+  static getJSONContentTypeWithToken(): HttpHeaders {
+    const token : TokenModel = JSON.parse(localStorage.getItem('token'));
+    console.log(token);
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token.token_type + ' ' + token.access_token
     });
   }
 }

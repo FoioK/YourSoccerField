@@ -6,5 +6,6 @@ export interface TokenModel {
   isActive: boolean;
   access_token: string;
   refresh_token: string;
-
+  token_type: string;
+  createTime: Date;
 }
