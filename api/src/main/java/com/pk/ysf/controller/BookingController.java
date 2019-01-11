@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("${spring.data.rest.base-path}/bookings")
 public class BookingController {
 
     private BookingService bookingService;
@@ -26,7 +26,6 @@ public class BookingController {
     }
 
     @PostMapping(
-            value = "/bookings",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

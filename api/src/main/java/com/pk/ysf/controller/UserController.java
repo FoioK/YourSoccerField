@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("${spring.data.rest.base-path}/users")
 public class UserController {
 
     private final UserService userService;
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping(
-            value = "/users/register",
+            value = "/register",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> register(@RequestBody @Valid UserDTO userDTO) {
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping(
-            value = "/users/{userId}/bookings",
+            value = "/{userId}/bookings",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<?> getAllBookings(@PathVariable Long userId) {
@@ -42,4 +42,8 @@ public class UserController {
                 HttpStatus.OK
         );
     }
+
+//    @PostMapping(
+//            value = "/use"
+//    )
 }

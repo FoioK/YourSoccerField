@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("${spring.data.rest.base-path}/soccerfields")
 public class SoccerFieldController {
 
     private SoccerFieldService soccerFieldService;
@@ -40,7 +40,6 @@ public class SoccerFieldController {
             @ApiResponse(code = 401, message = "Dostęp zabroniony"),
     })
     @GetMapping(
-            value = "/soccerfields",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('SOCCERFIELDS_GET_ALL')")
     public ResponseEntity<?> getAll() {
@@ -68,7 +67,6 @@ public class SoccerFieldController {
             @ApiResponse(code = 404, message = "Missing entity exception")
     })
     @PostMapping(
-            value = "/soccerfields",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('SOCCERFIELDS_POST_CREATE')")
@@ -82,7 +80,7 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
-            value = "/soccerfields/{soccerFieldId}",
+            value = "/{soccerFieldId}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_BY_ID')")
@@ -94,7 +92,7 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
-            value = "/soccerfields/byStreet/{street}",
+            value = "/byStreet/{street}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
@@ -108,7 +106,7 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
-            value = "/soccerfields/exampleTen",
+            value = "/exampleTen",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
@@ -120,7 +118,7 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
-            value = "/soccerfields/advancedSearch",
+            value = "/advancedSearch",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
