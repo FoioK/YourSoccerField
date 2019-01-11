@@ -4,5 +4,6 @@ export class AppRoute {
   static registration: string = 'registration';
   static mainPage: string = 'main';
   static reservation: string = 'reservation';
+  static id : string = '/:id';
 
 }

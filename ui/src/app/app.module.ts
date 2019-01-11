@@ -22,6 +22,13 @@ import { FooterComponent } from './component/footer/footer.component';
 import { DetailsSoccerfieldComponent } from './component/details-soccerfield/details-soccerfield.component';
 import { AdminPaneComponent } from './component/admin-pane/admin-pane.component';
 
+import { AuthGuard } from './module/auth.guard';
+import { ReservationService } from './service/reservation.service';
+import { CalendarModule, DateAdapter, CalendarDateFormatter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarComponent } from './component/calendar/calendar.component';
+import { CalendarHeaderComponent } from './component/calendar/calendar-header/calendar-header.component';
+import { CustomDateFormatter } from './component/calendar/custom-classes/twentyFourHours';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +40,9 @@ import { AdminPaneComponent } from './component/admin-pane/admin-pane.component'
     MiniSocerfieldComponent,
     FooterComponent,
     DetailsSoccerfieldComponent,
+    CalendarComponent,
+    CalendarHeaderComponent,
+    DetailsSoccerfieldComponent,
     AdminPaneComponent
   ],
   imports: [
@@ -41,7 +51,16 @@ import { AdminPaneComponent } from './component/admin-pane/admin-pane.component'
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }, {
+      dateFormatter: {
+        provide: CalendarDateFormatter,
+        useClass: CustomDateFormatter
+      }
+    }),
   ],
   providers: [
     AuthService,
@@ -50,6 +69,8 @@ import { AdminPaneComponent } from './component/admin-pane/admin-pane.component'
     ApiMapping,
     UserService,
     SoccerFieldService,
+    AuthGuard,
+    ReservationService,
   ],
   bootstrap: [AppComponent]
 })
