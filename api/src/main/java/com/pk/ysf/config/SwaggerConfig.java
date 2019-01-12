@@ -15,7 +15,7 @@ import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
-public class SpringFoxConfig {
+public class SwaggerConfig {
 
     @Value("${project.name}")
     private String name;
@@ -33,7 +33,7 @@ public class SpringFoxConfig {
     public Docket apiDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.pk.YourSoccerField"))
+                .apis(RequestHandlerSelectors.basePackage("com.pk.ysf"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(this.getApiInfo());
