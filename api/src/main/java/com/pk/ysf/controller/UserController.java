@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
 @RequestMapping("${spring.data.rest.base-path}/users")
@@ -43,7 +45,17 @@ public class UserController {
         );
     }
 
-//    @PostMapping(
-//            value = "/use"
-//    )
+    @PostMapping(
+            value = "/admin/authenticate",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Map<String, Boolean>> adminAuthenticate(
+            @RequestParam Map<String, String> params) {
+
+        return new ResponseEntity<>(
+                Collections.singletonMap("success", this.userService.adminAuthenticate(params)),
+                HttpStatus.ACCEPTED
+        );
+    }
 }
