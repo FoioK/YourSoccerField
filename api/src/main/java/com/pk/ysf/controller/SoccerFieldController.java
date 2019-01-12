@@ -130,16 +130,4 @@ public class SoccerFieldController {
                 HttpStatus.OK
         );
     }
-
-    @GetMapping(
-            value = "/surfaces",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<?> getAllSurface() {
-        return new ResponseEntity<>(
-                this.soccerFieldService.getAllSurface(),
-                HttpStatus.OK
-        );
-    }
 }
