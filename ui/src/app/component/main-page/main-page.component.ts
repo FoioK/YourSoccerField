@@ -1,41 +1,34 @@
-import { Component, OnInit } from "@angular/core";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from "@angular/animations";
-import { FormBuilder, FormGroup, FormControl, FormArray } from "@angular/forms";
-import { SoccerField } from "../../model/soccer-field";
-import { SoccerFieldService } from "../../service/soccer-field.service";
-import { switchMap } from "rxjs/operators";
-import { Observable, of } from "rxjs";
-import { Surface } from "src/app/model/surface";
-import { UserService } from "../../service/user.service";
-import { Router } from "@angular/router";
-import { AppRoute } from "../../module/app-route";
+import {Component, OnInit} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {SoccerField} from '../../model/soccer-field';
+import {SoccerFieldService} from '../../service/soccer-field.service';
+import {switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {Surface} from 'src/app/model/surface';
+import {UserService} from '../../service/user.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: "app-main-page",
-  templateUrl: "./main-page.component.html",
-  styleUrls: ["./main-page.component.css"],
+  selector: 'app-main-page',
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.css'],
   animations: [
-    trigger("showHide", [
+    trigger('showHide', [
       state(
-        "show",
+        'show',
         style({
           opacity: 1
         })
       ),
       state(
-        "hide",
+        'hide',
         style({
           opacity: 0
         })
       ),
-      transition("show=>hide", [animate("0.5s")]),
-      transition("hide=>show", [animate("0.5s")])
+      transition('show=>hide', [animate('0.5s')]),
+      transition('hide=>show', [animate('0.5s')])
     ])
   ]
 })
@@ -76,11 +69,11 @@ export class MainPageComponent implements OnInit {
 
   private initAddressForm() {
     this.addressGroup = this.formBuilder.group({
-      address: ""
+      address: ''
     });
 
     this.addressGroup
-      .get("address")
+      .get('address')
       .valueChanges.pipe(
         switchMap(street =>
           street.toString().length > 0
@@ -132,18 +125,18 @@ export class MainPageComponent implements OnInit {
   }
 
   private getWidthMin(value: number): void {
-    this.filterForm.controls["widthMin"].setValue(value);
+    this.filterForm.controls['widthMin'].setValue(value);
   }
 
   private getWidthMax(value: number): void {
-    this.filterForm.controls["widthMax"].setValue(value);
+    this.filterForm.controls['widthMax'].setValue(value);
   }
 
   private getLengthMin(value: number): void {
-    this.filterForm.controls["lengthMin"].setValue(value);
+    this.filterForm.controls['lengthMin'].setValue(value);
   }
 
   private getLengthMax(value: number): void {
-    this.filterForm.controls["lengthMax"].setValue(value);
+    this.filterForm.controls['lengthMax'].setValue(value);
   }
 }
