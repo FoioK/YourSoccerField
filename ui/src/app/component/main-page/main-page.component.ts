@@ -6,8 +6,6 @@ import {SoccerFieldService} from '../../service/soccer-field.service';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {Surface} from 'src/app/model/surface';
-import {UserService} from '../../service/user.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -36,9 +34,10 @@ export class MainPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private soccerFieldService: SoccerFieldService,
-    private userService: UserService,
-    private router: Router
-  ) {}
+  ) {
+
+  }
+
   filterShow = false;
 
   filterForm: FormGroup;
@@ -48,14 +47,15 @@ export class MainPageComponent implements OnInit {
   exampleSoccerFieldList: Array<SoccerField>;
   promptSoccerFieldList: Array<SoccerField>;
   surfacesList: Array<Surface>;
+
   ngOnInit() {
-    this.getExampleSocerfields();
+    this.getExampleSoccerfields();
     this.getAllSurfaces();
     this.initAddressForm();
     this.buildFilterForm();
   }
 
-  private getExampleSocerfields() {
+  private getExampleSoccerfields() {
     this.soccerFieldService.getExampleTen().subscribe(result => {
       this.exampleSoccerFieldList = result;
     });
@@ -75,12 +75,12 @@ export class MainPageComponent implements OnInit {
     this.addressGroup
       .get('address')
       .valueChanges.pipe(
-        switchMap(street =>
-          street.toString().length > 0
-            ? this.soccerFieldService.findByAddressContains(street)
-            : of([])
-        )
+      switchMap(street =>
+        street.toString().length > 0
+          ? this.soccerFieldService.findByAddressContains(street)
+          : of([])
       )
+    )
       .subscribe(result => {
         this.promptSoccerFieldList = result;
       });
@@ -104,8 +104,10 @@ export class MainPageComponent implements OnInit {
         result => {
           this.promptSoccerFieldList = result;
         },
-        err => {},
-        () => {}
+        () => {
+        },
+        () => {
+        }
       );
     });
   }
@@ -114,9 +116,9 @@ export class MainPageComponent implements OnInit {
     return new FormControl(id);
   }
 
-  private setSomething(name: string, id: number): void {
-    let index = -1;
-    index = this.surfaces.value.findIndex(control => control === id);
+  private setSomething(id: number): void {
+    const index: number = this.surfaces.value.findIndex(control => control === id);
+
     if (index === -1) {
       this.surfaces.push(this.createNewControl(id));
     } else {
