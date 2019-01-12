@@ -41,7 +41,7 @@ public class SoccerFieldController {
     })
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('SOCCERFIELDS_GET_ALL')")
+    @PreAuthorize("hasAnyRole(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_GET_ALL)")
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(
                 this.soccerFieldService.getAll(),
@@ -69,7 +69,7 @@ public class SoccerFieldController {
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAuthority('SOCCERFIELDS_POST_CREATE')")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_POST_CREATE)")
     public ResponseEntity<?> createSoccerField(
             @Valid @RequestBody SoccerFieldDTO soccerFieldDTO
     ) {
@@ -83,7 +83,7 @@ public class SoccerFieldController {
             value = "/{soccerFieldId}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_BY_ID')")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_GET_BY_ID)")
     public ResponseEntity<?> getById(@PathVariable Long soccerFieldId) {
         return new ResponseEntity<>(
                 this.soccerFieldService.getById(soccerFieldId),

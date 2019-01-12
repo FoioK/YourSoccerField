@@ -29,7 +29,7 @@ public class BookingController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority('BOOKINGS_POST_CREATE')")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).BOOKINGS_POST_CREATE)")
     public ResponseEntity<?> create(
             @Valid @RequestBody BookingDTO bookingDTO
     ) {
