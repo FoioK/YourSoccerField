@@ -1,8 +1,10 @@
 package com.pk.ysf.service.impl;
 
-import com.google.gson.Gson;
 import com.pk.ysf.apimodels.exception.*;
-import com.pk.ysf.apimodels.model.*;
+import com.pk.ysf.apimodels.model.Booking;
+import com.pk.ysf.apimodels.model.Role;
+import com.pk.ysf.apimodels.model.UserEntity;
+import com.pk.ysf.apimodels.model.UserRole;
 import com.pk.ysf.domain.Constants;
 import com.pk.ysf.repository.BookingRepository;
 import com.pk.ysf.repository.RoleRepository;
@@ -13,20 +15,17 @@ import com.pk.ysf.service.dtoModel.UserDTO;
 import com.pk.ysf.service.mapper.BaseFromDTO;
 import com.pk.ysf.service.mapper.BaseToDTO;
 import com.pk.ysf.util.CustomAccessTokenConverter;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.jwt.JwtHelper;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.xml.bind.DatatypeConverter;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -37,7 +36,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BookingRepository bookingRepository;
-    private final CustomAccessTokenConverter customAccessTokenConverter;
 
     private PasswordEncoder passwordEncoder;
     private BaseFromDTO<UserEntity, UserDTO> userFromDTO;
@@ -51,12 +49,11 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
-            BookingRepository bookingRepository, @Qualifier("encoder") PasswordEncoder passwordEncoder, CustomAccessTokenConverter customAccessTokenConverter) {
+            BookingRepository bookingRepository, @Qualifier("encoder") PasswordEncoder passwordEncoder, CustomAccessTokenConverter customAccessTokenConverter, JwtTokenStore jwtTokenStore, JwtAccessTokenConverter jwtAccessTokenConverter) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bookingRepository = bookingRepository;
         this.passwordEncoder = passwordEncoder;
-        this.customAccessTokenConverter = customAccessTokenConverter;
         this.setUserMapper();
         this.setBookingMapper();
     }
@@ -257,40 +254,5 @@ public class UserServiceImpl implements UserService {
                 .findAllByUserCode(user.getCode());
 
         return new ArrayList<>(this.bookingToDTO.mapAllFromEntities(bookings));
-    }
-
-    @Override
-    public Boolean adminAuthenticate(Map<String, String> params) {
-        if (!this.validateAdminAuthenticateParams(params)) {
-            throw new AppException(
-                    "Illegal argument",
-                    HttpStatus.BAD_GATEWAY,
-                    ErrorCode.INVALID_INPUT
-            );
-        }
-
-        return null;
-    }
-
-    private Boolean validateAdminAuthenticateParams(Map<String, String> params) {
-        if (params == null) {
-            return Boolean.FALSE;
-        }
-
-        String token = params.get("token");
-        if (token == null) {
-            return Boolean.FALSE;
-        }
-
-        String decodedToken = JwtHelper.decode(token).getClaims();
-//        Gson gson = new Gson();
-//        CustomUserDetail customUserDetail = gson.fromJson(decodedToken, CustomUserDetail.class);
-        //        CustomUserDetail userEntity = (CustomUserDetail) ((OAuth2AuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails()).getDecodedDetails();
-//        this.customAccessTokenConverter.extractAccessToken(params.get("token"))
-        Claims claims = Jwts.parser()
-                .setSigningKey(DatatypeConverter.parseBase64Binary("ysf_secret"))
-                .parseClaimsJws(decodedToken).getBody();
-
-        return true;
     }
 }

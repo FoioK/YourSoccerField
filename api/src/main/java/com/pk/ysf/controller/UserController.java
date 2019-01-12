@@ -51,11 +51,10 @@ public class UserController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Map<String, Boolean>> adminAuthenticate(
-            @RequestParam Map<String, String> params) {
-
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).USERS_ADMIN_PANE)")
+    public ResponseEntity<Map<String, Boolean>> adminPaneAuthenticate() {
         return new ResponseEntity<>(
-                Collections.singletonMap("success", this.userService.adminAuthenticate(params)),
+                Collections.singletonMap("success", true),
                 HttpStatus.ACCEPTED
         );
     }
