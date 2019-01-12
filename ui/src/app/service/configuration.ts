@@ -12,8 +12,12 @@ export class Configuration {
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   );
 
-  getEmailRegExp(): RegExp {
-    return this.emailRegExp;
+  static getTokenAuthorization(): HttpHeaders {
+    const token: TokenModel = Configuration.getToken();
+
+    return new HttpHeaders({
+      'Authorization': token.token_type + ' ' + token.access_token
+    });
   }
 
   static getJSONContentType(): HttpHeaders {
@@ -23,11 +27,19 @@ export class Configuration {
   }
 
   static getJSONContentTypeWithToken(): HttpHeaders {
-    const token : TokenModel = JSON.parse(localStorage.getItem('token'));
-    console.log(token);
+    const token: TokenModel = Configuration.getToken();
+
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': token.token_type + ' ' + token.access_token
     });
+  }
+
+  private static getToken(): TokenModel {
+    return JSON.parse(localStorage.getItem('token'));
+  }
+
+  getEmailRegExp(): RegExp {
+    return this.emailRegExp;
   }
 }
