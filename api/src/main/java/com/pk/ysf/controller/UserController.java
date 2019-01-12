@@ -46,9 +46,8 @@ public class UserController {
         );
     }
 
-    @PostMapping(
+    @GetMapping(
             value = "/admin/authenticate",
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).USERS_ADMIN_PANE)")
