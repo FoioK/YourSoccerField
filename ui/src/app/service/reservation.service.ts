@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { SoccerField } from "../model/soccer-field";
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { Configuration } from "./configuration";
-import { ApiMapping } from "./api-mapping";
+import { Injectable } from '@angular/core';
+import { SoccerField } from '../model/soccer-field';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Configuration } from './configuration';
+import { ApiMapping } from './api-mapping';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ReservationService {
   soccerfieldToBook: SoccerField;

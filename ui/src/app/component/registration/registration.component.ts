@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { passValidator } from "../../custom-validators/passValidator";
-import { Configuration } from "../../service/configuration";
-import { AppRoute } from "../../module/app-route";
-import { RegisterService } from "../../service/register.service";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { passValidator } from '../../custom-validators/passValidator';
+import { Configuration } from '../../service/configuration';
+import { AppRoute } from '../../module/app-route';
+import { RegisterService } from '../../service/register.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-registration",
-  templateUrl: "./registration.component.html",
-  styleUrls: ["./registration.component.css"]
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
   constructor(
@@ -23,18 +23,18 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
-      nickname: ["", [Validators.required]],
-      firstName: ["", [Validators.required]],
-      secondName: ["", [Validators.required]],
+      nickname: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      secondName: ['', [Validators.required]],
       email: [
-        "",
+        '',
         [
           Validators.required,
           Validators.pattern(this.configuration.getEmailRegExp())
         ]
       ],
-      password: ["", [Validators.required]],
-      confirmPassword: ["", [Validators.required, passValidator]]
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required, passValidator]]
     });
 
     this.registrationForm.controls.password.valueChanges.subscribe(x =>
@@ -43,7 +43,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   getLoginRoute(): string {
-    return "/" + AppRoute.login;
+    return '/' + AppRoute.login;
   }
 
   createUser() {

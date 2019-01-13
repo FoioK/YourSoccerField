@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Configuration } from "./configuration";
-import { ApiMapping } from "./api-mapping";
-import { Observable } from "rxjs";
-import { SoccerField } from "../model/soccer-field";
-import { SearchModel } from "../model/search-model";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Configuration } from './configuration';
+import { ApiMapping } from './api-mapping';
+import { Observable } from 'rxjs';
+import { SoccerField } from '../model/soccer-field';
+import { SearchModel } from '../model/search-model';
 import { Surface } from '../model/surface';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class SoccerFieldService {
   constructor(
@@ -53,10 +53,11 @@ export class SoccerFieldService {
   }
 
   getAllSurfaces(): Observable<Array<Surface>> {
-    return this.http.get<Array<Surface>>(this.configuration.apiServer + this.apiMapping.surfaces,
-    {
-      headers: Configuration.getJSONContentType()
-    }
+    return this.http.get<Array<Surface>>(
+      this.configuration.apiServer + this.apiMapping.surfaces,
+      {
+        headers: Configuration.getJSONContentType()
+      }
     );
   }
 }

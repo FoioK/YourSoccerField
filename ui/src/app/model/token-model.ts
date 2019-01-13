@@ -1,5 +1,4 @@
 export interface TokenModel {
-
   id: number;
   code: number;
   email: string;

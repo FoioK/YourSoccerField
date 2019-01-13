@@ -1,5 +1,4 @@
 export interface SearchModel {
-
   name?: string;
   surfaces?: Array<number>;
   paid?: boolean;
@@ -10,5 +9,4 @@ export interface SearchModel {
   maxWidth?: number;
   minLength?: number;
   maxLength?: number;
-
 }
