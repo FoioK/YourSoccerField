@@ -1,5 +1,4 @@
 export interface User {
-
   id?: number;
   code?: number;
   email: string;
@@ -9,5 +8,4 @@ export interface User {
   secondName: string;
   nickname: string;
   createTime?: Date;
-
 }

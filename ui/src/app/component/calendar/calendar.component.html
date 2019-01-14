@@ -3,18 +3,12 @@
 
 <div class="alert alert-info">
   Click on a day on the view.
-  <strong *ngIf="clickedDate">You clicked on this day: {{ clickedDate | date:'medium' }}</strong>
+  <strong *ngIf="clickedDate">You clicked on this day: {{ clickedDate | date:'dd.MM.yyyy h:mm:ss a' |
+    convertTime12To24Format }}</strong>
 </div>
 
 <div>
-  <mwl-calendar-week-view
-    [viewDate]="viewDate"
-    [events]="events"
-    [hourSegments]="2"
-    [dayStartHour]="8"
-    [dayEndHour]="23"
-    [hourSegmentHeight]="20"
-    (beforeViewRender)="setDisableHours($event)"
-    (dayHeaderClicked)="clickedDate = $event.day.date">
+  <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" [hourSegments]="2" [dayStartHour]="8" [dayEndHour]="23"
+    [hourSegmentHeight]="20" [refresh]="refresh" (beforeViewRender)="setDisableHours($event)" (hourSegmentClicked)="hourSegmentClicked($event.date)">
   </mwl-calendar-week-view>
 </div>

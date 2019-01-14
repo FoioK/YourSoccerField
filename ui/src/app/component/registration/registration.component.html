@@ -1,8 +1,8 @@
 <div class="d-flex align-items-center justify-content-center container-body">
   <section class="col-8 col-sm-8 col-lg-4 container-center ">
     <div class="justify-content-center">
-          <h1 class="form-title">Sign Up</h1>
-      </div>
+      <h1 class="form-title">Sign Up</h1>
+    </div>
     <form [formGroup]="registrationForm" (submit)="createUser()">
       <div class="justify-content-center form-item">
         <input class="form-control form-input" type="text" placeholder="Nickname" formControlName="nickname">
@@ -29,9 +29,11 @@
         <i class="fas fa-key form-icons"></i>
       </div>
       <div class="row h-100 no-gutters justify-content-center align-items-center form-item">
-        <div class="col-12 col-sm-4 col-lg-4"><button class=" btn btn-primary w-100 form-btn" type="submit" [disabled]="registrationForm.invalid">Sign Up</button></div>
+        <div class="col-12 col-sm-4 col-lg-4"><button class=" btn btn-primary w-100 form-btn" type="submit" [disabled]="registrationForm.invalid">Sign
+            Up</button></div>
         <div class="col-6 col-sm-4 col-lg-4 text-center my-1"><span class="form-qustion">Are you member?</span></div>
-        <div class="col-6 col-sm-4 col-lg-4 text-center my-1"><span class="form-qustion form-link"><a [routerLink]="[getLoginRoute()]">Click here to login</a></span></div>
+        <div class="col-6 col-sm-4 col-lg-4 text-center my-1"><span class="form-qustion form-link"><a [routerLink]="[getLoginRoute()]">Click
+              here to login</a></span></div>
       </div>
     </form>
   </section>

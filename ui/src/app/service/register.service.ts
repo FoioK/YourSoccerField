@@ -1,18 +1,18 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpResponse,
   HttpErrorResponse
-} from "@angular/common/http";
-import { Configuration } from "./configuration";
-import { User } from "../model/user";
-import { ApiMapping } from "./api-mapping";
-import { Observable, throwError, of } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { pipe } from "@angular/core/src/render3/pipe";
+} from '@angular/common/http';
+import { Configuration } from './configuration';
+import { User } from '../model/user';
+import { ApiMapping } from './api-mapping';
+import { Observable, throwError, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { pipe } from '@angular/core/src/render3/pipe';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class RegisterService {
   constructor(
@@ -32,11 +32,9 @@ export class RegisterService {
         user,
         {
           headers: Configuration.getJSONContentType(),
-          observe: "response"
+          observe: 'response'
         }
       )
-      .pipe(
-        catchError(this.errorHandler)
-      );
+      .pipe(catchError(this.errorHandler));
   }
 }

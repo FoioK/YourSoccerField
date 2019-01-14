@@ -12,23 +12,29 @@ import {RegistrationComponent} from './component/registration/registration.compo
 import {RegisterService} from './service/register.service';
 import {ApiMapping} from './service/api-mapping';
 import {NavbarComponent} from './component/navbar/navbar.component';
-import { MainPageComponent } from './component/main-page/main-page.component';
+import {MainPageComponent} from './component/main-page/main-page.component';
 import {UserService} from './service/user.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SoccerFieldService} from './service/soccer-field.service';
-import { MultirangeSliderComponent } from './component/multirange-slider/multirange-slider.component';
-import { MiniSocerfieldComponent } from './component/mini-socerfield/mini-socerfield.component';
-import { FooterComponent } from './component/footer/footer.component';
-import { DetailsSoccerfieldComponent } from './component/details-soccerfield/details-soccerfield.component';
-import { AdminPaneComponent } from './component/admin-pane/admin-pane.component';
+import {MultirangeSliderComponent} from './component/multirange-slider/multirange-slider.component';
+import {MiniSocerfieldComponent} from './component/mini-socerfield/mini-socerfield.component';
+import {FooterComponent} from './component/footer/footer.component';
+import {DetailsSoccerfieldComponent} from './component/details-soccerfield/details-soccerfield.component';
+import {AdminPaneComponent} from './component/admin-pane/admin-pane.component';
 
-import { AuthGuard } from './module/auth.guard';
-import { ReservationService } from './service/reservation.service';
-import { CalendarModule, DateAdapter, CalendarDateFormatter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { CalendarComponent } from './component/calendar/calendar.component';
-import { CalendarHeaderComponent } from './component/calendar/calendar-header/calendar-header.component';
-import { CustomDateFormatter } from './component/calendar/custom-classes/twentyFourHours';
+import {AuthGuard} from './module/auth.guard';
+import {ReservationService} from './service/reservation.service';
+import {
+  CalendarModule,
+  DateAdapter,
+  CalendarDateFormatter
+} from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import {CalendarComponent} from './component/calendar/calendar.component';
+import {CalendarHeaderComponent} from './component/calendar/calendar-header/calendar-header.component';
+import {CustomDateFormatter} from './component/calendar/custom-classes/twenty-four-hours';
+import {ConvertTime12To24FormatPipe} from './component/calendar/custom-pipes/convert-time12-to24-format.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,8 +48,8 @@ import { CustomDateFormatter } from './component/calendar/custom-classes/twentyF
     DetailsSoccerfieldComponent,
     CalendarComponent,
     CalendarHeaderComponent,
-    DetailsSoccerfieldComponent,
     AdminPaneComponent
+    ConvertTime12To24FormatPipe
   ],
   imports: [
     BrowserModule,

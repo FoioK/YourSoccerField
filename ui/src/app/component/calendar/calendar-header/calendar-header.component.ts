@@ -6,8 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./calendar-header.component.css']
 })
 export class CalendarHeaderComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Input() view: string;
 
@@ -19,8 +18,5 @@ export class CalendarHeaderComponent implements OnInit {
 
   @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
 
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

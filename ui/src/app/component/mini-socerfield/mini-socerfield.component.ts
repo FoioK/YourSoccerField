@@ -1,20 +1,19 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { SoccerField } from "../../model/soccer-field";
-import { Router } from "@angular/router";
-import { AppRoute } from "../../module/app-route";
-import { ReservationService } from '../../service/reservation.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { SoccerField } from '../../model/soccer-field';
+import { Router } from '@angular/router';
+import { AppRoute } from '../../module/app-route';
 @Component({
-  selector: "app-mini-socerfield",
-  templateUrl: "./mini-socerfield.component.html",
-  styleUrls: ["./mini-socerfield.component.css"]
+  selector: 'app-mini-socerfield',
+  templateUrl: './mini-socerfield.component.html',
+  styleUrls: ['./mini-socerfield.component.css']
 })
-export class MiniSocerfieldComponent implements OnInit {
+export class MiniSoccerfieldComponent implements OnInit {
   @Input()
   field: SoccerField;
   @Input()
   private even: boolean = false;
 
-  constructor(private router: Router, private reservation: ReservationService) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
