@@ -5,14 +5,12 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {UserService} from './user.service';
 import {catchError} from 'rxjs/operators';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   private oauthAddress = "/oauth/token";
-  private jwtHelper = new JwtHelperService();
 
   constructor(
     private http: HttpClient,
@@ -64,11 +62,6 @@ export class AuthService {
   private store(token: TokenModel) {
     localStorage.setItem("token", JSON.stringify(token));
     this.userService.setLogged(token != null);
-  }
-
-  public isAuthenticated(): boolean {
-    const token: TokenModel = JSON.parse(localStorage.getItem("token"));
-    return token != null && !this.jwtHelper.isTokenExpired(token.access_token);
   }
 
   private static errorHandler(errorResponse: any) {
