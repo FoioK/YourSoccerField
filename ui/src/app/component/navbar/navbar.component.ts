@@ -49,11 +49,7 @@ export class NavbarComponent implements OnInit {
 
   private topArrow() {
     this.render.listen(window, "scroll", () => {
-      if (window.scrollY > 50) {
-        this.arrow = true;
-      } else {
-        this.arrow = false;
-      }
+      this.arrow = window.scrollY > 50;
     });
   }
 
