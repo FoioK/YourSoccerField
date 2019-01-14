@@ -17,7 +17,7 @@ import {UserService} from './service/user.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SoccerFieldService} from './service/soccer-field.service';
 import {MultirangeSliderComponent} from './component/multirange-slider/multirange-slider.component';
-import {MiniSocerfieldComponent} from './component/mini-socerfield/mini-socerfield.component';
+import {MiniSoccerfieldComponent} from './component/mini-socerfield/mini-socerfield.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {DetailsSoccerfieldComponent} from './component/details-soccerfield/details-soccerfield.component';
 import {AdminPaneComponent} from './component/admin-pane/admin-pane.component';
@@ -43,12 +43,12 @@ import {ConvertTime12To24FormatPipe} from './component/calendar/custom-pipes/con
     NavbarComponent,
     MainPageComponent,
     MultirangeSliderComponent,
-    MiniSocerfieldComponent,
+    MiniSoccerfieldComponent,
     FooterComponent,
     DetailsSoccerfieldComponent,
     CalendarComponent,
     CalendarHeaderComponent,
-    AdminPaneComponent
+    AdminPaneComponent,
     ConvertTime12To24FormatPipe
   ],
   imports: [
