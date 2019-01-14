@@ -72,7 +72,14 @@ export class CalendarComponent implements OnInit {
       this.clickedDate = new Date(data);
       const newDate = new Date(data);
       newDate.setTime(newDate.getTime() + 5400000);
-      if (checkAvailabilityDateByEvents(newDate, this.events)) {
+      if (
+        checkAvailabilityDateByEvents(
+          this.clickedDate,
+          newDate,
+          this.events,
+          this.currentDayViewHour
+        )
+      ) {
         this.events = this.events.filter(event => {
           return event.meta.id !== -1;
         });
