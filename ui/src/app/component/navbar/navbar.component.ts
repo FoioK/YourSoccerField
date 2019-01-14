@@ -1,12 +1,7 @@
-import {
-  Component,
-  OnInit,
-  Renderer2
-} from "@angular/core";
-import { Router } from "@angular/router";
-import { AppRoute } from "../../module/app-route";
-import { UserService } from "../../service/user.service";
-import { AuthService } from '../../service/auth.service';
+import {Component, OnInit, Renderer2} from "@angular/core";
+import {Router} from "@angular/router";
+import {AppRoute} from "../../module/app-route";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: "navbar-page",
@@ -18,15 +13,38 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private render: Renderer2,
-  ) {}
+  ) {
+  }
 
+  private isAdmin: boolean = false;
   private arrow: Boolean = false;
   isLogged: Boolean = false;
 
   ngOnInit() {
     this.userService.isLogged()
-      .subscribe(response => this.isLogged = response);
+      .subscribe(response => {
+        this.isLogged = response;
+        if (response) {
+          this.checkIsAdmin();
+          return;
+        }
+        this.isAdmin = false;
+      });
+
     this.topArrow();
+  }
+
+  private checkIsAdmin() {
+    this.userService.adminPaneAuthenticate()
+      .subscribe(response => this.isAdmin = response.valueOf());
+  }
+
+  isUserAdmin(): boolean {
+    return this.isAdmin;
+  }
+
+  goToAdminPane() {
+
   }
 
   private topArrow() {
@@ -40,7 +58,7 @@ export class NavbarComponent implements OnInit {
   }
 
   private scrollTop() {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    window.scrollTo({top: 0, left: 0, behavior: "smooth"});
   }
 
   goToMain() {
@@ -57,9 +75,8 @@ export class NavbarComponent implements OnInit {
 
   logOutProcess(isMainPage: Boolean) {
     this.userService.logOut();
-    this.userService.isLogged().subscribe(result => {
-      this.isLogged = result;
-    });
+    this.userService.isLogged().subscribe(result => this.isLogged = result);
+
     if (isMainPage) {
       window.location.reload();
     } else {

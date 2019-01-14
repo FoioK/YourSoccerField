@@ -44,8 +44,8 @@ export class UserService {
     this.setLogged(false);
   }
 
-  adminPaneAuthenticate() {
-    this.http.get(
+  adminPaneAuthenticate(): Observable<Boolean> {
+    return this.http.get<Boolean>(
       this.configuration.apiServer + this.apiMapping.user_adminPane_authenticate,
       {headers: Configuration.getTokenAuthorization()}
     );
