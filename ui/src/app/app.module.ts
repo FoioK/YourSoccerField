@@ -20,6 +20,8 @@ import { MultirangeSliderComponent } from './component/multirange-slider/multira
 import { MiniSocerfieldComponent } from './component/mini-socerfield/mini-socerfield.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { DetailsSoccerfieldComponent } from './component/details-soccerfield/details-soccerfield.component';
+import { AdminPaneComponent } from './component/admin-pane/admin-pane.component';
+
 import { AuthGuard } from './module/auth.guard';
 import { ReservationService } from './service/reservation.service';
 import { CalendarModule, DateAdapter, CalendarDateFormatter } from 'angular-calendar';
@@ -40,6 +42,8 @@ import { CustomDateFormatter } from './component/calendar/custom-classes/twentyF
     DetailsSoccerfieldComponent,
     CalendarComponent,
     CalendarHeaderComponent,
+    DetailsSoccerfieldComponent,
+    AdminPaneComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,10 @@
 package com.pk.ysf.service.impl;
 
+import com.pk.ysf.apimodels.exception.*;
+import com.pk.ysf.apimodels.model.Booking;
+import com.pk.ysf.apimodels.model.Role;
+import com.pk.ysf.apimodels.model.UserEntity;
+import com.pk.ysf.apimodels.model.UserRole;
 import com.pk.ysf.domain.Constants;
 import com.pk.ysf.repository.BookingRepository;
 import com.pk.ysf.repository.RoleRepository;
@@ -9,14 +14,12 @@ import com.pk.ysf.service.dtoModel.BookingDTO;
 import com.pk.ysf.service.dtoModel.UserDTO;
 import com.pk.ysf.service.mapper.BaseFromDTO;
 import com.pk.ysf.service.mapper.BaseToDTO;
-import com.pk.ysf.apimodels.exception.*;
-import com.pk.ysf.apimodels.model.Booking;
-import com.pk.ysf.apimodels.model.Role;
-import com.pk.ysf.apimodels.model.UserEntity;
-import com.pk.ysf.apimodels.model.UserRole;
+import com.pk.ysf.util.CustomAccessTokenConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +49,7 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
-            BookingRepository bookingRepository, @Qualifier("encoder") PasswordEncoder passwordEncoder) {
+            BookingRepository bookingRepository, @Qualifier("encoder") PasswordEncoder passwordEncoder, CustomAccessTokenConverter customAccessTokenConverter, JwtTokenStore jwtTokenStore, JwtAccessTokenConverter jwtAccessTokenConverter) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bookingRepository = bookingRepository;

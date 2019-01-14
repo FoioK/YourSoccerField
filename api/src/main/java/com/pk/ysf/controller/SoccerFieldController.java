@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("${spring.data.rest.base-path}/soccerfields")
 public class SoccerFieldController {
 
     private SoccerFieldService soccerFieldService;
@@ -40,9 +40,8 @@ public class SoccerFieldController {
             @ApiResponse(code = 401, message = "Dostęp zabroniony"),
     })
     @GetMapping(
-            value = "/soccerfields",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('SOCCERFIELDS_GET_ALL')")
+    @PreAuthorize("hasAnyRole(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_GET_ALL)")
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(
                 this.soccerFieldService.getAll(),
@@ -68,10 +67,9 @@ public class SoccerFieldController {
             @ApiResponse(code = 404, message = "Missing entity exception")
     })
     @PostMapping(
-            value = "/soccerfields",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAuthority('SOCCERFIELDS_POST_CREATE')")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_POST_CREATE)")
     public ResponseEntity<?> createSoccerField(
             @Valid @RequestBody SoccerFieldDTO soccerFieldDTO
     ) {
@@ -82,10 +80,10 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
-            value = "/soccerfields/{soccerFieldId}",
+            value = "/{soccerFieldId}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority('SOCCERFIELDS_GET_BY_ID')")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_GET_BY_ID)")
     public ResponseEntity<?> getById(@PathVariable Long soccerFieldId) {
         return new ResponseEntity<>(
                 this.soccerFieldService.getById(soccerFieldId),
@@ -94,7 +92,7 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
-            value = "/soccerfields/byStreet/{street}",
+            value = "/byStreet/{street}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
@@ -108,7 +106,7 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
-            value = "/soccerfields/exampleTen",
+            value = "/exampleTen",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
@@ -120,7 +118,7 @@ public class SoccerFieldController {
     }
 
     @GetMapping(
-            value = "/soccerfields/advancedSearch",
+            value = "/advancedSearch",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
@@ -129,18 +127,6 @@ public class SoccerFieldController {
     ) {
         return new ResponseEntity<>(
                 this.soccerFieldService.getByCustomCriteria(encodedObject),
-                HttpStatus.OK
-        );
-    }
-
-    @GetMapping(
-            value = "/surfaces",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<?> getAllSurface() {
-        return new ResponseEntity<>(
-                this.soccerFieldService.getAllSurface(),
                 HttpStatus.OK
         );
     }

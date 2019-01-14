@@ -5,7 +5,7 @@
       <div class="order-sm-1 order-2 col-12 col-sm-6 col-lg-4 px-0">
         <div class="justify-content-center form-item mx-0">
           <form [formGroup]="addressGroup">
-            <input class="form-control form-input" type="text" placeholder="Write location" formControlName="address" />
+            <input class="form-control form-input" type="text" placeholder="Write location" formControlName="address"/>
             <i class="fas fa-search-location form-icons"></i>
           </form>
         </div>
@@ -25,7 +25,7 @@
         </button>
       </div>
       <div class="row filter-row no-gutters mx-0 col-12 col-sm-12 col-lg-12" [hidden]="filterShow === false"
-        [@showHide]="filterShow ? 'show' : 'hide'">
+           [@showHide]="filterShow ? 'show' : 'hide'">
         <!-- column for surface -->
         <div class="col-12 col-sm-12 col-md-3 col-lg-3 my-1">
           <!--
@@ -33,7 +33,7 @@
           -->
           <div class="d-flex h-100 justify-content-center align-items-center flex-column">
             <label class="d-flex align-items-center w-100 filter-label" *ngFor="let surface of surfacesList">
-              <input class="filter-checkbox ml-2" type="checkbox" (input)="setSomething(surface.name,surface.id)" />
+              <input class="filter-checkbox ml-2" type="checkbox" (input)="setSomething(surface.id)"/>
               <span class="filter-label-title mx-auto">{{surface.name}}</span>
             </label>
           </div>
@@ -43,7 +43,7 @@
           <!-- column for paid -->
           <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
             <label class="d-flex align-items-center mb-0 filter-label">
-              <input class="filter-checkbox ml-2" type="checkbox" formControlName="paid" />
+              <input class="filter-checkbox ml-2" type="checkbox" formControlName="paid"/>
               <span class="filter-label-title mx-auto">paid</span>
             </label>
           </div>
@@ -51,7 +51,7 @@
           <!-- column for lighting -->
           <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
             <label class="d-flex align-items-center mb-0 filter-label">
-              <input class="filter-checkbox ml-2" type="checkbox" formControlName="lighting" />
+              <input class="filter-checkbox ml-2" type="checkbox" formControlName="lighting"/>
               <span class="filter-label-title mx-auto">lighting</span>
             </label>
           </div>
@@ -59,7 +59,7 @@
           <!-- column for fenced -->
           <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
             <label class="d-flex align-items-center mb-0 filter-label">
-              <input class="filter-checkbox ml-2" type="checkbox" formControlName="fenced" />
+              <input class="filter-checkbox ml-2" type="checkbox" formControlName="fenced"/>
               <span class="filter-label-title mx-auto">fance</span>
             </label>
           </div>
@@ -68,7 +68,7 @@
           <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
             <div class="d-flex h-100 justify-content-center align-items-center flex-column">
               <label class="d-flex align-items-center mb-0 filter-label">
-                <input class="filter-checkbox ml-2" type="checkbox" formControlName="lockerRoom" />
+                <input class="filter-checkbox ml-2" type="checkbox" formControlName="lockerRoom"/>
                 <span class="filter-label-title mx-auto">locker room</span>
               </label>
             </div>
@@ -79,7 +79,8 @@
             <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
               Width :
             </label>
-            <app-multirange-slider (emitMin)="getWidthMin($event)" (emitMax)="getWidthMax($event)"></app-multirange-slider>
+            <app-multirange-slider (emitMin)="getWidthMin($event)"
+                                   (emitMax)="getWidthMax($event)"></app-multirange-slider>
             <label class="d-flex align-items-center mb-0 filter-label">
               <span class="filter-label-title mx-auto">min {{filterForm.value.widthMin}}m</span>
               <span class="filter-label-title mx-auto">max {{filterForm.value.widthMax}}m</span>
@@ -91,7 +92,8 @@
             <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
               Length :
             </label>
-            <app-multirange-slider (emitMin)="getLengthMin($event)" (emitMax)="getLengthMax($event)"></app-multirange-slider>
+            <app-multirange-slider (emitMin)="getLengthMin($event)"
+                                   (emitMax)="getLengthMax($event)"></app-multirange-slider>
             <label class="d-flex align-items-center mb-0 filter-label">
               <span class="filter-label-title mx-auto">min {{filterForm.value.lengthMin}}m</span>
               <span class="filter-label-title mx-auto">max {{filterForm.value.lengthMax}}m</span>
@@ -119,16 +121,18 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 my-4 px-4">
           <h1 class="form-title m-0 px-4 text-left">Found {{promptSoccerFieldList.length}} place</h1>
         </div>
-        <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4" *ngFor="let field of promptSoccerFieldList; let i = even">
-          <app-mini-socerfield [field]="field" [even]="i ? true: false"></app-mini-socerfield>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4"
+             *ngFor="let field of promptSoccerFieldList; let i = even">
+          <app-mini-socerfield [field]="field" [even]="i"></app-mini-socerfield>
         </div>
       </ng-template>
       <ng-template #examples>
-          <div class="col-12 col-sm-12 col-md-12 col-lg-12 my-4 px-4">
-              <h1 class="form-title m-0 px-4 text-left">Our top 10 recommended place</h1>
-            </div>
-        <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4" *ngFor="let field of exampleSoccerFieldList; let i = even">
-          <app-mini-socerfield [field]="field" [even]="i ? true: false"></app-mini-socerfield>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 my-4 px-4">
+          <h1 class="form-title m-0 px-4 text-left">Our top 10 recommended place</h1>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4"
+             *ngFor="let field of exampleSoccerFieldList; let i = even">
+          <app-mini-socerfield [field]="field" [even]="i"></app-mini-socerfield>
         </div>
       </ng-template>
     </div>
