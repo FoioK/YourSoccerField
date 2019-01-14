@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
   }
 
   goToAdminPane() {
-
+    this.router.navigateByUrl("/" + AppRoute.adminPane);
   }
 
   private topArrow() {
