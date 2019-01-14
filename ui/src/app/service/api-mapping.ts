@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 export class ApiMapping {
 
   user_create = '/users/register';
+  user_adminPane_authenticate = '/users/admin/authenticate';
 
   // @PathVariable {street}
   soccerField_findByAddressContains = '/soccerfields/byStreet/';

@@ -18,21 +18,14 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private render: Renderer2,
-    private authService: AuthService,
   ) {}
 
   private arrow: Boolean = false;
   isLogged: Boolean = false;
 
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.isLogged = true;
-    } else {
-      localStorage.removeItem('token');
-      this.userService.isLogged().subscribe(response => {
-        this.isLogged = response;
-      }); //TODO error handle
-    }
+    this.userService.isLogged()
+      .subscribe(response => this.isLogged = response);
     this.topArrow();
   }
 
