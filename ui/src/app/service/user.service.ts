@@ -44,11 +44,10 @@ export class UserService {
     this.setLogged(false);
   }
 
-  adminPaneAuthenticate(): Observable<Boolean> {
-    return this.http.get<Boolean>(
+  adminPaneAuthenticate(): Observable<boolean> {
+    return this.http.get<boolean>(
       this.configuration.apiServer + this.apiMapping.user_adminPane_authenticate,
       {headers: Configuration.getTokenAuthorization()}
     );
   }
-
 }

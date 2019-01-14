@@ -23,12 +23,9 @@ import {DetailsSoccerfieldComponent} from './component/details-soccerfield/detai
 import {AdminPaneComponent} from './component/admin-pane/admin-pane.component';
 
 import {AuthGuard} from './module/auth.guard';
+import {AdminPaneGuard} from "./module/admin-pane-guard";
 import {ReservationService} from './service/reservation.service';
-import {
-  CalendarModule,
-  DateAdapter,
-  CalendarDateFormatter
-} from 'angular-calendar';
+import {CalendarDateFormatter, CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {CalendarComponent} from './component/calendar/calendar.component';
 import {CalendarHeaderComponent} from './component/calendar/calendar-header/calendar-header.component';
@@ -77,6 +74,7 @@ import {ConvertTime12To24FormatPipe} from './component/calendar/custom-pipes/con
     SoccerFieldService,
     AuthGuard,
     ReservationService,
+    AdminPaneGuard,
   ],
   bootstrap: [AppComponent]
 })

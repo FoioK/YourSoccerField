@@ -7,7 +7,7 @@ import {MainPageComponent} from '../component/main-page/main-page.component';
 import {DetailsSoccerfieldComponent} from '../component/details-soccerfield/details-soccerfield.component';
 import {AuthGuard} from './auth.guard';
 import {AdminPaneComponent} from '../component/admin-pane/admin-pane.component';
-import {AdminGuard} from './admin-guard';
+import {AdminPaneGuard} from './admin-pane-guard';
 
 const routes: Routes = [
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
   {
     path: AppRoute.adminPane,
     component: AdminPaneComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminPaneGuard]
   }
 ];
 
