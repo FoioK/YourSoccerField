@@ -1,4 +1,4 @@
-import {RouterModule, Routes, CanActivate} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {LoginComponent} from '../component/login/login.component';
 import {RegistrationComponent} from '../component/registration/registration.component';
@@ -13,29 +13,29 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: AppRoute.mainPage
+    redirectTo: AppRoute.MAIN_PAGE
   },
   {
-    path: AppRoute.login,
+    path: AppRoute.LOGIN,
     component: LoginComponent
   },
   {
-    path: AppRoute.registration,
+    path: AppRoute.REGISTRATION,
     component: RegistrationComponent
   },
   {
-    path: AppRoute.mainPage,
+    path: AppRoute.MAIN_PAGE,
     component: MainPageComponent
   },
   {
-    path: AppRoute.reservation + AppRoute.id,
+    path: AppRoute.RESERVATION + AppRoute.RESERVATION_ID,
     component: DetailsSoccerfieldComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: AppRoute.adminPane,
+    path: AppRoute.ADMIN_PANE,
     component: AdminPaneComponent,
-    canActivate: [AdminPaneGuard]
+    canActivate: [AdminPaneGuard],
   }
 ];
 
