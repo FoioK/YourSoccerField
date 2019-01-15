@@ -8,3 +8,10 @@ export enum AppRoute {
   ADMIN_PANE = 'adminPane',
 
 }
+
+export namespace AppRoute {
+
+  export enum ADMIN_PANE_CHILD {
+    SOCCER_FIELD = 'soccerField'
+  }
+}
