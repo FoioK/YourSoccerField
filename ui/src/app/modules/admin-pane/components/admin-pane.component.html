@@ -2,7 +2,9 @@
 
   <div class="row">
     <div class="col-md-3">
-      <div class="card-counter primary">
+      <div class="card-counter primary"
+           (click)="goToSoccerFields()">
+        <i class="fas fa-futbol"></i>
         <span class="count-numbers">11</span>
         <span class="count-name">Boiska</span>
       </div>
@@ -10,8 +12,9 @@
 
     <div class="col-md-3">
       <div class="card-counter danger">
-        <span class="">5</span>
-        <span class="">Użytkownicy</span>
+        <i class="fas fa-users"></i>
+        <span class="count-numbers">5</span>
+        <span class="count-name">Użytkownicy</span>
       </div>
     </div>
   </div>
