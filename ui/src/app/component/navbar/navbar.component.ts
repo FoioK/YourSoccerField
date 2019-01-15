@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
   }
 
   goToAdminPane() {
-    this.router.navigateByUrl("/" + AppRoute.adminPane);
+    this.router.navigateByUrl("/" + AppRoute.ADMIN_PANE);
   }
 
   private topArrow() {
@@ -58,15 +58,15 @@ export class NavbarComponent implements OnInit {
   }
 
   goToMain() {
-    this.router.navigateByUrl("/" + AppRoute.mainPage);
+    this.router.navigateByUrl("/" + AppRoute.MAIN_PAGE);
   }
 
   goToLogin() {
-    this.router.navigateByUrl("/" + AppRoute.login);
+    this.router.navigateByUrl("/" + AppRoute.LOGIN);
   }
 
   logOut() {
-    this.logOutProcess(this.router.url === AppRoute.mainPage);
+    this.logOutProcess(this.router.url === AppRoute.MAIN_PAGE);
   }
 
   logOutProcess(isMainPage: Boolean) {
@@ -76,7 +76,7 @@ export class NavbarComponent implements OnInit {
     if (isMainPage) {
       window.location.reload();
     } else {
-      this.router.navigateByUrl(AppRoute.mainPage);
+      this.router.navigateByUrl(AppRoute.MAIN_PAGE);
     }
   }
 }

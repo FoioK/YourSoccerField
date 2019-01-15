@@ -56,9 +56,9 @@ export class MainPageComponent implements OnInit {
   }
 
   private getExampleSoccerfields() {
-    this.soccerFieldService.getExampleTen().subscribe(result => {
-      this.exampleSoccerFieldList = result;
-    });
+    // this.soccerFieldService.getExampleTen().subscribe(result => {
+    //   this.exampleSoccerFieldList = result;
+    // });
   }
 
   private getAllSurfaces() {

@@ -43,14 +43,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   getLoginRoute(): string {
-    return '/' + AppRoute.login;
+    return '/' + AppRoute.LOGIN;
   }
 
   createUser() {
     this.registerService.createUser(this.registrationForm.value).subscribe(
       response => {
         if (response.status === 201) {
-          this.router.navigateByUrl(AppRoute.login);
+          this.router.navigateByUrl(AppRoute.LOGIN);
         }
       },
       error => {

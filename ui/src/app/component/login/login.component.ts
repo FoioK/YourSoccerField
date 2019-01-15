@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.userService.isLogged().subscribe(
       response => {
         if (response) {
-          this.router.navigateByUrl(AppRoute.mainPage);
+          this.router.navigateByUrl(AppRoute.MAIN_PAGE);
         } else {
           // console.log(response);
         }
@@ -56,6 +56,6 @@ export class LoginComponent implements OnInit {
   }
 
   goToRegistration() {
-    this.router.navigateByUrl(AppRoute.registration);
+    this.router.navigateByUrl(AppRoute.REGISTRATION);
   }
 }

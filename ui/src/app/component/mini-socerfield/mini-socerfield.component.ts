@@ -18,6 +18,6 @@ export class MiniSoccerfieldComponent implements OnInit {
   ngOnInit() {}
 
   private book(data: SoccerField) {
-    this.router.navigate([AppRoute.reservation, data.id]);
+    this.router.navigate([AppRoute.RESERVATION, data.id]);
   }
 }
