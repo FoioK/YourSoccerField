@@ -6,11 +6,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {AdminPaneRoutingModule} from "./admin-pane-routing.module";
 import {DataTableModule} from "angular-6-datatable";
 import {CommonModule} from "@angular/common";
+import {ModalService} from "../../service/modal.service";
+import {ModalComponent} from "../../shared/components/modal.component";
 
 @NgModule({
   declarations: [
     AdminPaneComponent,
     AdminSoccerFieldComponent,
+    ModalComponent
   ],
   imports: [
     HttpClientModule,
@@ -18,7 +21,9 @@ import {CommonModule} from "@angular/common";
     CommonModule,
     DataTableModule,
   ],
-  providers: []
+  providers: [
+    ModalService
+  ]
 })
 export class AdminPaneModule {
 }
