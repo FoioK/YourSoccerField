@@ -1,14 +1,21 @@
 <app-calendar-header [(view)]="view" [(viewDate)]="viewDate">
 </app-calendar-header>
 
-<div class="alert alert-info">
-  Click on a day on the view.
-  <strong *ngIf="clickedDate">You clicked on this day: {{ clickedDate | date:'dd.MM.yyyy h:mm:ss a' |
-    convertTime12To24Format }}</strong>
+<div class="alert alert-info" [ngClass]="{'alert-danger' : errorMsg?.length > 0}">
+  <div class="col">
+    Click on a day on the view.
+    <strong *ngIf="clickedDate">You clicked on this day: {{ clickedDate | date:'dd.MM.yyyy h:mm:ss a' |
+      convertTime12To24Format }} </strong>
+  </div>
+  <div class="col">
+    <strong>
+      {{ errorMsg }}
+    </strong>
+  </div>
 </div>
-
 <div>
-  <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" [hourSegments]="2" [dayStartHour]="8" [dayEndHour]="23" [dayEndMinute]="0"
-    [hourSegmentHeight]="20" [refresh]="refresh" (beforeViewRender)="setDisableHours($event)" (hourSegmentClicked)="hourSegmentClicked($event.date)">
+  <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" [hourSegments]="2" [dayStartHour]="8" [dayEndHour]="23"
+    [dayEndMinute]="0" [hourSegmentHeight]="20" [refresh]="refresh" (beforeViewRender)="setDisableHours($event)"
+    (hourSegmentClicked)="hourSegmentClicked($event.date)">
   </mwl-calendar-week-view>
 </div>

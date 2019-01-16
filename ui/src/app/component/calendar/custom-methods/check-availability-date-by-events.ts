@@ -5,7 +5,8 @@ export function checkAvailabilityDateByEvents(
   dateStart: Date,
   dateEnd: Date,
   events: CalendarEvent[],
-  currentDayViewHour: WeekViewHourColumn[]
+  currentDayViewHour: WeekViewHourColumn[],
+  currentId: number
 ): boolean {
   let result: boolean = true;
   const dateStartData: Date = new Date(dateStart);
@@ -35,7 +36,7 @@ export function checkAvailabilityDateByEvents(
     if (
       (dateEndData > event.start &&
         dateEndData < event.end &&
-        event.meta.id !== -1) || // default id for current clicked date
+        event.meta.id !== currentId) || // default id for current clicked date
       dateEndData.getTime() > DayEndHourData.getTime()
     ) {
       result = false;
