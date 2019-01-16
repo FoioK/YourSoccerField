@@ -6,6 +6,8 @@ export class ApiMapping {
   user_create = '/users/register';
   user_adminPane_authenticate = '/users/admin/authenticate';
 
+  soccerField_findAll = '/soccerfields';
+
   // @PathVariable {street}
   soccerField_findByAddressContains = '/soccerfields/byStreet/';
 
