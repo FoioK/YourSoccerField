@@ -75,11 +75,6 @@ export class AuthService {
     this.userService.setLogged(token != null);
   }
 
-  public isAuthenticated(): boolean {
-    const token: TokenModel = JSON.parse(localStorage.getItem('token'));
-    return token != null && !this.jwtHelper.isTokenExpired(token.access_token);
-  }
-
   private static errorHandler(errorResponse: any) {
     return throwError(errorResponse);
   }
