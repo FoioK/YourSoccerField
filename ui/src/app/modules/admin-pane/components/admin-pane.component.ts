@@ -19,7 +19,13 @@ export class AdminPaneComponent implements OnInit {
   }
 
   goToSoccerFields() {
-    this.router.navigate([AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD], {relativeTo: this.route});
+    const soccerFieldPath = AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD;
+    this.route.routeConfig.path != soccerFieldPath ?
+      this.router.navigate(
+        [soccerFieldPath],
+        {relativeTo: this.route}
+      )
+      : false;
   }
 
 }

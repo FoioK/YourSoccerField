@@ -11,13 +11,18 @@ const adminPaneRoutes: Routes = [
     component: AdminPaneComponent,
     pathMatch: 'full',
     canActivate: [AdminPaneGuard],
-    children: [
-      {
-        path: AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD,
-        component: AdminSoccerFieldComponent,
-      }
-    ]
+    // children: [
+    //   {
+    //     path: AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD,
+    //     component: AdminSoccerFieldComponent,
+    //   }
+    // ]
   },
+  {
+    path: AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD,
+    component: AdminSoccerFieldComponent,
+    canActivate: [AdminPaneGuard]
+  }
 ];
 
 @NgModule({
