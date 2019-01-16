@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SoccerFieldService} from "../../../../service/soccer-field.service";
 
 @Component({
   selector: 'app-admin-soccer-field',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSoccerFieldComponent implements OnInit {
 
-  constructor() { }
+  public soccerFields = [];
+
+  constructor(private soccerFieldService: SoccerFieldService) {
+  }
 
   ngOnInit() {
+    this.soccerFieldService.findAll()
+      .subscribe(data => this.soccerFields = data);
   }
 
 }
