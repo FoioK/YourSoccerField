@@ -90,3 +90,68 @@
   opacity: 0.9;
   transition: 1.5s all;
 }
+
+.error-container {
+  animation-name: error-opacity;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+}
+
+.error-icon {
+  color: rgb(250, 19, 19);
+  width: 30px;
+  font-size: 30px;
+  transition: 1s all;
+}
+
+.error-show,
+.error-show:focus {
+  animation-name: error-shake;
+  animation-timing-function: cubic-bezier(.36, .07, .19, .97);
+  animation-direction: both;
+  animation-duration: 1s;
+  border-color: rgb(250, 19, 19);
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 55, 0.25);
+}
+
+.error-show:focus+.form-icons {
+  color: rgb(250, 19, 19);
+}
+
+@keyframes error-opacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes error-shake {
+
+  10%,
+  90% {
+    -webkit-transform: translate3d(-1px, 0, 0);
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    -webkit-transform: translate3d(2px, 0, 0);
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translate3d(-4px, 0, 0);
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    -webkit-transform: translate3d(4px, 0, 0);
+    transform: translate3d(4px, 0, 0);
+  }
+}
