@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import {ModalComponent} from "../shared/directives/modal.component";
 
 @Injectable()
 export class ModalService {
@@ -13,7 +14,7 @@ export class ModalService {
   }
 
   open(id: string) {
-    let modal: any = this.modals.filter(x => x.id === id)[0];
+    let modal: ModalComponent = this.modals.filter(x => x.id === id)[0];
     modal.open();
   }
 
