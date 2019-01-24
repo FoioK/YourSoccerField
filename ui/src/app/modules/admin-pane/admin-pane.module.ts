@@ -22,7 +22,9 @@ import {ModalComponent} from "../../shared/directives/modal/modal.component";
     DataTableModule,
     MatDialogModule
   ],
-  providers: [
+  providers: [],
+  entryComponents: [
+    ModalComponent
   ]
 })
 export class AdminPaneModule {
