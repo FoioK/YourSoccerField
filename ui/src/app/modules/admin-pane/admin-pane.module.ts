@@ -6,8 +6,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {AdminPaneRoutingModule} from "./admin-pane-routing.module";
 import {DataTableModule} from "angular-6-datatable";
 import {CommonModule} from "@angular/common";
-import {ModalService} from "../../service/modal.service";
-import {ModalComponent} from "../../shared/components/modal.component";
+import {MatDialogModule} from "@angular/material";
+import {ModalComponent} from "../../shared/directives/modal/modal.component";
 
 @NgModule({
   declarations: [
@@ -20,9 +20,9 @@ import {ModalComponent} from "../../shared/components/modal.component";
     AdminPaneRoutingModule,
     CommonModule,
     DataTableModule,
+    MatDialogModule
   ],
   providers: [
-    ModalService
   ]
 })
 export class AdminPaneModule {
