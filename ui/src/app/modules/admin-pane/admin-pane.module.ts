@@ -7,8 +7,7 @@ import {AdminPaneRoutingModule} from "./admin-pane-routing.module";
 import {DataTableModule} from "angular-6-datatable";
 import {CommonModule} from "@angular/common";
 import {ModalService} from "../../service/modal.service";
-import {ModalComponent} from "../../shared/directives/modal.component";
-import {MatDialogModule} from "@angular/material";
+import {ModalComponent} from "../../shared/components/modal.component";
 
 @NgModule({
   declarations: [
@@ -21,14 +20,9 @@ import {MatDialogModule} from "@angular/material";
     AdminPaneRoutingModule,
     CommonModule,
     DataTableModule,
-    MatDialogModule,
   ],
   providers: [
-    ModalService,
-    // {
-    //   provide: AdminPaneComponent,
-    //   useValue: {hasBackdrop: false}
-    // }
+    ModalService
   ]
 })
 export class AdminPaneModule {

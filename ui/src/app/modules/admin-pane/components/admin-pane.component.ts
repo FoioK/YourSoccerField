@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppRoute} from "../../../module/app-route";
-import {MatDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-admin-pane',
@@ -11,7 +10,6 @@ import {MatDialogRef} from "@angular/material";
 export class AdminPaneComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<AdminPaneComponent>,
     private route: ActivatedRoute,
     private router: Router
   ) {

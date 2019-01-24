@@ -5,24 +5,27 @@ import {ModalService} from "../../service/modal.service";
   selector: 'ysf-modal',
   template: '<ng-content></ng-content>'
 })
-
 export class ModalComponent implements OnInit, OnDestroy {
+
   @Input() id: string;
   private element: any;
 
-  constructor(private modalService: ModalService, private el: ElementRef) {
-    this.element = el.nativeElement;
+  constructor(
+    private modalService: ModalService,
+    private el: ElementRef
+  ) {
+    this.element = el
   }
 
   ngOnInit(): void {
     let modal = this;
 
     if (!this.id) {
-      console.error('modal must have an id');
+      // TODO Okno modalne musi miec id
       return;
     }
 
-    document.body.appendChild(this.element);
+    // document.body.appendChild(this.element);
 
     this.element.addEventListener('click', function (e: any) {
       if (e.target.className === 'modal') {
