@@ -3,9 +3,11 @@ package com.pk.ysf.service.mapper.impl;
 import com.pk.ysf.apimodels.model.Booking;
 import com.pk.ysf.service.dtoModel.BookingDTO;
 import com.pk.ysf.service.mapper.BaseMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+@Component
 public class BookingToDTO implements BaseMapper<Booking, BookingDTO> {
 
     @Override

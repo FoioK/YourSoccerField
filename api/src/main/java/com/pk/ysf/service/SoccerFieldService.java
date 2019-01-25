@@ -1,5 +1,6 @@
 package com.pk.ysf.service;
 
+import com.pk.ysf.service.dtoModel.BookingDTO;
 import com.pk.ysf.service.dtoModel.SoccerFieldDTO;
 import com.pk.ysf.service.dtoModel.SurfaceDTO;
 
@@ -20,4 +21,6 @@ public interface SoccerFieldService {
     List<SoccerFieldDTO> getByCustomCriteria(String encodedObject);
 
     List<SurfaceDTO> getAllSurface();
+
+    List<BookingDTO> getAllBookings(Long soccerFieldId);
 }

@@ -19,6 +19,9 @@ interface BookingRepository : JpaRepository<Booking, Long> {
             @Param("day") day: Int
     ): List<Booking>
 
+    @Query(value = findAllBySoccerFieldIdQuery, nativeQuery = true)
+    fun findAllBySoccerField(@Param("soccerFieldId") soccerFieldId: Long): List<Booking>
+
     companion object {
 
         const val findAllByDateQuery = "SELECT * FROM Booking " +
@@ -26,6 +29,9 @@ interface BookingRepository : JpaRepository<Booking, Long> {
                 "YEAR(start_date) = :year " +
                 "AND MONTH(start_date) = :month " +
                 "AND DAY(start_date) = :day"
+
+        const val findAllBySoccerFieldIdQuery = "SELECT * FROM Booking " +
+                "WHERE soccer_field_id = :soccerFieldId"
 
     }
 }

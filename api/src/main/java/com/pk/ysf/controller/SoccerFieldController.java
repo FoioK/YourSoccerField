@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("${spring.data.rest.base-path}/soccerfields")
@@ -127,6 +129,19 @@ public class SoccerFieldController {
     ) {
         return new ResponseEntity<>(
                 this.soccerFieldService.getByCustomCriteria(encodedObject),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping(
+            value = "/{soccerFieldId}/bookings",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> getAllBookings(
+            @NotNull @Positive @PathVariable Long soccerFieldId
+    ) {
+        return new ResponseEntity<>(
+                this.soccerFieldService.getAllBookings(soccerFieldId),
                 HttpStatus.OK
         );
     }
