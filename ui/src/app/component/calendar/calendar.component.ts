@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
 import { WeekView, WeekViewHourColumn } from 'calendar-utils';
 import { compareDateIsLess } from './custom-methods/compare-date-is-less';
@@ -14,8 +14,13 @@ import { Subject } from 'rxjs';
 })
 export class CalendarComponent implements OnInit {
   constructor() {}
-
+  @Output()
+  errorMsg: string;
+  @Output()
+  toBooking: EventEmitter<any> = new EventEmitter<any>();
   view: string = 'week';
+
+  currentId: number = -1;
 
   viewDate: Date = new Date();
 
@@ -34,13 +39,10 @@ export class CalendarComponent implements OnInit {
   ];
 
   currentDayViewHour: WeekViewHourColumn[];
-
   clickedDate: Date;
-
   ngOnInit() {}
 
   private setDisableHours(data: WeekView) {
-    console.log(data);
     this.currentDayViewHour = data.hourColumns;
     data.hourColumns.forEach(hourColumns => {
       if (compareDateIsLess(new Date(), hourColumns.date)) {
@@ -72,9 +74,17 @@ export class CalendarComponent implements OnInit {
       this.clickedDate = new Date(data);
       const newDate = new Date(data);
       newDate.setTime(newDate.getTime() + 5400000);
-      if (checkAvailabilityDateByEvents(newDate, this.events)) {
+      if (
+        checkAvailabilityDateByEvents(
+          this.clickedDate,
+          newDate,
+          this.events,
+          this.currentDayViewHour,
+          this.currentId
+        )
+      ) {
         this.events = this.events.filter(event => {
-          return event.meta.id !== -1;
+          return event.meta.id !== this.currentId;
         });
         this.events.push({
           title: 'Your choice',
@@ -82,9 +92,24 @@ export class CalendarComponent implements OnInit {
           start: this.clickedDate,
           end: newDate,
           meta: {
-            id: -1
+            id: this.currentId
           }
         });
+        this.errorMsg = '';
+        this.toBooking.emit({
+          isBooking: true,
+          start: this.clickedDate,
+          end: newDate
+        });
+      } else {
+        this.events = this.events.filter(event => {
+          return event.meta.id !== this.currentId;
+        });
+        this.toBooking.emit({
+          isBooking: false
+        });
+        this.errorMsg =
+          'Your choosen date overlap on other reservation or going outside of hours range';
       }
     }
     this.refresh.next();
