@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {SoccerField} from "../../../model/soccer-field";
+import {Address} from "../../../model/address";
 
 @Component({
   selector: 'app-modal',
@@ -11,6 +12,8 @@ import {SoccerField} from "../../../model/soccer-field";
 export class ModalComponent implements OnInit {
 
   form: FormGroup;
+  addressForm: FormGroup;
+
   soccerField: SoccerField;
 
   constructor(
@@ -22,7 +25,27 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO Build form
+    this.builtForm(this.soccerField);
+    this.buildAddressForm(this.soccerField.address);
+  }
+
+  private builtForm(soccerField: SoccerField) {
+    this.form = this.formBuilder.group({
+      name: soccerField.name,
+      address: this.addressForm,
+      surface: soccerField.surface,
+      width: soccerField.width,
+      length: soccerField.length,
+      price: soccerField.price
+    })
+  }
+
+  private buildAddressForm(address: Address) {
+    this.addressForm = this.formBuilder.group({
+      city: address.city,
+      street: address.street,
+      apartmentNumber: address.apartmentNumber
+    });
   }
 
   save() {
