@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SoccerFieldService} from "../../../../service/soccer-field.service";
 import {SoccerField} from "../../../../model/soccer-field";
 import {MatDialog, MatDialogConfig} from "@angular/material";
-import {ModalComponent} from "../../../../shared/directives/modal/modal.component";
+import {AdminEditSoccerFieldComponent} from "../../modal/admin-edit-soccer-field/admin-edit-soccer-field.component";
 
 @Component({
   selector: 'app-admin-soccer-field',
@@ -29,13 +29,15 @@ export class AdminSoccerFieldComponent implements OnInit {
   }
 
   editSoccerField(soccerField: SoccerField) {
-    this.editUserDialog = this.dialog.open(ModalComponent, {
-      height: '400px',
-      width: '600px',
-      disableClose: true,
-      autoFocus: true,
-      data: soccerField
-    });
+    this.editUserDialog = this.dialog.open(
+      AdminEditSoccerFieldComponent,
+      {
+        height: '400px',
+        width: '600px',
+        disableClose: true,
+        autoFocus: true,
+        data: soccerField
+      });
 
     this.editUserDialog.afterClosed()
       .subscribe(result => {

@@ -1,15 +1,15 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {SoccerField} from "../../../model/soccer-field";
-import {Address} from "../../../model/address";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {SoccerField} from "../../../../model/soccer-field";
+import {Address} from "../../../../model/address";
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  selector: 'app-admin-edit-soccer-field',
+  templateUrl: './admin-edit-soccer-field.component.html',
+  styleUrls: ['./admin-edit-soccer-field.component.css']
 })
-export class ModalComponent implements OnInit {
+export class AdminEditSoccerFieldComponent implements OnInit {
 
   form: FormGroup;
   addressForm: FormGroup;
@@ -18,7 +18,7 @@ export class ModalComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<ModalComponent>,
+    private dialogRef: MatDialogRef<AdminEditSoccerFieldComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.soccerField = data.soccerField;
