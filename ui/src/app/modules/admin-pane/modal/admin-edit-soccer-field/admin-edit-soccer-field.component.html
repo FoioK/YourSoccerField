@@ -1,6 +1,16 @@
-<p>
-  admin-edit-soccer-field works!
-</p>
+<form [formGroup]="form">
+  <label>
+    <p class="label-txt">Name</p>
+    <input class="form-control"
+           type="text"
+           formControlName="name"
+           value="{{form.get('name')}}">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <button type="submit">submit</button>
+</form>
 
 <div mat-dialog-actions>
   <button class="mat-raised-button" (click)="close()">Close</button>

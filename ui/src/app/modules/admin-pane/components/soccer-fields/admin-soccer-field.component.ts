@@ -32,8 +32,7 @@ export class AdminSoccerFieldComponent implements OnInit {
     this.editUserDialog = this.dialog.open(
       AdminEditSoccerFieldComponent,
       {
-        height: '400px',
-        width: '600px',
+        width: '60%',
         disableClose: true,
         autoFocus: true,
         data: soccerField

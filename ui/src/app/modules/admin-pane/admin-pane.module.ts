@@ -7,7 +7,7 @@ import {AdminPaneRoutingModule} from "./admin-pane-routing.module";
 import {DataTableModule} from "angular-6-datatable";
 import {CommonModule} from "@angular/common";
 import {MatDialogModule} from "@angular/material";
-import {AdminEditSoccerFieldComponent} from './modal/admin-edit-soccer-field/admin-edit-soccer-field.component';
+import {AdminEditSoccerFieldComponent} from "./modal/admin-edit-soccer-field/admin-edit-soccer-field.component";
 
 @NgModule({
   declarations: [
