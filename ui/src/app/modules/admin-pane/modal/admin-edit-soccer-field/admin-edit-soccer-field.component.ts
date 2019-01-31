@@ -21,7 +21,7 @@ export class AdminEditSoccerFieldComponent implements OnInit {
     private dialogRef: MatDialogRef<AdminEditSoccerFieldComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
-    this.soccerField = data.soccerField;
+    this.soccerField = data;
   }
 
   ngOnInit() {
