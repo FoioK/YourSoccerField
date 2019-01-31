@@ -54,3 +54,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.cal-week-view .cal-header.cal-today{
+  background: #d1ecf1;
+}

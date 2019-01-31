@@ -43,7 +43,7 @@ public class SoccerFieldController {
     })
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_GET_ALL)")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_GET_ALL)")
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(
                 this.soccerFieldService.getAll(),

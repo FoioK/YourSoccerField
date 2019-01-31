@@ -1,10 +1,17 @@
-export class AppRoute {
+export enum AppRoute {
 
-  static login: string = 'login';
-  static registration: string = 'registration';
-  static mainPage: string = 'main';
-  static reservation: string = 'reservation';
-  static id : string = '/:id';
-  static adminPane: string = 'adminPane';
+  LOGIN = 'login',
+  REGISTRATION = 'registration',
+  MAIN_PAGE = 'main',
+  RESERVATION = 'reservation',
+  RESERVATION_ID = '/:id',
+  ADMIN_PANE = 'adminPane',
 
+}
+
+export namespace AppRoute {
+
+  export enum ADMIN_PANE_CHILD {
+    SOCCER_FIELD = 'soccerField'
+  }
 }

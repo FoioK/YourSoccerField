@@ -1,0 +1,25 @@
+<form [formGroup]="form">
+
+  <div class="row">
+    <div class="col-6">
+      <p class="label-txt">Name</p>
+    </div>
+    <div class="col-6">
+      <label>
+        <input class="form-control"
+               type="text"
+               formControlName="name"
+               value="{{form.get('name').value}}">
+      </label>
+      <div class="line-box">
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<div mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+</div>

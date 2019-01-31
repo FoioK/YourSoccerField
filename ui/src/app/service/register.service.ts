@@ -7,9 +7,8 @@ import {
 import { Configuration } from './configuration';
 import { User } from '../model/user';
 import { ApiMapping } from './api-mapping';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { pipe } from '@angular/core/src/render3/pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +20,7 @@ export class RegisterService {
     private apiMapping: ApiMapping
   ) {}
 
-  private errorHandler(errorResponse: any) {
+  private errorHandler(errorResponse: HttpErrorResponse) {
     return throwError(errorResponse.error);
   }
 

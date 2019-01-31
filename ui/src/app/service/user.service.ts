@@ -24,12 +24,12 @@ export class UserService {
   private isLoggedSubject = new BehaviorSubject<boolean>(false);
 
   isLogged(): Observable<boolean> {
-    this.setLogged(this.getLogged());
+    this.setLogged(this.isAuthenticated());
 
     return this.isLoggedSubject.asObservable();
   }
 
-  getLogged(): boolean {
+  isAuthenticated(): boolean {
     const token: TokenModel = JSON.parse(localStorage.getItem('token'));
 
     return token != null && !this.jwtHelper.isTokenExpired(token.access_token);
@@ -44,11 +44,10 @@ export class UserService {
     this.setLogged(false);
   }
 
-  adminPaneAuthenticate() {
-    this.http.get(
+  adminPaneAuthenticate(): Observable<boolean> {
+    return this.http.get<boolean>(
       this.configuration.apiServer + this.apiMapping.user_adminPane_authenticate,
       {headers: Configuration.getTokenAuthorization()}
     );
   }
-
 }
