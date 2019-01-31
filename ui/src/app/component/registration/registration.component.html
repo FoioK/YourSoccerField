@@ -5,7 +5,7 @@
     </div>
     <form [formGroup]="registrationForm" (submit)="createUser()">
       <div class="justify-content-center form-item">
-        <input class="form-control form-input" type="text" placeholder="Nickname" formControlName="nickname">
+        <input class="form-control form-input" type="text" placeholder="Nickname" formControlName="nickname" [ngClass]="{'error-show': errorReason === 'nickname'}">
         <i class="fas fa-user-tie form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
@@ -17,11 +17,11 @@
         <i class="fas fa-user-tie form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
-        <input class="form-control form-input" type="email" placeholder="Email" formControlName="email">
+        <input class="form-control form-input" type="email" placeholder="Email" formControlName="email" [ngClass]="{'error-show': errorReason === 'email'}">
         <i class="fas fa-at form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
-        <input class="form-control form-input" type="password" placeholder="Password" formControlName="password">
+        <input class="form-control form-input" type="password" placeholder="Password" formControlName="password" >
         <i class="fas fa-key form-icons"></i>
       </div>
       <div class="justify-content-center form-item">
@@ -36,5 +36,11 @@
               here to login</a></span></div>
       </div>
     </form>
+    <section [hidden]="!registrationErrorMsg?.length > 0">
+      <div class="d-flex align-items-center text-white error-container">
+        <i class="fas fa-plus error-icon"></i>
+        <span class="px-3">{{ registrationErrorMsg }}</span>
+      </div>
+    </section>
   </section>
 </div>
