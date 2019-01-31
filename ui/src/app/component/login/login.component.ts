@@ -5,6 +5,7 @@ import { Configuration } from '../../service/configuration';
 import { AppRoute } from '../../module/app-route';
 import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,8 @@ export class LoginComponent implements OnInit {
   ) {}
 
   loginForm: FormGroup;
+  loginErrorMsg: string;
+  errorStatus: number;
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -36,23 +39,33 @@ export class LoginComponent implements OnInit {
   }
 
   logIn() {
-    this.authService.getAccessToken(
-      this.loginForm.get('email').value,
-      this.loginForm.get('password').value
-    );
-
-    this.userService.isLogged().subscribe(
-      response => {
-        if (response) {
-          this.router.navigateByUrl(AppRoute.MAIN_PAGE);
-        } else {
-          // console.log(response);
+    this.authService
+      .getAccessToken(
+        this.loginForm.get('email').value,
+        this.loginForm.get('password').value
+      )
+      .subscribe(
+        token => {
+          this.userService.isLogged().subscribe(response => {
+            if (response) {
+              this.router.navigateByUrl(AppRoute.mainPage);
+            }
+          });
+          this.errorStatus = -1;
+          this.loginErrorMsg = '';
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            this.loginErrorMsg =
+              'The password that you have entered is incorrect';
+            this.errorStatus = error.status;
+          }
+          if (error.status === 401) {
+            this.loginErrorMsg = 'The email that you have entered is incorrect';
+            this.errorStatus = error.status;
+          }
         }
-      },
-      err => {
-        // console.log(err);
-      }
-    );
+      );
   }
 
   goToRegistration() {
