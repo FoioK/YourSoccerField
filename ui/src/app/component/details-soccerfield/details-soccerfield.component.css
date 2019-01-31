@@ -29,6 +29,11 @@
   color: #fff;
 }
 
+.container-summary{
+  background: #343A40;
+  color: #fff;
+}
+
 .title-field{
   animation-name: show-names;
   animation-duration: 1s;
@@ -37,12 +42,22 @@
   font-style: normal;
 }
 
+.title-field-summary{
+  font-size:24px;
+}
+
 .data-field{
   animation-name: show-text;
   animation-duration: 3s;
   animation-iteration-count: 1;
   font-size: 22px;
   font-style: bold;
+  text-align: center;
+}
+
+.data-field-small{
+  font-size:18px;
+  color: #9fabb7;
 }
 
 .data-icon{
@@ -60,6 +75,22 @@
 
 .data-icon-false{
   background:red;
+}
+
+.picture {
+  min-height: 200px;
+  background: url('https://images.pexels.com/photos/399187/pexels-photo-399187.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center;
+  background-size: cover;
+}
+
+.btn-book {
+  border-radius: 0px;
+}
+
+.btn-book:hover {
+  background: #007bff;
+  color: #fff;
+  transition: 1s all;
 }
 
 @keyframes show-names{
