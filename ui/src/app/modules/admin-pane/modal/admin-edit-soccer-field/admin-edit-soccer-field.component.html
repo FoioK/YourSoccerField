@@ -1,14 +1,22 @@
 <form [formGroup]="form">
-  <label>
-    <p class="label-txt">Name</p>
-    <input class="form-control"
-           type="text"
-           formControlName="name"
-           value="{{form.get('name').value}}">
-    <div class="line-box">
-      <div class="line"></div>
+
+  <div class="row">
+    <div class="col-6">
+      <p class="label-txt">Name</p>
     </div>
-  </label>
+    <div class="col-6">
+      <label>
+        <input class="form-control"
+               type="text"
+               formControlName="name"
+               value="{{form.get('name').value}}">
+      </label>
+      <div class="line-box">
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+
 </form>
 
 <div mat-dialog-actions>
