@@ -1,19 +1,19 @@
 package com.pk.ysf.service.impl;
 
 import com.google.gson.Gson;
+import com.pk.ysf.apimodels.exception.ErrorCode;
+import com.pk.ysf.apimodels.exception.MissingEntityException;
+import com.pk.ysf.apimodels.model.*;
 import com.pk.ysf.repository.AddressRepository;
+import com.pk.ysf.repository.BookingRepository;
 import com.pk.ysf.repository.SoccerFieldRepository;
 import com.pk.ysf.service.SoccerFieldService;
 import com.pk.ysf.service.dtoModel.*;
 import com.pk.ysf.service.mapper.BaseFromDTO;
 import com.pk.ysf.service.mapper.BaseToDTO;
+import com.pk.ysf.service.mapper.impl.BookingFromDTO;
+import com.pk.ysf.service.mapper.impl.BookingToDTO;
 import com.pk.ysf.util.SearchFactory;
-import com.pk.ysf.apimodels.exception.ErrorCode;
-import com.pk.ysf.apimodels.exception.MissingEntityException;
-import com.pk.ysf.apimodels.model.Address;
-import com.pk.ysf.apimodels.model.OpenHour;
-import com.pk.ysf.apimodels.model.SoccerField;
-import com.pk.ysf.apimodels.model.Surface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +27,9 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
 
     private SoccerFieldRepository soccerFieldRepository;
     private AddressRepository addressRepository;
+    private BookingRepository bookingRepository;
+
+    private BookingToDTO bookingToDTO;
 
     private BaseToDTO<SoccerField, SoccerFieldDTO> soccerFieldToDTO;
     private BaseFromDTO<SoccerField, SoccerFieldDTO> soccerFieldFromDTO;
@@ -43,10 +46,14 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     public SoccerFieldServiceImpl(
             SoccerFieldRepository soccerFieldRepository,
             AddressRepository addressRepository,
+            BookingRepository bookingRepository,
+            BookingToDTO bookingToDTO,
             SearchFactory searchFactory) {
 
         this.soccerFieldRepository = soccerFieldRepository;
         this.addressRepository = addressRepository;
+        this.bookingRepository = bookingRepository;
+        this.bookingToDTO = bookingToDTO;
         this.searchFactory = searchFactory;
         setSoccerFieldMapper();
         setSurfaceMapper();
@@ -316,5 +323,12 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
         List<Surface> surfaces = this.soccerFieldRepository.findAllSurface();
 
         return new ArrayList<>(surfaceToDTO.mapAllFromEntities(surfaces));
+    }
+
+    @Override
+    public List<BookingDTO> getAllBookings(Long soccerFieldId) {
+        List<Booking> bookings = this.bookingRepository.findAllBySoccerField(soccerFieldId);
+
+        return new ArrayList<>(this.bookingToDTO.mapAll(bookings));
     }
 }

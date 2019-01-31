@@ -1,11 +1,5 @@
 package com.pk.ysf.service.impl;
 
-import com.pk.ysf.repository.BookingRepository;
-import com.pk.ysf.repository.SoccerFieldRepository;
-import com.pk.ysf.service.BookingService;
-import com.pk.ysf.service.dtoModel.BookingDTO;
-import com.pk.ysf.service.mapper.BaseFromDTO;
-import com.pk.ysf.service.mapper.BaseToDTO;
 import com.pk.ysf.apimodels.exception.AppException;
 import com.pk.ysf.apimodels.exception.BookingException;
 import com.pk.ysf.apimodels.exception.ErrorCode;
@@ -13,6 +7,12 @@ import com.pk.ysf.apimodels.exception.MissingEntityException;
 import com.pk.ysf.apimodels.model.Booking;
 import com.pk.ysf.apimodels.model.OpenHour;
 import com.pk.ysf.apimodels.model.SoccerField;
+import com.pk.ysf.repository.BookingRepository;
+import com.pk.ysf.repository.SoccerFieldRepository;
+import com.pk.ysf.service.BookingService;
+import com.pk.ysf.service.dtoModel.BookingDTO;
+import com.pk.ysf.service.mapper.impl.BookingFromDTO;
+import com.pk.ysf.service.mapper.impl.BookingToDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,40 +28,21 @@ public class BookingServiceImpl implements BookingService {
 
     private SoccerFieldRepository soccerFieldRepository;
     private BookingRepository bookingRepository;
-    private BaseFromDTO<Booking, BookingDTO> bookingFromDTO;
-    private BaseToDTO<Booking, BookingDTO> bookingToDTO;
+
+    private BookingFromDTO bookingFromDTO;
+    private BookingToDTO bookingToDTO;
 
     @Autowired
     public BookingServiceImpl(
             SoccerFieldRepository soccerFieldRepository,
-            BookingRepository bookingRepository
+            BookingRepository bookingRepository,
+            BookingFromDTO bookingFromDTO,
+            BookingToDTO bookingToDTO
     ) {
         this.soccerFieldRepository = soccerFieldRepository;
         this.bookingRepository = bookingRepository;
-        setBookingMapper();
-    }
-
-    private void setBookingMapper() {
-        this.bookingFromDTO = dto -> new Booking(
-                dto.getId(),
-                dto.getUserCode(),
-                LocalDateTime.parse(dto.getStartDate()),
-                LocalTime.parse(dto.getExecutionTime()),
-                this.getSoccerFieldById(dto.getSoccerField()),
-                dto.getPayed() == null ? false : dto.getPayed()
-        );
-
-        this.bookingToDTO = entity -> {
-            BookingDTO bookingDTO = new BookingDTO();
-            bookingDTO.setId(entity.getId());
-            bookingDTO.setUserCode(entity.getUserCode());
-            bookingDTO.setStartDate(Objects.requireNonNull(entity.getStartDate()).toString());
-            bookingDTO.setExecutionTime(Objects.requireNonNull(entity.getExecutionTime()).toString());
-            bookingDTO.setSoccerField(Objects.requireNonNull(entity.getSoccerField()).getId());
-            bookingDTO.setPayed(entity.isPayed());
-
-            return bookingDTO;
-        };
+        this.bookingFromDTO = bookingFromDTO;
+        this.bookingToDTO = bookingToDTO;
     }
 
     @Override
@@ -74,10 +55,9 @@ public class BookingServiceImpl implements BookingService {
             );
         }
 
-        Booking booking = this.bookingFromDTO.createFromDTO(bookingDTO);
+        Booking booking = this.bookingFromDTO.map(bookingDTO);
 
-        return this.bookingToDTO
-                .createFromEntity(this.bookingRepository.save(booking));
+        return this.bookingToDTO.map(this.bookingRepository.save(booking));
     }
 
     private boolean validation(BookingDTO bookingDTO) {
