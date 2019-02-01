@@ -7,40 +7,59 @@ import { checkAvailabilityDateByDisable } from './custom-methods/check-availabil
 import { colors } from './colors/color-events';
 import { checkAvailabilityDateByEvents } from './custom-methods/check-availability-date-by-events';
 import { Subject } from 'rxjs';
+import { ReservationService } from '../../service/reservation.service';
+import { Reservation } from '../../model/reservation';
+import { addTimeToDate } from './custom-methods/add-time-to-date';
+import { ActivatedRoute } from '@angular/router';
+import { setNewCalendarEvent } from './custom-methods/set-new-calendar-event';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private reservation: ReservationService,
+    private route: ActivatedRoute
+  ) {}
   @Output()
   errorMsg: string;
   @Output()
   toBooking: EventEmitter<any> = new EventEmitter<any>();
-  view: string = 'week';
+  view: string = 'day';
 
-  currentId: number = -1;
+  soccerFieldId: string;
+  chooseEventId: number = -1;
 
   viewDate: Date = new Date();
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      title: 'Booked',
-      color: colors.blue,
-      start: new Date(2019, 0, 15, 9, 0, 0, 0),
-      end: new Date(2019, 0, 15, 10, 30, 0, 0),
-      meta: {
-        id: 1
-      }
-    }
-  ];
+  events: CalendarEvent[] = [];
 
   currentDayViewHour: WeekViewHourColumn[];
   clickedDate: Date;
-  ngOnInit() {}
+  ngOnInit() {
+    this.getBookedDate();
+  }
+
+  private getBookedDate() {
+    this.soccerFieldId = this.route.snapshot.paramMap.get('id');
+    this.reservation
+      .getReservationsForSoccerfield(this.soccerFieldId)
+      .subscribe(result => {
+        this.events = [];
+        result.forEach(e => {
+          if (!compareDateIsLess(new Date(), new Date(e.startDate))) {
+            setNewCalendarEvent(
+              this.events,
+              new Date(e.startDate),
+              addTimeToDate(e.executionTime, new Date(e.startDate))
+            );
+          }
+        });
+      });
+  }
 
   private setDisableHours(data: WeekView) {
     this.currentDayViewHour = data.hourColumns;
@@ -63,7 +82,7 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-  private hourSegmentClicked(data: Date) {
+  private selectDateToBook(data: Date) {
     if (
       checkAvailabilityDateByDisable(
         data,
@@ -80,20 +99,18 @@ export class CalendarComponent implements OnInit {
           newDate,
           this.events,
           this.currentDayViewHour,
-          this.currentId
+          this.chooseEventId
         )
       ) {
         this.events = this.events.filter(event => {
-          return event.meta.id !== this.currentId;
+          return event.id !== this.chooseEventId;
         });
         this.events.push({
+          id: this.chooseEventId,
           title: 'Your choice',
           color: colors.yellow,
           start: this.clickedDate,
-          end: newDate,
-          meta: {
-            id: this.currentId
-          }
+          end: newDate
         });
         this.errorMsg = '';
         this.toBooking.emit({
@@ -103,7 +120,7 @@ export class CalendarComponent implements OnInit {
         });
       } else {
         this.events = this.events.filter(event => {
-          return event.meta.id !== this.currentId;
+          return event.id !== this.chooseEventId;
         });
         this.toBooking.emit({
           isBooking: false

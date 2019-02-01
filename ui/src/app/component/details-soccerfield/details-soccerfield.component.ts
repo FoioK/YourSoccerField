@@ -9,7 +9,7 @@ import { SoccerField } from '../../model/soccer-field';
 })
 export class DetailsSoccerfieldComponent implements OnInit {
   soccerfieldToBook: SoccerField;
-  currentId: string;
+  soccerFieldId: string;
   toBookingStart: Date = new Date();
   toBookingEnd: Date = new Date();
   isBooking: boolean = false;
@@ -24,8 +24,8 @@ export class DetailsSoccerfieldComponent implements OnInit {
   }
 
   private getSoccerfieldById(): void {
-    this.currentId = this.route.snapshot.paramMap.get('id');
-    this.reservation.getSoccerfieldById(this.currentId).subscribe(result => {
+    this.soccerFieldId = this.route.snapshot.paramMap.get('id');
+    this.reservation.getSoccerfieldById(this.soccerFieldId).subscribe(result => {
       this.soccerfieldToBook = result;
     });
   }
