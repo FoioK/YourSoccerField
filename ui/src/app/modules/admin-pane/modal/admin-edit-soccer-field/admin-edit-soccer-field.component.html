@@ -1,25 +1,79 @@
-<form [formGroup]="form">
+<div class="d-flex align-items-center justify-content-center container-body">
+  <section class="col-8 container-center">
 
-  <div class="row">
-    <div class="col-6">
-      <p class="label-txt">Name</p>
+    <div class="row justify-content-center">
+      <h1 class="form-title">Edit Soccer Field</h1>
     </div>
-    <div class="col-6">
-      <label>
-        <input class="form-control"
+
+    <form [formGroup]="form">
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input"
                type="text"
-               formControlName="name"
-               value="{{form.get('name').value}}">
-      </label>
-      <div class="line-box">
-        <div class="line"></div>
+               formControlName="name">
       </div>
+
+      <form [formGroup]="addressForm">
+        <div class="justify-content-center form-item">
+          <input class="form-control form-input"
+                 type="text"
+                 formControlName="city">
+          <input class="form-control form-input"
+                 type="text"
+                 formControlName="street">
+          <input class="form-control form-input"
+                 type="text"
+                 formControlName="apartmentNumber">
+        </div>
+      </form>
+
+      <div class="justify-content-center form-item">
+
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            Dropdown button
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input"
+               type="text"
+               formControlName="width">
+      </div>
+
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input"
+               type="text"
+               formControlName="length">
+      </div>
+
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input"
+               type="text"
+               formControlName="price">
+      </div>
+
+    </form>
+
+    <div mat-dialog-actions>
+      <button class="btn btn-danger"
+              (click)="close()">Close
+      </button>
+      <button class="btn btn-primary"
+              (click)="save()">Save
+      </button>
     </div>
-  </div>
 
-</form>
+  </section>
 
-<div mat-dialog-actions>
-  <button class="mat-raised-button" (click)="close()">Close</button>
-  <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
 </div>
