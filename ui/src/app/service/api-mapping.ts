@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { SoccerField } from '../model/soccer-field';
 
 @Injectable()
 export class ApiMapping {
@@ -13,6 +14,9 @@ export class ApiMapping {
 
   // @PathVariable {soccerFieldId}
   soccerField_findById = '/soccerfields/';
+
+  // soccerField_findById + @PathVariable {soccerFieldId} + soccerField_reservationsById
+  soccerField_reservationsById = '/bookings/';
 
   // @RequestParam {encodedObject}
   soccerField_findByCustomCriteria = '/soccerfields/advancedSearch?encodedObject=';

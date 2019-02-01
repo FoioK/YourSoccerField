@@ -36,7 +36,7 @@ export function checkAvailabilityDateByEvents(
     if (
       (dateEndData > event.start &&
         dateEndData < event.end &&
-        event.meta.id !== currentId) || // default id for current clicked date
+        event.id !== currentId) || // default id for current clicked date
       dateEndData.getTime() > DayEndHourData.getTime()
     ) {
       result = false;

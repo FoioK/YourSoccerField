@@ -16,6 +16,6 @@
 <div>
   <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" [daysInWeek]="3" [hourSegments]="2" [dayStartHour]="8" [dayEndHour]="23"
     [dayEndMinute]="0" [hourSegmentHeight]="20" [refresh]="refresh" (beforeViewRender)="setDisableHours($event)"
-    (hourSegmentClicked)="hourSegmentClicked($event.date)">
+    (hourSegmentClicked)="selectDateToBook($event.date)">
   </mwl-calendar-week-view>
 </div>
