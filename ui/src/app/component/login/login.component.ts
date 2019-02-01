@@ -45,10 +45,10 @@ export class LoginComponent implements OnInit {
         this.loginForm.get('password').value
       )
       .subscribe(
-        token => {
+        () => {
           this.userService.isLogged().subscribe(response => {
             if (response) {
-              this.router.navigateByUrl(AppRoute.mainPage);
+              this.router.navigateByUrl(AppRoute.MAIN_PAGE);
             }
           });
           this.errorStatus = -1;
