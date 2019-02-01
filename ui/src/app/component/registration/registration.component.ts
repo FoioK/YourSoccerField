@@ -5,6 +5,7 @@ import { Configuration } from '../../service/configuration';
 import { AppRoute } from '../../module/app-route';
 import { RegisterService } from '../../service/register.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -20,6 +21,8 @@ export class RegistrationComponent implements OnInit {
   ) {}
 
   registrationForm: FormGroup;
+  registrationErrorMsg: string;
+  errorReason: string;
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
@@ -43,7 +46,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   getLoginRoute(): string {
-    return '/' + AppRoute.login;
+    return '/' + AppRoute.LOGIN;
   }
 
   createUser() {
@@ -53,8 +56,14 @@ export class RegistrationComponent implements OnInit {
           this.router.navigateByUrl(AppRoute.login);
         }
       },
-      error => {
-        console.log(error);
+      (error: HttpErrorResponse) => {
+        if (error.error === 'DUPLICATE_USER_NICKNAME') {
+          this.errorReason = 'nickname';
+        }
+        if (error.error === 'DUPLICATE_USER_EMAIL') {
+          this.errorReason = 'email';
+        }
+        this.registrationErrorMsg = error.message;
       }
     );
   }

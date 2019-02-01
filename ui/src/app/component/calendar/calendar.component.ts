@@ -18,18 +18,23 @@ import { setNewCalendarEvent } from './custom-methods/set-new-calendar-event';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+
   constructor(
     private reservation: ReservationService,
     private route: ActivatedRoute
   ) {}
+
   @Output()
   errorMsg: string;
   @Output()
   toBooking: EventEmitter<any> = new EventEmitter<any>();
+  
   view: string = 'day';
 
   soccerFieldId: string;
   chooseEventId: number = -1;
+
+  currentId: number = -1;
 
   viewDate: Date = new Date();
 
@@ -39,6 +44,7 @@ export class CalendarComponent implements OnInit {
 
   currentDayViewHour: WeekViewHourColumn[];
   clickedDate: Date;
+
   ngOnInit() {
     this.getBookedDate();
   }
@@ -98,7 +104,7 @@ export class CalendarComponent implements OnInit {
           this.clickedDate,
           newDate,
           this.events,
-          this.currentDayViewHour,
+          this.currentDayViewHour,          
           this.chooseEventId
         )
       ) {
