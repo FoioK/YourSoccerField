@@ -331,4 +331,19 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
 
         return new ArrayList<>(this.bookingToDTO.mapAll(bookings));
     }
+
+    @Override
+    public Optional<SoccerFieldDTO> updateSoccerField(SoccerFieldDTO soccerFieldDTO) {
+        Optional<SoccerField> soccerFieldById = this.soccerFieldRepository
+                .findById(soccerFieldDTO.getId());
+
+        if (!soccerFieldById.isPresent()) {
+            return Optional.ofNullable(this.createSoccerField(soccerFieldDTO));
+        }
+
+        SoccerField soccerField = this.soccerFieldFromDTO.createFromDTO(soccerFieldDTO);
+        this.soccerFieldRepository.save(soccerField);
+
+        return Optional.empty();
+    }
 }

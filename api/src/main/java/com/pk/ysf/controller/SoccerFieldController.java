@@ -14,6 +14,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("${spring.data.rest.base-path}/soccerfields")
@@ -144,5 +146,23 @@ public class SoccerFieldController {
                 this.soccerFieldService.getAllBookings(soccerFieldId),
                 HttpStatus.OK
         );
+    }
+
+    @PutMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_PUT_UPDATE)")
+    public ResponseEntity<Void> updateSoccerField(@RequestBody SoccerFieldDTO soccerFieldDTO) {
+        Optional<SoccerFieldDTO> result = this.soccerFieldService.updateSoccerField(soccerFieldDTO);
+
+        if (result.isPresent()) {
+            return ResponseEntity
+                    .created(URI.create("/soccerfields"))
+                    .build();
+        }
+
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }

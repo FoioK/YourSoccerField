@@ -5,6 +5,7 @@ import com.pk.ysf.service.dtoModel.SoccerFieldDTO;
 import com.pk.ysf.service.dtoModel.SurfaceDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SoccerFieldService {
 
@@ -23,4 +24,6 @@ public interface SoccerFieldService {
     List<SurfaceDTO> getAllSurface();
 
     List<BookingDTO> getAllBookings(Long soccerFieldId);
+
+    Optional<SoccerFieldDTO> updateSoccerField(SoccerFieldDTO soccerField);
 }
