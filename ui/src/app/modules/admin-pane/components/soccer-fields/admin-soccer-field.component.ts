@@ -17,14 +17,19 @@ export class AdminSoccerFieldComponent implements OnInit {
   private editUserDialog;
 
   constructor(private soccerFieldService: SoccerFieldService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog
+  ) {
     this.dialogConf = new MatDialogConfig();
     this.dialogConf.disableClose = true;
     this.dialogConf.autoFocus = true;
   }
 
   ngOnInit() {
-    this.soccerFieldService.findAll()
+    this.getAllSoccerField();
+  }
+
+  private getAllSoccerField() {
+    return this.soccerFieldService.findAll()
       .subscribe(data => this.soccerFields = data);
   }
 
@@ -39,8 +44,16 @@ export class AdminSoccerFieldComponent implements OnInit {
       });
 
     this.editUserDialog.afterClosed()
+      .subscribe((result: SoccerField) =>
+        result ? this.updateSoccerField(result) : undefined);
+  }
+
+  updateSoccerField(soccerField: SoccerField) {
+    this.soccerFieldService.updateSoccerField(soccerField)
       .subscribe(result => {
-        console.log(result)
+        if (result.status == 201 || result.status == 204) {
+          this.getAllSoccerField();
+        }
       });
   }
 

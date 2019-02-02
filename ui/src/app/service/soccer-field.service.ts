@@ -71,4 +71,15 @@ export class SoccerFieldService {
       }
     );
   }
+
+  updateSoccerField(soccerField: SoccerField) {
+    return this.http.put(
+      this.configuration.apiServer + this.apiMapping.soccerField_findAll,
+      soccerField,
+      {
+        headers: Configuration.getJSONContentTypeWithToken(),
+        observe: "response"
+      }
+    )
+  }
 }

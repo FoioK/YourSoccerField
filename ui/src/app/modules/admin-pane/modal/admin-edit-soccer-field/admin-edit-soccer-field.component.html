@@ -27,22 +27,13 @@
       </form>
 
       <div class="justify-content-center form-item">
-
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-            Dropdown button
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
+        <select class="form-control"
+                formControlName="surface">
+          <option *ngFor="let surface of surfaceList"
+                  [ngValue]="surface">
+            {{surface.name}}
+          </option>
+        </select>
       </div>
 
       <div class="justify-content-center form-item">
@@ -70,6 +61,7 @@
               (click)="close()">Close
       </button>
       <button class="btn btn-primary"
+              [disabled]="form.invalid || addressForm.invalid"
               (click)="save()">Save
       </button>
     </div>
