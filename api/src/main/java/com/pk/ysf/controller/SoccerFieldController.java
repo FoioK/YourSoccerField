@@ -149,11 +149,18 @@ public class SoccerFieldController {
     }
 
     @PutMapping(
+            value = "/{soccerFieldId}",
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_PUT_UPDATE)")
-    public ResponseEntity<Void> updateSoccerField(@RequestBody SoccerFieldDTO soccerFieldDTO) {
-        Optional<SoccerFieldDTO> result = this.soccerFieldService.updateSoccerField(soccerFieldDTO);
+    public ResponseEntity<Void> updateSoccerField(
+            @PathVariable Long soccerFieldId,
+            @RequestBody SoccerFieldDTO soccerFieldDTO
+    ) {
+        Optional<SoccerFieldDTO> result =
+                this.soccerFieldService.updateSoccerField(
+                        soccerFieldId,
+                        soccerFieldDTO);
 
         if (result.isPresent()) {
             return ResponseEntity

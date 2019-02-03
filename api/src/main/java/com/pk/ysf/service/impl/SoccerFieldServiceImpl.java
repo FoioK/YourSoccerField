@@ -333,9 +333,9 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     }
 
     @Override
-    public Optional<SoccerFieldDTO> updateSoccerField(SoccerFieldDTO soccerFieldDTO) {
+    public Optional<SoccerFieldDTO> updateSoccerField(Long soccerFieldId, SoccerFieldDTO soccerFieldDTO) {
         Optional<SoccerField> soccerFieldById = this.soccerFieldRepository
-                .findById(soccerFieldDTO.getId());
+                .findById(soccerFieldId);
 
         if (!soccerFieldById.isPresent()) {
             return Optional.ofNullable(this.createSoccerField(soccerFieldDTO));

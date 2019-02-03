@@ -25,5 +25,5 @@ public interface SoccerFieldService {
 
     List<BookingDTO> getAllBookings(Long soccerFieldId);
 
-    Optional<SoccerFieldDTO> updateSoccerField(SoccerFieldDTO soccerField);
+    Optional<SoccerFieldDTO> updateSoccerField(Long soccerFieldId, SoccerFieldDTO soccerField);
 }

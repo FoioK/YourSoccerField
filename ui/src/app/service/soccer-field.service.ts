@@ -74,7 +74,7 @@ export class SoccerFieldService {
 
   updateSoccerField(soccerField: SoccerField) {
     return this.http.put(
-      this.configuration.apiServer + this.apiMapping.soccerField_findAll,
+      this.configuration.apiServer + this.apiMapping.soccerField_findById + soccerField.id,
       soccerField,
       {
         headers: Configuration.getJSONContentTypeWithToken(),
