@@ -173,4 +173,20 @@ public class SoccerFieldController {
                 .noContent()
                 .build();
     }
+
+    @DeleteMapping(
+            value = "/{soccerFieldId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_DELETE_BY_ID)")
+    public ResponseEntity<Void> deleteSoccerField(
+            @PathVariable Long soccerFieldId
+    ) {
+        this.soccerFieldService.deleteSoccerFieldById(soccerFieldId);
+
+        return ResponseEntity
+                .noContent()
+                .build();
+    }
 }

@@ -345,4 +345,9 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
 
         return Optional.empty();
     }
+
+    @Override
+    public void deleteSoccerFieldById(Long soccerFieldId) {
+        this.soccerFieldRepository.deleteById(soccerFieldId);
+    }
 }

@@ -82,4 +82,14 @@ export class SoccerFieldService {
       }
     )
   }
+
+  deleteSoccerField(soccerFieldId) {
+    return this.http.delete(
+      this.configuration.apiServer + this.apiMapping.soccerField_findById + soccerFieldId,
+      {
+        headers: Configuration.getJSONContentTypeWithToken(),
+        observe: "response"
+      }
+    )
+  }
 }

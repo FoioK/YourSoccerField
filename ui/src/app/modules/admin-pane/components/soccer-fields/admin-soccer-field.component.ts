@@ -57,4 +57,13 @@ export class AdminSoccerFieldComponent implements OnInit {
       });
   }
 
+  deleteSoccerField(soccerFieldId) {
+    this.soccerFieldService.deleteSoccerField(soccerFieldId)
+      .subscribe(result => {
+        if (result.status == 200 || result.status == 204) {
+          this.getAllSoccerField();
+        }
+      })
+  }
+
 }
