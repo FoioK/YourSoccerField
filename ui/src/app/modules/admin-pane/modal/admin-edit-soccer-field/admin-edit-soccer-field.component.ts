@@ -108,13 +108,22 @@ export class AdminEditSoccerFieldComponent implements OnInit {
   }
 
   save() {
-    this.form.get('address').setValue(this.addressForm.value);
+    this.dialogRef.close(this.prepareSoccerField());
+  }
 
-    const soccerField: SoccerField = this.form.value;
-    soccerField.id = this.soccerField.id;
-    soccerField.openHour = this.soccerField.openHour;
+  private prepareSoccerField(): SoccerField {
+    const address: Address = this.addressForm.value;
+    address.id = this.soccerField.address.id;
 
-    this.dialogRef.close(soccerField);
+    const editSoccerField: SoccerField = this.form.value;
+    this.soccerField.name = editSoccerField.name;
+    this.soccerField.surface = editSoccerField.surface;
+    this.soccerField.address = address;
+    this.soccerField.width = editSoccerField.width;
+    this.soccerField.length = editSoccerField.length;
+    this.soccerField.price = editSoccerField.price;
+
+    return this.soccerField;
   }
 
   close() {

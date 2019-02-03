@@ -48,7 +48,7 @@ export class AdminSoccerFieldComponent implements OnInit {
         result ? this.updateSoccerField(result) : undefined);
   }
 
-  updateSoccerField(soccerField: SoccerField) {
+  private updateSoccerField(soccerField: SoccerField) {
     this.soccerFieldService.updateSoccerField(soccerField)
       .subscribe(result => {
         if (result.status == 201 || result.status == 204) {

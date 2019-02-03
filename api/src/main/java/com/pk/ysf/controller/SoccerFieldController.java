@@ -150,7 +150,8 @@ public class SoccerFieldController {
 
     @PutMapping(
             value = "/{soccerFieldId}",
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_PUT_UPDATE)")
     public ResponseEntity<Void> updateSoccerField(
