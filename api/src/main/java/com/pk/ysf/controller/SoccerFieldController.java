@@ -165,7 +165,7 @@ public class SoccerFieldController {
 
         if (result.isPresent()) {
             return ResponseEntity
-                    .created(URI.create("/soccerfields"))
+                    .created(URI.create(String.format("/soccerfields/%d", soccerFieldId)))
                     .build();
         }
 
