@@ -10,8 +10,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("${spring.data.rest.base-path}/users")
@@ -56,5 +58,47 @@ public class UserController {
                 Collections.singletonMap("success", true),
                 HttpStatus.ACCEPTED
         );
+    }
+
+    @PutMapping(
+            value = "/{userId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).USERS_PUT_UPDATE)")
+    public ResponseEntity<Void> updateUser(
+            @PathVariable Long userId,
+            @RequestBody UserDTO userDTO
+    ) {
+        Optional<UserDTO> result =
+                this.userService.updateUser(
+                        userId,
+                        userDTO
+                );
+
+        if (result.isPresent()) {
+            return ResponseEntity
+                    .created(URI.create(String.format("/users/%d", userId)))
+                    .build();
+        }
+        return ResponseEntity
+                .noContent()
+                .build();
+    }
+
+    @DeleteMapping(
+            value = "/{userId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).USERS_DELETE_BY_ID)")
+    public ResponseEntity<Void> deleteUser(
+            @PathVariable Long userId
+    ) {
+        this.userService.deleteUser(userId);
+
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }

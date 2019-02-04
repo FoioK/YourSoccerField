@@ -255,4 +255,24 @@ public class UserServiceImpl implements UserService {
 
         return new ArrayList<>(this.bookingToDTO.mapAllFromEntities(bookings));
     }
+
+    @Override
+    public Optional<UserDTO> updateUser(Long userId, UserDTO userDTO) {
+        Optional<UserEntity> userById = this.userRepository
+                .findById(userId);
+
+        if (!userById.isPresent()) {
+            return Optional.ofNullable(this.createUser(userDTO));
+        }
+
+        UserEntity userEntity = this.userFromDTO.createFromDTO(userDTO);
+        this.userRepository.save(userEntity);
+
+        return Optional.empty();
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        this.userRepository.deleteById(userId);
+    }
 }

@@ -1,9 +1,13 @@
 package com.pk.ysf.util;
 
-public enum  Permissions {
+public enum Permissions {
 
     // ADMIN
     USERS_ADMIN_PANE("USERS_ADMIN_PANE"),
+    // ADMIN
+    USERS_PUT_UPDATE("USERS_PUT_UPDATE"),
+    // ADMIN
+    USERS_DELETE_BY_ID("USERS_DELETE_BY_ID"),
 
     // ADMIN
     SOCCERFIELDS_GET_ALL("SOCCERFIELDS_GET_ALL"),
