@@ -4,6 +4,7 @@ import {NgModule} from "@angular/core";
 import {AdminSoccerFieldComponent} from "./components/soccer-fields/admin-soccer-field.component";
 import {AdminPaneGuard} from "../../module/admin-pane-guard";
 import {AppRoute} from "../../module/app-route";
+import {AdminUserComponent} from "./components/admin-user/admin-user.component";
 
 const adminPaneRoutes: Routes = [
   {
@@ -21,6 +22,11 @@ const adminPaneRoutes: Routes = [
   {
     path: AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD,
     component: AdminSoccerFieldComponent,
+    canActivate: [AdminPaneGuard]
+  },
+  {
+    path: AppRoute.ADMIN_PANE_CHILD.USER,
+    component: AdminUserComponent,
     canActivate: [AdminPaneGuard]
   }
 ];
