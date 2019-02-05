@@ -14,7 +14,7 @@ export class AdminSoccerFieldComponent implements OnInit {
   public soccerFields = [];
 
   private dialogConf: MatDialogConfig;
-  private editUserDialog;
+  private editSoccerFieldDialog;
 
   constructor(private soccerFieldService: SoccerFieldService,
               private dialog: MatDialog
@@ -34,7 +34,7 @@ export class AdminSoccerFieldComponent implements OnInit {
   }
 
   editSoccerField(soccerField: SoccerField) {
-    this.editUserDialog = this.dialog.open(
+    this.editSoccerFieldDialog = this.dialog.open(
       AdminEditSoccerFieldComponent,
       {
         width: '60%',
@@ -43,7 +43,7 @@ export class AdminSoccerFieldComponent implements OnInit {
         data: soccerField
       });
 
-    this.editUserDialog.afterClosed()
+    this.editSoccerFieldDialog.afterClosed()
       .subscribe((result: SoccerField) =>
         result ? this.updateSoccerField(result) : undefined);
   }
