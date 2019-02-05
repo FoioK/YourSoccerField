@@ -53,7 +53,7 @@ export class RegistrationComponent implements OnInit {
     this.registerService.createUser(this.registrationForm.value).subscribe(
       response => {
         if (response.status === 201) {
-          this.router.navigateByUrl(AppRoute.login);
+          this.router.navigateByUrl(AppRoute.LOGIN);
         }
       },
       (error: HttpErrorResponse) => {
