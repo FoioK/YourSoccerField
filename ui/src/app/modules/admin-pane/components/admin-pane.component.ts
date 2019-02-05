@@ -25,7 +25,7 @@ export class AdminPaneComponent implements OnInit {
         [soccerFieldPath],
         {relativeTo: this.route}
       )
-      : false;
+      : this.router.navigateByUrl(AppRoute.ADMIN_PANE);
   }
 
 }
