@@ -8,7 +8,6 @@ import { colors } from './colors/color-events';
 import { checkAvailabilityDateByEvents } from './custom-methods/check-availability-date-by-events';
 import { Subject } from 'rxjs';
 import { ReservationService } from '../../service/reservation.service';
-import { Reservation } from '../../model/reservation';
 import { addTimeToDate } from './custom-methods/add-time-to-date';
 import { ActivatedRoute } from '@angular/router';
 import { setNewCalendarEvent } from './custom-methods/set-new-calendar-event';
@@ -18,9 +17,8 @@ import { setNewCalendarEvent } from './custom-methods/set-new-calendar-event';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-
   constructor(
-    private reservation: ReservationService,
+    private reservationService: ReservationService,
     private route: ActivatedRoute
   ) {}
 
@@ -28,7 +26,7 @@ export class CalendarComponent implements OnInit {
   errorMsg: string;
   @Output()
   toBooking: EventEmitter<any> = new EventEmitter<any>();
-  
+
   view: string = 'day';
 
   soccerFieldId: string;
@@ -51,7 +49,7 @@ export class CalendarComponent implements OnInit {
 
   private getBookedDate() {
     this.soccerFieldId = this.route.snapshot.paramMap.get('id');
-    this.reservation
+    this.reservationService
       .getReservationsForSoccerfield(this.soccerFieldId)
       .subscribe(result => {
         this.events = [];
@@ -104,7 +102,7 @@ export class CalendarComponent implements OnInit {
           this.clickedDate,
           newDate,
           this.events,
-          this.currentDayViewHour,          
+          this.currentDayViewHour,
           this.chooseEventId
         )
       ) {

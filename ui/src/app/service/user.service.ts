@@ -1,25 +1,25 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {Configuration} from './configuration';
-import {ApiMapping} from './api-mapping';
-import {TokenModel} from '../model/token-model';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Configuration } from './configuration';
+import { ApiMapping } from './api-mapping';
+import { TokenModel } from '../model/token-model';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
+import { AppRoute } from '../module/app-route';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   private jwtHelper: JwtHelperService = new JwtHelperService();
 
   constructor(
     private http: HttpClient,
     private configuration: Configuration,
     private apiMapping: ApiMapping,
-  ) {
-
-  }
+    private router: Router
+  ) {}
 
   private isLoggedSubject = new BehaviorSubject<boolean>(false);
 
@@ -46,8 +46,19 @@ export class UserService {
 
   adminPaneAuthenticate(): Observable<boolean> {
     return this.http.get<boolean>(
-      this.configuration.apiServer + this.apiMapping.user_adminPane_authenticate,
-      {headers: Configuration.getTokenAuthorization()}
+      this.configuration.apiServer +
+        this.apiMapping.user_adminPane_authenticate,
+      { headers: Configuration.getTokenAuthorization() }
     );
+  }
+
+  getLoggedUserCode(): number {
+    const token: TokenModel = JSON.parse(localStorage.getItem('token'));
+    if (token !== null) {
+      return token.code;
+    } else {
+      this.logOut();
+      this.router.navigateByUrl(AppRoute.LOGIN);
+    }
   }
 }

@@ -3,39 +3,39 @@
     <div class="row no-gutters container-data w-100 h-100 d-flex">
       <div class="col-6 col-lg-4 my-2 px-3">
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Name</div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook.name}}</div>
+        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook?.name}}</div>
       </div>
       <div class="col-6 col-lg-4 my-2 px-2">
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Adress</div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook.address.city}},
-          {{soccerfieldToBook.address.street}} {{soccerfieldToBook.address.apartmentNumber}}</div>
+        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook?.address.city}},
+          {{soccerfieldToBook?.address.street}} {{soccerfieldToBook?.address.apartmentNumber}}</div>
       </div>
       <div class=" col-6 col-lg-4 my-2 px-2">
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Size</div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook.length}}m
+        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook?.length}}m
           x
-          {{soccerfieldToBook.width}}m</div>
+          {{soccerfieldToBook?.width}}m</div>
       </div>
       <div class=" col-6 col-lg-4 my-2 px-2">
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Price</div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook.price}}
+        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook?.price}}
           PLN/1.5h</div>
       </div>
       <div class=" col-6 col-lg-4 my-2 px-2">
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Surface</div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook.surface.name}}</div>
+        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook?.surface.name}}</div>
       </div>
       <div class=" col-6 col-lg-4 my-2 px-2">
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Open
           hours</div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook.openHour.s1}}
+        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook?.openHour.s1}}
           -
-          {{soccerfieldToBook.openHour.e1}}</div>
+          {{soccerfieldToBook?.openHour.e1}}</div>
       </div>
       <div class=" col-6 col-lg-4 my-2 px-2">
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Fenced</div>
         <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">
-          <i class="fas fa-check data-icon " *ngIf="soccerfieldToBook.isLockerRoom; else notFenced"></i>
+          <i class="fas fa-check data-icon data-icon-true" *ngIf="soccerfieldToBook?.fenced; else notFenced"></i>
           <ng-template #notFenced>
             <i class="fas fa-times data-icon data-icon-false"></i>
           </ng-template>
@@ -44,7 +44,7 @@
       <div class=" col-6 col-lg-4 my-2 px-2">
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Lighting</div>
         <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">
-          <i class="fas fa-check data-icon " *ngIf="soccerfieldToBook.isLockerRoom; else notLockerRoom"></i>
+          <i class="fas fa-check data-icon data-icon-true" *ngIf="soccerfieldToBook?.lighting; else notLighting"></i>
           <ng-template #notLighting>
             <i class="fas fa-times data-icon data-icon-false"></i>
           </ng-template>
@@ -54,7 +54,7 @@
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Locker
           room</div>
         <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">
-          <i class="fas fa-check data-icon data-icon-true" *ngIf="soccerfieldToBook.isLockerRoom; else notLockerRoom"></i>
+          <i class="fas fa-check data-icon data-icon-true" *ngIf="soccerfieldToBook?.lockerRoom; else notLockerRoom"></i>
           <ng-template #notLockerRoom>
             <i class="fas fa-times data-icon data-icon-false"></i>
           </ng-template>
@@ -62,7 +62,7 @@
       </div>
       <div class=" col-12 my-2 px-2">
         <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Description</div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook.description}}</div>
+        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerfieldToBook?.description}}</div>
       </div>
     </div>
   </div>
@@ -81,13 +81,13 @@
       <div class="col-12 pt-4 px-0">
         <div class="row no-gutters col-12 px-3 pb-3 d-flex align-items-center title-field title-field-summary">
           <div class="col-12 d-flex align-items-center p-0">
-            {{soccerfieldToBook.address.city}}, {{soccerfieldToBook.address.street}}
-            {{soccerfieldToBook.address.apartmentNumber}}
+            {{soccerfieldToBook?.address.city}}, {{soccerfieldToBook?.address.street}}
+            {{soccerfieldToBook?.address.apartmentNumber}}
           </div>
           <div class="col-12 p-0 d-flex align-items-center data-field-small">
-            {{soccerfieldToBook.length}}m
+            {{soccerfieldToBook?.length}}m
             x
-            {{soccerfieldToBook.width}}m | {{soccerfieldToBook.surface.name}}
+            {{soccerfieldToBook?.width}}m | {{soccerfieldToBook?.surface.name}}
           </div>
         </div>
         <section [hidden]="!isBooking">
@@ -102,16 +102,25 @@
           </div>
           <div class="row no-gutters col-12 px-3 pb-3 d-flex align-items-center title-field title-field-summary">
             <div class="col-12 p-0 d-flex align-items-center">
-              {{soccerfieldToBook.price}} zł
+              {{soccerfieldToBook?.price}} zł
             </div>
             <div class="col-12 p-0 d-flex align-items-center data-field-small">
               To pay
             </div>
           </div>
           <div class="row no-gutters col-12 px-3 pb-3 d-flex align-items-center title-field title-field-summary">
-            <div class="row no-gutters col-12 px-3 pb-3 pt-3 d-flex align-items-center title-field title-field-summary">
-              <button class="btn btn-book w-100 my-2" [disabled]="!isBooking">book</button>
-            </div>
+            <ng-container *ngIf="!isPaid" ;else Payment>
+              <div class="row no-gutters col-12 px-3 pb-3 pt-3 d-flex align-items-center title-field title-field-summary">
+                <button class="btn btn-book w-100 my-2" [disabled]="!isBooking" (click)="setReservation()">book</button>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="isPaid">
+              <h2 class="text-center important-info mb-2">The code below is required when paying for it</h2>
+              <p id="paymentCode" class="w-100 text-center">{{paymentCode}}</p>
+              <button class="btn btn-book w-100 my-2" (cbOnSuccess)="copyCodeToClipboard()" ngxClipboard [cbContent]="paymentCode"
+                [ngClass]="{true: 'btn-copied' }[copyText === 'Copied']">{{ copyText }}</button>
+              <button class="btn btn-book w-100 my-2">Pay</button>
+            </ng-container>
           </div>
         </section>
       </div>
@@ -121,6 +130,12 @@
         <div class="col-12 p-0 d-flex align-items-center text-center">
           Choose a date from the calendar
         </div>
+        <ng-container *ngIf="errorMsg?.length > 0">
+          <div class="col-12 mt-2 p-0 d-flex align-items-center text-center important-info">
+            {{ errorMsg }}
+          </div>
+        </ng-container>
+
       </div>
     </section>
   </div>
