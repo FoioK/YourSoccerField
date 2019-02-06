@@ -1,17 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
 
-.ysf-2{
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+.ysf-2 {
   font-family: 'Carter One', cursive;
-  font-size:2rem !important;
+  font-size: 2rem !important;
+  color: #fff !important;
+  cursor: pointer;
 }
 
-.ysf-3{
+.ysf-3 {
   font-family: 'Galada', cursive;
-  font-size:2rem !important;
+  font-size: 2rem !important;
 }
 
-.form-input:focus + .form-icons{
+.form-input:focus+.form-icons {
   color: #007bff;
   opacity: 0.9;
-  transition:1.5s all;
+  transition: 1.5s all;
+}
+
+.cal-week-view .cal-time {
+  padding-top: 0px;
+  line-height: 20px;
+  background: #fff;
+}
+
+.cal-week-view .cal-time:hover {
+  cursor: default;
+}
+
+.cal-week-view .cal-hour:not(:last-child) .cal-hour-segment,
+.cal-week-view .cal-hour:last-child :not(:last-child) .cal-hour-segment {
+  border-bottom: thin solid #e1e1e1;
+}
+
+.cal-week-view .cal-hour-segment.cal-after-hour-start .cal-time {
+  display: block;
+}
+
+.cal-day-segment-disabled {
+  background-color: grey;
+}
+
+.cal-day-segment-disabled:hover {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.cal-week-view .cal-time-events .cal-event {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cal-week-view .cal-header.cal-today{
+  background: #d1ecf1;
 }

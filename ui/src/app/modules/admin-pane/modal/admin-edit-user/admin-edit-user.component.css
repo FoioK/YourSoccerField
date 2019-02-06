@@ -1,0 +1,20 @@
+.mat-dialog-container {
+  overflow: hidden !important;
+  border-radius: 5px !important;
+  padding: 5px !important;
+  background: rgba(0, 0, 0, 0.0);
+}
+
+.form-title {
+  text-align: center;
+  line-height: 20px;
+  font-size: 24px;
+  color: #fff;
+  margin: 20px 0 20px 0;
+}
+
+.form-item {
+  height: 100%;
+  margin: 15px 5px 15px 5px;
+  position: relative;
+}

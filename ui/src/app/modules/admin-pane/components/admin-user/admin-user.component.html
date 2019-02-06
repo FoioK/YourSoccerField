@@ -1,0 +1,69 @@
+<app-admin-pane></app-admin-pane>
+<br>
+<br>
+<div class=col-md-12>
+
+  <table class="table table-striped"
+         [mfData]="users"
+         #mf="mfDataTable"
+         [mfRowsOnPage]="5">
+    <thead>
+    <tr>
+      <th style="width: 5%">
+        <mfDefaultSorter by="id">Id</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="code">Kod</mfDefaultSorter>
+      </th>
+      <th style="width: 15%">
+        <mfDefaultSorter by="email">Email</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="firstName">Imię</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="secondName">Nazwisko</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="nickname">Nick</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="isActive">Aktywny</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+        <mfDefaultSorter by="Opcje">Opcje</mfDefaultSorter>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of mf.data">
+      <td>{{user.id}}</td>
+      <td>{{user.code}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.secondName}}</td>
+      <td>{{user.nickname}}</td>
+      <td>{{user.active ? 'Tak' : 'Nie'}}</td>
+      <td>
+        <a class="btn btn-info btn-xs"
+           (click)="editUser(user)"
+           style="margin-right: 5px">
+          <span class="glyphicon glyphicon-edit"></span>Edytuj
+        </a>
+        <a class="btn btn-danger btn-xs"
+           (click)="deleteUser(user.id)">
+          <span class="glyphicon glyphicon-remove"></span>Usuń
+        </a>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="4">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+
+</div>

@@ -1,70 +1,70 @@
-.mini-socerfield{
+.mini-socerfield {
   min-height: 200px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   background: #fff;
   border-radius: .25rem;
   background-clip: padding-box;
   border: 1px solid #ced4da;
 }
 
-.picture{
+.picture {
   min-height: 200px;
   background: url('https://images.pexels.com/photos/399187/pexels-photo-399187.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center;
   background-size: cover;
 }
 
-.picture-even{
+.picture-even {
   background: url('https://images.pexels.com/photos/104675/pexels-photo-104675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center;
   background-size: cover;
 }
 
-.socerfield-data{
-  font-size:18px;
+.socerfield-data {
+  font-size: 18px;
   line-height: 18px;
   color: #495057;
 }
 
-.form-icons{
+.form-icons {
   width: 30px;
   font-size: 30px;
   color: #343a40;
   margin: 0px 30px 0px 0px;
 }
 
-.form-title{
-  color:#343a40;
+.form-title {
+  color: #343a40;
   text-align: center;
   width: 100%;
   line-height: 20px;
-  font-size:24px;
+  font-size: 24px;
   margin: 20px 0px 20px 0px;
 }
 
-.btn-book{
+.btn-book {
   border-radius: 0px;
 }
 
-.btn-book:hover{
+.btn-book:hover {
   background: #007bff;
   color: #fff;
   transition: 1s all;
 }
 
-@media only screen and (max-width: 576px){
-  .socerfield-data{
-    font-size:14px;
+@media only screen and (max-width: 576px) {
+  .socerfield-data {
+    font-size: 14px;
     line-height: 14px;
   }
 
-  .form-icons{
+  .form-icons {
     width: 20px;
     font-size: 20px;
     margin: 0px 20px 0px 0px;
   }
 
-  .form-title{
+  .form-title {
     line-height: 18px;
-    font-size:18px;
+    font-size: 18px;
     margin: 10px 0px 10px 0px;
   }
 }

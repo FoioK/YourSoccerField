@@ -1,8 +1,8 @@
-import {Address} from "./address";
-import {Surface} from "./surface";
+import { Address } from './address';
+import { Surface } from './surface';
+import { OpenHour } from './open-hour';
 
 export interface SoccerField {
-
   id?: number;
   name: string;
   address: Address;
@@ -10,9 +10,9 @@ export interface SoccerField {
   width: number;
   length: number;
   price?: number;
-  isLighting?: boolean;
-  isFenced?: boolean;
-  isLockerRoom?: boolean;
+  lighting?: boolean;
+  fenced?: boolean;
+  lockerRoom?: boolean;
   description?: string;
-
+  openHour: OpenHour;
 }

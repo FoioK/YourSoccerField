@@ -1,6 +1,4 @@
 export interface Surface {
-
-  id?: number,
-  name: string,
-
+  id?: number;
+  name: string;
 }
