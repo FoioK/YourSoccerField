@@ -104,6 +104,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDTO> getAll() {
+        return new ArrayList<>(
+                this.userToDTO.mapAllFromEntities(this.userRepository.findAll())
+        );
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public UserDTO createUser(UserDTO userDTO) {
         this.validationUserDTOModel(userDTO);

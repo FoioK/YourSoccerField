@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface UserService {
 
+    List<UserDTO> getAll();
+
     UserDTO createUser(UserDTO userDTO);
 
     List<BookingDTO> getAllBookingsByUserId(Long userId);

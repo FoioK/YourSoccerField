@@ -3,7 +3,9 @@ package com.pk.ysf.util;
 public enum Permissions {
 
     // ADMIN
-    USERS_ADMIN_PANE("USERS_ADMIN_PANE"),
+    USERS_GET_ALL("USERS_GET_ALL"),
+    // ADMIN
+    USERS_GET_ADMIN_AUTHENTICATE("USERS_GET_ADMIN_AUTHENTICATE"),
     // ADMIN
     USERS_PUT_UPDATE("USERS_PUT_UPDATE"),
     // ADMIN

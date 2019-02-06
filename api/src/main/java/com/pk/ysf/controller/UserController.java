@@ -26,9 +26,20 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping(
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+    )
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity
+                .ok()
+                .body(this.userService.getAll());
+    }
+
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<?> register(@RequestBody @Valid UserDTO userDTO) {
         return new ResponseEntity<>(
                 userService.createUser(userDTO),
@@ -51,7 +62,7 @@ public class UserController {
             value = "/admin/authenticate",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).USERS_ADMIN_PANE)")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).USERS_GET_ADMIN_AUTHENTICATE)")
     public ResponseEntity<Map<String, Boolean>> adminPaneAuthenticate() {
         return new ResponseEntity<>(
                 Collections.singletonMap("success", true),
