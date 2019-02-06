@@ -48,6 +48,7 @@ export class CalendarComponent implements OnInit {
     this.reservationService.checkWasBooked().subscribe(result => {
       if (result) {
         this.getBookedDate();
+        this.reservationService.setWasBooked(false);
       }
     });
   }
