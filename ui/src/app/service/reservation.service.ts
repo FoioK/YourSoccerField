@@ -33,19 +33,19 @@ export class ReservationService {
       this.configuration.apiServer +
         this.apiMapping.soccerField_findById +
         id +
-        this.apiMapping.soccerField_reservationsById,
+        this.apiMapping.booking_create,
       {
         headers: Configuration.getJSONContentTypeWithToken()
       }
     ).pipe(catchError(this.errorHandler));
   }
 
-  setReservationForSoccerfield(
-    reservation: string
+  createReservation(
+    reservation: Reservation
   ): Observable<HttpResponse<Reservation>> {
     return this.http.post<Reservation>(
       this.configuration.apiServer +
-        this.apiMapping.soccerField_reservationsById,
+        this.apiMapping.booking_create,
       reservation,
       {
         headers: Configuration.getJSONContentTypeWithToken(),

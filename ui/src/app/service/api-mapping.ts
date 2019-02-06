@@ -15,8 +15,11 @@ export class ApiMapping {
   // @PathVariable {soccerFieldId}
   soccerField_findById = '/soccerfields/';
 
+  // @Body {reservation}
+  booking_create = '/bookings';
+
   // soccerField_findById + @PathVariable {soccerFieldId} + soccerField_reservationsById
-  soccerField_reservationsById = '/bookings/';
+  // TO DO
 
   // @RequestParam {encodedObject}
   soccerField_findByCustomCriteria = '/soccerfields/advancedSearch?encodedObject=';

@@ -54,7 +54,7 @@ export class DetailsSoccerfieldComponent implements OnInit {
     }
   }
 
-  private transformDateToPost(date: Date): string {
+  private transformDateToApiFormat(date: Date): string {
     // result -> yyyy-mm-ddThh:mm in 24 hours format
     const dataDate = new Date(date);
     return (
@@ -85,11 +85,11 @@ export class DetailsSoccerfieldComponent implements OnInit {
       executionTime: '01:30',
       payed: false,
       soccerField: parseInt(this.soccerFieldId, 10),
-      startDate: this.transformDateToPost(this.toBookingStart),
+      startDate: this.transformDateToApiFormat(this.toBookingStart),
       userCode: this.userCode
     };
     this.reservationService
-      .setReservationForSoccerfield(JSON.stringify(reservation))
+      .createReservation(reservation)
       .subscribe(
         result => {
           this.paymentCode = this.generatePaymentCode(
