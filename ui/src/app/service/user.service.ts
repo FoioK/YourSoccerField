@@ -53,7 +53,7 @@ export class UserService {
     return this.http.get<boolean>(
       this.configuration.apiServer +
         this.apiMapping.user_adminPane_authenticate,
-      { headers: Configuration.getTokenAuthorization() }
+      { headers: this.configuration.getTokenAuthorization() }
     );
   }
 
