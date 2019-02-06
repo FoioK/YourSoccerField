@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Configuration} from './configuration';
 import {ApiMapping} from './api-mapping';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {SoccerField} from '../model/soccer-field';
 import {SearchModel} from '../model/search-model';
 import {Surface} from '../model/surface';
@@ -20,12 +20,11 @@ export class SoccerFieldService {
 
   findAll(): Observable<Array<SoccerField>> {
     return this.http.get<Array<SoccerField>>(
-      this.configuration.apiServer +
-      this.apiMapping.soccerField_findAll,
+      this.configuration.apiServer + this.apiMapping.soccerField_findAll,
       {
         headers: Configuration.getJSONContentTypeWithToken()
       }
-    )
+    );
   }
 
   findByAddressContains(street: string): Observable<Array<SoccerField>> {
@@ -68,6 +67,15 @@ export class SoccerFieldService {
       this.configuration.apiServer + this.apiMapping.surfaces,
       {
         headers: Configuration.getJSONContentType()
+      }
+    );
+  }
+
+  getSoccerfieldById(id: number): Observable<SoccerField> {
+    return this.http.get<SoccerField>(
+      this.configuration.apiServer + this.apiMapping.soccerField_findById + id,
+      {
+        headers: Configuration.getJSONContentTypeWithToken()
       }
     );
   }

@@ -20,7 +20,7 @@ import {FooterComponent} from './component/footer/footer.component';
 import {DetailsSoccerfieldComponent} from './component/details-soccerfield/details-soccerfield.component';
 
 import {AuthGuard} from './module/auth.guard';
-import {AdminPaneGuard} from "./module/admin-pane-guard";
+import {AdminPaneGuard} from './module/admin-pane-guard';
 import {ReservationService} from './service/reservation.service';
 import {CalendarDateFormatter, CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
@@ -28,7 +28,9 @@ import {CalendarComponent} from './component/calendar/calendar.component';
 import {CalendarHeaderComponent} from './component/calendar/calendar-header/calendar-header.component';
 import {CustomDateFormatter} from './component/calendar/custom-classes/twenty-four-hours';
 import {ConvertTime12To24FormatPipe} from './component/calendar/custom-pipes/convert-time12-to24-format.pipe';
-import {LoginComponent} from "./component/login/login.component";
+import {LoginComponent} from './component/login/login.component';
+import { DatePipe } from '@angular/common';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import {LoginComponent} from "./component/login/login.component";
         useClass: CustomDateFormatter
       }
     }),
+    ClipboardModule,
   ],
   providers: [
     AuthService,
@@ -71,6 +74,7 @@ import {LoginComponent} from "./component/login/login.component";
     AuthGuard,
     ReservationService,
     AdminPaneGuard,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

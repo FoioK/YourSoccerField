@@ -5,6 +5,8 @@ import {Configuration} from './configuration';
 import {ApiMapping} from './api-mapping';
 import {TokenModel} from '../model/token-model';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {Router} from '@angular/router';
+import {AppRoute} from '../module/app-route';
 import {User} from "../model/user";
 import {catchError} from "rxjs/operators";
 
@@ -19,6 +21,7 @@ export class UserService {
     private http: HttpClient,
     private configuration: Configuration,
     private apiMapping: ApiMapping,
+    private router: Router
   ) {
 
   }
@@ -48,9 +51,20 @@ export class UserService {
 
   adminPaneAuthenticate(): Observable<boolean> {
     return this.http.get<boolean>(
-      this.configuration.apiServer + this.apiMapping.user_adminPane_authenticate,
-      {headers: this.configuration.getTokenAuthorization()}
+      this.configuration.apiServer +
+        this.apiMapping.user_adminPane_authenticate,
+      { headers: Configuration.getTokenAuthorization() }
     );
+  }
+
+  getLoggedUserCode(): number {
+    const token: TokenModel = JSON.parse(localStorage.getItem('token'));
+    if (token !== null) {
+      return token.code;
+    } else {
+      this.logOut();
+      this.router.navigateByUrl(AppRoute.LOGIN);
+    }
   }
 
   createUser(user: User): Observable<HttpResponse<User>> {

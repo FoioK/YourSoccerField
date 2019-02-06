@@ -10,9 +10,9 @@ export interface SoccerField {
   width: number;
   length: number;
   price?: number;
-  isLighting?: boolean;
-  isFenced?: boolean;
-  isLockerRoom?: boolean;
+  lighting?: boolean;
+  fenced?: boolean;
+  lockerRoom?: boolean;
   description?: string;
   openHour: OpenHour;
 }
