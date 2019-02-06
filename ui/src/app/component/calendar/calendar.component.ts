@@ -45,6 +45,11 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.getBookedDate();
+    this.reservationService.checkWasBooked().subscribe(result => {
+      if (result) {
+        this.getBookedDate();
+      }
+    });
   }
 
   private getBookedDate() {
