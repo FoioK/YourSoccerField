@@ -4,8 +4,9 @@ import { SoccerField } from '../model/soccer-field';
 @Injectable()
 export class ApiMapping {
 
-  user_create = '/users/register';
+  user_create = '/users';
   user_adminPane_authenticate = '/users/admin/authenticate';
+  user_byId = '/users/';
 
   soccerField_findAll = '/soccerfields';
 

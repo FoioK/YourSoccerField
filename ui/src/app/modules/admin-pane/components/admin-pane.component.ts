@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppRoute} from "../../../module/app-route";
 
@@ -7,25 +7,28 @@ import {AppRoute} from "../../../module/app-route";
   templateUrl: './admin-pane.component.html',
   styleUrls: ['./admin-pane.component.css']
 })
-export class AdminPaneComponent implements OnInit {
+export class AdminPaneComponent {
 
   constructor(
     private route: ActivatedRoute,
     private router: Router
   ) {
-  }
 
-  ngOnInit() {
   }
 
   goToSoccerFields() {
-    const soccerFieldPath = AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD;
-    this.route.routeConfig.path != soccerFieldPath ?
-      this.router.navigate(
-        [soccerFieldPath],
-        {relativeTo: this.route}
-      )
-      : false;
+    this.goToRoute(AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD);
+  }
+
+  goToUser() {
+    this.goToRoute(AppRoute.ADMIN_PANE_CHILD.USER);
+  }
+
+  goToRoute(route: string) {
+    this.route.routeConfig.path != route ?
+      this.router.navigateByUrl(AppRoute.ADMIN_PANE + '/' + route)
+      :
+      this.router.navigateByUrl(AppRoute.ADMIN_PANE);
   }
 
 }

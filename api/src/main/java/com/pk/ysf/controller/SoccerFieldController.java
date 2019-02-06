@@ -14,6 +14,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("${spring.data.rest.base-path}/soccerfields")
@@ -144,5 +146,47 @@ public class SoccerFieldController {
                 this.soccerFieldService.getAllBookings(soccerFieldId),
                 HttpStatus.OK
         );
+    }
+
+    @PutMapping(
+            value = "/{soccerFieldId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_PUT_UPDATE)")
+    public ResponseEntity<Void> updateSoccerField(
+            @PathVariable Long soccerFieldId,
+            @RequestBody SoccerFieldDTO soccerFieldDTO
+    ) {
+        Optional<SoccerFieldDTO> result =
+                this.soccerFieldService.updateSoccerField(
+                        soccerFieldId,
+                        soccerFieldDTO);
+
+        if (result.isPresent()) {
+            return ResponseEntity
+                    .created(URI.create(String.format("/soccerfields/%d", soccerFieldId)))
+                    .build();
+        }
+
+        return ResponseEntity
+                .noContent()
+                .build();
+    }
+
+    @DeleteMapping(
+            value = "/{soccerFieldId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).SOCCERFIELDS_DELETE_BY_ID)")
+    public ResponseEntity<Void> deleteSoccerField(
+            @PathVariable Long soccerFieldId
+    ) {
+        this.soccerFieldService.deleteSoccerFieldById(soccerFieldId);
+
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }

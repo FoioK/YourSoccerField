@@ -12,6 +12,7 @@ export enum AppRoute {
 export namespace AppRoute {
 
   export enum ADMIN_PANE_CHILD {
-    SOCCER_FIELD = 'soccerField'
+    SOCCER_FIELD = 'soccerField',
+    USER = 'user'
   }
 }

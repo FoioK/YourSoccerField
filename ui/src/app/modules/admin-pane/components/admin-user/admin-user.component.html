@@ -4,7 +4,7 @@
 <div class=col-md-12>
 
   <table class="table table-striped"
-         [mfData]="soccerFields"
+         [mfData]="users"
          #mf="mfDataTable"
          [mfRowsOnPage]="5">
     <thead>
@@ -13,22 +13,22 @@
         <mfDefaultSorter by="id">Id</mfDefaultSorter>
       </th>
       <th style="width: 10%">
-        <mfDefaultSorter by="name">Nazwa</mfDefaultSorter>
+        <mfDefaultSorter by="code">Kod</mfDefaultSorter>
       </th>
       <th style="width: 15%">
-        <mfDefaultSorter by="address">Adres</mfDefaultSorter>
+        <mfDefaultSorter by="email">Email</mfDefaultSorter>
       </th>
       <th style="width: 10%">
-        <mfDefaultSorter by="surface">Nawierzchnia</mfDefaultSorter>
+        <mfDefaultSorter by="firstName">Imię</mfDefaultSorter>
       </th>
       <th style="width: 10%">
-        <mfDefaultSorter by="width">Szerokość</mfDefaultSorter>
+        <mfDefaultSorter by="secondName">Nazwisko</mfDefaultSorter>
       </th>
       <th style="width: 10%">
-        <mfDefaultSorter by="length">Długość</mfDefaultSorter>
+        <mfDefaultSorter by="nickname">Nick</mfDefaultSorter>
       </th>
       <th style="width: 10%">
-        <mfDefaultSorter by="price">Cena</mfDefaultSorter>
+        <mfDefaultSorter by="isActive">Aktywny</mfDefaultSorter>
       </th>
       <th style="width: 10%">
         <mfDefaultSorter by="Opcje">Opcje</mfDefaultSorter>
@@ -36,22 +36,22 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let soccerField of mf.data">
-      <td>{{soccerField.id}}</td>
-      <td>{{soccerField.name | uppercase}}</td>
-      <td>{{soccerField.address.street + ' ' + soccerField.address.apartmentNumber + ', ' + soccerField.address.city}}</td>
-      <td>{{soccerField.surface.name}}</td>
-      <td>{{soccerField.width}}</td>
-      <td>{{soccerField.length}}</td>
-      <td>{{soccerField.price != null ? soccerField.price : 'Darmowy'}}</td>
+    <tr *ngFor="let user of mf.data">
+      <td>{{user.id}}</td>
+      <td>{{user.code}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.secondName}}</td>
+      <td>{{user.nickname}}</td>
+      <td>{{user.active ? 'Tak' : 'Nie'}}</td>
       <td>
         <a class="btn btn-info btn-xs"
-           (click)="editSoccerField(soccerField)"
+           (click)="editUser(user)"
            style="margin-right: 5px">
           <span class="glyphicon glyphicon-edit"></span>Edytuj
         </a>
         <a class="btn btn-danger btn-xs"
-           (click)="deleteSoccerField(soccerField.id)">
+           (click)="deleteUser(user.id)">
           <span class="glyphicon glyphicon-remove"></span>Usuń
         </a>
       </td>

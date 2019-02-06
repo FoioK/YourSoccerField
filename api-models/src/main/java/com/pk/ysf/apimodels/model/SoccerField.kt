@@ -13,10 +13,20 @@ data class SoccerField(
         @Column(nullable = false, length = 64)
         val name: String?,
 
-        @ManyToOne(cascade = [CascadeType.ALL])
+        @ManyToOne(cascade = [
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH]
+        )
         val address: Address?,
 
-        @ManyToOne(cascade = [CascadeType.ALL])
+        @ManyToOne(cascade = [
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH]
+        )
         val surface: Surface?,
 
         @Column(nullable = false)
@@ -42,7 +52,12 @@ data class SoccerField(
         @OneToMany(mappedBy = "soccerField")
         val bookingsId: List<Booking>,
 
-        @ManyToOne(cascade = [CascadeType.ALL])
+        @ManyToOne(cascade = [
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH]
+        )
         val openHour: OpenHour?
 ) {
     constructor() : this(

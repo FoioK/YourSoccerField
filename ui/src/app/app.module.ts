@@ -8,7 +8,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {RegistrationComponent} from './component/registration/registration.component';
-import {RegisterService} from './service/register.service';
 import {ApiMapping} from './service/api-mapping';
 import {NavbarComponent} from './component/navbar/navbar.component';
 import {MainPageComponent} from './component/main-page/main-page.component';
@@ -69,7 +68,6 @@ import { ClipboardModule } from 'ngx-clipboard';
   providers: [
     AuthService,
     Configuration,
-    RegisterService,
     ApiMapping,
     UserService,
     SoccerFieldService,

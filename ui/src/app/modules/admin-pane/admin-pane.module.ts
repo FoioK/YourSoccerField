@@ -8,12 +8,16 @@ import {CommonModule} from "@angular/common";
 import {MatDialogModule} from "@angular/material";
 import {AdminEditSoccerFieldComponent} from "./modal/admin-edit-soccer-field/admin-edit-soccer-field.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {AdminUserComponent} from './components/admin-user/admin-user.component';
+import {AdminEditUserComponent} from './modal/admin-edit-user/admin-edit-user.component';
 
 @NgModule({
   declarations: [
     AdminPaneComponent,
     AdminSoccerFieldComponent,
-    AdminEditSoccerFieldComponent
+    AdminEditSoccerFieldComponent,
+    AdminUserComponent,
+    AdminEditUserComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -24,7 +28,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   ],
   providers: [],
   entryComponents: [
-    AdminEditSoccerFieldComponent
+    AdminEditSoccerFieldComponent,
+    AdminEditUserComponent
   ]
 })
 export class AdminPaneModule {

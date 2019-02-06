@@ -11,7 +11,6 @@ import com.pk.ysf.service.SoccerFieldService;
 import com.pk.ysf.service.dtoModel.*;
 import com.pk.ysf.service.mapper.BaseFromDTO;
 import com.pk.ysf.service.mapper.BaseToDTO;
-import com.pk.ysf.service.mapper.impl.BookingFromDTO;
 import com.pk.ysf.service.mapper.impl.BookingToDTO;
 import com.pk.ysf.util.SearchFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -330,5 +329,25 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
         List<Booking> bookings = this.bookingRepository.findAllBySoccerField(soccerFieldId);
 
         return new ArrayList<>(this.bookingToDTO.mapAll(bookings));
+    }
+
+    @Override
+    public Optional<SoccerFieldDTO> updateSoccerField(Long soccerFieldId, SoccerFieldDTO soccerFieldDTO) {
+        Optional<SoccerField> soccerFieldById = this.soccerFieldRepository
+                .findById(soccerFieldId);
+
+        if (!soccerFieldById.isPresent()) {
+            return Optional.ofNullable(this.createSoccerField(soccerFieldDTO));
+        }
+
+        SoccerField soccerField = this.soccerFieldFromDTO.createFromDTO(soccerFieldDTO);
+        this.soccerFieldRepository.save(soccerField);
+
+        return Optional.empty();
+    }
+
+    @Override
+    public void deleteSoccerFieldById(Long soccerFieldId) {
+        this.soccerFieldRepository.deleteById(soccerFieldId);
     }
 }

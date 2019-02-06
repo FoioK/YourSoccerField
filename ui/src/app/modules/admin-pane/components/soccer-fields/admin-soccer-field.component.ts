@@ -14,22 +14,27 @@ export class AdminSoccerFieldComponent implements OnInit {
   public soccerFields = [];
 
   private dialogConf: MatDialogConfig;
-  private editUserDialog;
+  private editSoccerFieldDialog;
 
   constructor(private soccerFieldService: SoccerFieldService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog
+  ) {
     this.dialogConf = new MatDialogConfig();
     this.dialogConf.disableClose = true;
     this.dialogConf.autoFocus = true;
   }
 
   ngOnInit() {
-    this.soccerFieldService.findAll()
+    this.getAllSoccerField();
+  }
+
+  private getAllSoccerField() {
+    return this.soccerFieldService.findAll()
       .subscribe(data => this.soccerFields = data);
   }
 
   editSoccerField(soccerField: SoccerField) {
-    this.editUserDialog = this.dialog.open(
+    this.editSoccerFieldDialog = this.dialog.open(
       AdminEditSoccerFieldComponent,
       {
         width: '60%',
@@ -38,10 +43,27 @@ export class AdminSoccerFieldComponent implements OnInit {
         data: soccerField
       });
 
-    this.editUserDialog.afterClosed()
+    this.editSoccerFieldDialog.afterClosed()
+      .subscribe((result: SoccerField) =>
+        result ? this.updateSoccerField(result) : undefined);
+  }
+
+  private updateSoccerField(soccerField: SoccerField) {
+    this.soccerFieldService.updateSoccerField(soccerField)
       .subscribe(result => {
-        console.log(result)
+        if (result.status == 201 || result.status == 204) {
+          this.getAllSoccerField();
+        }
       });
+  }
+
+  deleteSoccerField(soccerFieldId) {
+    this.soccerFieldService.deleteSoccerField(soccerFieldId)
+      .subscribe(result => {
+        if (result.status == 200 || result.status == 204) {
+          this.getAllSoccerField();
+        }
+      })
   }
 
 }

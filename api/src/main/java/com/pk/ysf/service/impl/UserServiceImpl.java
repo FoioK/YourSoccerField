@@ -104,6 +104,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDTO> getAll() {
+        return new ArrayList<>(
+                this.userToDTO.mapAllFromEntities(this.userRepository.findAll())
+        );
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public UserDTO createUser(UserDTO userDTO) {
         this.validationUserDTOModel(userDTO);
@@ -254,5 +261,26 @@ public class UserServiceImpl implements UserService {
                 .findAllByUserCode(user.getCode());
 
         return new ArrayList<>(this.bookingToDTO.mapAllFromEntities(bookings));
+    }
+
+    @Override
+    public Optional<UserDTO> updateUser(Long userId, UserDTO userDTO) {
+        Optional<UserEntity> userById = this.userRepository
+                .findById(userId);
+
+        if (!userById.isPresent()) {
+            return Optional.ofNullable(this.createUser(userDTO));
+        }
+
+        userDTO.setPassword("");
+        UserEntity userEntity = this.userFromDTO.createFromDTO(userDTO);
+        this.userRepository.save(userEntity);
+
+        return Optional.empty();
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        this.userRepository.deleteById(userId);
     }
 }
