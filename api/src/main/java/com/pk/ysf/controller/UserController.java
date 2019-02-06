@@ -27,7 +27,6 @@ public class UserController {
     }
 
     @PostMapping(
-            value = "/register",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> register(@RequestBody @Valid UserDTO userDTO) {

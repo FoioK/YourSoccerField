@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passValidator } from '../../custom-validators/passValidator';
 import { Configuration } from '../../service/configuration';
 import { AppRoute } from '../../module/app-route';
-import { RegisterService } from '../../service/register.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-registration',
@@ -16,7 +16,7 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private configuration: Configuration,
-    private registerService: RegisterService,
+    private userService: UserService,
     private router: Router
   ) {}
 
@@ -50,7 +50,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   createUser() {
-    this.registerService.createUser(this.registrationForm.value).subscribe(
+    this.userService.createUser(this.registrationForm.value).subscribe(
       response => {
         if (response.status === 201) {
           this.router.navigateByUrl(AppRoute.LOGIN);

@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class ApiMapping {
 
-  user_create = '/users/register';
+  user_create = '/users';
   user_adminPane_authenticate = '/users/admin/authenticate';
 
   soccerField_findAll = '/soccerfields';
