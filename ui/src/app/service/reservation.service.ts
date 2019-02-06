@@ -19,20 +19,10 @@ export class ReservationService {
 
   private isBookedSubject = new BehaviorSubject<boolean>(false);
 
-  getSoccerfieldById(id: string): Observable<SoccerField> {
-    return this.http.get<SoccerField>(
-      this.configuration.apiServer + this.apiMapping.soccerField_findById + id,
-      {
-        headers: Configuration.getJSONContentTypeWithToken()
-      }
-    );
-  }
-
-  getReservationsForSoccerfield(id: string): Observable<Array<Reservation>> {
+  getReservationsForSoccerfield(id: number): Observable<Array<Reservation>> {
     return this.http.get<Array<Reservation>>(
       this.configuration.apiServer +
-        this.apiMapping.soccerField_findById +
-        id +
+        this.apiMapping.soccerField_findById + id +
         this.apiMapping.booking_create,
       {
         headers: Configuration.getJSONContentTypeWithToken()

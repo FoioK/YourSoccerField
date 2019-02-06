@@ -6,6 +6,7 @@ import { Reservation } from 'src/app/model/reservation';
 import { DatePipe } from '@angular/common';
 import { UserService } from '../../service/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SoccerFieldService } from '../../service/soccer-field.service';
 @Component({
   selector: 'app-details-soccerfield',
   templateUrl: './details-soccerfield.component.html',
@@ -26,6 +27,7 @@ export class DetailsSoccerfieldComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private reservationService: ReservationService,
+    private soccerfieldService: SoccerFieldService,
     private userService: UserService,
     private datePipe: DatePipe
   ) {}
@@ -37,8 +39,8 @@ export class DetailsSoccerfieldComponent implements OnInit {
 
   private getSoccerfieldById(): void {
     this.soccerFieldId = this.route.snapshot.paramMap.get('id');
-    this.reservationService
-      .getSoccerfieldById(this.soccerFieldId)
+    this.soccerfieldService
+      .getSoccerfieldById(parseInt(this.soccerFieldId, 10))
       .subscribe(result => {
         this.soccerfieldToBook = result;
       });

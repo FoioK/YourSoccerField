@@ -56,7 +56,7 @@ export class CalendarComponent implements OnInit {
   private getBookedDate() {
     this.soccerFieldId = this.route.snapshot.paramMap.get('id');
     this.reservationService
-      .getReservationsForSoccerfield(this.soccerFieldId)
+      .getReservationsForSoccerfield(parseInt(this.soccerFieldId, 10))
       .subscribe(result => {
         this.events = [];
         result.forEach(e => {
