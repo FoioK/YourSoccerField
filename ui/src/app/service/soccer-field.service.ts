@@ -1,12 +1,11 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Configuration} from './configuration';
-import {ApiMapping} from './api-mapping';
-import {Observable} from 'rxjs';
-import {SoccerField} from '../model/soccer-field';
-import {SearchModel} from '../model/search-model';
-import {Surface} from '../model/surface';
-
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Configuration } from './configuration';
+import { ApiMapping } from './api-mapping';
+import { Observable, throwError } from 'rxjs';
+import { SoccerField } from '../model/soccer-field';
+import { SearchModel } from '../model/search-model';
+import { Surface } from '../model/surface';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,24 +14,22 @@ export class SoccerFieldService {
     private http: HttpClient,
     private configuration: Configuration,
     private apiMapping: ApiMapping
-  ) {
-  }
+  ) {}
 
   findAll(): Observable<Array<SoccerField>> {
     return this.http.get<Array<SoccerField>>(
-      this.configuration.apiServer +
-      this.apiMapping.soccerField_findAll,
+      this.configuration.apiServer + this.apiMapping.soccerField_findAll,
       {
         headers: Configuration.getJSONContentTypeWithToken()
       }
-    )
+    );
   }
 
   findByAddressContains(street: string): Observable<Array<SoccerField>> {
     return this.http.get<Array<SoccerField>>(
       this.configuration.apiServer +
-      this.apiMapping.soccerField_findByAddressContains +
-      street,
+        this.apiMapping.soccerField_findByAddressContains +
+        street,
       {
         headers: Configuration.getJSONContentType()
       }
@@ -46,8 +43,8 @@ export class SoccerFieldService {
 
     return this.http.get<Array<SoccerField>>(
       this.configuration.apiServer +
-      this.apiMapping.soccerField_findByCustomCriteria +
-      btoa(stringJson),
+        this.apiMapping.soccerField_findByCustomCriteria +
+        btoa(stringJson),
       {
         headers: Configuration.getJSONContentType()
       }
@@ -68,6 +65,15 @@ export class SoccerFieldService {
       this.configuration.apiServer + this.apiMapping.surfaces,
       {
         headers: Configuration.getJSONContentType()
+      }
+    );
+  }
+
+  getSoccerfieldById(id: number): Observable<SoccerField> {
+    return this.http.get<SoccerField>(
+      this.configuration.apiServer + this.apiMapping.soccerField_findById + id,
+      {
+        headers: Configuration.getJSONContentTypeWithToken()
       }
     );
   }

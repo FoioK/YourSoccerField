@@ -1,8 +1,8 @@
 export interface Reservation {
   executionTime: string;
-  id: number;
+  id?: number;
   payed: boolean;
-  soccerFieldId: number;
+  soccerField: number;
   startDate: string;
   userCode: number;
 }
