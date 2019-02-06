@@ -69,4 +69,35 @@ export class UserService {
   private errorHandler(errorResponse: HttpErrorResponse) {
     return throwError(errorResponse.error);
   }
+
+  findAll(): Observable<Array<User>> {
+    return this.http.get<Array<User>>(
+      this.configuration.apiServer +
+      this.apiMapping.user_create,
+      {
+        headers: Configuration.getJSONContentTypeWithToken()
+      }
+    )
+  }
+
+  updateUser(user: User) {
+    return this.http.put(
+      this.configuration.apiServer + this.apiMapping.user_byId + user.id,
+      user,
+      {
+        headers: Configuration.getJSONContentTypeWithToken(),
+        observe: "response"
+      }
+    )
+  }
+
+  deleteUser(userId) {
+    return this.http.delete(
+      this.configuration.apiServer + this.apiMapping.user_byId + userId,
+      {
+        headers: Configuration.getJSONContentTypeWithToken(),
+        observe: "response"
+      }
+    )
+  }
 }

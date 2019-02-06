@@ -3,7 +3,7 @@ export interface User {
   code?: number;
   email: string;
   password?: string;
-  isActive?: boolean;
+  active?: boolean;
   firstName: string;
   secondName: string;
   nickname: string;
