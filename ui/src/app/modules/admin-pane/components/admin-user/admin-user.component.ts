@@ -34,7 +34,7 @@ export class AdminUserComponent implements OnInit {
       .subscribe(data => this.users = data);
   }
 
-  editUser(user: User) {
+  private editUser(user: User) {
     this.editUserDialog = this.dialog.open(
       AdminEditUserComponent,
       {
@@ -58,7 +58,7 @@ export class AdminUserComponent implements OnInit {
       });
   }
 
-  deleteUser(userId) {
+  private deleteUser(userId) {
     this.userService.deleteUser(userId)
       .subscribe(result => {
         if (result.status == 200 || result.status == 204) {
