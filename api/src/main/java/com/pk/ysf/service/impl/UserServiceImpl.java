@@ -272,6 +272,7 @@ public class UserServiceImpl implements UserService {
             return Optional.ofNullable(this.createUser(userDTO));
         }
 
+        userDTO.setPassword("");
         UserEntity userEntity = this.userFromDTO.createFromDTO(userDTO);
         this.userRepository.save(userEntity);
 
