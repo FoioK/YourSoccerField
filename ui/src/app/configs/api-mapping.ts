@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import { SoccerField } from '../model/soccer-field';
 
 @Injectable()
 export class ApiMapping {
