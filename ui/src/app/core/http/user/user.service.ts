@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Configuration} from './configuration';
-import {ApiMapping} from './api-mapping';
-import {TokenModel} from '../model/token-model';
+import {Configuration} from '../../../configs/configuration';
+import {ApiMapping} from '../../../configs/api-mapping';
+import {TokenModel} from '../../../shared/models/token-model';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
-import {AppRoute} from '../module/app-route';
-import {User} from "../model/user";
+import {AppRoute} from '../../../configs/app-route';
+import {User} from "../../../shared/models/user";
 import {catchError} from "rxjs/operators";
+import {HeaderService} from "../../services/header.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class UserService {
     private http: HttpClient,
     private configuration: Configuration,
     private apiMapping: ApiMapping,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderService
   ) {
 
   }
@@ -52,8 +54,8 @@ export class UserService {
   adminPaneAuthenticate(): Observable<boolean> {
     return this.http.get<boolean>(
       this.configuration.apiServer +
-        this.apiMapping.user_adminPane_authenticate,
-      { headers: this.configuration.getTokenAuthorization() }
+      this.apiMapping.user_adminPane_authenticate,
+      {headers: this.headerService.getTokenAuthorization()}
     );
   }
 
@@ -73,7 +75,7 @@ export class UserService {
         this.configuration.apiServer + this.apiMapping.user_create,
         user,
         {
-          headers: Configuration.getJSONContentType(),
+          headers: HeaderService.getJSONContentType(),
           observe: 'response'
         }
       )
@@ -89,7 +91,7 @@ export class UserService {
       this.configuration.apiServer +
       this.apiMapping.user_create,
       {
-        headers: Configuration.getJSONContentTypeWithToken()
+        headers: HeaderService.getJSONContentTypeWithToken()
       }
     )
   }
@@ -99,7 +101,7 @@ export class UserService {
       this.configuration.apiServer + this.apiMapping.user_byId + user.id,
       user,
       {
-        headers: Configuration.getJSONContentTypeWithToken(),
+        headers: HeaderService.getJSONContentTypeWithToken(),
         observe: "response"
       }
     )
@@ -109,7 +111,7 @@ export class UserService {
     return this.http.delete(
       this.configuration.apiServer + this.apiMapping.user_byId + userId,
       {
-        headers: Configuration.getJSONContentTypeWithToken(),
+        headers: HeaderService.getJSONContentTypeWithToken(),
         observe: "response"
       }
     )

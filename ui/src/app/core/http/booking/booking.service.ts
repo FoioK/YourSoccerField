@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { SoccerField } from '../model/soccer-field';
+import { SoccerField } from '../../../shared/models/soccer-field';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Configuration } from './configuration';
-import { ApiMapping } from './api-mapping';
-import { Reservation } from '../model/reservation';
+import { Configuration } from '../../../configs/configuration';
+import { ApiMapping } from '../../../configs/api-mapping';
+import { Reservation } from '../../../shared/models/reservation';
 import { catchError } from 'rxjs/operators';
+import {HeaderService} from "../../services/header.service";
 @Injectable({
   providedIn: 'root'
 })
-export class ReservationService {
+export class BookingService {
   soccerfieldToBook: SoccerField;
   constructor(
     private http: HttpClient,
@@ -25,7 +26,7 @@ export class ReservationService {
         this.apiMapping.soccerField_findById + id +
         this.apiMapping.booking_create,
       {
-        headers: Configuration.getJSONContentTypeWithToken()
+        headers: HeaderService.getJSONContentTypeWithToken()
       }
     ).pipe(catchError(this.errorHandler));
   }
@@ -38,7 +39,7 @@ export class ReservationService {
         this.apiMapping.booking_create,
       reservation,
       {
-        headers: Configuration.getJSONContentTypeWithToken(),
+        headers: HeaderService.getJSONContentTypeWithToken(),
         observe: 'response'
       }
     ).pipe(catchError(this.errorHandler));

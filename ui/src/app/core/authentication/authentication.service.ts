@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Configuration } from './configuration';
-import { TokenModel } from '../model/token-model';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError, of, empty } from 'rxjs';
-import { UserService } from './user.service';
-import { catchError, tap } from 'rxjs/operators';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import {Injectable} from '@angular/core';
+import {Configuration} from '../../configs/configuration';
+import {TokenModel} from '../../shared/models/token-model';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {UserService} from '../http/user/user.service';
+import {catchError, tap} from 'rxjs/operators';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthenticationService {
   private oauthAddress = '/oauth/token';
   private jwtHelper = new JwtHelperService();
 
@@ -18,14 +18,14 @@ export class AuthService {
     private http: HttpClient,
     private configuration: Configuration,
     private userService: UserService
-  ) {}
+  ) {
+  }
 
   getAccessToken(email: string, password: string): Observable<any> {
     return this.postUserDetails(
-      AuthService.getCredentialsByPassword(email, password)
+      AuthenticationService.getCredentialsByPassword(email, password)
     ).pipe(
-      tap(
-        token => {
+      tap(token => {
           this.store(token);
           return token;
         },
@@ -38,7 +38,7 @@ export class AuthService {
 
   refreshAccessToken(refreshToken: string) {
     this.postUserDetails(
-      AuthService.getCredentialsByRefreshToken(refreshToken)
+      AuthenticationService.getCredentialsByRefreshToken(refreshToken)
     );
   }
 
@@ -47,9 +47,9 @@ export class AuthService {
       .post<TokenModel>(
         this.configuration.authServer + this.oauthAddress,
         credentials,
-        AuthService.getOptions()
+        AuthenticationService.getOptions()
       )
-      .pipe(catchError(AuthService.errorHandler));
+      .pipe(catchError(AuthenticationService.errorHandler));
   }
 
   private static getCredentialsByPassword(

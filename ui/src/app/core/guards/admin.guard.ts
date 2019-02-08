@@ -1,14 +1,14 @@
 import {CanActivate, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {UserService} from "../service/user.service";
+import {UserService} from "../http/user/user.service";
 import {Injectable} from "@angular/core";
 import {catchError, map} from "rxjs/operators";
-import {AppRoute} from "./app-route";
+import {AppRoute} from "../../configs/app-route";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminPaneGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
   constructor(
     private userService: UserService,

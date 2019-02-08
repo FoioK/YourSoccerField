@@ -1,7 +1,7 @@
 import {Component, OnInit, Renderer2} from "@angular/core";
 import {Router} from "@angular/router";
-import {AppRoute} from "../../module/app-route";
-import {UserService} from "../../service/user.service";
+import {AppRoute} from "../../configs/app-route";
+import {UserService} from "../http/user/user.service";
 
 @Component({
   selector: "navbar-page",
@@ -79,4 +79,5 @@ export class NavbarComponent implements OnInit {
       this.router.navigateByUrl(AppRoute.MAIN_PAGE);
     }
   }
+
 }
