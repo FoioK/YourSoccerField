@@ -12,18 +12,6 @@ export class HeaderService {
 
   }
 
-  getTokenAuthorization(): HttpHeaders {
-    const token: TokenModel = Configuration.getToken();
-
-    if (token == null) {
-      this.router.navigateByUrl(AppRoute.LOGIN);
-    }
-
-    return new HttpHeaders({
-      'Authorization': token.token_type + ' ' + token.access_token
-    });
-  }
-
   static getJSONContentType(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json'
@@ -35,6 +23,18 @@ export class HeaderService {
 
     return new HttpHeaders({
       'Content-Type': 'application/json',
+      'Authorization': token.token_type + ' ' + token.access_token
+    });
+  }
+
+  getTokenAuthorization(): HttpHeaders {
+    const token: TokenModel = Configuration.getToken();
+
+    if (token == null) {
+      this.router.navigateByUrl(AppRoute.LOGIN);
+    }
+
+    return new HttpHeaders({
       'Authorization': token.token_type + ' ' + token.access_token
     });
   }

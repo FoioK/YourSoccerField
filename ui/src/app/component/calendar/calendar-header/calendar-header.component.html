@@ -1,13 +1,16 @@
 <div class="row text-center">
   <div class="col-md-6">
     <div class="btn-group">
-      <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+      <div (viewDateChange)="viewDateChange.next(viewDate)" [(viewDate)]="viewDate" [view]="view" class="btn btn-primary"
+           mwlCalendarPreviousView>
         Previous
       </div>
-      <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+      <div (viewDateChange)="viewDateChange.next(viewDate)" [(viewDate)]="viewDate" class="btn btn-outline-secondary"
+           mwlCalendarToday>
         Today
       </div>
-      <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+      <div (viewDateChange)="viewDateChange.next(viewDate)" [(viewDate)]="viewDate" [view]="view" class="btn btn-primary"
+           mwlCalendarNextView>
         Next
       </div>
     </div>
@@ -16,4 +19,4 @@
     <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
   </div>
 </div>
-<br />
+<br/>

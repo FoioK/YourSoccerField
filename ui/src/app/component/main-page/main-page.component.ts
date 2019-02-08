@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {SoccerField} from '../../model/soccer-field';
-import {SoccerFieldService} from '../../service/soccer-field.service';
+import {SoccerField} from '../../shared/models/soccer-field';
+import {SoccerFieldService} from '../../core/http/soccer-field/soccer-field.service';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {Surface} from 'src/app/model/surface';
+import {Surface} from 'src/app/shared/models/surface';
 
 @Component({
   selector: 'app-main-page',
@@ -31,22 +31,20 @@ import {Surface} from 'src/app/model/surface';
   ]
 })
 export class MainPageComponent implements OnInit {
+  filterShow = false;
+  filterForm: FormGroup;
+  surfaces: FormArray = this.formBuilder.array([]);
+  addressGroup: FormGroup;
+  exampleSoccerFieldList: Array<SoccerField>;
+  promptSoccerFieldList: Array<SoccerField>;
+  surfacesList: Array<Surface>;
+
   constructor(
     private formBuilder: FormBuilder,
     private soccerFieldService: SoccerFieldService,
   ) {
 
   }
-
-  filterShow = false;
-
-  filterForm: FormGroup;
-  surfaces: FormArray = this.formBuilder.array([]);
-  addressGroup: FormGroup;
-
-  exampleSoccerFieldList: Array<SoccerField>;
-  promptSoccerFieldList: Array<SoccerField>;
-  surfacesList: Array<Surface>;
 
   ngOnInit() {
     this.getExampleSoccerfields();

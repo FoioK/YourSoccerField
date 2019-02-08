@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../service/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Configuration } from '../../service/configuration';
-import { AppRoute } from '../../module/app-route';
-import { UserService } from '../../service/user.service';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../../core/authentication/authentication.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Configuration} from '../../configs/configuration';
+import {AppRoute} from '../../configs/app-route';
+import {UserService} from '../../core/http/user/user.service';
+import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -13,17 +13,18 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
+  loginErrorMsg: string;
+  errorStatus: number;
+
   constructor(
-    private authService: AuthService,
+    private authService: AuthenticationService,
     private formBuilder: FormBuilder,
     private configuration: Configuration,
     private userService: UserService,
     private router: Router
-  ) {}
-
-  loginForm: FormGroup;
-  loginErrorMsg: string;
-  errorStatus: number;
+  ) {
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({

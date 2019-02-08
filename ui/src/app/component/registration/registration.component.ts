@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { passValidator } from '../../custom-validators/passValidator';
-import { Configuration } from '../../service/configuration';
-import { AppRoute } from '../../module/app-route';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import {UserService} from "../../service/user.service";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {passValidator} from '../../custom-validators/passValidator';
+import {Configuration} from '../../configs/configuration';
+import {AppRoute} from '../../configs/app-route';
+import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
+import {UserService} from "../../core/http/user/user.service";
 
 @Component({
   selector: 'app-registration',
@@ -13,16 +13,17 @@ import {UserService} from "../../service/user.service";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  registrationForm: FormGroup;
+  registrationErrorMsg: string;
+  errorReason: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private configuration: Configuration,
     private userService: UserService,
     private router: Router
-  ) {}
-
-  registrationForm: FormGroup;
-  registrationErrorMsg: string;
-  errorReason: string;
+  ) {
+  }
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({

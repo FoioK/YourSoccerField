@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ReservationService } from '../../service/reservation.service';
-import { SoccerField } from '../../model/soccer-field';
-import { Reservation } from 'src/app/model/reservation';
-import { DatePipe } from '@angular/common';
-import { UserService } from '../../service/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { SoccerFieldService } from '../../service/soccer-field.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {BookingService} from '../../core/http/booking/booking.service';
+import {SoccerField} from '../../shared/models/soccer-field';
+import {Reservation} from 'src/app/shared/models/reservation';
+import {DatePipe} from '@angular/common';
+import {UserService} from '../../core/http/user/user.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {SoccerFieldService} from '../../core/http/soccer-field/soccer-field.service';
+
 @Component({
   selector: 'app-details-soccerfield',
   templateUrl: './details-soccerfield.component.html',
@@ -26,11 +27,12 @@ export class DetailsSoccerfieldComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private reservationService: ReservationService,
+    private reservationService: BookingService,
     private soccerfieldService: SoccerFieldService,
     private userService: UserService,
     private datePipe: DatePipe
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.getSoccerfieldById();

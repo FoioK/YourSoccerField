@@ -83,7 +83,7 @@
   opacity: 0.3;
 }
 
-.form-input:focus+.form-icons {
+.form-input:focus + .form-icons {
   color: #007bff;
   opacity: 0.9;
   transition: 1.5s all;
@@ -126,7 +126,7 @@
   box-shadow: 0 0 0 0.2rem rgba(255, 0, 55, 0.25);
 }
 
-.error-show:focus+.form-icons {
+.error-show:focus + .form-icons {
   color: rgb(250, 19, 19);
 }
 

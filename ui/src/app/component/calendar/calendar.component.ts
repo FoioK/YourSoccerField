@@ -1,47 +1,42 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CalendarEvent } from 'angular-calendar';
-import { WeekView, WeekViewHourColumn } from 'calendar-utils';
-import { compareDateIsLess } from './custom-methods/compare-date-is-less';
-import { compareTime } from './custom-methods/compare-time';
-import { checkAvailabilityDateByDisable } from './custom-methods/check-availability-date-by-disable';
-import { colors } from './colors/color-events';
-import { checkAvailabilityDateByEvents } from './custom-methods/check-availability-date-by-events';
-import { Subject } from 'rxjs';
-import { ReservationService } from '../../service/reservation.service';
-import { addTimeToDate } from './custom-methods/add-time-to-date';
-import { ActivatedRoute } from '@angular/router';
-import { setNewCalendarEvent } from './custom-methods/set-new-calendar-event';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {CalendarEvent} from 'angular-calendar';
+import {WeekView, WeekViewHourColumn} from 'calendar-utils';
+import {compareDateIsLess} from './custom-methods/compare-date-is-less';
+import {compareTime} from './custom-methods/compare-time';
+import {checkAvailabilityDateByDisable} from './custom-methods/check-availability-date-by-disable';
+import {colors} from './colors/color-events';
+import {checkAvailabilityDateByEvents} from './custom-methods/check-availability-date-by-events';
+import {Subject} from 'rxjs';
+import {BookingService} from '../../core/http/booking/booking.service';
+import {addTimeToDate} from './custom-methods/add-time-to-date';
+import {ActivatedRoute} from '@angular/router';
+import {setNewCalendarEvent} from './custom-methods/set-new-calendar-event';
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  constructor(
-    private reservationService: ReservationService,
-    private route: ActivatedRoute
-  ) {}
-
   @Output()
   errorMsg: string;
   @Output()
   toBooking: EventEmitter<any> = new EventEmitter<any>();
-
   view: string = 'day';
-
   soccerFieldId: string;
   chooseEventId: number = -1;
-
   currentId: number = -1;
-
   viewDate: Date = new Date();
-
   refresh: Subject<any> = new Subject();
-
   events: CalendarEvent[] = [];
-
   currentDayViewHour: WeekViewHourColumn[];
   clickedDate: Date;
+
+  constructor(
+    private reservationService: BookingService,
+    private route: ActivatedRoute
+  ) {
+  }
 
   ngOnInit() {
     this.getBookedDate();

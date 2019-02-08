@@ -1,4 +1,4 @@
-import { AbstractControl } from '@angular/forms';
+import {AbstractControl} from '@angular/forms';
 
 export function passValidator(control: AbstractControl) {
   if (control && (control.value !== null && control.value !== undefined)) {

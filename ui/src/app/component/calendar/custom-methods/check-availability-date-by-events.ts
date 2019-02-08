@@ -1,5 +1,5 @@
-import { CalendarEvent } from 'angular-calendar';
-import { WeekViewHourColumn } from 'calendar-utils';
+import {CalendarEvent} from 'angular-calendar';
+import {WeekViewHourColumn} from 'calendar-utils';
 
 export function checkAvailabilityDateByEvents(
   dateStart: Date,

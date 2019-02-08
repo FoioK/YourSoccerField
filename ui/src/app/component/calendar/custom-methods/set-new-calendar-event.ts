@@ -1,5 +1,5 @@
-import { CalendarEvent } from 'angular-calendar';
-import { colors } from '../colors/color-events';
+import {CalendarEvent} from 'angular-calendar';
+import {colors} from '../colors/color-events';
 
 export function setNewCalendarEvent(
   calendar: CalendarEvent[],

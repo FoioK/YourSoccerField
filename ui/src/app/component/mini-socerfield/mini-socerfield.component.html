@@ -1,5 +1,6 @@
 <div class="row col-12 col-xs-12 col-md-12 col-lg-12 no-gutters p-2 mini-socerfield ">
-  <div class="col-6 col-xs-6 col-md-6 col-lg-6 p-0 picture d-flex align-items-center" [ngClass]="{'picture-even': even===true}">
+  <div [ngClass]="{'picture-even': even===true}"
+       class="col-6 col-xs-6 col-md-6 col-lg-6 p-0 picture d-flex align-items-center">
   </div>
   <div class="row col-6 col-xs-6 col-md-6 col-lg-6 no-gutters d-flex align-items-center">
     <div class="row col-12 col-xs-12 col-md-12 col-lg-12 no-gutters">
@@ -30,7 +31,7 @@
       </label>
     </div>
     <div class="col-12 col-xs-12 col-md-12 col-lg-12 px-3 d-flex align-items-center">
-      <button class="btn btn-book w-100 my-2" (click)="book(field)">book</button>
+      <button (click)="book(field)" class="btn btn-book w-100 my-2">book</button>
     </div>
   </div>
 </div>

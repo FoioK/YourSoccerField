@@ -17,6 +17,7 @@ import {HeaderService} from "../../services/header.service";
 export class UserService {
 
   private jwtHelper: JwtHelperService = new JwtHelperService();
+  private isLoggedSubject = new BehaviorSubject<boolean>(false);
 
   constructor(
     private http: HttpClient,
@@ -27,8 +28,6 @@ export class UserService {
   ) {
 
   }
-
-  private isLoggedSubject = new BehaviorSubject<boolean>(false);
 
   isLogged(): Observable<boolean> {
     this.setLogged(this.isAuthenticated());
@@ -82,10 +81,6 @@ export class UserService {
       .pipe(catchError(this.errorHandler));
   }
 
-  private errorHandler(errorResponse: HttpErrorResponse) {
-    return throwError(errorResponse.error);
-  }
-
   findAll(): Observable<Array<User>> {
     return this.http.get<Array<User>>(
       this.configuration.apiServer +
@@ -115,5 +110,9 @@ export class UserService {
         observe: "response"
       }
     )
+  }
+
+  private errorHandler(errorResponse: HttpErrorResponse) {
+    return throwError(errorResponse.error);
   }
 }

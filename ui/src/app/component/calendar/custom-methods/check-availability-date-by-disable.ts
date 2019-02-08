@@ -1,4 +1,4 @@
-import { WeekViewHourColumn } from 'calendar-utils';
+import {WeekViewHourColumn} from 'calendar-utils';
 
 export function checkAvailabilityDateByDisable(
   clickedDate: Date,

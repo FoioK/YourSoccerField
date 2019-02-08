@@ -9,16 +9,16 @@ import {UserService} from "../http/user/user.service";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
+  isLogged: Boolean = false;
+  private isAdmin: boolean = false;
+  private arrow: Boolean = false;
+
   constructor(
     private router: Router,
     private userService: UserService,
     private render: Renderer2,
   ) {
   }
-
-  private isAdmin: boolean = false;
-  private arrow: Boolean = false;
-  isLogged: Boolean = false;
 
   ngOnInit() {
     this.userService.isLogged()
@@ -34,27 +34,12 @@ export class NavbarComponent implements OnInit {
     this.topArrow();
   }
 
-  private checkIsAdmin() {
-    this.userService.adminPaneAuthenticate()
-      .subscribe(response => this.isAdmin = response.valueOf());
-  }
-
   isUserAdmin(): boolean {
     return this.isAdmin;
   }
 
   goToAdminPane() {
     this.router.navigateByUrl("/" + AppRoute.ADMIN_PANE);
-  }
-
-  private topArrow() {
-    this.render.listen(window, "scroll", () => {
-      this.arrow = window.scrollY > 50;
-    });
-  }
-
-  private scrollTop() {
-    window.scrollTo({top: 0, left: 0, behavior: "smooth"});
   }
 
   goToMain() {
@@ -78,6 +63,21 @@ export class NavbarComponent implements OnInit {
     } else {
       this.router.navigateByUrl(AppRoute.MAIN_PAGE);
     }
+  }
+
+  private checkIsAdmin() {
+    this.userService.adminPaneAuthenticate()
+      .subscribe(response => this.isAdmin = response.valueOf());
+  }
+
+  private topArrow() {
+    this.render.listen(window, "scroll", () => {
+      this.arrow = window.scrollY > 50;
+    });
+  }
+
+  private scrollTop() {
+    window.scrollTo({top: 0, left: 0, behavior: "smooth"});
   }
 
 }

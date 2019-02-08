@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  Renderer2,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, Renderer2} from '@angular/core';
 
 @Component({
   selector: 'app-multirange-slider',
@@ -13,17 +6,17 @@ import {
   styleUrls: ['./multirange-slider.component.css']
 })
 export class MultirangeSliderComponent implements OnInit {
+  @Output()
+  emitMin = new EventEmitter<number>();
+  @Output()
+  emitMax = new EventEmitter<number>();
   private slider;
   private min;
   private max;
   private range;
 
-  @Output()
-  emitMin = new EventEmitter<number>();
-  @Output()
-  emitMax = new EventEmitter<number>();
-
-  constructor(private el: ElementRef, private r2: Renderer2) {}
+  constructor(private el: ElementRef, private r2: Renderer2) {
+  }
 
   ngOnInit() {
     this.slider = this.el.nativeElement.querySelector('.slider');
@@ -37,9 +30,9 @@ export class MultirangeSliderComponent implements OnInit {
 
     const valueMin =
       (100 / (parseInt(this.min.max, 10) - parseInt(this.min.min, 10))) *
-        parseInt(this.min.value, 10) -
+      parseInt(this.min.value, 10) -
       (100 / (parseInt(this.min.max, 10) - parseInt(this.min.min, 10))) *
-        parseInt(this.min.min, 10);
+      parseInt(this.min.min, 10);
 
     const inputRangeLeft = this.slider.querySelector('.inverse-left');
 
@@ -59,9 +52,9 @@ export class MultirangeSliderComponent implements OnInit {
 
     const valueMax =
       (100 / (parseInt(this.max.max, 10) - parseInt(this.max.min, 10))) *
-        parseInt(this.max.value, 10) -
+      parseInt(this.max.value, 10) -
       (100 / (parseInt(this.max.max, 10) - parseInt(this.max.min, 10))) *
-        parseInt(this.max.min, 10);
+      parseInt(this.max.min, 10);
 
     const inputRangeRight = this.slider.querySelector('.inverse-right');
 
