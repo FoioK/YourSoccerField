@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit {
   }
 
   goToMain() {
-    this.router.navigateByUrl("/" + AppRoute.MAIN_PAGE);
+    this.router.navigateByUrl("/" + AppRoute.HOME);
   }
 
   goToLogin() {
@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
-    this.logOutProcess(this.router.url === AppRoute.MAIN_PAGE);
+    this.logOutProcess(this.router.url === AppRoute.HOME);
   }
 
   logOutProcess(isMainPage: Boolean) {
@@ -61,7 +61,7 @@ export class NavbarComponent implements OnInit {
     if (isMainPage) {
       window.location.reload();
     } else {
-      this.router.navigateByUrl(AppRoute.MAIN_PAGE);
+      this.router.navigateByUrl(AppRoute.HOME);
     }
   }
 

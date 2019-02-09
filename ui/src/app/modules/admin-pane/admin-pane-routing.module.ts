@@ -1,33 +1,33 @@
 import {RouterModule, Routes} from "@angular/router";
-import {AdminPaneComponent} from "./components/admin-pane.component";
+import {AdminPanelComponent} from "./admin-panel.component";
 import {NgModule} from "@angular/core";
-import {AdminSoccerFieldComponent} from "./components/soccer-fields/admin-soccer-field.component";
-import {AdminPaneGuard} from "../../module/admin-pane-guard";
-import {AppRoute} from "../../module/app-route";
-import {AdminUserComponent} from "./components/admin-user/admin-user.component";
+import {SoccerFieldListComponent} from "./pages/soccer-field/soccer-field-list.component";
+import {AdminGuard} from "../../core/guards/admin.guard";
+import {AppRoute} from "../../configs/app-route";
+import {UserListComponent} from "./pages/user/user-list.component";
 
 const adminPaneRoutes: Routes = [
   {
     path: '',
-    component: AdminPaneComponent,
+    component: AdminPanelComponent,
     pathMatch: 'full',
-    canActivate: [AdminPaneGuard],
+    canActivate: [AdminGuard],
     // children: [
     //   {
     //     path: AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD,
-    //     component: AdminSoccerFieldComponent,
+    //     component: SoccerFieldListComponent,
     //   }
     // ]
   },
   {
     path: AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD,
-    component: AdminSoccerFieldComponent,
-    canActivate: [AdminPaneGuard]
+    component: SoccerFieldListComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: AppRoute.ADMIN_PANE_CHILD.USER,
-    component: AdminUserComponent,
-    canActivate: [AdminPaneGuard]
+    component: UserListComponent,
+    canActivate: [AdminGuard]
   }
 ];
 

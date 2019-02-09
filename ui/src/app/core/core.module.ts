@@ -9,11 +9,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SharedModule} from "../shared/shared.module";
 import {HeaderService} from "./services/header.service";
+import {AppRoutingModule} from "../app-routing.module";
 
 @NgModule({
   declarations: [],
   imports: [
     SharedModule,
+    AppRoutingModule,
 
     HttpClientModule,
     BrowserAnimationsModule,

@@ -1,35 +1,34 @@
 import {NgModule} from '@angular/core';
 
-import {AdminPaneComponent} from "./components/admin-pane.component";
-import {AdminSoccerFieldComponent} from "./components/soccer-fields/admin-soccer-field.component";
+import {AdminPanelComponent} from "./admin-panel.component";
+import {SoccerFieldListComponent} from "./pages/soccer-field/soccer-field-list.component";
 import {AdminPaneRoutingModule} from "./admin-pane-routing.module";
 import {DataTableModule} from "angular-6-datatable";
-import {CommonModule} from "@angular/common";
 import {MatDialogModule} from "@angular/material";
-import {AdminEditSoccerFieldComponent} from "./modal/admin-edit-soccer-field/admin-edit-soccer-field.component";
-import {ReactiveFormsModule} from "@angular/forms";
-import {AdminUserComponent} from './components/admin-user/admin-user.component';
-import {AdminEditUserComponent} from './modal/admin-edit-user/admin-edit-user.component';
+import {EditSoccerFieldModal} from "./pages/soccer-field/modal/edit-soccer-field/edit-soccer-field.modal";
+import {UserListComponent} from './pages/user/user-list.component';
+import {EditUserModal} from './pages/user/modal/edit-user/edit-user.modal';
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
   declarations: [
-    AdminPaneComponent,
-    AdminSoccerFieldComponent,
-    AdminEditSoccerFieldComponent,
-    AdminUserComponent,
-    AdminEditUserComponent
+    AdminPanelComponent,
+    SoccerFieldListComponent,
+    EditSoccerFieldModal,
+    UserListComponent,
+    EditUserModal
   ],
   imports: [
-    ReactiveFormsModule,
+    SharedModule,
     AdminPaneRoutingModule,
-    CommonModule,
+
     DataTableModule,
     MatDialogModule
   ],
   providers: [],
   entryComponents: [
-    AdminEditSoccerFieldComponent,
-    AdminEditUserComponent
+    EditSoccerFieldModal,
+    EditUserModal
   ]
 })
 export class AdminPaneModule {

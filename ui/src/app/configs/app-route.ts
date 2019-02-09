@@ -2,7 +2,7 @@ export enum AppRoute {
 
   LOGIN = 'login',
   REGISTRATION = 'registration',
-  MAIN_PAGE = 'main',
+  HOME = 'home',
   RESERVATION = 'reservation',
   RESERVATION_ID = '/:id',
   ADMIN_PANE = 'adminPane',

@@ -25,7 +25,7 @@ export class AdminGuard implements CanActivate {
             if (response) {
               return true;
             }
-            this.router.navigateByUrl(AppRoute.MAIN_PAGE);
+            this.router.navigateByUrl(AppRoute.HOME);
 
             return false;
           }
@@ -34,7 +34,7 @@ export class AdminGuard implements CanActivate {
   }
 
   private handleError() {
-    this.router.navigateByUrl(AppRoute.MAIN_PAGE);
+    this.router.navigateByUrl(AppRoute.HOME);
   }
 
 }
