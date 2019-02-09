@@ -1,0 +1,53 @@
+<div class="d-flex align-items-center justify-content-center container-body">
+  <section class="col-8 container-center">
+
+    <div class="row justify-content-center">
+      <h1 class="form-title">Edit Soccer Field</h1>
+    </div>
+
+    <form [formGroup]="form">
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input"
+               formControlName="email"
+               type="text">
+      </div>
+
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input"
+               formControlName="firstName"
+               type="text">
+      </div>
+
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input"
+               formControlName="secondName"
+               type="text">
+      </div>
+
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input"
+               formControlName="nickname"
+               type="text">
+      </div>
+
+      <div class="justify-content-center form-item">
+        <input class="form-control form-input"
+               formControlName="active"
+               type="text">
+      </div>
+
+    </form>
+
+    <div mat-dialog-actions>
+      <button (click)="close()"
+              class="btn btn-danger">Close
+      </button>
+      <button (click)="save()"
+              [disabled]="form.invalid"
+              class="btn btn-primary">Save
+      </button>
+    </div>
+
+  </section>
+
+</div>

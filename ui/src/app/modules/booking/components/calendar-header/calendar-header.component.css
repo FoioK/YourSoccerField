@@ -1,0 +1,13 @@
+.btn-primary {
+  background: #007bff;
+}
+
+.btn-primary:hover {
+  background: #343A40;
+  transition: 1s all;
+}
+
+.btn-outline-secondary:hover {
+  background: #343A40;
+  transition: 1s all;
+}
