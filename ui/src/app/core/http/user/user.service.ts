@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Configuration} from '../../../configs/configuration';
-import {ApiMapping} from '../../../configs/api-mapping';
 import {TokenModel} from '../../../shared/models/token-model';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
@@ -10,6 +9,7 @@ import {AppRoute} from '../../../configs/app-route';
 import {User} from "../../../shared/models/user";
 import {catchError} from "rxjs/operators";
 import {HeaderService} from "../../services/header.service";
+import {ApiRoutes, PATH_USER_ID} from "../../../configs/api-routes";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,6 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private configuration: Configuration,
-    private apiMapping: ApiMapping,
     private router: Router,
     private headerService: HeaderService
   ) {
@@ -53,7 +52,7 @@ export class UserService {
   adminPaneAuthenticate(): Observable<boolean> {
     return this.http.get<boolean>(
       this.configuration.apiServer +
-      this.apiMapping.user_adminPane_authenticate,
+      ApiRoutes.USERS_ADMIN_AUTHENTICATE,
       {headers: this.headerService.getTokenAuthorization()}
     );
   }
@@ -71,7 +70,7 @@ export class UserService {
   createUser(user: User): Observable<HttpResponse<User>> {
     return this.http
       .post<User>(
-        this.configuration.apiServer + this.apiMapping.user_create,
+        this.configuration.apiServer + ApiRoutes.USERS,
         user,
         {
           headers: HeaderService.getJSONContentType(),
@@ -84,7 +83,7 @@ export class UserService {
   findAll(): Observable<Array<User>> {
     return this.http.get<Array<User>>(
       this.configuration.apiServer +
-      this.apiMapping.user_create,
+      ApiRoutes.USERS,
       {
         headers: HeaderService.getJSONContentTypeWithToken()
       }
@@ -93,7 +92,8 @@ export class UserService {
 
   updateUser(user: User) {
     return this.http.put(
-      this.configuration.apiServer + this.apiMapping.user_byId + user.id,
+      this.configuration.apiServer +
+      ApiRoutes.USERS_WITH_ID.replace(PATH_USER_ID, (user.id || "").toLocaleString()),
       user,
       {
         headers: HeaderService.getJSONContentTypeWithToken(),
@@ -104,7 +104,8 @@ export class UserService {
 
   deleteUser(userId) {
     return this.http.delete(
-      this.configuration.apiServer + this.apiMapping.user_byId + userId,
+      this.configuration.apiServer +
+      ApiRoutes.USERS_WITH_ID.replace(PATH_USER_ID, (userId.id || "").toLocaleString()),
       {
         headers: HeaderService.getJSONContentTypeWithToken(),
         observe: "response"

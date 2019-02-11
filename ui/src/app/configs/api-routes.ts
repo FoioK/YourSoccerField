@@ -5,9 +5,9 @@ export enum ApiRoutes {
   SOCCER_FIELDS = '/soccerfields',
   SOCCER_FIELDS_WITH_ID = '/soccerfields/{soccerFieldId}',
   SOCCER_FIELDS_BOOKINGS = 'soccerfields/{soccerFieldId}/bookings',
-  SOCCER_FIELDS_ADVANCED_SEARCH = 'soccerfields/advancedSearch?encodedObject={encodedObject}',
-  SOCCER_FIELDS_SEARCH_BY_STREET = 'soccerfields/byStreet/{street}',
-  SOCCER_FIELDS_EXAMPLE_TEN = 'soccerfields/exampleTen',
+  SOCCER_FIELDS_ADVANCED_SEARCH = '/soccerfields/advancedSearch?encodedObject={encodedObject}',
+  SOCCER_FIELDS_SEARCH_BY_STREET = '/soccerfields/byStreet/{street}',
+  SOCCER_FIELDS_EXAMPLE_TEN = '/soccerfields/exampleTen',
 
   SURFACES = '/surfaces',
 

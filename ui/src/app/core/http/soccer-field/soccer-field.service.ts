@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Configuration} from '../../../configs/configuration';
-import {ApiMapping} from '../../../configs/api-mapping';
 import {Observable} from 'rxjs';
 import {SoccerField} from '../../../shared/models/soccer-field';
 import {SearchModel} from '../../../shared/models/search-model';
 import {Surface} from '../../../shared/models/surface';
 import {HeaderService} from "../../services/header.service";
+import {ApiRoutes, PARAM_ENCODED_OBJECT, PATH_SOCCER_FIELD_ID, PATH_STREET} from "../../../configs/api-routes";
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +15,12 @@ export class SoccerFieldService {
   constructor(
     private http: HttpClient,
     private configuration: Configuration,
-    private apiMapping: ApiMapping
   ) {
   }
 
   findAll(): Observable<Array<SoccerField>> {
     return this.http.get<Array<SoccerField>>(
-      this.configuration.apiServer + this.apiMapping.soccerField_findAll,
+      this.configuration.apiServer + ApiRoutes.SOCCER_FIELDS,
       {
         headers: HeaderService.getJSONContentTypeWithToken()
       }
@@ -31,8 +30,7 @@ export class SoccerFieldService {
   findByAddressContains(street: string): Observable<Array<SoccerField>> {
     return this.http.get<Array<SoccerField>>(
       this.configuration.apiServer +
-      this.apiMapping.soccerField_findByAddressContains +
-      street,
+      ApiRoutes.SOCCER_FIELDS_SEARCH_BY_STREET.replace(PATH_STREET, street),
       {
         headers: HeaderService.getJSONContentType()
       }
@@ -46,8 +44,7 @@ export class SoccerFieldService {
 
     return this.http.get<Array<SoccerField>>(
       this.configuration.apiServer +
-      this.apiMapping.soccerField_findByCustomCriteria +
-      btoa(stringJson),
+      ApiRoutes.SOCCER_FIELDS_ADVANCED_SEARCH.replace(PARAM_ENCODED_OBJECT, btoa(stringJson)),
       {
         headers: HeaderService.getJSONContentType()
       }
@@ -56,7 +53,7 @@ export class SoccerFieldService {
 
   getExampleTen(): Observable<Array<SoccerField>> {
     return this.http.get<Array<SoccerField>>(
-      this.configuration.apiServer + this.apiMapping.soccerField_exampleTen,
+      this.configuration.apiServer + ApiRoutes.SOCCER_FIELDS_EXAMPLE_TEN,
       {
         headers: HeaderService.getJSONContentType()
       }
@@ -65,7 +62,7 @@ export class SoccerFieldService {
 
   getAllSurfaces(): Observable<Array<Surface>> {
     return this.http.get<Array<Surface>>(
-      this.configuration.apiServer + this.apiMapping.surfaces,
+      this.configuration.apiServer + ApiRoutes.SURFACES,
       {
         headers: HeaderService.getJSONContentType()
       }
@@ -74,7 +71,8 @@ export class SoccerFieldService {
 
   getSoccerfieldById(id: number): Observable<SoccerField> {
     return this.http.get<SoccerField>(
-      this.configuration.apiServer + this.apiMapping.soccerField_findById + id,
+      this.configuration.apiServer +
+      ApiRoutes.SOCCER_FIELDS_WITH_ID.replace(PATH_SOCCER_FIELD_ID, (id || "").toLocaleString()),
       {
         headers: HeaderService.getJSONContentTypeWithToken()
       }
@@ -83,7 +81,11 @@ export class SoccerFieldService {
 
   updateSoccerField(soccerField: SoccerField) {
     return this.http.put(
-      this.configuration.apiServer + this.apiMapping.soccerField_findById + soccerField.id,
+      this.configuration.apiServer +
+      ApiRoutes.SOCCER_FIELDS_WITH_ID.replace(
+        PATH_SOCCER_FIELD_ID,
+        (soccerField.id || "").toLocaleString()
+      ),
       soccerField,
       {
         headers: HeaderService.getJSONContentTypeWithToken(),
@@ -94,7 +96,11 @@ export class SoccerFieldService {
 
   deleteSoccerField(soccerFieldId) {
     return this.http.delete(
-      this.configuration.apiServer + this.apiMapping.soccerField_findById + soccerFieldId,
+      this.configuration.apiServer +
+      ApiRoutes.SOCCER_FIELDS_WITH_ID.replace(
+        PATH_SOCCER_FIELD_ID,
+        (soccerFieldId || "").toLocaleString()
+      ),
       {
         headers: HeaderService.getJSONContentTypeWithToken(),
         observe: "response"
