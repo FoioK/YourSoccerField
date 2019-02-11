@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {passwordValidator} from './validators/password-validator';
+import {passwordValidator} from '../../validators/password-validator';
 import {Configuration} from '../../../../configs/configuration';
 import {AppRoute} from '../../../../configs/app-route';
 import {Router} from '@angular/router';

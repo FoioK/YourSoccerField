@@ -8,7 +8,8 @@ import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
 import {CustomDateFormatter} from "./utils/twenty-four-hours";
 import {ClipboardModule} from "ngx-clipboard";
 import {ConvertTime12To24FormatPipe} from "./pipe/convert-time12-to24-format.pipe";
-import {DetailsSoccerfieldComponent} from "./pages/detail-soccer-field/details-soccerfield.component";
+import {DetailsSoccerfieldComponent} from "./details-soccerfield.component";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import {DetailsSoccerfieldComponent} from "./pages/detail-soccer-field/details-s
     }),
     ClipboardModule,
   ],
-  providers: [],
+  providers: [
+    DatePipe,
+  ],
 })
 export class BookingModule {
 

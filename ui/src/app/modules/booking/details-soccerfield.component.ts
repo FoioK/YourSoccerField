@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {BookingService} from '../../../../core/http/booking/booking.service';
-import {SoccerField} from '../../../../shared/models/soccer-field';
+import {BookingService} from '../../core/http/booking/booking.service';
+import {SoccerField} from '../../shared/models/soccer-field';
 import {Reservation} from 'src/app/shared/models/reservation';
 import {DatePipe} from '@angular/common';
-import {UserService} from '../../../../core/http/user/user.service';
+import {UserService} from '../../core/http/user/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import {SoccerFieldService} from '../../../../core/http/soccer-field/soccer-field.service';
+import {SoccerFieldService} from '../../core/http/soccer-field/soccer-field.service';
 
 @Component({
   selector: 'app-details-soccerfield',
