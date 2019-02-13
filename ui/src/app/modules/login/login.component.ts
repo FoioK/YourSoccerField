@@ -10,7 +10,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.styles.css', './login.component.css']
+  styleUrls: ['./styles/common-style.css', './login.component.css']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
