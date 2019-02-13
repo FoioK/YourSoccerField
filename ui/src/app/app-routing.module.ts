@@ -1,6 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {AppRoute} from "./app.route";
+import {PageNotFoundComponent} from "./core/page-not-found/page-not-found.component";
 
 const routes: Routes = [
   {
@@ -23,8 +24,11 @@ const routes: Routes = [
   {
     path: AppRoute.ADMIN_PANE,
     loadChildren: 'src/app/modules/admin-pane/admin-panel.module#AdminPanelModule'
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
-
 ];
 
 @NgModule({
