@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../core/authentication/authentication.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Configuration} from '../../configs/configuration';
-import {AppRoute} from '../../configs/app-route';
+import {AppRoute} from '../../app.route';
 import {UserService} from '../../core/http/user/user.service';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';

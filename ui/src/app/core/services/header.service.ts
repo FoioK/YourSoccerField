@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpHeaders} from "@angular/common/http";
 import {TokenModel} from "../../shared/models/token-model";
-import {AppRoute} from "../../configs/app-route";
+import {AppRoute} from "../../app.route";
 import {Configuration} from "../../configs/configuration";
 import {Router} from "@angular/router";
 

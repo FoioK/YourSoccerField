@@ -6,7 +6,7 @@ import {Configuration} from '../../../configs/configuration';
 import {Reservation} from '../../../shared/models/reservation';
 import {catchError} from 'rxjs/operators';
 import {HeaderService} from "../../services/header.service";
-import {ApiRoutes, PATH_SOCCER_FIELD_ID} from "../../../configs/api-routes";
+import {ApiRoute, PATH_SOCCER_FIELD_ID} from "../api.route";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class BookingService {
   getReservationsForSoccerfield(id: number): Observable<Array<Reservation>> {
     return this.http.get<Array<Reservation>>(
       this.configuration.apiServer +
-      ApiRoutes.SOCCER_FIELDS_BOOKINGS.replace(PATH_SOCCER_FIELD_ID, (id || "").toLocaleString()),
+      ApiRoute.SOCCER_FIELDS_BOOKINGS.replace(PATH_SOCCER_FIELD_ID, (id || "").toLocaleString()),
       {
         headers: HeaderService.getJSONContentTypeWithToken()
       }
@@ -36,7 +36,7 @@ export class BookingService {
   ): Observable<HttpResponse<Reservation>> {
     return this.http.post<Reservation>(
       this.configuration.apiServer +
-      ApiRoutes.BOOKINGS,
+      ApiRoute.BOOKINGS,
       reservation,
       {
         headers: HeaderService.getJSONContentTypeWithToken(),

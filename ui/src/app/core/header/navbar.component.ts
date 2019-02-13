@@ -1,6 +1,6 @@
 import {Component, OnInit, Renderer2} from "@angular/core";
 import {Router} from "@angular/router";
-import {AppRoute} from "../../configs/app-route";
+import {AppRoute} from "../../app.route";
 import {UserService} from "../http/user/user.service";
 
 @Component({

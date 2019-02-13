@@ -5,11 +5,11 @@ import {Configuration} from '../../../configs/configuration';
 import {TokenModel} from '../../../shared/models/token-model';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
-import {AppRoute} from '../../../configs/app-route';
+import {AppRoute} from '../../../app.route';
 import {User} from "../../../shared/models/user";
 import {catchError} from "rxjs/operators";
 import {HeaderService} from "../../services/header.service";
-import {ApiRoutes, PATH_USER_ID} from "../../../configs/api-routes";
+import {ApiRoute, PATH_USER_ID} from "../api.route";
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +52,7 @@ export class UserService {
   adminPaneAuthenticate(): Observable<boolean> {
     return this.http.get<boolean>(
       this.configuration.apiServer +
-      ApiRoutes.USERS_ADMIN_AUTHENTICATE,
+      ApiRoute.USERS_ADMIN_AUTHENTICATE,
       {headers: this.headerService.getTokenAuthorization()}
     );
   }
@@ -70,7 +70,7 @@ export class UserService {
   createUser(user: User): Observable<HttpResponse<User>> {
     return this.http
       .post<User>(
-        this.configuration.apiServer + ApiRoutes.USERS,
+        this.configuration.apiServer + ApiRoute.USERS,
         user,
         {
           headers: HeaderService.getJSONContentType(),
@@ -83,7 +83,7 @@ export class UserService {
   findAll(): Observable<Array<User>> {
     return this.http.get<Array<User>>(
       this.configuration.apiServer +
-      ApiRoutes.USERS,
+      ApiRoute.USERS,
       {
         headers: HeaderService.getJSONContentTypeWithToken()
       }
@@ -93,7 +93,7 @@ export class UserService {
   updateUser(user: User) {
     return this.http.put(
       this.configuration.apiServer +
-      ApiRoutes.USERS_WITH_ID.replace(PATH_USER_ID, (user.id || "").toLocaleString()),
+      ApiRoute.USERS_WITH_ID.replace(PATH_USER_ID, (user.id || "").toLocaleString()),
       user,
       {
         headers: HeaderService.getJSONContentTypeWithToken(),
@@ -105,7 +105,7 @@ export class UserService {
   deleteUser(userId) {
     return this.http.delete(
       this.configuration.apiServer +
-      ApiRoutes.USERS_WITH_ID.replace(PATH_USER_ID, (userId.id || "").toLocaleString()),
+      ApiRoute.USERS_WITH_ID.replace(PATH_USER_ID, (userId.id || "").toLocaleString()),
       {
         headers: HeaderService.getJSONContentTypeWithToken(),
         observe: "response"

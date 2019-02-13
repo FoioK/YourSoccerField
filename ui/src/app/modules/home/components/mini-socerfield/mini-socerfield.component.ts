@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SoccerField} from '../../../../shared/models/soccer-field';
 import {Router} from '@angular/router';
-import {AppRoute} from '../../../../configs/app-route';
+import {AppRoute} from '../../../../app.route';
 
 @Component({
   selector: 'app-mini-socerfield',
@@ -21,6 +21,6 @@ export class MiniSoccerfieldComponent implements OnInit {
   }
 
   private book(data: SoccerField) {
-    this.router.navigate([AppRoute.RESERVATION, data.id]);
+    this.router.navigate([AppRoute.BOOKING, data.id]);
   }
 }

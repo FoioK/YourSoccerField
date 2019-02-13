@@ -1,6 +1,6 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {AppRoute} from "./configs/app-route";
+import {AppRoute} from "./app.route";
 
 const routes: Routes = [
   {
@@ -17,12 +17,12 @@ const routes: Routes = [
     loadChildren: 'src/app/modules/home/home.module#HomeModule'
   },
   {
-    path: AppRoute.RESERVATION + AppRoute.RESERVATION_ID,
+    path: AppRoute.BOOKING + '/:id',
     loadChildren: 'src/app/modules/booking/booking.module#BookingModule'
   },
   {
     path: AppRoute.ADMIN_PANE,
-    loadChildren: 'src/app/modules/admin-pane/admin-pane.module#AdminPaneModule'
+    loadChildren: 'src/app/modules/admin-pane/admin-panel.module#AdminPanelModule'
   }
 
 ];
