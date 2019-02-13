@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {passwordValidator} from '../../validators/password-validator';
-import {Configuration} from '../../../../configs/configuration';
+import {EMAIL_REG_EXP} from '../../../../configs/configuration';
 import {AppRoute} from '../../../../app.route';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -19,7 +19,6 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private configuration: Configuration,
     private userService: UserService,
     private router: Router
   ) {
@@ -34,7 +33,7 @@ export class RegistrationComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(this.configuration.getEmailRegExp())
+          Validators.pattern(EMAIL_REG_EXP)
         ]
       ],
       password: ['', [Validators.required]],

@@ -1,25 +1,23 @@
 import {Injectable} from "@angular/core";
 import {HttpHeaders} from "@angular/common/http";
 import {TokenModel} from "../../shared/models/token-model";
-import {AppRoute} from "../../app.route";
-import {Configuration} from "../../configs/configuration";
-import {Router} from "@angular/router";
+import {SessionService} from "./session.service";
 
 @Injectable()
 export class HeaderService {
 
-  constructor(private router: Router) {
+  constructor() {
 
   }
 
-  static getJSONContentType(): HttpHeaders {
+  static JSONContentType(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json'
     });
   }
 
-  static getJSONContentTypeWithToken(): HttpHeaders {
-    const token: TokenModel = Configuration.getToken();
+  static JSONContentTypeWithToken(sessionService: SessionService): HttpHeaders {
+    const token: TokenModel = sessionService.getToken();
 
     return new HttpHeaders({
       'Content-Type': 'application/json',
@@ -27,12 +25,8 @@ export class HeaderService {
     });
   }
 
-  getTokenAuthorization(): HttpHeaders {
-    const token: TokenModel = Configuration.getToken();
-
-    if (token == null) {
-      this.router.navigateByUrl(AppRoute.LOGIN);
-    }
+  static tokenWithoutContentType(sessionService: SessionService): HttpHeaders {
+    const token: TokenModel = sessionService.getToken();
 
     return new HttpHeaders({
       'Authorization': token.token_type + ' ' + token.access_token

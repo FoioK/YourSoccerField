@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Configuration} from '../../configs/configuration';
+import {AUTH_SERVER} from '../../configs/configuration';
 import {TokenModel} from '../../shared/models/token-model';
 import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {UserService} from '../http/user/user.service';
 import {catchError, tap} from 'rxjs/operators';
+import {SessionService} from "../services/session.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,7 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
-    private configuration: Configuration,
-    private userService: UserService
+    private sessionService: SessionService
   ) {
   }
 
@@ -69,7 +68,7 @@ export class AuthenticationService {
   private postUserDetails(credentials: string): Observable<TokenModel> {
     return this.http
       .post<TokenModel>(
-        this.configuration.authServer + this.oauthAddress,
+        AUTH_SERVER + this.oauthAddress,
         credentials,
         AuthenticationService.getAuthOptions()
       )
@@ -87,7 +86,7 @@ export class AuthenticationService {
 
   private store(token: TokenModel) {
     localStorage.setItem('token', JSON.stringify(token));
-    this.userService.setLogged(token != null);
+    this.sessionService.setLogged(token != null);
   }
 
   private static errorHandler(errorResponse: any) {

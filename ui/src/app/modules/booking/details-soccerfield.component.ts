@@ -4,9 +4,9 @@ import {BookingService} from '../../core/http/booking/booking.service';
 import {SoccerField} from '../../shared/models/soccer-field';
 import {Reservation} from 'src/app/shared/models/reservation';
 import {DatePipe} from '@angular/common';
-import {UserService} from '../../core/http/user/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SoccerFieldService} from '../../core/http/soccer-field/soccer-field.service';
+import {SessionService} from "../../core/services/session.service";
 
 @Component({
   selector: 'app-details-soccerfield',
@@ -28,21 +28,21 @@ export class DetailsSoccerfieldComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private reservationService: BookingService,
-    private soccerfieldService: SoccerFieldService,
-    private userService: UserService,
+    private soccerFieldService: SoccerFieldService,
+    private sessionService: SessionService,
     private datePipe: DatePipe
   ) {
   }
 
   ngOnInit() {
     this.getSoccerfieldById();
-    this.userCode = this.userService.getLoggedUserCode();
+    this.userCode = this.sessionService.getLoggedUserCode();
   }
 
   private getSoccerfieldById(): void {
     this.soccerFieldId = this.route.snapshot.paramMap.get('id');
-    this.soccerfieldService
-      .getSoccerfieldById(parseInt(this.soccerFieldId, 10))
+    this.soccerFieldService
+      .getSoccerFieldById(parseInt(this.soccerFieldId, 10))
       .subscribe(result => {
         this.soccerfieldToBook = result;
       });

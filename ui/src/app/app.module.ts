@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {Configuration} from './configs/configuration';
 import {CoreModule} from "./core/core.module";
 import {SharedModule} from "./shared/shared.module";
 import {AppRoutingModule} from "./app-routing.module";
@@ -15,9 +14,7 @@ import {AppRoutingModule} from "./app-routing.module";
     CoreModule,
     AppRoutingModule
   ],
-  providers: [
-    Configuration,
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

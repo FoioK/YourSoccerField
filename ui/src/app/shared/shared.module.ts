@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {NavbarComponent} from "../core/header/navbar.component";
+import {NavBarComponent} from "../core/header/nav-bar.component";
 import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import {FooterComponent} from "../core/footer/footer.component";
@@ -7,7 +7,7 @@ import {PageNotFoundComponent} from "../core/page-not-found/page-not-found.compo
 
 @NgModule({
   declarations: [
-    NavbarComponent,
+    NavBarComponent,
     FooterComponent,
     PageNotFoundComponent,
   ],
@@ -16,7 +16,7 @@ import {PageNotFoundComponent} from "../core/page-not-found/page-not-found.compo
     ReactiveFormsModule,
   ],
   exports: [
-    NavbarComponent,
+    NavBarComponent,
     FooterComponent,
 
     CommonModule,

@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {UserService} from "../../../../../../core/http/user/user.service";
 import {User} from "../../../../../../shared/models/user";
-import {Configuration} from "../../../../../../configs/configuration";
+import {EMAIL_REG_EXP} from "../../../../../../configs/configuration";
 
 @Component({
   selector: 'app-admin-edit-user',
@@ -20,7 +20,6 @@ export class EditUserModal implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private dialogRef: MatDialogRef<EditUserModal>,
-    private configuration: Configuration,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.user = data;
@@ -37,7 +36,7 @@ export class EditUserModal implements OnInit {
         [
           Validators.required,
           Validators.maxLength(64),
-          Validators.pattern(this.configuration.getEmailRegExp())
+          Validators.pattern(EMAIL_REG_EXP)
         ]
       ],
       firstName: [
