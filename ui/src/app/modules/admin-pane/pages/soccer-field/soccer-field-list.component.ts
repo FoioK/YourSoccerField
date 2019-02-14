@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SoccerFieldService} from "../../../../core/http/soccer-field/soccer-field.service";
-import {SoccerField} from "../../../../shared/models/soccer-field";
+import {SoccerFieldModel} from "../../../../shared/models/soccer-field.model";
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {EditSoccerFieldModal} from "./modal/edit-soccer-field/edit-soccer-field.modal";
 
@@ -33,7 +33,7 @@ export class SoccerFieldListComponent implements OnInit {
       .subscribe(data => this.soccerFields = data);
   }
 
-  editSoccerField(soccerField: SoccerField) {
+  editSoccerField(soccerField: SoccerFieldModel) {
     this.editSoccerFieldDialog = this.dialog.open(
       EditSoccerFieldModal,
       {
@@ -44,11 +44,11 @@ export class SoccerFieldListComponent implements OnInit {
       });
 
     this.editSoccerFieldDialog.afterClosed()
-      .subscribe((result: SoccerField) =>
+      .subscribe((result: SoccerFieldModel) =>
         result ? this.updateSoccerField(result) : undefined);
   }
 
-  private updateSoccerField(soccerField: SoccerField) {
+  private updateSoccerField(soccerField: SoccerFieldModel) {
     this.soccerFieldService.updateSoccerField(soccerField)
       .subscribe(result => {
         if (result.status == 201 || result.status == 204) {

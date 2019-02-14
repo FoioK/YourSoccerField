@@ -1,6 +1,6 @@
 import {Time} from '@angular/common';
 
-export interface OpenHour {
+export interface OpenHourModel {
   id?: number;
 
   s1: Time;

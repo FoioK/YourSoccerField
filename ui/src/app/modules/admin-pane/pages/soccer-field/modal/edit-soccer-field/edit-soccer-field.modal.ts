@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {SoccerField} from "../../../../../../shared/models/soccer-field";
-import {Address} from "../../../../../../shared/models/address";
+import {SoccerFieldModel} from "../../../../../../shared/models/soccer-field.model";
+import {AddressModel} from "../../../../../../shared/models/address.model";
 import {SoccerFieldService} from "../../../../../../core/http/soccer-field/soccer-field.service";
-import {Surface} from "../../../../../../shared/models/surface";
+import {SurfaceModel} from "../../../../../../shared/models/surface.model";
 
 @Component({
   selector: 'app-admin-edit-soccer-field',
@@ -16,8 +16,8 @@ export class EditSoccerFieldModal implements OnInit {
   form: FormGroup;
   addressForm: FormGroup;
 
-  soccerField: SoccerField;
-  surfaceList: Array<Surface>;
+  soccerField: SoccerFieldModel;
+  surfaceList: Array<SurfaceModel>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +42,7 @@ export class EditSoccerFieldModal implements OnInit {
     this.dialogRef.close();
   }
 
-  private builtForm(soccerField: SoccerField) {
+  private builtForm(soccerField: SoccerFieldModel) {
     this.form = this.formBuilder.group({
       name: [
         soccerField.name,
@@ -82,7 +82,7 @@ export class EditSoccerFieldModal implements OnInit {
     })
   }
 
-  private buildAddressForm(address: Address) {
+  private buildAddressForm(address: AddressModel) {
     this.addressForm = this.formBuilder.group({
       city: [
         address.city,
@@ -115,11 +115,11 @@ export class EditSoccerFieldModal implements OnInit {
     });
   }
 
-  private prepareSoccerField(): SoccerField {
-    const address: Address = this.addressForm.value;
+  private prepareSoccerField(): SoccerFieldModel {
+    const address: AddressModel = this.addressForm.value;
     address.id = this.soccerField.address.id;
 
-    const editSoccerField: SoccerField = this.form.value;
+    const editSoccerField: SoccerFieldModel = this.form.value;
     this.soccerField.name = editSoccerField.name;
     this.soccerField.surface = editSoccerField.surface;
     this.soccerField.address = address;

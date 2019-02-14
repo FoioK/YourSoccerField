@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {API_SERVER} from '../../../configs/configuration';
-import {User} from "../../../shared/models/user";
+import {UserModel} from "../../../shared/models/user.model";
 import {catchError} from "rxjs/operators";
 import {HeaderService} from "../../services/header.service";
 import {ApiRoute, PATH_USER_ID} from "../api.route";
@@ -27,9 +27,9 @@ export class UserService {
     );
   }
 
-  createUser(user: User): Observable<HttpResponse<User>> {
+  createUser(user: UserModel): Observable<HttpResponse<UserModel>> {
     return this.http
-      .post<User>(
+      .post<UserModel>(
         API_SERVER + ApiRoute.USERS,
         user,
         {
@@ -39,8 +39,8 @@ export class UserService {
       ).pipe(catchError(UserService.errorHandler));
   }
 
-  findAll(): Observable<Array<User>> {
-    return this.http.get<Array<User>>(
+  findAll(): Observable<Array<UserModel>> {
+    return this.http.get<Array<UserModel>>(
       API_SERVER + ApiRoute.USERS,
       {
         headers: HeaderService.JSONContentTypeWithToken(this.sessionService)
@@ -48,7 +48,7 @@ export class UserService {
     ).pipe(catchError(UserService.errorHandler));
   }
 
-  updateUser(user: User) {
+  updateUser(user: UserModel) {
     return this.http.put(
       API_SERVER + ApiRoute.USERS_WITH_ID.replace(PATH_USER_ID, (user.id || "").toLocaleString()),
       user,

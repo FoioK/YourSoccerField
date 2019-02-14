@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BookingService} from '../../core/http/booking/booking.service';
-import {SoccerField} from '../../shared/models/soccer-field';
-import {Reservation} from 'src/app/shared/models/reservation';
+import {SoccerFieldModel} from '../../shared/models/soccer-field.model';
+import {ReservationModel} from 'src/app/shared/models/reservation.model';
 import {DatePipe} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SoccerFieldService} from '../../core/http/soccer-field/soccer-field.service';
@@ -14,7 +14,7 @@ import {SessionService} from "../../core/services/session.service";
   styleUrls: ['./details-soccerfield.component.css']
 })
 export class DetailsSoccerfieldComponent implements OnInit {
-  soccerfieldToBook: SoccerField;
+  soccerfieldToBook: SoccerFieldModel;
   soccerFieldId: string;
   toBookingStart: Date = new Date();
   toBookingEnd: Date = new Date();
@@ -85,7 +85,7 @@ export class DetailsSoccerfieldComponent implements OnInit {
   }
 
   private setReservation(): void {
-    const reservation: Reservation = {
+    const reservation: ReservationModel = {
       executionTime: '01:30',
       payed: false,
       soccerField: parseInt(this.soccerFieldId, 10),

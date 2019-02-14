@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable} from "rxjs";
-import {TokenModel} from "../../shared/models/token-model";
+import {TokenModel} from "../../shared/models/token.model";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {AppRoute} from "../../app.route";
 import {Router} from "@angular/router";

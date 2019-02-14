@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AUTH_SERVER} from '../../configs/configuration';
-import {TokenModel} from '../../shared/models/token-model';
+import {TokenModel} from '../../shared/models/token.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';

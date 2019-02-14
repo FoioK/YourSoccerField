@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {API_SERVER} from '../../../configs/configuration';
-import {Reservation} from '../../../shared/models/reservation';
+import {ReservationModel} from '../../../shared/models/reservation.model';
 import {catchError} from 'rxjs/operators';
 import {HeaderService} from "../../services/header.service";
 import {ApiRoute} from "../api.route";
@@ -23,9 +23,9 @@ export class BookingService {
   }
 
   createReservation(
-    reservation: Reservation
-  ): Observable<HttpResponse<Reservation>> {
-    return this.http.post<Reservation>(
+    reservation: ReservationModel
+  ): Observable<HttpResponse<ReservationModel>> {
+    return this.http.post<ReservationModel>(
       API_SERVER + ApiRoute.BOOKINGS,
       reservation,
       {

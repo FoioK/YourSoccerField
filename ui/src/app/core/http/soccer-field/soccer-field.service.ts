@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {SoccerField} from '../../../shared/models/soccer-field';
-import {SearchModel} from '../../../shared/models/search-model';
-import {Surface} from '../../../shared/models/surface';
+import {SoccerFieldModel} from '../../../shared/models/soccer-field.model';
+import {SearchModel} from '../../../shared/models/search.model';
+import {SurfaceModel} from '../../../shared/models/surface.model';
 import {HeaderService} from "../../services/header.service";
 import {ApiRoute, PARAM_ENCODED_OBJECT, PATH_SOCCER_FIELD_ID, PATH_STREET} from "../api.route";
 import {SessionService} from "../../services/session.service";
-import {Reservation} from "../../../shared/models/reservation";
+import {ReservationModel} from "../../../shared/models/reservation.model";
 import {catchError} from "rxjs/operators";
 import {API_SERVER} from "../../../configs/configuration";
 
@@ -22,8 +22,8 @@ export class SoccerFieldService {
 
   }
 
-  findAll(): Observable<Array<SoccerField>> {
-    return this.http.get<Array<SoccerField>>(
+  findAll(): Observable<Array<SoccerFieldModel>> {
+    return this.http.get<Array<SoccerFieldModel>>(
       API_SERVER + ApiRoute.SOCCER_FIELDS,
       {
         headers: HeaderService.JSONContentTypeWithToken(this.sessionService)
@@ -31,8 +31,8 @@ export class SoccerFieldService {
     ).pipe(catchError(SoccerFieldService.errorHandler));
   }
 
-  findByAddressContains(street: string): Observable<Array<SoccerField>> {
-    return this.http.get<Array<SoccerField>>(
+  findByAddressContains(street: string): Observable<Array<SoccerFieldModel>> {
+    return this.http.get<Array<SoccerFieldModel>>(
       API_SERVER +
       ApiRoute.SOCCER_FIELDS_SEARCH_BY_STREET.replace(PATH_STREET, street),
       {
@@ -43,10 +43,10 @@ export class SoccerFieldService {
 
   findByCustomCriteria(
     searchModel: SearchModel
-  ): Observable<Array<SoccerField>> {
+  ): Observable<Array<SoccerFieldModel>> {
     const stringJson: string = JSON.stringify(searchModel);
 
-    return this.http.get<Array<SoccerField>>(
+    return this.http.get<Array<SoccerFieldModel>>(
       API_SERVER +
       ApiRoute.SOCCER_FIELDS_ADVANCED_SEARCH.replace(PARAM_ENCODED_OBJECT, btoa(stringJson)),
       {
@@ -55,8 +55,8 @@ export class SoccerFieldService {
     ).pipe(catchError(SoccerFieldService.errorHandler));
   }
 
-  getExampleTen(): Observable<Array<SoccerField>> {
-    return this.http.get<Array<SoccerField>>(
+  getExampleTen(): Observable<Array<SoccerFieldModel>> {
+    return this.http.get<Array<SoccerFieldModel>>(
       API_SERVER + ApiRoute.SOCCER_FIELDS_EXAMPLE_TEN,
       {
         headers: HeaderService.JSONContentType()
@@ -64,8 +64,8 @@ export class SoccerFieldService {
     ).pipe(catchError(SoccerFieldService.errorHandler));
   }
 
-  getBookings(id: number): Observable<Array<Reservation>> {
-    return this.http.get<Array<Reservation>>(
+  getBookings(id: number): Observable<Array<ReservationModel>> {
+    return this.http.get<Array<ReservationModel>>(
       API_SERVER +
       ApiRoute.SOCCER_FIELDS_BOOKINGS.replace(PATH_SOCCER_FIELD_ID, (id || "").toLocaleString()),
       {
@@ -74,8 +74,8 @@ export class SoccerFieldService {
     ).pipe(catchError(SoccerFieldService.errorHandler));
   }
 
-  getAllSurfaces(): Observable<Array<Surface>> {
-    return this.http.get<Array<Surface>>(
+  getAllSurfaces(): Observable<Array<SurfaceModel>> {
+    return this.http.get<Array<SurfaceModel>>(
       API_SERVER + ApiRoute.SURFACES,
       {
         headers: HeaderService.JSONContentType()
@@ -83,8 +83,8 @@ export class SoccerFieldService {
     ).pipe(catchError(SoccerFieldService.errorHandler));
   }
 
-  getSoccerFieldById(id: number): Observable<SoccerField> {
-    return this.http.get<SoccerField>(
+  getSoccerFieldById(id: number): Observable<SoccerFieldModel> {
+    return this.http.get<SoccerFieldModel>(
       API_SERVER + ApiRoute.SOCCER_FIELDS_WITH_ID.replace(PATH_SOCCER_FIELD_ID, (id || "").toLocaleString()),
       {
         headers: HeaderService.JSONContentTypeWithToken(this.sessionService)
@@ -92,7 +92,7 @@ export class SoccerFieldService {
     ).pipe(catchError(SoccerFieldService.errorHandler));
   }
 
-  updateSoccerField(soccerField: SoccerField) {
+  updateSoccerField(soccerField: SoccerFieldModel) {
     return this.http.put(
       API_SERVER + ApiRoute.SOCCER_FIELDS_WITH_ID.replace(
         PATH_SOCCER_FIELD_ID,

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {UserService} from "../../../../../../core/http/user/user.service";
-import {User} from "../../../../../../shared/models/user";
+import {UserModel} from "../../../../../../shared/models/user.model";
 import {EMAIL_REG_EXP} from "../../../../../../configs/configuration";
 
 @Component({
@@ -14,7 +14,7 @@ export class EditUserModal implements OnInit {
 
   form: FormGroup;
 
-  user: User;
+  user: UserModel;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,7 +29,7 @@ export class EditUserModal implements OnInit {
     this.builtForm(this.user);
   }
 
-  private builtForm(user: User) {
+  private builtForm(user: UserModel) {
     this.form = this.formBuilder.group({
       email: [
         user.email,
@@ -71,8 +71,8 @@ export class EditUserModal implements OnInit {
     this.dialogRef.close(this.prepareUser());
   }
 
-  private prepareUser(): User {
-    const editUser: User = this.form.value;
+  private prepareUser(): UserModel {
+    const editUser: UserModel = this.form.value;
     this.user.email = editUser.email;
     this.user.firstName = editUser.firstName;
     this.user.secondName = editUser.secondName;

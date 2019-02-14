@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SoccerField} from '../../../../shared/models/soccer-field';
+import {SoccerFieldModel} from '../../../../shared/models/soccer-field.model';
 import {Router} from '@angular/router';
 import {AppRoute} from '../../../../app.route';
 
@@ -10,7 +10,7 @@ import {AppRoute} from '../../../../app.route';
 })
 export class MiniSoccerfieldComponent implements OnInit {
   @Input()
-  field: SoccerField;
+  field: SoccerFieldModel;
   @Input()
   private even: boolean = false;
 
@@ -20,7 +20,7 @@ export class MiniSoccerfieldComponent implements OnInit {
   ngOnInit() {
   }
 
-  private book(data: SoccerField) {
+  private book(data: SoccerFieldModel) {
     this.router.navigate([AppRoute.BOOKING, data.id]);
   }
 }

@@ -1,4 +1,4 @@
-export interface Reservation {
+export interface ReservationModel {
   executionTime: string;
   id?: number;
   payed: boolean;

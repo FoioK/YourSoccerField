@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../../core/http/user/user.service";
 import {MatDialog, MatDialogConfig} from "@angular/material";
-import {User} from "../../../../shared/models/user";
+import {UserModel} from "../../../../shared/models/user.model";
 import {EditUserModal} from "./modal/edit-user/edit-user.modal";
 
 @Component({
@@ -34,7 +34,7 @@ export class UserListComponent implements OnInit {
       .subscribe(data => this.users = data);
   }
 
-  private editUser(user: User) {
+  private editUser(user: UserModel) {
     this.editUserDialog = this.dialog.open(
       EditUserModal,
       {
@@ -45,11 +45,11 @@ export class UserListComponent implements OnInit {
       });
 
     this.editUserDialog.afterClosed()
-      .subscribe((result: User) =>
+      .subscribe((result: UserModel) =>
         result ? this.updateUser(result) : undefined);
   }
 
-  private updateUser(user: User) {
+  private updateUser(user: UserModel) {
     this.userService.updateUser(user)
       .subscribe(result => {
         if (result.status == 201 || result.status == 204) {

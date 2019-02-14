@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {SoccerField} from '../../shared/models/soccer-field';
+import {SoccerFieldModel} from '../../shared/models/soccer-field.model';
 import {SoccerFieldService} from '../../core/http/soccer-field/soccer-field.service';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {Surface} from 'src/app/shared/models/surface';
+import {SurfaceModel} from 'src/app/shared/models/surface.model';
 
 @Component({
   selector: 'app-main-page',
@@ -35,9 +35,9 @@ export class HomeComponent implements OnInit {
   filterForm: FormGroup;
   surfaces: FormArray = this.formBuilder.array([]);
   addressGroup: FormGroup;
-  exampleSoccerFieldList: Array<SoccerField>;
-  promptSoccerFieldList: Array<SoccerField>;
-  surfacesList: Array<Surface>;
+  exampleSoccerFieldList: Array<SoccerFieldModel>;
+  promptSoccerFieldList: Array<SoccerFieldModel>;
+  surfacesList: Array<SurfaceModel>;
 
   constructor(
     private formBuilder: FormBuilder,
