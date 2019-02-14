@@ -8,12 +8,12 @@ import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
 import {CustomDateFormatter} from "./utils/twenty-four-hours";
 import {ClipboardModule} from "ngx-clipboard";
 import {ConvertTime12To24FormatPipe} from "./pipe/convert-time12-to24-format.pipe";
-import {DetailsSoccerfieldComponent} from "./details-soccerfield.component";
+import {DetailsSoccerFieldComponent} from "./details-soccer-field.component";
 import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
-    DetailsSoccerfieldComponent,
+    DetailsSoccerFieldComponent,
     CalendarComponent,
     CalendarHeaderComponent,
     ConvertTime12To24FormatPipe,

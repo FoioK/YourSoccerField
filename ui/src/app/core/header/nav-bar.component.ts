@@ -39,27 +39,27 @@ export class NavBarComponent implements OnInit {
     this.topArrow();
   }
 
-  isUserAdmin(): Boolean {
+  private isUserAdmin(): Boolean {
     return this.isAdmin;
   }
 
-  goToAdminPane() {
+  private goToAdminPane() {
     this.router.navigateByUrl("/" + AppRoute.ADMIN_PANE);
   }
 
-  goToHome() {
+  private goToHome() {
     this.router.navigateByUrl("/" + AppRoute.HOME);
   }
 
-  goToLogin() {
+  private goToLogin() {
     this.router.navigateByUrl("/" + AppRoute.LOGIN);
   }
 
-  logOut() {
+  private logOut() {
     this.logOutProcess(this.router.url === AppRoute.HOME);
   }
 
-  logOutProcess(isHomePage: Boolean) {
+  private logOutProcess(isHomePage: Boolean) {
     this.sessionService.logOut();
     this.sessionService.isLogged()
       .subscribe(result => this.isLogged = result);

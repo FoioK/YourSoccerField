@@ -8,6 +8,7 @@ export function compareTime(today: Date, data: Date): boolean {
   if (dataSecond.getTime() === todayData.getTime()) {
     todayData = new Date(today);
     dataSecond = new Date(data);
+
     if (dataSecond < todayData) {
       return true;
     }

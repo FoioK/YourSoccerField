@@ -12,9 +12,9 @@ import {EMAIL_REG_EXP} from "../../../../../../configs/configuration";
 })
 export class EditUserModal implements OnInit {
 
-  form: FormGroup;
+  private form: FormGroup;
 
-  user: UserModel;
+  private readonly user: UserModel;
 
   constructor(
     private formBuilder: FormBuilder,

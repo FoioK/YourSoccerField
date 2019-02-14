@@ -13,9 +13,10 @@ import {SessionService} from "../../core/services/session.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  loginErrorMsg: string;
-  errorStatus: number;
+
+  private loginForm: FormGroup;
+  private loginErrorMsg: string;
+  private errorStatus: number;
 
   constructor(
     private authService: AuthenticationService,
@@ -38,37 +39,35 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  logIn() {
+  private logIn() {
     this.authService
       .getAccessToken(
         this.loginForm.get('email').value,
         this.loginForm.get('password').value
-      )
-      .subscribe(
-        () => {
-          this.sessionService.isLogged().subscribe(response => {
-            if (response) {
-              this.router.navigateByUrl(AppRoute.HOME);
-            }
-          });
-          this.errorStatus = -1;
-          this.loginErrorMsg = '';
-        },
-        (error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            this.loginErrorMsg =
-              'The password that you have entered is incorrect';
-            this.errorStatus = error.status;
+      ).subscribe(
+      () => {
+        this.sessionService.isLogged().subscribe(response => {
+          if (response) {
+            this.router.navigateByUrl(AppRoute.HOME);
           }
-          if (error.status === 401) {
-            this.loginErrorMsg = 'The email that you have entered is incorrect';
-            this.errorStatus = error.status;
-          }
+        });
+        this.errorStatus = -1;
+        this.loginErrorMsg = '';
+      }, (error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          this.loginErrorMsg =
+            'The password that you have entered is incorrect';
+          this.errorStatus = error.status;
         }
-      );
+        if (error.status === 401) {
+          this.loginErrorMsg = 'The email that you have entered is incorrect';
+          this.errorStatus = error.status;
+        }
+      }
+    );
   }
 
-  goToRegistration() {
+  private goToRegistration() {
     this.router.navigateByUrl(AppRoute.LOGIN + '/' + AppRoute.REGISTRATION);
   }
 }

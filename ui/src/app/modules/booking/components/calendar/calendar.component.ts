@@ -19,19 +19,20 @@ import {SoccerFieldService} from "../../../../core/http/soccer-field/soccer-fiel
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+
   @Output()
   errorMsg: string;
   @Output()
-  toBooking: EventEmitter<any> = new EventEmitter<any>();
-  view: string = 'day';
-  soccerFieldId: string;
-  chooseEventId: number = -1;
-  currentId: number = -1;
-  viewDate: Date = new Date();
-  refresh: Subject<any> = new Subject();
-  events: CalendarEvent[] = [];
-  currentDayViewHour: WeekViewHourColumn[];
-  clickedDate: Date;
+
+  private toBooking: EventEmitter<any> = new EventEmitter<any>();
+  private view: string = 'day';
+  private soccerFieldId: string;
+  private chooseEventId: number = -1;
+  private viewDate: Date = new Date();
+  private refresh: Subject<any> = new Subject();
+  private events: CalendarEvent[] = [];
+  private currentDayViewHour: WeekViewHourColumn[];
+  private clickedDate: Date;
 
   constructor(
     private bookingService: BookingService,
@@ -138,4 +139,5 @@ export class CalendarComponent implements OnInit {
     }
     this.refresh.next();
   }
+
 }

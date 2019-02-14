@@ -10,8 +10,4 @@ export class FooterComponent {
 
   private version = environment.version;
 
-  constructor() {
-
-  }
-
 }

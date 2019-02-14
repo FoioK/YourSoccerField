@@ -17,15 +17,15 @@ export class AdminPanelComponent {
 
   }
 
-  goToSoccerFields() {
+  private goToSoccerFields() {
     this.goToRoute(AdminPanelRoute.SOCCER_FIELD);
   }
 
-  goToUser() {
+  private goToUser() {
     this.goToRoute(AdminPanelRoute.USER);
   }
 
-  goToRoute(route: AdminPanelRoute) {
+  private goToRoute(route: AdminPanelRoute) {
     this.route.routeConfig.path != route ?
       this.router.navigateByUrl(AppRoute.ADMIN_PANE + '/' + route)
       :

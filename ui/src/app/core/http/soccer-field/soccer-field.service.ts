@@ -7,7 +7,7 @@ import {SurfaceModel} from '../../../shared/models/surface.model';
 import {HeaderService} from "../../services/header.service";
 import {ApiRoute, PARAM_ENCODED_OBJECT, PATH_SOCCER_FIELD_ID, PATH_STREET} from "../api.route";
 import {SessionService} from "../../services/session.service";
-import {ReservationModel} from "../../../shared/models/reservation.model";
+import {BookingModel} from "../../../shared/models/booking.model";
 import {catchError} from "rxjs/operators";
 import {API_SERVER} from "../../../configs/configuration";
 
@@ -64,8 +64,8 @@ export class SoccerFieldService {
     ).pipe(catchError(SoccerFieldService.errorHandler));
   }
 
-  getBookings(id: number): Observable<Array<ReservationModel>> {
-    return this.http.get<Array<ReservationModel>>(
+  getBookings(id: number): Observable<Array<BookingModel>> {
+    return this.http.get<Array<BookingModel>>(
       API_SERVER +
       ApiRoute.SOCCER_FIELDS_BOOKINGS.replace(PATH_SOCCER_FIELD_ID, (id || "").toLocaleString()),
       {

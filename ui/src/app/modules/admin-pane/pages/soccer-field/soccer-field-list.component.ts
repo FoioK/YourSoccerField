@@ -33,7 +33,7 @@ export class SoccerFieldListComponent implements OnInit {
       .subscribe(data => this.soccerFields = data);
   }
 
-  editSoccerField(soccerField: SoccerFieldModel) {
+  private editSoccerField(soccerField: SoccerFieldModel) {
     this.editSoccerFieldDialog = this.dialog.open(
       EditSoccerFieldModal,
       {
@@ -57,7 +57,7 @@ export class SoccerFieldListComponent implements OnInit {
       });
   }
 
-  deleteSoccerField(soccerFieldId) {
+  private deleteSoccerField(soccerFieldId) {
     this.soccerFieldService.deleteSoccerField(soccerFieldId)
       .subscribe(result => {
         if (result.status == 200 || result.status == 204) {

@@ -31,13 +31,14 @@ import {SurfaceModel} from 'src/app/shared/models/surface.model';
   ]
 })
 export class HomeComponent implements OnInit {
-  filterShow = false;
-  filterForm: FormGroup;
-  surfaces: FormArray = this.formBuilder.array([]);
-  addressGroup: FormGroup;
-  exampleSoccerFieldList: Array<SoccerFieldModel>;
-  promptSoccerFieldList: Array<SoccerFieldModel>;
-  surfacesList: Array<SurfaceModel>;
+
+  private filterShow = false;
+  private filterForm: FormGroup;
+  private surfaces: FormArray = this.formBuilder.array([]);
+  private addressGroup: FormGroup;
+  private exampleSoccerFieldList: Array<SoccerFieldModel>;
+  private promptSoccerFieldList: Array<SoccerFieldModel>;
+  private surfacesList: Array<SurfaceModel>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,13 +48,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getExampleSoccerfields();
+    this.getExampleSoccerFields();
     this.getAllSurfaces();
     this.initAddressForm();
     this.buildFilterForm();
   }
 
-  private getExampleSoccerfields() {
+  private getExampleSoccerFields() {
     this.soccerFieldService.getExampleTen().subscribe(result => {
       this.exampleSoccerFieldList = result;
     });
@@ -78,10 +79,9 @@ export class HomeComponent implements OnInit {
           ? this.soccerFieldService.findByAddressContains(street)
           : of([])
       )
-    )
-      .subscribe(result => {
-        this.promptSoccerFieldList = result;
-      });
+    ).subscribe(result => {
+      this.promptSoccerFieldList = result;
+    });
   }
 
   private buildFilterForm() {
@@ -101,16 +101,12 @@ export class HomeComponent implements OnInit {
       this.soccerFieldService.findByCustomCriteria(value).subscribe(
         result => {
           this.promptSoccerFieldList = result;
-        },
-        () => {
-        },
-        () => {
         }
       );
     });
   }
 
-  private createNewControl(id: number) {
+  private static createNewControl(id: number) {
     return new FormControl(id);
   }
 
@@ -118,7 +114,7 @@ export class HomeComponent implements OnInit {
     const index: number = this.surfaces.value.findIndex(control => control === id);
 
     if (index === -1) {
-      this.surfaces.push(this.createNewControl(id));
+      this.surfaces.push(HomeComponent.createNewControl(id));
     } else {
       this.surfaces.removeAt(index);
     }

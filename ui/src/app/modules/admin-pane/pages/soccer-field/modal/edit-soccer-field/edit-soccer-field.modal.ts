@@ -13,11 +13,11 @@ import {SurfaceModel} from "../../../../../../shared/models/surface.model";
 })
 export class EditSoccerFieldModal implements OnInit {
 
-  form: FormGroup;
-  addressForm: FormGroup;
+  private form: FormGroup;
+  private addressForm: FormGroup;
 
-  soccerField: SoccerFieldModel;
-  surfaceList: Array<SurfaceModel>;
+  private readonly soccerField: SoccerFieldModel;
+  private surfaceList: Array<SurfaceModel>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,11 +34,11 @@ export class EditSoccerFieldModal implements OnInit {
     this.getAllSurfaces();
   }
 
-  save() {
+  private save() {
     this.dialogRef.close(this.prepareSoccerField());
   }
 
-  close() {
+  private close() {
     this.dialogRef.close();
   }
 

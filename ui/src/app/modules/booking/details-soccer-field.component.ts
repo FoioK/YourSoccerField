@@ -2,32 +2,32 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BookingService} from '../../core/http/booking/booking.service';
 import {SoccerFieldModel} from '../../shared/models/soccer-field.model';
-import {ReservationModel} from 'src/app/shared/models/reservation.model';
+import {BookingModel} from 'src/app/shared/models/booking.model';
 import {DatePipe} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SoccerFieldService} from '../../core/http/soccer-field/soccer-field.service';
 import {SessionService} from "../../core/services/session.service";
 
 @Component({
-  selector: 'app-details-soccerfield',
-  templateUrl: './details-soccerfield.component.html',
-  styleUrls: ['./details-soccerfield.component.css']
+  selector: 'app-details-soccerField',
+  templateUrl: './details-soccer-field.component.html',
+  styleUrls: ['./details-soccer-field.component.css']
 })
-export class DetailsSoccerfieldComponent implements OnInit {
-  soccerfieldToBook: SoccerFieldModel;
-  soccerFieldId: string;
-  toBookingStart: Date = new Date();
-  toBookingEnd: Date = new Date();
-  userCode: number;
-  isBooking: boolean = false;
-  isPaid: boolean = false;
-  paymentCode: string;
-  copyText: string = 'Copy';
-  errorMsg: string;
+export class DetailsSoccerFieldComponent implements OnInit {
+  private soccerFieldToBook: SoccerFieldModel;
+  private soccerFieldId: string;
+  private toBookingStart: Date = new Date();
+  private toBookingEnd: Date = new Date();
+  private userCode: number;
+  private isBooking: boolean = false;
+  private isPaid: boolean = false;
+  private paymentCode: string;
+  private copyText: string = 'Copy';
+  private errorMsg: string;
 
   constructor(
     private route: ActivatedRoute,
-    private reservationService: BookingService,
+    private bookingService: BookingService,
     private soccerFieldService: SoccerFieldService,
     private sessionService: SessionService,
     private datePipe: DatePipe
@@ -35,16 +35,16 @@ export class DetailsSoccerfieldComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSoccerfieldById();
+    this.getSoccerFieldById();
     this.userCode = this.sessionService.getLoggedUserCode();
   }
 
-  private getSoccerfieldById(): void {
+  private getSoccerFieldById(): void {
     this.soccerFieldId = this.route.snapshot.paramMap.get('id');
     this.soccerFieldService
       .getSoccerFieldById(parseInt(this.soccerFieldId, 10))
       .subscribe(result => {
-        this.soccerfieldToBook = result;
+        this.soccerFieldToBook = result;
       });
   }
 
@@ -52,6 +52,7 @@ export class DetailsSoccerfieldComponent implements OnInit {
     this.errorMsg = '';
     this.isPaid = false;
     this.isBooking = data.isBooking;
+
     if (this.isBooking) {
       this.toBookingStart = new Date(data.start);
       this.toBookingEnd = new Date(data.end);
@@ -61,6 +62,7 @@ export class DetailsSoccerfieldComponent implements OnInit {
   private transformDateToApiFormat(date: Date): string {
     // result -> yyyy-mm-ddThh:mm in 24 hours format
     const dataDate = new Date(date);
+
     return (
       this.datePipe.transform(dataDate, 'yyyy-MM-dd') +
       'T' +
@@ -71,7 +73,7 @@ export class DetailsSoccerfieldComponent implements OnInit {
     );
   }
 
-  private generatePaymentCode(data: string): string {
+  private static generatePaymentCode(data: string): string {
     let result = '';
     for (let i = 0; i < btoa(data).length; i++) {
       result += btoa(data)
@@ -81,30 +83,32 @@ export class DetailsSoccerfieldComponent implements OnInit {
         result += '/';
       }
     }
+
     return result;
   }
 
-  private setReservation(): void {
-    const reservation: ReservationModel = {
+  private setBooking(): void {
+    const booking: BookingModel = {
       executionTime: '01:30',
       payed: false,
       soccerField: parseInt(this.soccerFieldId, 10),
       startDate: this.transformDateToApiFormat(this.toBookingStart),
       userCode: this.userCode
     };
-    this.reservationService
-      .createReservation(reservation)
+
+    this.bookingService
+      .createBooking(booking)
       .subscribe(
         result => {
-          this.paymentCode = this.generatePaymentCode(
+          this.paymentCode = DetailsSoccerFieldComponent.generatePaymentCode(
             result.body.id.toString()
           );
-          this.reservationService.setWasBooked(true);
+          this.bookingService.setWasBooked(true);
           this.isPaid = true;
         },
         (err: HttpErrorResponse) => {
           if (err.status === 409) {
-            this.reservationService.setWasBooked(true);
+            this.bookingService.setWasBooked(true);
             this.isPaid = false;
             this.isBooking = false;
             this.errorMsg = 'Is another booking on this time, please try again';
