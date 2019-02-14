@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent} from 'angular-calendar';
 import {WeekView, WeekViewHourColumn} from 'calendar-utils';
 import {compareDateIsLess} from '../../functions/compare-date-is-less';
@@ -14,6 +14,7 @@ import {setNewCalendarEvent} from '../../functions/set-new-calendar-event';
 
 @Component({
   selector: 'app-calendar',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })

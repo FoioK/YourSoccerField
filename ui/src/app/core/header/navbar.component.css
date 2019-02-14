@@ -34,6 +34,13 @@
   transition: 1s all;
 }
 
+.nav-logo {
+  font-family: 'Carter One', cursive;
+  font-size: 2rem !important;
+  color: #fff !important;
+  cursor: pointer;
+}
+
 .arrow {
   font-size: 18px;
   color: #fff;
