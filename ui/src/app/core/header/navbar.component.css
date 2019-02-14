@@ -1,6 +1,7 @@
 .navbar-dark .navbar-nav .nav-link {
   color: #fff;
   font-size: 18px;
+  -webkit-transition: 1s all;
   transition: 1s all;
 }
 
@@ -11,21 +12,25 @@
 
 .navbar-dark .navbar-nav {
   color: #495057;
+  -webkit-transition: 1s all;
   transition: 1s all;
 }
 
 .nav-item {
   text-align: center;
   cursor: pointer;
+  padding: 0 5px;
 }
 
 .nav-item:hover {
   background-color: #fff;
+  -webkit-transition: 1s all;
   transition: 1s all;
 }
 
-.nav-item:hover > .nav-link:hover {
+.nav-item:hover>.nav-link:hover {
   color: #495057;
+  -webkit-transition: 1s all;
   transition: 1s all;
 }
 
@@ -35,16 +40,19 @@
   cursor: pointer;
   height: 100%;
   width: 100%;
+  -webkit-transition: 1s all;
   transition: 1s all;
 }
 
-.nav-item:hover > .arrow {
+.nav-item:hover>.arrow {
   color: #495057;
+  -webkit-transition: 1s all;
   transition: 1s all;
 }
 
 .hidden {
   opacity: 0;
   visibility: hidden;
+  -webkit-transition: 1s all;
   transition: 1s all;
 }
