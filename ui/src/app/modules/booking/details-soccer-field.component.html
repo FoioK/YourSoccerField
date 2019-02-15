@@ -5,7 +5,7 @@
         Name
       </span>
       <span class="field-details">
-        {{soccerfieldToBook?.name}}
+        {{soccerFieldToBook?.name}}
       </span>
     </div>
     <div class="col-6 col-lg-4 my-2 px-2 container-fields">
@@ -13,9 +13,9 @@
         Adress
       </span>
       <span class="field-details">
-        {{soccerfieldToBook?.address.city}},
-        {{soccerfieldToBook?.address.street}}
-        {{soccerfieldToBook?.address.apartmentNumber}}
+        {{soccerFieldToBook?.address.city}},
+        {{soccerFieldToBook?.address.street}}
+        {{soccerFieldToBook?.address.apartmentNumber}}
       </span>
     </div>
     <div class="col-6 col-lg-4 my-2 px-2 container-fields">
@@ -23,9 +23,9 @@
         Size
       </span>
       <span class="field-details">
-        {{soccerfieldToBook?.length}} m
+        {{soccerFieldToBook?.length}} m
         x
-        {{soccerfieldToBook?.width}} m
+        {{soccerFieldToBook?.width}} m
       </span>
     </div>
     <div class="col-6 col-lg-4 my-2 px-2 container-fields">
@@ -33,7 +33,7 @@
         Price
       </span>
       <span class="field-details">
-        {{soccerfieldToBook?.price}} PLN/1.5h
+        {{soccerFieldToBook?.price}} PLN/1.5h
       </span>
     </div>
     <div class="col-6 col-lg-4 my-2 px-2 container-fields">
@@ -41,7 +41,7 @@
         Surface
       </span>
       <span class="field-details">
-        {{soccerfieldToBook?.surface.name}}
+        {{soccerFieldToBook?.surface.name}}
       </span>
     </div>
     <div class="col-6 col-lg-4 my-2 px-2 container-fields">
@@ -49,9 +49,9 @@
         Open hours
       </span>
       <span class="field-details">
-        {{soccerfieldToBook?.openHour.s1}}
+        {{soccerFieldToBook?.openHour.s1}}
         -
-        {{soccerfieldToBook?.openHour.e1}}
+        {{soccerFieldToBook?.openHour.e1}}
       </span>
     </div>
     <div class="col-6 col-lg-4 my-2 px-2 container-fields">
@@ -59,7 +59,7 @@
         Fenced
       </span>
       <span class="field-details">
-        <i *ngIf="soccerfieldToBook?.fenced;
+        <i *ngIf="soccerFieldToBook?.fenced;
          else notFenced"
            class="fas fa-check data-icon data-icon-true">
         </i>
@@ -74,7 +74,7 @@
         Lighting
       </span>
       <span class="field-details">
-        <i *ngIf="soccerfieldToBook?.lighting;
+        <i *ngIf="soccerFieldToBook?.lighting;
          else notLighting"
            class="fas fa-check data-icon data-icon-true"></i>
         <ng-template #notLighting>
@@ -87,7 +87,7 @@
         Locker room
       </span>
       <span class="field-details">
-        <i *ngIf="soccerfieldToBook?.lockerRoom;
+        <i *ngIf="soccerFieldToBook?.lockerRoom;
          else notLockerRoom"
            class="fas fa-check data-icon data-icon-true">
         </i>
@@ -101,7 +101,7 @@
         Description
       </span>
       <span class="field-details">
-        {{soccerfieldToBook?.description}}
+        {{soccerFieldToBook?.description}}
       </span>
     </div>
   </div>
@@ -119,17 +119,17 @@
     </div>
     <div class="col-12 mt-4 text-left">
       <span class="field-title field-title-summary">
-        {{soccerfieldToBook?.address.city}},
-        {{soccerfieldToBook?.address.street}}
-        {{soccerfieldToBook?.address.apartmentNumber}}
+        {{soccerFieldToBook?.address.city}},
+        {{soccerFieldToBook?.address.street}}
+        {{soccerFieldToBook?.address.apartmentNumber}}
       </span>
     </div>
     <div class="col-12 text-left">
       <span class="field-details-small">
-        {{soccerfieldToBook?.length}} m
+        {{soccerFieldToBook?.length}} m
         x
-        {{soccerfieldToBook?.width}} m
-        | {{soccerfieldToBook?.surface.name}}
+        {{soccerFieldToBook?.width}} m
+        | {{soccerFieldToBook?.surface.name}}
       </span>
     </div>
     <section [hidden]="isBooking">
@@ -164,7 +164,7 @@
       </div>
       <div class="col-12 mt-4">
         <span class="field-title field-title-summary">
-          {{soccerfieldToBook?.price}} zł
+          {{soccerFieldToBook?.price}} zł
         </span>
       </div>
       <div class="col-12">
@@ -176,7 +176,7 @@
         <div class="col-12 mt-4">
           <button class="btn summary-btn my-2"
                   [disabled]="!isBooking"
-                  (click)="setReservation()">
+                  (click)="setBooking()">
             book
           </button>
         </div>
