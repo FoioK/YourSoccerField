@@ -21,5 +21,6 @@ export function checkAvailabilityDateByDisable(
       });
     });
   });
+
   return result;
 }

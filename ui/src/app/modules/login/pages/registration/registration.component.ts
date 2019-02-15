@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {passwordValidator} from '../../validators/password-validator';
-import {Configuration} from '../../../../configs/configuration';
-import {AppRoute} from '../../../../configs/app-route';
+import {EMAIL_REG_EXP} from '../../../../configs/configuration';
+import {AppRoute} from '../../../../app.route';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 import {UserService} from "../../../../core/http/user/user.service";
@@ -13,16 +13,17 @@ import {UserService} from "../../../../core/http/user/user.service";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  registrationForm: FormGroup;
-  registrationErrorMsg: string;
-  errorReason: string;
+
+  private registrationForm: FormGroup;
+  private registrationErrorMsg: string;
+  private errorReason: string;
 
   constructor(
     private formBuilder: FormBuilder,
-    private configuration: Configuration,
     private userService: UserService,
     private router: Router
   ) {
+
   }
 
   ngOnInit() {
@@ -34,23 +35,23 @@ export class RegistrationComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(this.configuration.getEmailRegExp())
+          Validators.pattern(EMAIL_REG_EXP)
         ]
       ],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required, passwordValidator]]
     });
 
-    this.registrationForm.controls.password.valueChanges.subscribe(x =>
+    this.registrationForm.controls.password.valueChanges.subscribe(() =>
       this.registrationForm.controls.confirmPassword.updateValueAndValidity()
     );
   }
 
-  getLoginRoute(): string {
+  private getLoginRoute(): string {
     return '/' + AppRoute.LOGIN;
   }
 
-  createUser() {
+  private createUser() {
     this.userService.createUser(this.registrationForm.value).subscribe(
       response => {
         if (response.status === 201) {

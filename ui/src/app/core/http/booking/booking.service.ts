@@ -1,48 +1,38 @@
 import {Injectable} from '@angular/core';
-import {SoccerField} from '../../../shared/models/soccer-field';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Configuration} from '../../../configs/configuration';
-import {Reservation} from '../../../shared/models/reservation';
+import {API_SERVER} from '../../../configs/configuration';
+import {BookingModel} from '../../../shared/models/booking.model';
 import {catchError} from 'rxjs/operators';
 import {HeaderService} from "../../services/header.service";
-import {ApiRoutes, PATH_SOCCER_FIELD_ID} from "../../../configs/api-routes";
+import {ApiRoute} from "../api.route";
+import {SessionService} from "../../services/session.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
-  soccerfieldToBook: SoccerField;
+
   private isBookedSubject = new BehaviorSubject<boolean>(false);
 
   constructor(
     private http: HttpClient,
-    private configuration: Configuration,
+    private sessionService: SessionService,
   ) {
+
   }
 
-  getReservationsForSoccerfield(id: number): Observable<Array<Reservation>> {
-    return this.http.get<Array<Reservation>>(
-      this.configuration.apiServer +
-      ApiRoutes.SOCCER_FIELDS_BOOKINGS.replace(PATH_SOCCER_FIELD_ID, (id || "").toLocaleString()),
+  createBooking(
+    booking: BookingModel
+  ): Observable<HttpResponse<BookingModel>> {
+    return this.http.post<BookingModel>(
+      API_SERVER + ApiRoute.BOOKINGS,
+      booking,
       {
-        headers: HeaderService.getJSONContentTypeWithToken()
-      }
-    ).pipe(catchError(this.errorHandler));
-  }
-
-  createReservation(
-    reservation: Reservation
-  ): Observable<HttpResponse<Reservation>> {
-    return this.http.post<Reservation>(
-      this.configuration.apiServer +
-      ApiRoutes.BOOKINGS,
-      reservation,
-      {
-        headers: HeaderService.getJSONContentTypeWithToken(),
+        headers: HeaderService.JSONContentTypeWithToken(this.sessionService),
         observe: 'response'
       }
-    ).pipe(catchError(this.errorHandler));
+    ).pipe(catchError(BookingService.errorHandler));
   }
 
   setWasBooked(isBooked: boolean) {
@@ -53,7 +43,8 @@ export class BookingService {
     return this.isBookedSubject.asObservable();
   }
 
-  private errorHandler(errorResponse: HttpErrorResponse) {
+  private static errorHandler(errorResponse: HttpErrorResponse) {
     return throwError(errorResponse);
   }
+
 }

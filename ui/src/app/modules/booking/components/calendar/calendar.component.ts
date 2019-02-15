@@ -11,6 +11,7 @@ import {BookingService} from '../../../../core/http/booking/booking.service';
 import {addTimeToDate} from '../../functions/add-time-to-date';
 import {ActivatedRoute} from '@angular/router';
 import {setNewCalendarEvent} from '../../functions/set-new-calendar-event';
+import {SoccerFieldService} from "../../../../core/http/soccer-field/soccer-field.service";
 
 @Component({
   selector: 'app-calendar',
@@ -18,40 +19,42 @@ import {setNewCalendarEvent} from '../../functions/set-new-calendar-event';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+
   @Output()
   errorMsg: string;
   @Output()
-  toBooking: EventEmitter<any> = new EventEmitter<any>();
-  view: string = 'day';
-  soccerFieldId: string;
-  chooseEventId: number = -1;
-  currentId: number = -1;
-  viewDate: Date = new Date();
-  refresh: Subject<any> = new Subject();
-  events: CalendarEvent[] = [];
-  currentDayViewHour: WeekViewHourColumn[];
-  clickedDate: Date;
+
+  private toBooking: EventEmitter<any> = new EventEmitter<any>();
+  private view: string = 'day';
+  private soccerFieldId: string;
+  private chooseEventId: number = -1;
+  private viewDate: Date = new Date();
+  private refresh: Subject<any> = new Subject();
+  private events: CalendarEvent[] = [];
+  private currentDayViewHour: WeekViewHourColumn[];
+  private clickedDate: Date;
 
   constructor(
-    private reservationService: BookingService,
+    private bookingService: BookingService,
+    private soccerFieldService: SoccerFieldService,
     private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
     this.getBookedDate();
-    this.reservationService.checkWasBooked().subscribe(result => {
+    this.bookingService.checkWasBooked().subscribe(result => {
       if (result) {
         this.getBookedDate();
-        this.reservationService.setWasBooked(false);
+        this.bookingService.setWasBooked(false);
       }
     });
   }
 
   private getBookedDate() {
     this.soccerFieldId = this.route.snapshot.paramMap.get('id');
-    this.reservationService
-      .getReservationsForSoccerfield(parseInt(this.soccerFieldId, 10))
+    this.soccerFieldService
+      .getBookings(parseInt(this.soccerFieldId, 10))
       .subscribe(result => {
         this.events = [];
         result.forEach(e => {
@@ -136,4 +139,5 @@ export class CalendarComponent implements OnInit {
     }
     this.refresh.next();
   }
+
 }

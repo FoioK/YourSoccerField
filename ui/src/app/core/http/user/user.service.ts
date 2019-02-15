@@ -1,119 +1,75 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Configuration} from '../../../configs/configuration';
-import {TokenModel} from '../../../shared/models/token-model';
-import {JwtHelperService} from '@auth0/angular-jwt';
-import {Router} from '@angular/router';
-import {AppRoute} from '../../../configs/app-route';
-import {User} from "../../../shared/models/user";
+import {API_SERVER} from '../../../configs/configuration';
+import {UserModel} from "../../../shared/models/user.model";
 import {catchError} from "rxjs/operators";
 import {HeaderService} from "../../services/header.service";
-import {ApiRoutes, PATH_USER_ID} from "../../../configs/api-routes";
+import {ApiRoute, PATH_USER_ID} from "../api.route";
+import {SessionService} from "../../services/session.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private jwtHelper: JwtHelperService = new JwtHelperService();
-  private isLoggedSubject = new BehaviorSubject<boolean>(false);
-
   constructor(
     private http: HttpClient,
-    private configuration: Configuration,
-    private router: Router,
-    private headerService: HeaderService
+    private sessionService: SessionService
   ) {
 
   }
 
-  isLogged(): Observable<boolean> {
-    this.setLogged(this.isAuthenticated());
-
-    return this.isLoggedSubject.asObservable();
-  }
-
-  isAuthenticated(): boolean {
-    const token: TokenModel = JSON.parse(localStorage.getItem('token'));
-
-    return token != null && !this.jwtHelper.isTokenExpired(token.access_token);
-  }
-
-  setLogged(isLogged: boolean) {
-    this.isLoggedSubject.next(isLogged);
-  }
-
-  logOut() {
-    localStorage.removeItem('token');
-    this.setLogged(false);
-  }
-
   adminPaneAuthenticate(): Observable<boolean> {
     return this.http.get<boolean>(
-      this.configuration.apiServer +
-      ApiRoutes.USERS_ADMIN_AUTHENTICATE,
-      {headers: this.headerService.getTokenAuthorization()}
+      API_SERVER + ApiRoute.USERS_ADMIN_AUTHENTICATE,
+      {headers: HeaderService.tokenWithoutContentType(this.sessionService)}
     );
   }
 
-  getLoggedUserCode(): number {
-    const token: TokenModel = JSON.parse(localStorage.getItem('token'));
-    if (token !== null) {
-      return token.code;
-    } else {
-      this.logOut();
-      this.router.navigateByUrl(AppRoute.LOGIN);
-    }
-  }
-
-  createUser(user: User): Observable<HttpResponse<User>> {
+  createUser(user: UserModel): Observable<HttpResponse<UserModel>> {
     return this.http
-      .post<User>(
-        this.configuration.apiServer + ApiRoutes.USERS,
+      .post<UserModel>(
+        API_SERVER + ApiRoute.USERS,
         user,
         {
-          headers: HeaderService.getJSONContentType(),
+          headers: HeaderService.JSONContentType(),
           observe: 'response'
         }
-      )
-      .pipe(catchError(this.errorHandler));
+      ).pipe(catchError(UserService.errorHandler));
   }
 
-  findAll(): Observable<Array<User>> {
-    return this.http.get<Array<User>>(
-      this.configuration.apiServer +
-      ApiRoutes.USERS,
+  findAll(): Observable<Array<UserModel>> {
+    return this.http.get<Array<UserModel>>(
+      API_SERVER + ApiRoute.USERS,
       {
-        headers: HeaderService.getJSONContentTypeWithToken()
+        headers: HeaderService.JSONContentTypeWithToken(this.sessionService)
       }
-    )
+    ).pipe(catchError(UserService.errorHandler));
   }
 
-  updateUser(user: User) {
+  updateUser(user: UserModel) {
     return this.http.put(
-      this.configuration.apiServer +
-      ApiRoutes.USERS_WITH_ID.replace(PATH_USER_ID, (user.id || "").toLocaleString()),
+      API_SERVER + ApiRoute.USERS_WITH_ID.replace(PATH_USER_ID, (user.id || "").toLocaleString()),
       user,
       {
-        headers: HeaderService.getJSONContentTypeWithToken(),
+        headers: HeaderService.JSONContentTypeWithToken(this.sessionService),
         observe: "response"
       }
-    )
+    ).pipe(catchError(UserService.errorHandler));
   }
 
   deleteUser(userId) {
     return this.http.delete(
-      this.configuration.apiServer +
-      ApiRoutes.USERS_WITH_ID.replace(PATH_USER_ID, (userId.id || "").toLocaleString()),
+      API_SERVER + ApiRoute.USERS_WITH_ID.replace(PATH_USER_ID, (userId.id || "").toLocaleString()),
       {
-        headers: HeaderService.getJSONContentTypeWithToken(),
+        headers: HeaderService.JSONContentTypeWithToken(this.sessionService),
         observe: "response"
       }
-    )
+    ).pipe(catchError(UserService.errorHandler));
   }
 
-  private errorHandler(errorResponse: HttpErrorResponse) {
+  private static errorHandler(errorResponse: HttpErrorResponse) {
     return throwError(errorResponse.error);
   }
 }
