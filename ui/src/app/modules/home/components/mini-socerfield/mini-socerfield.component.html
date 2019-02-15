@@ -1,0 +1,48 @@
+<section class="row no-gutters col-12 p-2 mini-socerfield">
+  <div [ngClass]="{'picture-even': even===true}"
+    class="col-6 p-0 container-picture">
+  </div>
+  <div class="row no-gutters col-6 container-data">
+    <h1 class="px-3 data-title">
+      {{field.name}}
+    </h1>
+    <div class="col-12 px-3">
+      <label class="my-2 data-label">
+        <i class="fas fa-map-marker-alt data-icon"></i>
+        <span>
+          {{field.address.street + ' ' + field.address.apartmentNumber }}
+        </span>
+      </label>
+    </div>
+    <div class="col-12 px-3">
+      <label class="my-2 data-label">
+        <i class="fas fa-seedling data-icon"></i>
+        <span>
+          {{field.surface.name}}
+        </span>
+      </label>
+    </div>
+    <div class="col-12 px-3">
+      <label class="my-2 data-label">
+        <i class="fas fa-credit-card data-icon"></i>
+        <span>
+          {{field.price}}
+        </span>
+      </label>
+    </div>
+    <div class="col-12 px-3">
+      <label class="my-2 data-label">
+        <i class="fas fa-expand-arrows-alt data-icon"></i>
+        <span>
+          {{field.length + 'm'}} x {{field.width + 'm'}}
+        </span>
+      </label>
+    </div>
+    <div class="col-12 px-3">
+      <button (click)="book(field)"
+        class="btn btn-book w-100 my-2">
+        book
+      </button>
+    </div>
+  </div>
+</section>

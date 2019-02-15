@@ -1,0 +1,49 @@
+<main class="container-main">
+  <section class="col-8 col-md-6 col-lg-4 container-center">
+    <header>
+      <i class="fas fa-futbol form-logo"></i>
+      <h1 class="form-title">
+        Your Soccer Field
+      </h1>
+    </header>
+    <form (submit)="logIn()" [formGroup]="loginForm">
+      <div class="form-container">
+        <input [ngClass]="{'error-show': errorStatus === 401}"
+          class="form-control form-input"
+          formControlName="email"
+          placeholder="Email" type="email">
+        <i class="fas fa-at form-icon"></i>
+      </div>
+      <div class="form-container">
+        <input [ngClass]="{'error-show': errorStatus === 400}"
+          class="form-control form-input"
+          formControlName="password"
+          placeholder="Password" type="password">
+        <i class="fas fa-key form-icon"></i>
+      </div>
+      <div class="row no-gutters form-container">
+        <button [disabled]="loginForm.invalid"
+        class="btn btn-primary form-btn" type="submit">
+          Login
+        </button>
+        <div class="col-6 mt-3 text-center">
+          <span class="form-text">
+            Not a member yet ?
+          </span>
+        </div>
+        <div class="col-6 text-center mt-3">
+          <span class="form-text form-link">
+            <a (click)="goToRegistration()">
+              Create your account
+            </a>
+          </span>
+        </div>
+      </div>
+    </form>
+    <section class="form-container-error"
+      [hidden]="!loginErrorMsg?.length > 0">
+        <i class="fas fa-plus error-icon"></i>
+        <span class="px-3">{{ loginErrorMsg }}</span>
+    </section>
+  </section>
+</main>
