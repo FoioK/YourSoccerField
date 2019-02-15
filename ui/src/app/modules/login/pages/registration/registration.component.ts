@@ -10,7 +10,7 @@ import {UserService} from "../../../../core/http/user/user.service";
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['../../styles/common-style.css', './registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
 

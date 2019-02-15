@@ -1,13 +1,22 @@
 .mini-socerfield {
+  height: 100%;
   min-height: 200px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   background: #fff;
   border-radius: .25rem;
   background-clip: padding-box;
   border: 1px solid #ced4da;
 }
 
-.picture {
+.container-picture {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
   min-height: 200px;
   background: url('https://images.pexels.com/photos/399187/pexels-photo-399187.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center;
   background-size: cover;
@@ -18,26 +27,32 @@
   background-size: cover;
 }
 
-.socerfield-data {
+.container-data,
+.data-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 18px;
-  line-height: 18px;
   color: #495057;
 }
 
-.form-icons {
+.data-icon {
   width: 30px;
   font-size: 30px;
   color: #343a40;
-  margin: 0px 30px 0px 0px;
+  margin-right: 30px;
 }
 
-.form-title {
+.data-title {
   color: #343a40;
   text-align: center;
   width: 100%;
   line-height: 20px;
   font-size: 24px;
-  margin: 20px 0px 20px 0px;
+  margin: 20px 0px;
 }
 
 .btn-book {
@@ -47,24 +62,24 @@
 .btn-book:hover {
   background: #007bff;
   color: #fff;
+  -webkit-transition: 1s all;
   transition: 1s all;
 }
 
 @media only screen and (max-width: 576px) {
-  .socerfield-data {
+  .container-data {
     font-size: 14px;
-    line-height: 14px;
   }
 
-  .form-icons {
+  .data-icon {
     width: 20px;
     font-size: 20px;
-    margin: 0px 20px 0px 0px;
+    margin-right: 20px;
   }
 
-  .form-title {
+  .data-title {
     line-height: 18px;
     font-size: 18px;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px;
   }
 }
