@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {UserService} from "../http/user/user.service";
 import {Injectable} from "@angular/core";
 import {catchError, map} from "rxjs/operators";
-import {AppRoute} from "../../configs/app-route";
+import {AppRoute} from "../../app.route";
 
 @Injectable({
   providedIn: 'root'
