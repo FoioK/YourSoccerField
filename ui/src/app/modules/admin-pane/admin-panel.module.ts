@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 
 import {AdminPanelComponent} from "./admin-panel.component";
 import {SoccerFieldListComponent} from "./pages/soccer-field/soccer-field-list.component";
-import {AdminPaneRoutingModule} from "./admin-pane-routing.module";
+import {AdminPanelRoutingModule} from "./admin-panel-routing.module";
 import {DataTableModule} from "angular-6-datatable";
 import {MatDialogModule} from "@angular/material";
 import {EditSoccerFieldModal} from "./pages/soccer-field/modal/edit-soccer-field/edit-soccer-field.modal";
@@ -20,7 +20,7 @@ import {SharedModule} from "../../shared/shared.module";
   ],
   imports: [
     SharedModule,
-    AdminPaneRoutingModule,
+    AdminPanelRoutingModule,
 
     DataTableModule,
     MatDialogModule
@@ -31,5 +31,6 @@ import {SharedModule} from "../../shared/shared.module";
     EditUserModal
   ]
 })
-export class AdminPaneModule {
+export class AdminPanelModule {
+
 }

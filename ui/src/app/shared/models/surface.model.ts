@@ -1,4 +1,4 @@
-export interface Surface {
+export interface SurfaceModel {
   id?: number;
   name: string;
 }

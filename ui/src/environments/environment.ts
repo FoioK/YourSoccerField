@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  version: '0.4.1',
+  name: 'Your Soccer Field',
+  apiServer: 'http://127.0.0.37:8080/api',
+  authServer: 'http://127.0.0.37:8081',
 };
 
 /*

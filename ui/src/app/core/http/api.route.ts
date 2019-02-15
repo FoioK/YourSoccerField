@@ -1,10 +1,10 @@
-export enum ApiRoutes {
+export enum ApiRoute {
 
   BOOKINGS = '/bookings',
 
   SOCCER_FIELDS = '/soccerfields',
   SOCCER_FIELDS_WITH_ID = '/soccerfields/{soccerFieldId}',
-  SOCCER_FIELDS_BOOKINGS = 'soccerfields/{soccerFieldId}/bookings',
+  SOCCER_FIELDS_BOOKINGS = '/soccerfields/{soccerFieldId}/bookings',
   SOCCER_FIELDS_ADVANCED_SEARCH = '/soccerfields/advancedSearch?encodedObject={encodedObject}',
   SOCCER_FIELDS_SEARCH_BY_STREET = '/soccerfields/byStreet/{street}',
   SOCCER_FIELDS_EXAMPLE_TEN = '/soccerfields/exampleTen',
@@ -12,8 +12,8 @@ export enum ApiRoutes {
   SURFACES = '/surfaces',
 
   USERS = '/users',
-  USERS_WITH_ID = 'users/{userId}',
-  USERS_BOOKINGS = 'users/{userId}/bookings',
+  USERS_WITH_ID = '/users/{userId}',
+  USERS_BOOKINGS = '/users/{userId}/bookings',
   USERS_ADMIN_AUTHENTICATE = '/users/admin/authenticate',
 }
 

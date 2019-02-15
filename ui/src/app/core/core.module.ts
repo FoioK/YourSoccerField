@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SharedModule} from "../shared/shared.module";
 import {HeaderService} from "./services/header.service";
 import {AppRoutingModule} from "../app-routing.module";
+import {SessionService} from "./services/session.service";
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,8 @@ import {AppRoutingModule} from "../app-routing.module";
     BookingService,
     AuthenticationGuard,
     AdminGuard,
-    HeaderService
+    HeaderService,
+    SessionService,
   ],
 })
 export class CoreModule {

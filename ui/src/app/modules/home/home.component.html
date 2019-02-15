@@ -1,141 +1,110 @@
-<main class="container-body">
-  <header class="col-12 px-0 px-md-4">
-    <div class="row no-gutters col-12 px-0">
+<div class="container-body">
+  <section class="col-12 col-sm-12 col-lg-12">
+    <div class="row no-gutters p-0 col-12 col-sm-12 col-lg-12">
       <!-- container for input search by location -->
-      <div class="order-md-1 order-2 col-12 col-md-6 col-lg-4 px-0">
-          <form [formGroup]="addressGroup" class="address-form">
-            <input class="form-control form-input"
-            formControlName="address"
-            placeholder="Write location"
-            type="text"/>
-            <i class="fas fa-search-location form-icon"></i>
+      <div class="order-sm-1 order-2 col-12 col-sm-6 col-lg-4 px-0">
+        <div class="justify-content-center form-item mx-0">
+          <form [formGroup]="addressGroup">
+            <input class="form-control form-input" formControlName="address" placeholder="Write location" type="text"/>
+            <i class="fas fa-search-location form-icons"></i>
           </form>
+        </div>
       </div>
       <!-- end container for input search by location -->
-      <!-- container for banner -->
-      <div class="order-1 order-xs-2 col-12 col-md-6 col-lg-8 px-0 container-banner">
-        <h1 class="m-0 px-4 banner-title">
-          Welcome in best place to look for active rest
-        </h1>
+      <!-- container for input search by location -->
+      <div class="order-1 order-sm-2 col-12 col-sm-6 col-lg-8 px-0 d-flex align-items-center justify-content-center">
+        <h1 class="form-title m-0 px-4">Welcome in best place to look for active rest</h1>
       </div>
-      <!-- end container for banner -->
+      <!-- end container for input search by location -->
     </div>
-     <!-- container for filter -->
-    <form [formGroup]="filterForm" class="col-12 px-0">
-        <button (click)="filterShow = !filterShow"
-          class="my-2 mx-0 form-control filter-btn">
+    <form [formGroup]="filterForm">
+      <!-- container for filter -->
+      <div class="col-12 col-sm-6 col-lg-4 px-0 ">
+        <button (click)="filterShow = !filterShow" class="form-control filter-btn my-2 mx-0">
           Filter
         </button>
-      <div [@showHide]="filterShow ? 'show' : 'hide'"
-        [hidden]="filterShow === false"
-        class="row no-gutters mx-0 col-12 container-filter">
+      </div>
+      <div [@showHide]="filterShow ? 'show' : 'hide'" [hidden]="filterShow === false"
+           class="row filter-row no-gutters mx-0 col-12 col-sm-12 col-lg-12">
         <!-- column for surface -->
-        <div class="col-12 col-md-3 my-1 container-surfaces">
-            <label *ngFor="let surface of surfacesList"
-              class="filter-label">
-              <input (input)="setSomething(surface.id)"
-                class="ml-2 filter-checkbox"
-                type="checkbox"/>
-              <span class="mx-auto ">
-                {{surface.name}}
-              </span>
+        <div class="col-12 col-sm-12 col-md-3 col-lg-3 my-1">
+          <!--
+            <button class="btn btn-secondary dropdown-toggle" href="#">SurfaceModel</button>
+          -->
+          <div class="d-flex h-100 justify-content-center align-items-center flex-column">
+            <label *ngFor="let surface of surfacesList" class="d-flex align-items-center w-100 filter-label">
+              <input (input)="setSomething(surface.id)" class="filter-checkbox ml-2" type="checkbox"/>
+              <span class="filter-label-title mx-auto">{{surface.name}}</span>
             </label>
+          </div>
         </div>
         <!-- end column for surface -->
-        <!-- column for other criteria-->
-        <div class="row col-12 col-md-9 my-1 no-gutters">
+        <div class="row col-12 col-sm-12 col-md-9 col-lg-9 my-1 no-gutters">
           <!-- column for paid -->
           <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
-            <label class="filter-label">
-              <input class="ml-2 filter-checkbox"
-                formControlName="paid"
-                type="checkbox"/>
-              <span class="mx-auto">
-                paid
-              </span>
+            <label class="d-flex align-items-center mb-0 filter-label">
+              <input class="filter-checkbox ml-2" formControlName="paid" type="checkbox"/>
+              <span class="filter-label-title mx-auto">paid</span>
             </label>
           </div>
           <!-- end column for paid -->
           <!-- column for lighting -->
           <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
-            <label class="filter-label">
-              <input class="ml-2 filter-checkbox"
-                formControlName="lighting"
-                type="checkbox"/>
-              <span class="mx-auto">
-                lighting
-              </span>
+            <label class="d-flex align-items-center mb-0 filter-label">
+              <input class="filter-checkbox ml-2" formControlName="lighting" type="checkbox"/>
+              <span class="filter-label-title mx-auto">lighting</span>
             </label>
           </div>
           <!-- end column for lighting -->
           <!-- column for fenced -->
           <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
-            <label class="filter-label">
-              <input class="ml-2 filter-checkbox"
-                formControlName="fenced"
-                type="checkbox"/>
-              <span class="mx-auto">
-                fance
-              </span>
+            <label class="d-flex align-items-center mb-0 filter-label">
+              <input class="filter-checkbox ml-2" formControlName="fenced" type="checkbox"/>
+              <span class="filter-label-title mx-auto">fance</span>
             </label>
           </div>
           <!-- end column for fenced -->
           <!-- column for lockerRoom -->
-          <div class="col-12 col-sm-6 col-lg-4 my-2 px-0 d-flex align-items-center">
-              <label class="filter-label">
-                <input class="ml-2 filter-checkbox"
-                  formControlName="lockerRoom"
-                  type="checkbox"/>
-                <span class="mx-auto">
-                  locker room
-                </span>
+          <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
+            <div class="d-flex h-100 justify-content-center align-items-center flex-column">
+              <label class="d-flex align-items-center mb-0 filter-label">
+                <input class="filter-checkbox ml-2" formControlName="lockerRoom" type="checkbox"/>
+                <span class="filter-label-title mx-auto">locker room</span>
               </label>
+            </div>
           </div>
           <!-- end column for lockerRoom -->
           <!-- column for width -->
           <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
-            <label class="filter-label">
+            <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
               Width :
             </label>
-            <app-multirange-slider
-              (emitMax)="getWidthMax($event)"
-              (emitMin)="getWidthMin($event)">
-            </app-multirange-slider>
-            <label class="filter-label">
-              <span class="mx-auto">
-                min {{filterForm.value.widthMin}} m
-              </span>
-              <span class="mx-auto">
-                max {{filterForm.value.widthMax}} m
-              </span>
+            <app-multirange-slider (emitMax)="getWidthMax($event)"
+                                   (emitMin)="getWidthMin($event)"></app-multirange-slider>
+            <label class="d-flex align-items-center mb-0 filter-label">
+              <span class="filter-label-title mx-auto">min {{filterForm.value.widthMin}}m</span>
+              <span class="filter-label-title mx-auto">max {{filterForm.value.widthMax}}m</span>
             </label>
           </div>
           <!-- end column for width -->
           <!-- column for length -->
           <div class="col-12 col-sm-6 col-lg-4 my-2 px-0">
-            <label class="filter-label">
+            <label class="d-flex align-items-center justify-content-center mb-0 filter-label">
               Length :
             </label>
-            <app-multirange-slider
-              (emitMax)="getLengthMax($event)"
-              (emitMin)="getLengthMin($event)">
-            </app-multirange-slider>
-            <label class="filter-label">
-              <span class="mx-auto">
-                min {{filterForm.value.lengthMin}} m
-              </span>
-              <span class="mx-auto">
-                max {{filterForm.value.lengthMax}} m
-              </span>
+            <app-multirange-slider (emitMax)="getLengthMax($event)"
+                                   (emitMin)="getLengthMin($event)"></app-multirange-slider>
+            <label class="d-flex align-items-center mb-0 filter-label">
+              <span class="filter-label-title mx-auto">min {{filterForm.value.lengthMin}}m</span>
+              <span class="filter-label-title mx-auto">max {{filterForm.value.lengthMax}}m</span>
             </label>
           </div>
           <!-- end column for length -->
         </div>
-        <!-- end column for other criteria-->
+
         <!-- column for hide button -->
-        <div class="col-12 mb-3">
-          <button (click)="filterShow = !filterShow"
-            class="btn filter-btn">
+        <div class="col-12 col-sm-12 col-lg-12 mb-3 h-100">
+          <button (click)="filterShow = !filterShow" class="btn filter-btn">
             Hide
           </button>
         </div>
@@ -143,43 +112,32 @@
       </div>
       <!-- end container for filter -->
     </form>
-  </header>
+  </section>
   <!-- main content -->
-  <section class="row no-gutters my-4 p-0 col-12">
-      <ng-container
-        *ngIf="promptSoccerFieldList?.length > 0; then prompt; else examples">
-      </ng-container>
+  <section>
+    <div class="row no-gutters col-12 col-sm-12 col-lg-12 my-4">
+      <ng-container *ngIf="promptSoccerFieldList?.length > 0; then prompt; else examples"></ng-container>
       <ng-template #prompt>
-        <div class="col-12 px-md-4">
-          <h2 class="m-0 text-md-left banner-title">
-            Found {{promptSoccerFieldList.length}} place
-          </h2>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 my-4 px-4">
+          <h1 class="form-title m-0 px-4 text-left">Found {{promptSoccerFieldList.length}} place</h1>
         </div>
-        <div *ngFor="let field of promptSoccerFieldList;
-          let i = even"
-          class="col-12 col-lg-6 my-4 px-md-4">
-          <app-mini-socerfield [even]="i"
-            [field]="field">
-          </app-mini-socerfield>
+        <div *ngFor="let field of promptSoccerFieldList; let i = even"
+             class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4">
+          <app-mini-socerfield [even]="i" [field]="field"></app-mini-socerfield>
         </div>
       </ng-template>
       <ng-template #examples>
-        <div class="col-12 px-md-4">
-          <h2 class="m-0 text-md-left banner-title">
-            Our top 10 recommended place
-          </h2>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 my-4 px-4">
+          <h1 class="form-title m-0 px-4 text-left">Our top 10 recommended place</h1>
         </div>
-        <div *ngFor="let field of exampleSoccerFieldList;
-          let i = even"
-          class="col-12 col-lg-6 my-4 px-md-4">
-          <app-mini-socerfield [even]="i"
-           [field]="field">
-          </app-mini-socerfield>
+        <div *ngFor="let field of exampleSoccerFieldList; let i = even"
+             class="col-12 col-sm-12 col-md-12 col-lg-6 my-4 px-4">
+          <app-mini-socerfield [even]="i" [field]="field"></app-mini-socerfield>
         </div>
       </ng-template>
+    </div>
   </section>
-</main>
+</div>
 <section>
-  <app-footer>
-  </app-footer>
+  <app-footer></app-footer>
 </section>

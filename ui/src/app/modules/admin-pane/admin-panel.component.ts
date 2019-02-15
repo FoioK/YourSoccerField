@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AppRoute} from "../../configs/app-route";
+import {AppRoute} from "../../app.route";
+import {AdminPanelRoute} from "./admin-panel.route";
 
 @Component({
   selector: 'app-admin-pane',
@@ -16,15 +17,15 @@ export class AdminPanelComponent {
 
   }
 
-  goToSoccerFields() {
-    this.goToRoute(AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD);
+  private goToSoccerFields() {
+    this.goToRoute(AdminPanelRoute.SOCCER_FIELD);
   }
 
-  goToUser() {
-    this.goToRoute(AppRoute.ADMIN_PANE_CHILD.USER);
+  private goToUser() {
+    this.goToRoute(AdminPanelRoute.USER);
   }
 
-  goToRoute(route: string) {
+  private goToRoute(route: AdminPanelRoute) {
     this.route.routeConfig.path != route ?
       this.router.navigateByUrl(AppRoute.ADMIN_PANE + '/' + route)
       :

@@ -42,5 +42,6 @@ export function checkAvailabilityDateByEvents(
       result = false;
     }
   });
+
   return result;
 }

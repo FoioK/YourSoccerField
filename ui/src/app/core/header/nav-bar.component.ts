@@ -1,31 +1,36 @@
 import {Component, OnInit, Renderer2} from "@angular/core";
 import {Router} from "@angular/router";
-import {AppRoute} from "../../configs/app-route";
+import {AppRoute} from "../../app.route";
+import {SessionService} from "../services/session.service";
 import {UserService} from "../http/user/user.service";
 
 @Component({
   selector: "navbar-page",
-  templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.css"]
+  templateUrl: "./nav-bar.component.html",
+  styleUrls: ["./nav-bar.component.css"]
 })
-export class NavbarComponent implements OnInit {
-  isLogged: Boolean = false;
-  private isAdmin: boolean = false;
+export class NavBarComponent implements OnInit {
+
+  private isLogged: Boolean = false;
+  private isAdmin: Boolean = false;
   private arrow: Boolean = false;
 
   constructor(
     private router: Router,
     private userService: UserService,
+    private sessionService: SessionService,
     private render: Renderer2,
   ) {
+
   }
 
   ngOnInit() {
-    this.userService.isLogged()
+    this.sessionService.isLogged()
       .subscribe(response => {
         this.isLogged = response;
         if (response) {
           this.checkIsAdmin();
+
           return;
         }
         this.isAdmin = false;
@@ -34,31 +39,32 @@ export class NavbarComponent implements OnInit {
     this.topArrow();
   }
 
-  isUserAdmin(): boolean {
+  private isUserAdmin(): Boolean {
     return this.isAdmin;
   }
 
-  goToAdminPane() {
+  private goToAdminPane() {
     this.router.navigateByUrl("/" + AppRoute.ADMIN_PANE);
   }
 
-  goToMain() {
+  private goToHome() {
     this.router.navigateByUrl("/" + AppRoute.HOME);
   }
 
-  goToLogin() {
+  private goToLogin() {
     this.router.navigateByUrl("/" + AppRoute.LOGIN);
   }
 
-  logOut() {
+  private logOut() {
     this.logOutProcess(this.router.url === AppRoute.HOME);
   }
 
-  logOutProcess(isMainPage: Boolean) {
-    this.userService.logOut();
-    this.userService.isLogged().subscribe(result => this.isLogged = result);
+  private logOutProcess(isHomePage: Boolean) {
+    this.sessionService.logOut();
+    this.sessionService.isLogged()
+      .subscribe(result => this.isLogged = result);
 
-    if (isMainPage) {
+    if (isHomePage) {
       window.location.reload();
     } else {
       this.router.navigateByUrl(AppRoute.HOME);
@@ -71,13 +77,21 @@ export class NavbarComponent implements OnInit {
   }
 
   private topArrow() {
-    this.render.listen(window, "scroll", () => {
-      this.arrow = window.scrollY > 50;
-    });
+    this.render.listen(
+      window,
+      "scroll",
+      () => {
+        this.arrow = window.scrollY > 50;
+      }
+    );
   }
 
   private scrollTop() {
-    window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
   }
 
 }

@@ -3,8 +3,8 @@ import {AdminPanelComponent} from "./admin-panel.component";
 import {NgModule} from "@angular/core";
 import {SoccerFieldListComponent} from "./pages/soccer-field/soccer-field-list.component";
 import {AdminGuard} from "../../core/guards/admin.guard";
-import {AppRoute} from "../../configs/app-route";
 import {UserListComponent} from "./pages/user/user-list.component";
+import {AdminPanelRoute} from "./admin-panel.route";
 
 const adminPaneRoutes: Routes = [
   {
@@ -20,12 +20,12 @@ const adminPaneRoutes: Routes = [
     // ]
   },
   {
-    path: AppRoute.ADMIN_PANE_CHILD.SOCCER_FIELD,
+    path: AdminPanelRoute.SOCCER_FIELD,
     component: SoccerFieldListComponent,
     canActivate: [AdminGuard]
   },
   {
-    path: AppRoute.ADMIN_PANE_CHILD.USER,
+    path: AdminPanelRoute.USER,
     component: UserListComponent,
     canActivate: [AdminGuard]
   }
@@ -39,6 +39,6 @@ const adminPaneRoutes: Routes = [
     RouterModule
   ]
 })
-export class AdminPaneRoutingModule {
+export class AdminPanelRoutingModule {
 
 }
