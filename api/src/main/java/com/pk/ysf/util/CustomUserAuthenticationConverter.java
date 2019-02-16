@@ -1,7 +1,7 @@
 package com.pk.ysf.util;
 
-import com.pk.ysf.apimodels.model.CustomUserDetail;
-import com.pk.ysf.apimodels.model.UserEntity;
+import com.pk.ysf.apimodels.entity.CustomUserDetail;
+import com.pk.ysf.apimodels.entity.UserEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    public final TokenStore tokenStore;
+    private final TokenStore tokenStore;
 
     @Autowired
     public ResourceServerConfiguration(TokenStore tokenStore) {

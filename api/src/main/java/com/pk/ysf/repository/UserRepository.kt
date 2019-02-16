@@ -1,7 +1,7 @@
 package com.pk.ysf.repository
 
-import com.pk.ysf.apimodels.model.UserEntity
-import com.pk.ysf.apimodels.model.UserRole
+import com.pk.ysf.apimodels.entity.UserEntity
+import com.pk.ysf.apimodels.entity.UserRole
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query

@@ -1,6 +1,5 @@
-package com.pk.ysf.apimodels.model
+package com.pk.ysf.apimodels.entity
 
-import com.pk.ysf.apimodels.model.Role
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id

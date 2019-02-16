@@ -3,7 +3,7 @@ package com.pk.ysf.service.impl;
 import com.google.gson.Gson;
 import com.pk.ysf.apimodels.exception.ErrorCode;
 import com.pk.ysf.apimodels.exception.MissingEntityException;
-import com.pk.ysf.apimodels.model.*;
+import com.pk.ysf.apimodels.entity.*;
 import com.pk.ysf.repository.AddressRepository;
 import com.pk.ysf.repository.BookingRepository;
 import com.pk.ysf.repository.SoccerFieldRepository;

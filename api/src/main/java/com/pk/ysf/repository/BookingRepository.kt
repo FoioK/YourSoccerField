@@ -1,6 +1,6 @@
 package com.pk.ysf.repository
 
-import com.pk.ysf.apimodels.model.Booking
+import com.pk.ysf.apimodels.entity.Booking
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

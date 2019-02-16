@@ -1,6 +1,6 @@
 package com.pk.ysf.config;
 
-import com.pk.ysf.apimodels.model.CustomUserDetail;
+import com.pk.ysf.apimodels.entity.CustomUserDetail;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
