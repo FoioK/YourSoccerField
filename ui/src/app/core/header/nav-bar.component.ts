@@ -29,7 +29,7 @@ export class NavBarComponent implements OnInit {
       .subscribe(response => {
         this.isLogged = response;
         if (response) {
-          this.checkIsAdmin();
+          // this.checkIsAdmin();
 
           return;
         }
@@ -72,11 +72,11 @@ export class NavBarComponent implements OnInit {
   }
 
   private checkIsAdmin() {
-    // this.userService.adminPaneAuthenticate()
-    //   .subscribe(response => this.isAdmin = response.valueOf(),
-    //   error => {
-    //     console.log(error);
-    // });
+    this.userService.adminPaneAuthenticate()
+      .subscribe(response => this.isAdmin = response.valueOf(),
+      error => {
+        console.log(error);
+    });
   }
 
   private topArrow() {
