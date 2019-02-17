@@ -1,0 +1,81 @@
+.container-body {
+  min-height: calc(100vh - 48px);
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(6, 88, 136, 0.5)), color-stop(rgba(7, 122, 59, 0.5)), to(rgba(9, 167, 80, 0.5))),
+    url("https://images.pexels.com/photos/1667583/pexels-photo-1667583.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&fbclid=IwAR2ccgRxcMYPCaBnpjJxFWDTgCheYggR0Rcfkti8Qt41MklViuO9LymO8BE") no-repeat center center fixed;
+  background: linear-gradient(to bottom right, rgba(6, 88, 136, 0.5), rgba(7, 122, 59, 0.5), rgba(9, 167, 80, 0.5)),
+    url("https://images.pexels.com/photos/1667583/pexels-photo-1667583.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&fbclid=IwAR2ccgRxcMYPCaBnpjJxFWDTgCheYggR0Rcfkti8Qt41MklViuO9LymO8BE") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  padding: 20px;
+  display: grid;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-family: 'Carter One', cursive;
+  color: #ffffff;
+  font-size: 24px;
+  overflow: hidden;
+}
+
+.container-center {
+  -ms-flex-item-align: center;
+  align-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column;
+  flex-flow: column;
+}
+
+.container-center>h1 {
+  font-size: 220px;
+  text-align: center;
+  margin: 0;
+  padding: 0px 20px;
+}
+
+.container-center>h2 {
+  text-align: center;
+  margin: 15px;
+}
+
+.container-center>.btn {
+  width: 200px;
+  font-size: 24px;
+  cursor: pointer;
+  border: none;
+  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #ffffff), color-stop(50%, #212529));
+  background: linear-gradient(to right, #ffffff 50%, #212529 50%);
+  background-position: 0 0;
+  background-size: 200% 100%;
+  -webkit-transition: 1s all;
+  transition: 1s all;
+}
+
+.container-center>.btn:hover {
+  color: #ffffff;
+  background-position: 100% 0;
+  -webkit-transition: 1s all;
+  transition: 1s all;
+}
+
+.container-center>.btn:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, .25);
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, .25);
+}
+
+@media only screen and (max-width: 576px) {
+  .container-center>h1 {
+    font-size: 180px;
+  }
+
+  .container-center>h2,
+  .container-body>.btn-home {
+    font-size: 20px;
+  }
+}
