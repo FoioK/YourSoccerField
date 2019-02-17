@@ -24,7 +24,7 @@ export class UserService {
     return this.http.get<boolean>(
       API_SERVER + ApiRoute.USERS_ADMIN_AUTHENTICATE,
       {headers: HeaderService.tokenWithoutContentType(this.sessionService)}
-    );
+    ).pipe(catchError(UserService.errorHandler));
   }
 
   createUser(user: UserModel): Observable<HttpResponse<UserModel>> {
@@ -70,6 +70,6 @@ export class UserService {
   }
 
   private static errorHandler(errorResponse: HttpErrorResponse) {
-    return throwError(errorResponse.error);
+    return throwError(errorResponse);
   }
 }
