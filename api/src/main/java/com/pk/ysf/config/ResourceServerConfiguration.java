@@ -36,7 +36,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .accessDeniedHandler(
                         (request, response, authException) ->
-                                response.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+                                response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                .and().headers().frameOptions().sameOrigin();
     }
 
     @Override

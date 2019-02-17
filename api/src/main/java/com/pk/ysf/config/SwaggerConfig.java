@@ -26,9 +26,6 @@ public class SwaggerConfig {
     @Value("${project.description}")
     private String description;
 
-    @Value("${server.address}")
-    private String address;
-
     @Bean
     public Docket apiDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
