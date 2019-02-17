@@ -21,7 +21,7 @@ export class TokenRefreshInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(error => {
-      if(error instanceof HttpErrorResponse && error.status === 401){
+      if(error instanceof HttpErrorResponse && error.status === 401 && this.seesionService.getToken()!== null){
         return this.handleError401(req,next);
       }else{
         return throwError(error);
