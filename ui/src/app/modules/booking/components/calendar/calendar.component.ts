@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent} from 'angular-calendar';
 import {WeekView, WeekViewHourColumn} from 'calendar-utils';
 import {compareDateIsLess} from '../../functions/compare-date-is-less';
@@ -15,6 +15,7 @@ import {SoccerFieldService} from "../../../../core/http/soccer-field/soccer-fiel
 
 @Component({
   selector: 'app-calendar',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })

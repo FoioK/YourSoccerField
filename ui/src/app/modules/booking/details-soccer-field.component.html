@@ -1,158 +1,207 @@
-<div class="container-body pt-2">
-  <div class="col-12 col-sm-12 col-md-12 col-lg-12 p-4">
-    <div class="row no-gutters container-data w-100 h-100 d-flex">
-      <div class="col-6 col-lg-4 my-2 px-3">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Name</div>
-        <div
-          class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerFieldToBook?.name}}</div>
-      </div>
-      <div class="col-6 col-lg-4 my-2 px-2">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Adress</div>
-        <div
-          class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerFieldToBook?.address.city}}
-          ,
-          {{soccerFieldToBook?.address.street}} {{soccerFieldToBook?.address.apartmentNumber}}</div>
-      </div>
-      <div class=" col-6 col-lg-4 my-2 px-2">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Size</div>
-        <div
-          class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerFieldToBook?.length}}
-          m
-          x
-          {{soccerFieldToBook?.width}} m
-        </div>
-      </div>
-      <div class=" col-6 col-lg-4 my-2 px-2">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Price</div>
-        <div
-          class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerFieldToBook?.price}}
-          PLN/1.5h
-        </div>
-      </div>
-      <div class=" col-6 col-lg-4 my-2 px-2">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">SurfaceModel</div>
-        <div
-          class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerFieldToBook?.surface.name}}</div>
-      </div>
-      <div class=" col-6 col-lg-4 my-2 px-2">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Open
-          hours
-        </div>
-        <div
-          class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerFieldToBook?.openHour.s1}}
-          -
-          {{soccerFieldToBook?.openHour.e1}}</div>
-      </div>
-      <div class=" col-6 col-lg-4 my-2 px-2">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Fenced</div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">
-          <i *ngIf="soccerFieldToBook?.fenced; else notFenced" class="fas fa-check data-icon data-icon-true"></i>
-          <ng-template #notFenced>
-            <i class="fas fa-times data-icon data-icon-false"></i>
-          </ng-template>
-        </div>
-      </div>
-      <div class=" col-6 col-lg-4 my-2 px-2">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Lighting</div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">
-          <i *ngIf="soccerFieldToBook?.lighting; else notLighting" class="fas fa-check data-icon data-icon-true"></i>
-          <ng-template #notLighting>
-            <i class="fas fa-times data-icon data-icon-false"></i>
-          </ng-template>
-        </div>
-      </div>
-      <div class=" col-12 col-lg-4 my-2 px-2">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Locker
-          room
-        </div>
-        <div class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">
-          <i *ngIf="soccerFieldToBook?.lockerRoom; else notLockerRoom"
-             class="fas fa-check data-icon data-icon-true"></i>
-          <ng-template #notLockerRoom>
-            <i class="fas fa-times data-icon data-icon-false"></i>
-          </ng-template>
-        </div>
-      </div>
-      <div class=" col-12 my-2 px-2">
-        <div class="col-12 m-0 px-0 d-flex justify-content-center align-items-center title-field">Description</div>
-        <div
-          class="col-12 m-0 px-0 mt-3 d-flex justify-content-center align-items-center data-field">{{soccerFieldToBook?.description}}</div>
-      </div>
+<header class="col-12 p-4 container-header">
+  <div class="row no-gutters container-data">
+    <div class="col-6 col-lg-4 my-2 px-3 container-fields">
+      <span class="field-title">
+        Name
+      </span>
+      <span class="field-details">
+        {{soccerFieldToBook?.name}}
+      </span>
+    </div>
+    <div class="col-6 col-lg-4 my-2 px-2 container-fields">
+      <span class="field-title">
+        Adress
+      </span>
+      <span class="field-details">
+        {{soccerFieldToBook?.address.city}},
+        {{soccerFieldToBook?.address.street}}
+        {{soccerFieldToBook?.address.apartmentNumber}}
+      </span>
+    </div>
+    <div class="col-6 col-lg-4 my-2 px-2 container-fields">
+      <span class="field-title">
+        Size
+      </span>
+      <span class="field-details">
+        {{soccerFieldToBook?.length}} m
+        x
+        {{soccerFieldToBook?.width}} m
+      </span>
+    </div>
+    <div class="col-6 col-lg-4 my-2 px-2 container-fields">
+      <span class="field-title">
+        Price
+      </span>
+      <span class="field-details">
+        {{soccerFieldToBook?.price}} PLN/1.5h
+      </span>
+    </div>
+    <div class="col-6 col-lg-4 my-2 px-2 container-fields">
+      <span class="field-title">
+        Surface
+      </span>
+      <span class="field-details">
+        {{soccerFieldToBook?.surface.name}}
+      </span>
+    </div>
+    <div class="col-6 col-lg-4 my-2 px-2 container-fields">
+      <span class="field-title">
+        Open hours
+      </span>
+      <span class="field-details">
+        {{soccerFieldToBook?.openHour.s1}}
+        -
+        {{soccerFieldToBook?.openHour.e1}}
+      </span>
+    </div>
+    <div class="col-6 col-lg-4 my-2 px-2 container-fields">
+      <span class="field-title">
+        Fenced
+      </span>
+      <span class="field-details">
+        <i *ngIf="soccerFieldToBook?.fenced;
+         else notFenced"
+           class="fas fa-check data-icon data-icon-true">
+        </i>
+        <ng-template #notFenced>
+          <i class="fas fa-times data-icon data-icon-false">
+          </i>
+        </ng-template>
+      </span>
+    </div>
+    <div class="col-6 col-lg-4 my-2 px-2 container-fields">
+      <span class="field-title">
+        Lighting
+      </span>
+      <span class="field-details">
+        <i *ngIf="soccerFieldToBook?.lighting;
+         else notLighting"
+           class="fas fa-check data-icon data-icon-true"></i>
+        <ng-template #notLighting>
+          <i class="fas fa-times data-icon data-icon-false"></i>
+        </ng-template>
+      </span>
+    </div>
+    <div class="col-12 col-lg-4 my-2 px-2 container-fields">
+      <span class="field-title">
+        Locker room
+      </span>
+      <span class="field-details">
+        <i *ngIf="soccerFieldToBook?.lockerRoom;
+         else notLockerRoom"
+           class="fas fa-check data-icon data-icon-true">
+        </i>
+        <ng-template #notLockerRoom>
+          <i class="fas fa-times data-icon data-icon-false"></i>
+        </ng-template>
+      </span>
+    </div>
+    <div class="col-12 my-2 px-2 container-fields">
+      <span class="field-title">
+        Description
+      </span>
+      <span class="field-details">
+        {{soccerFieldToBook?.description}}
+      </span>
     </div>
   </div>
-</div>
+</header>
 <section class="row no-gutters col-12 p-4">
   <div class="col-12 col-md-8 p-4">
-    <app-calendar (toBooking)="setDateToBooking($event)"></app-calendar>
+    <app-calendar (toBooking)="setDateToBooking($event)">
+    </app-calendar>
   </div>
-  <div class="col-12 col-md-4 p-4">
-    <div class="row no-gutters col-12 px-3 pb-3 pt-3 d-flex align-items-center justify-content-center title-field">
+  <div class="col-12 col-md-4 p-4 container-summary">
+    <span class="field-title">
       Summary
+    </span>
+    <div class="mt-4 summary-picture">
     </div>
-    <div class="col-12 p-0 container-summary">
-      <div class="col-12  p-0 picture d-flex align-items-center">
-      </div>
-      <div class="col-12 pt-4 px-0">
-        <div class="row no-gutters col-12 px-3 pb-3 d-flex align-items-center title-field title-field-summary">
-          <div class="col-12 d-flex align-items-center p-0">
-            {{soccerFieldToBook?.address.city}}, {{soccerFieldToBook?.address.street}}
-            {{soccerFieldToBook?.address.apartmentNumber}}
-          </div>
-          <div class="col-12 p-0 d-flex align-items-center data-field-small">
-            {{soccerFieldToBook?.length}} m
-            x
-            {{soccerFieldToBook?.width}} m | {{soccerFieldToBook?.surface.name}}
-          </div>
-        </div>
-        <section [hidden]="!isBooking">
-          <div class="row no-gutters col-12 px-3 pb-3 d-flex align-items-center title-field title-field-summary">
-            <div class="col-12 p-0 d-flex align-items-center">
-              {{toBookingStart | date:' h:mm:ss a' | convertTime12To24Format}} - {{toBookingEnd | date:' h:mm:ss a' |
-              convertTime12To24Format}} | 90 min
-            </div>
-            <div class="col-12 p-0 d-flex align-items-center data-field-small">
-              {{toBookingStart | date:'dd.MM.yyyy '}}
-            </div>
-          </div>
-          <div class="row no-gutters col-12 px-3 pb-3 d-flex align-items-center title-field title-field-summary">
-            <div class="col-12 p-0 d-flex align-items-center">
-              {{soccerFieldToBook?.price}} zł
-            </div>
-            <div class="col-12 p-0 d-flex align-items-center data-field-small">
-              To pay
-            </div>
-          </div>
-          <div class="row no-gutters col-12 px-3 pb-3 d-flex align-items-center title-field title-field-summary">
-            <ng-container *ngIf="!isPaid" ;else Payment>
-              <div
-                class="row no-gutters col-12 px-3 pb-3 pt-3 d-flex align-items-center title-field title-field-summary">
-                <button class="btn btn-book w-100 my-2" [disabled]="!isBooking" (click)="setBooking()">book</button>
-              </div>
-            </ng-container>
-            <ng-container *ngIf="isPaid">
-              <h2 class="text-center important-info mb-2">The code below is required when paying for it</h2>
-              <p id="paymentCode" class="w-100 text-center">{{paymentCode}}</p>
-              <button class="btn btn-book w-100 my-2" (cbOnSuccess)="copyCodeToClipboard()" ngxClipboard
-                      [cbContent]="paymentCode"
-                      [ngClass]="{true: 'btn-copied' }[copyText === 'Copied']">{{ copyText }}</button>
-              <button class="btn btn-book w-100 my-2">Pay</button>
-            </ng-container>
-          </div>
-        </section>
-      </div>
+    <div class="col-12 mt-4 text-left">
+      <span class="field-title field-title-summary">
+        {{soccerFieldToBook?.address.city}},
+        {{soccerFieldToBook?.address.street}}
+        {{soccerFieldToBook?.address.apartmentNumber}}
+      </span>
+    </div>
+    <div class="col-12 text-left">
+      <span class="field-details-small">
+        {{soccerFieldToBook?.length}} m
+        x
+        {{soccerFieldToBook?.width}} m
+        | {{soccerFieldToBook?.surface.name}}
+      </span>
     </div>
     <section [hidden]="isBooking">
-      <div class="row no-gutters col-12 px-3 pb-3 pt-3 d-flex align-items-center title-field title-field-summary">
-        <div class="col-12 p-0 d-flex align-items-center text-center">
+      <div class="col-12 mt-4">
+        <span class="field-title field-title-summary">
           Choose a date from the calendar
-        </div>
+        </span>
         <ng-container *ngIf="errorMsg?.length > 0">
-          <div class="col-12 mt-2 p-0 d-flex align-items-center text-center important-info">
-            {{ errorMsg }}
+          <div class="col-12 mt-4">
+            <span class="my-2 field-important-text">
+              {{ errorMsg }}
+            </span>
           </div>
         </ng-container>
-
       </div>
+    </section>
+    <section [hidden]="!isBooking"
+             class="text-left">
+      <div class="col-12 mt-4">
+        <span class="field-title field-title-summary">
+          {{toBookingStart | date:' h:mm:ss a' |
+          convertTime12To24Format}}
+          -
+          {{toBookingEnd | date:' h:mm:ss a' |
+          convertTime12To24Format}} | 90 min
+        </span>
+      </div>
+      <div class="col-12">
+        <span class="field-details-small">
+          {{toBookingStart | date:'dd.MM.yyyy '}}
+        </span>
+      </div>
+      <div class="col-12 mt-4">
+        <span class="field-title field-title-summary">
+          {{soccerFieldToBook?.price}} zł
+        </span>
+      </div>
+      <div class="col-12">
+        <span class="field-details-small">
+          To pay
+        </span>
+      </div>
+      <ng-container *ngIf="!isPaid">
+        <div class="col-12 mt-4">
+          <button class="btn summary-btn my-2"
+                  [disabled]="!isBooking"
+                  (click)="setBooking()">
+            book
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isPaid">
+        <div class="col-12 text-center">
+          <h2 class="my-2 field-important-text">
+            The code below is required when paying for it
+          </h2>
+          <p id="paymentCode"
+             class="my-4">
+            {{paymentCode}}
+          </p>
+          <button class="btn summary-btn my-2"
+                  (cbOnSuccess)="copyCodeToClipboard()"
+                  ngxClipboard
+                  [cbContent]="paymentCode"
+                  [ngClass]="{true: 'summary-btn-copied' }[copyText === 'Copied']">
+            {{ copyText }}
+          </button>
+          <button class="btn summary-btn my-2">
+            Pay
+          </button>
+        </div>
+      </ng-container>
     </section>
   </div>
 </section>

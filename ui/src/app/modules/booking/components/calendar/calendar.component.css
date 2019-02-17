@@ -1,0 +1,45 @@
+@import '../../../../../../node_modules/angular-calendar/css/angular-calendar.css';
+
+.cal-week-view .cal-time {
+  padding-top: 0px;
+  line-height: 20px;
+  background: #fff;
+}
+
+.cal-week-view .cal-time:hover {
+  cursor: default;
+}
+
+.cal-week-view .cal-hour:not(:last-child) .cal-hour-segment,
+.cal-week-view .cal-hour:last-child :not(:last-child) .cal-hour-segment {
+  border-bottom: thin solid #e1e1e1;
+}
+
+.cal-week-view .cal-hour-segment.cal-after-hour-start .cal-time {
+  display: block;
+}
+
+.cal-day-segment-disabled {
+  background-color: grey;
+}
+
+.cal-day-segment-disabled:hover {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.cal-week-view .cal-time-events .cal-event {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.cal-week-view .cal-header.cal-today {
+  background: #d1ecf1;
+}
