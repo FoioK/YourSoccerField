@@ -72,8 +72,11 @@ export class NavBarComponent implements OnInit {
   }
 
   private checkIsAdmin() {
-    this.userService.adminPaneAuthenticate()
-      .subscribe(response => this.isAdmin = response.valueOf());
+    // this.userService.adminPaneAuthenticate()
+    //   .subscribe(response => this.isAdmin = response.valueOf(),
+    //   error => {
+    //     console.log(error);
+    // });
   }
 
   private topArrow() {
