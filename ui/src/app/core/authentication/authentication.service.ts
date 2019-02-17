@@ -35,8 +35,8 @@ export class AuthenticationService {
     );
   }
 
-  refreshAccessToken(refreshToken: string) {
-    this.postUserDetails(
+  refreshAccessToken(refreshToken: string): Observable<any> {
+    return this.postUserDetails(
       AuthenticationService.getCredentialsByRefreshToken(refreshToken)
     ).pipe(
       tap(token => {
