@@ -1,5 +1,7 @@
 package com.pk.ysf.service.impl;
 
+import com.pk.ysf.apimodels.dto.BookingDetails;
+import com.pk.ysf.apimodels.dto.BookingInput;
 import com.pk.ysf.apimodels.exception.AppException;
 import com.pk.ysf.apimodels.exception.BookingException;
 import com.pk.ysf.apimodels.exception.ErrorCode;
@@ -11,8 +13,10 @@ import com.pk.ysf.repository.BookingRepository;
 import com.pk.ysf.repository.SoccerFieldRepository;
 import com.pk.ysf.service.BookingService;
 import com.pk.ysf.service.dtoModel.BookingDTO;
+import com.pk.ysf.service.mapper.booking.BookingInputToBooking;
 import com.pk.ysf.service.mapper.impl.BookingFromDTO;
 import com.pk.ysf.service.mapper.impl.BookingToDTO;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -23,30 +27,27 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
-@Service
-public class BookingServiceImpl implements BookingService {
+//@Service
+public class BookingServiceImplJava implements BookingService {
 
     private SoccerFieldRepository soccerFieldRepository;
     private BookingRepository bookingRepository;
 
-    private BookingFromDTO bookingFromDTO;
-    private BookingToDTO bookingToDTO;
+    private final BookingInputToBooking bookingInputToBooking;
 
     @Autowired
-    public BookingServiceImpl(
+    public BookingServiceImplJava(
             SoccerFieldRepository soccerFieldRepository,
             BookingRepository bookingRepository,
-            BookingFromDTO bookingFromDTO,
-            BookingToDTO bookingToDTO
-    ) {
+            BookingInputToBooking bookingInputToBooking) {
         this.soccerFieldRepository = soccerFieldRepository;
         this.bookingRepository = bookingRepository;
-        this.bookingFromDTO = bookingFromDTO;
-        this.bookingToDTO = bookingToDTO;
+        this.bookingInputToBooking = bookingInputToBooking;
     }
 
+    @NotNull
     @Override
-    public BookingDTO create(BookingDTO bookingDTO) {
+    public BookingDetails create(@NotNull BookingInput bookingInput) {
         if (!this.validation(bookingDTO)) {
             throw new AppException(
                     "Error occurred during data validation",
@@ -55,9 +56,9 @@ public class BookingServiceImpl implements BookingService {
             );
         }
 
-        Booking booking = this.bookingFromDTO.map(bookingDTO);
-
-        return this.bookingToDTO.map(this.bookingRepository.save(booking));
+        Booking booking = this.bookingInputToBooking.map(bookingDTO);
+//
+//        return this.bookingToDTO.map(this.bookingRepository.save(booking));
     }
 
     private boolean validation(BookingDTO bookingDTO) {
