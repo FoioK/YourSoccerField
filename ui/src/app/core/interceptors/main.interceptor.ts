@@ -3,27 +3,42 @@ import { HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/htt
 import { HttpInterceptor } from "@angular/common/http/src/interceptor";
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { HttpEvent } from '@angular/common/http/src/response';
-import { catchError, switchMap, filter, take, tap } from "rxjs/operators";
+import { catchError, switchMap, filter, take } from "rxjs/operators";
 import { AuthenticationService } from "../authentication/authentication.service";
 import { SessionService } from '../services/session.service';
-import { HeaderService } from '../services/header.service';
 import { TokenModel } from '../../shared/models/token.model';
+import { InternalServerErrorModal } from '../modal/internal-server-error/internal-server-error.modal';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 
 @Injectable()
 export class TokenRefreshInterceptor implements HttpInterceptor {
 
-  isRefreshingToken: boolean = false;
-  tokenSubject: BehaviorSubject<TokenModel> = new BehaviorSubject<TokenModel>(null);
+  private dialogConf: MatDialogConfig;
+  private internalServerErrorModal;
+  private isRefreshingToken: boolean = false;
+  private tokenSubject: BehaviorSubject<TokenModel> = new BehaviorSubject<TokenModel>(null);
 
   constructor(private authService: AuthenticationService,
               private seesionService: SessionService,
-              private headerService: HeaderService) {}
+              private dialog: MatDialog) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(error => {
-      if(error instanceof HttpErrorResponse && error.status === 401 && this.seesionService.getToken()!== null){
+      if(
+        error instanceof HttpErrorResponse
+        && error.status === 401
+        && this.seesionService.getToken()!== null
+      ){
         return this.handleError401(req,next);
-      }else{
+      }
+      if(
+        error instanceof HttpErrorResponse
+        && error.status === 500
+      ){
+        this.handleError500(error);
+        return throwError(error);
+      }
+      else{
         return throwError(error);
       }
     }));
@@ -54,5 +69,16 @@ export class TokenRefreshInterceptor implements HttpInterceptor {
         switchMap((token) => next.handle(this.addHeaderAuthorization(req,token)))
         );
     }
+  }
+
+  private handleError500(error: HttpErrorResponse){
+    this.dialogConf = new MatDialogConfig();
+    this.dialogConf.autoFocus = true;
+    this.internalServerErrorModal = this.dialog.open(
+      InternalServerErrorModal,
+      {
+        autoFocus: true,
+      }
+    );
   }
 }

@@ -12,15 +12,17 @@ import {HeaderService} from "./services/header.service";
 import {AppRoutingModule} from "../app-routing.module";
 import {SessionService} from "./services/session.service";
 import { TokenRefreshInterceptor } from './interceptors/token-refresh.interceptor';
+import { InternalServerErrorModal } from './modal/internal-server-error/internal-server-error.modal';
+import { MatDialogModule } from "@angular/material";
 
 @NgModule({
-  declarations: [],
+  declarations: [InternalServerErrorModal],
   imports: [
     SharedModule,
     AppRoutingModule,
-
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDialogModule,
   ],
   providers: [
     AuthenticationService,
@@ -37,6 +39,7 @@ import { TokenRefreshInterceptor } from './interceptors/token-refresh.intercepto
       multi: true,
     }
   ],
+  entryComponents: [InternalServerErrorModal]
 })
 export class CoreModule {
 
