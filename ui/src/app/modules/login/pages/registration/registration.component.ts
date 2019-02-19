@@ -59,13 +59,15 @@ export class RegistrationComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        if (error.error === 'DUPLICATE_USER_NICKNAME') {
-          this.errorReason = 'nickname';
+        if(error.status === 409){
+          if (error.error.error === 'DUPLICATE_USER_NICKNAME') {
+            this.errorReason = 'nickname';
+          }
+          if (error.error.error === 'DUPLICATE_USER_EMAIL') {
+            this.errorReason = 'email';
+          }
+          this.registrationErrorMsg = error.error.message;
         }
-        if (error.error === 'DUPLICATE_USER_EMAIL') {
-          this.errorReason = 'email';
-        }
-        this.registrationErrorMsg = error.message;
       }
     );
   }
