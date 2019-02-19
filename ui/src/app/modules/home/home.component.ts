@@ -57,12 +57,18 @@ export class HomeComponent implements OnInit {
   private getExampleSoccerFields() {
     this.soccerFieldService.getExampleTen().subscribe(result => {
       this.exampleSoccerFieldList = result;
+    },
+    error => {
+      console.log(error);
     });
   }
 
   private getAllSurfaces() {
     this.soccerFieldService.getAllSurfaces().subscribe(result => {
       this.surfacesList = result;
+    },
+    error => {
+      console.log(error);
     });
   }
 
@@ -81,6 +87,9 @@ export class HomeComponent implements OnInit {
       )
     ).subscribe(result => {
       this.promptSoccerFieldList = result;
+    },
+    error => {
+      console.log(error);
     });
   }
 
@@ -101,6 +110,9 @@ export class HomeComponent implements OnInit {
       this.soccerFieldService.findByCustomCriteria(value).subscribe(
         result => {
           this.promptSoccerFieldList = result;
+        },
+        error => {
+          console.log(error);
         }
       );
     });
@@ -110,7 +122,7 @@ export class HomeComponent implements OnInit {
     return new FormControl(id);
   }
 
-  private setSomething(id: number): void {
+  private setSurfaceToForm(id: number): void {
     const index: number = this.surfaces.value.findIndex(control => control === id);
 
     if (index === -1) {

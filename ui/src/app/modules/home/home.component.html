@@ -33,7 +33,7 @@
           -->
           <div class="d-flex h-100 justify-content-center align-items-center flex-column">
             <label *ngFor="let surface of surfacesList" class="d-flex align-items-center w-100 filter-label">
-              <input (input)="setSomething(surface.id)" class="filter-checkbox ml-2" type="checkbox"/>
+              <input (input)="setSurfaceToForm(surface.id)" class="filter-checkbox ml-2" type="checkbox"/>
               <span class="filter-label-title mx-auto">{{surface.name}}</span>
             </label>
           </div>
