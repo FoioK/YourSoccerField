@@ -45,6 +45,9 @@ export class DetailsSoccerFieldComponent implements OnInit {
       .getSoccerFieldById(parseInt(this.soccerFieldId, 10))
       .subscribe(result => {
         this.soccerFieldToBook = result;
+      },
+      error => {
+        console.log(error);
       });
   }
 

@@ -48,6 +48,8 @@ export class CalendarComponent implements OnInit {
         this.getBookedDate();
         this.bookingService.setWasBooked(false);
       }
+    }, error => {
+      console.log(error);
     });
   }
 
@@ -66,6 +68,9 @@ export class CalendarComponent implements OnInit {
             );
           }
         });
+      },
+      error => {
+        console.log(error);
       });
   }
 
