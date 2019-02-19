@@ -1,5 +1,6 @@
 package com.pk.ysf.apimodels.entity
 
+import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.time.LocalTime
 import javax.persistence.*
@@ -9,26 +10,51 @@ data class Booking(
 
         @Id
         @GeneratedValue
-        val id: Long?,
-
-        val userCode: Long,
-
-        val startDate: LocalDateTime?,
+        val id: Long,
 
         @Column(nullable = false)
-        val executionTime: LocalTime?,
+        val userCode: Long,
+
+        @Column(nullable = false)
+        val startDate: LocalDateTime,
+
+        @Column(nullable = false)
+        val executionTime: LocalTime,
+
+        @Column(nullable = false, scale = 2)
+        val amount: BigDecimal,
+
+        @Column(nullable = false)
+        val isPayed: Boolean,
 
         @ManyToOne
-        val soccerField: SoccerField?,
-
-        val isPayed: Boolean?
+        val soccerField: SoccerField?
 ) {
-        constructor() : this (
-                0,
-                0,
-                null,
-                null,
-                null,
-                false
-        )
+
+    private constructor(builder: Builder) : this(
+            builder.id,
+            builder.userCode,
+            builder.startDate,
+            builder.executionTime,
+            builder.amount,
+            builder.isPayed,
+            builder.soccerField
+    )
+
+    companion object {
+        inline fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
+    }
+
+    class Builder {
+
+        var id: Long = 0
+        var userCode: Long = 0
+        var startDate: LocalDateTime = LocalDateTime.now()
+        var executionTime: LocalTime = LocalTime.now()
+        var amount: BigDecimal = BigDecimal.ZERO
+        var isPayed: Boolean = false
+        var soccerField: SoccerField? = null
+
+        fun build() = Booking(this)
+    }
 }
