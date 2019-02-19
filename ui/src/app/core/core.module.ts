@@ -12,6 +12,7 @@ import {HeaderService} from "./services/header.service";
 import {AppRoutingModule} from "../app-routing.module";
 import {SessionService} from "./services/session.service";
 import { TokenRefreshInterceptor } from './interceptors/token-refresh.interceptor';
+import { HttpErrorsInterceptor } from './interceptors/http-errors.interceptor';
 import { InternalServerErrorModal } from './modal/internal-server-error/internal-server-error.modal';
 import { MatDialogModule } from "@angular/material";
 
@@ -36,6 +37,11 @@ import { MatDialogModule } from "@angular/material";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenRefreshInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorsInterceptor,
       multi: true,
     }
   ],

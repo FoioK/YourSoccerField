@@ -7,20 +7,15 @@ import { catchError, switchMap, filter, take } from "rxjs/operators";
 import { AuthenticationService } from "../authentication/authentication.service";
 import { SessionService } from '../services/session.service';
 import { TokenModel } from '../../shared/models/token.model';
-import { InternalServerErrorModal } from '../modal/internal-server-error/internal-server-error.modal';
-import { MatDialogConfig, MatDialog } from '@angular/material';
 
 @Injectable()
 export class TokenRefreshInterceptor implements HttpInterceptor {
 
-  private dialogConf: MatDialogConfig;
-  private internalServerErrorModal;
   private isRefreshingToken: boolean = false;
   private tokenSubject: BehaviorSubject<TokenModel> = new BehaviorSubject<TokenModel>(null);
 
   constructor(private authService: AuthenticationService,
-              private seesionService: SessionService,
-              private dialog: MatDialog) {}
+              private seesionService: SessionService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(error => {
@@ -30,13 +25,6 @@ export class TokenRefreshInterceptor implements HttpInterceptor {
         && this.seesionService.getToken()!== null
       ){
         return this.handleError401(req,next);
-      }
-      if(
-        error instanceof HttpErrorResponse
-        && error.status === 500
-      ){
-        this.handleError500(error);
-        return throwError(error);
       }
       else{
         return throwError(error);
@@ -69,16 +57,5 @@ export class TokenRefreshInterceptor implements HttpInterceptor {
         switchMap((token) => next.handle(this.addHeaderAuthorization(req,token)))
         );
     }
-  }
-
-  private handleError500(error: HttpErrorResponse){
-    this.dialogConf = new MatDialogConfig();
-    this.dialogConf.autoFocus = true;
-    this.internalServerErrorModal = this.dialog.open(
-      InternalServerErrorModal,
-      {
-        autoFocus: true,
-      }
-    );
   }
 }
