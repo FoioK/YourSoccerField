@@ -1,13 +1,17 @@
 package com.pk.ysf.apimodels.dto
 
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Positive
+
 data class BookingInput(
 
-        val userCode: Long,
-        val startDate: String,
-        val executionTime: String,
-        val amount: String,
-        val isPayed: Boolean,
-        val soccerField: Long
+        @Positive val userCode: Long = 0,
+        @NotEmpty val startDate: String = "",
+        @NotEmpty val executionTime: String = "",
+        @NotEmpty val amount: String = "",
+        @NotNull val isPayed: Boolean = false,
+        @Positive val soccerField: Long = 0
 
 ) {
 

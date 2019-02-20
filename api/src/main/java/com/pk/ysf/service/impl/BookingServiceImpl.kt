@@ -63,7 +63,7 @@ class BookingServiceImpl @Autowired constructor(
 
     private fun checkIsSoccerFieldOpen(
             bookingStartDate: LocalDateTime,
-            executrionTime: LocalTime,
+            executionTime: LocalTime,
             openHour: OpenHour
     ): Boolean {
         val dayOfWeek: DayOfWeek = bookingStartDate.dayOfWeek
@@ -78,7 +78,9 @@ class BookingServiceImpl @Autowired constructor(
             )
         }
 
-        if (closeTime.isBefore(this.sumLocalTimes(bookingStartDate, executrionTime)))
+        if (closeTime.isBefore(this.sumLocalTimes(bookingStartDate.toLocalTime(), executionTime))) {
+
+        }
 
             return true
     }
@@ -124,6 +126,6 @@ class BookingServiceImpl @Autowired constructor(
     private fun sumLocalTimes(one: LocalTime, two: LocalTime): LocalTime {
         val sum: LocalTime = one.plusHours(two.hour.toLong()).minusMinutes(two.minute.toLong())
 
-        return sum.isBefore(one) ? LocalTime.of(23, 59, 59, 59) : sum
+        return if (sum.isBefore(one)) LocalTime.of(23, 59, 59, 59) else sum
     }
 }
