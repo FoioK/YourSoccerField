@@ -1,17 +1,38 @@
 package com.pk.ysf.apimodels.dto
 
-import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Pattern
 import javax.validation.constraints.Positive
 
 data class BookingInput(
 
-        @Positive val userCode: Long = 0,
-        @NotEmpty val startDate: String = "",
-        @NotEmpty val executionTime: String = "",
-        @NotEmpty val amount: String = "",
-        @NotNull val isPayed: Boolean = false,
-        @Positive val soccerField: Long = 0
+        @field:Positive var userCode: Long = 0,
+
+        @field:NotNull
+        @field:Pattern(
+                message = "invalid format",
+                regexp = "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]"
+        )
+        val startDate: String = "",
+
+        @field:NotNull
+        @field:Pattern(
+                message = "must match with HH:MM pattern",
+                regexp = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\$"
+        )
+        val executionTime: String = "",
+
+        @field:NotBlank
+        @field:Pattern(
+                message = "invalid format",
+                regexp = "^(0|[1-9][0-9]*)(\\.[0-9]{2,2})?\$"
+        )
+        val amount: String = "",
+
+        val isPayed: Boolean = false,
+
+        @field:Positive val soccerField: Long = 0
 
 ) {
 

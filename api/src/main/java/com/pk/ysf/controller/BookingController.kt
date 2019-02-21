@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("\${spring.data.rest.base-path}/bookings")
@@ -24,7 +25,7 @@ open class BookingController @Autowired constructor(
             produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
     )
     @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).BOOKINGS_POST_CREATE)")
-    fun create(@RequestBody bookingInput: BookingInput): ResponseEntity<BookingDetails> {
+    fun create(@Valid @RequestBody bookingInput: BookingInput): ResponseEntity<BookingDetails> {
         val bookingDetails: BookingDetails = this.bookingService.create(bookingInput)
 
         return ResponseEntity
