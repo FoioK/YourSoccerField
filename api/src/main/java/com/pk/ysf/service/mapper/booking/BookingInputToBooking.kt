@@ -7,11 +7,13 @@ import com.pk.ysf.apimodels.exception.ErrorCode
 import com.pk.ysf.apimodels.exception.MissingEntityException
 import com.pk.ysf.repository.SoccerFieldRepository
 import com.pk.ysf.service.mapper.BaseMapper
+import com.pk.ysf.util.DateUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 @Component
 class BookingInputToBooking @Autowired constructor(
@@ -22,7 +24,10 @@ class BookingInputToBooking @Autowired constructor(
         return Booking(
                 0,
                 from.userCode,
-                LocalDateTime.parse(from.startDate),
+                LocalDateTime.parse(
+                        from.startDate,
+                        DateTimeFormatter.ofPattern(DateUtil.shortPattern)
+                ),
                 LocalTime.parse(from.executionTime),
                 BigDecimal(from.amount),
                 from.isPayed,

@@ -14,22 +14,27 @@ import com.pk.ysf.repository.SoccerFieldRepository
 import com.pk.ysf.service.BookingService
 import com.pk.ysf.service.mapper.booking.BookingInputToBooking
 import com.pk.ysf.service.mapper.booking.BookingToBookingDetails
+import com.pk.ysf.util.DateUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.RequestBody
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 @Service
-class BookingServiceImpl @Autowired constructor(
+open class BookingServiceImpl @Autowired constructor(
         private val soccerFieldRepository: SoccerFieldRepository,
         private val bookingRepository: BookingRepository,
         private val bookingInputToBooking: BookingInputToBooking,
         private val bookingToBookingDetails: BookingToBookingDetails
 ) : BookingService {
 
-    override fun create(bookingInput: BookingInput): BookingDetails {
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).BOOKINGS_POST_CREATE)")
+    override fun create(@RequestBody bookingInput: BookingInput): BookingDetails {
         if (!this.validation(bookingInput)) {
             throw AppException(
                     "Error occurred during data validation",
@@ -38,16 +43,31 @@ class BookingServiceImpl @Autowired constructor(
             )
         }
 
-        var booking: Booking = this.bookingInputToBooking.map(bookingInput)
+        val booking: Booking = this.bookingInputToBooking.map(bookingInput)
 
-        return BookingDetails.build { }
+        return this.bookingToBookingDetails.map(booking)
     }
 
     private fun validation(bookingInput: BookingInput): Boolean {
-        var soccerFild: SoccerField = this.getSoccerFieldById(bookingInput.soccerField)
-        var bookingStartDate: LocalDateTime = LocalDateTime.parse(bookingInput.startDate)
+        val soccerField: SoccerField = this.getSoccerFieldById(bookingInput.soccerField)
+        val bookingStartDate: LocalDateTime = LocalDateTime.parse(
+                bookingInput.startDate,
+                DateTimeFormatter.ofPattern(DateUtil.shortPattern)
+        )
+        val executionTime: LocalTime = LocalTime.parse(bookingInput.executionTime)
 
-        return false
+        // TODO do wyje **!!**
+        val openHour: OpenHour = soccerField.openHour!!
+
+        if (!this.checkIsSoccerFieldOpen(bookingStartDate, executionTime, openHour)) {
+            return false
+        }
+
+        return this.checkIsSoccerFieldFree(
+                bookingInput.soccerField,
+                bookingStartDate,
+                executionTime
+        )
     }
 
     private fun getSoccerFieldById(soccerFieldId: Long): SoccerField {
@@ -78,11 +98,14 @@ class BookingServiceImpl @Autowired constructor(
             )
         }
 
-        if (closeTime.isBefore(this.sumLocalTimes(bookingStartDate.toLocalTime(), executionTime))) {
-
+        if (closeTime.isBefore(this.sumLocalTimes(bookingStartTime, executionTime))) {
+            throw BookingException(
+                    "Soccer field is then closed",
+                    ErrorCode.SOCCER_FIELD_CLOSED
+            )
         }
 
-            return true
+        return true
     }
 
     // TODO kasacja *!!*
@@ -121,6 +144,58 @@ class BookingServiceImpl @Autowired constructor(
                 HttpStatus.BAD_REQUEST,
                 ErrorCode.OPEN_HOUR_GET_VALUE
         )
+    }
+
+    private fun checkIsSoccerFieldFree(
+            soccerFieldId: Long,
+            bookingStartDate: LocalDateTime,
+            executionTime: LocalTime
+    ): Boolean {
+        val bookingStartTime: LocalTime = bookingStartDate.toLocalTime()
+        val bookingEndTime: LocalTime = this.sumLocalTimes(bookingStartTime, executionTime)
+
+        val bookings: List<Booking> = this.bookingRepository
+                .findAllByDate(
+                        soccerFieldId,
+                        bookingStartDate.year,
+                        bookingStartDate.monthValue,
+                        bookingStartDate.dayOfMonth
+                )
+
+        if (this.filterBookingByStartAndEndTime(bookings, bookingStartTime, bookingEndTime) > 0) {
+            throw BookingException(
+                    "Is another booking on this time",
+                    ErrorCode.BOOKING_CONFLICT
+            )
+        }
+
+        return true
+    }
+
+    private fun filterBookingByStartAndEndTime(
+            bookings: List<Booking>,
+            bookingStartTime: LocalTime,
+            bookingEndTime: LocalTime
+    ): Long {
+        return bookings.stream()
+                .filter { booking ->
+                    val startTime: LocalTime = booking.startDate.toLocalTime()
+                    val endTime: LocalTime = this.sumLocalTimes(
+                            startTime,
+                            booking.executionTime
+                    )
+
+                    if (bookingStartTime == startTime || bookingEndTime == endTime) {
+                        return@filter true
+                    }
+
+                    if (bookingStartTime.isAfter(startTime) || bookingStartTime.isBefore(endTime)) {
+                        return@filter true
+                    }
+
+                    return@filter bookingEndTime.isAfter(startTime) && bookingEndTime.isBefore(endTime)
+                }
+                .count()
     }
 
     private fun sumLocalTimes(one: LocalTime, two: LocalTime): LocalTime {
