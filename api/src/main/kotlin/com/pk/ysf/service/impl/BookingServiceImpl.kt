@@ -11,7 +11,7 @@ import com.pk.ysf.apimodels.exception.ErrorCode
 import com.pk.ysf.apimodels.exception.MissingEntityException
 import com.pk.ysf.repository.BookingRepository
 import com.pk.ysf.repository.SoccerFieldRepository
-import com.pk.ysf.service.BookingService
+import com.pk.ysf.service.spec.BookingService
 import com.pk.ysf.service.mapper.booking.BookingInputToBooking
 import com.pk.ysf.service.mapper.booking.BookingToBookingDetails
 import com.pk.ysf.util.DateUtil
