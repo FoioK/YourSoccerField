@@ -16,7 +16,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 @Component
-class BookingInputToBooking @Autowired constructor(
+open class BookingInputToBooking @Autowired constructor(
         private val soccerFieldRepository: SoccerFieldRepository
 ) : BaseMapper<BookingInput, Booking> {
 
