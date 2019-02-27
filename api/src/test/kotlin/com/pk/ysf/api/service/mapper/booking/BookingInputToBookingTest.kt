@@ -35,7 +35,7 @@ class BookingInputToBookingTest {
 
     // TODO jak będzie builder w soccerField.kt to dodać budowanie wraz z id i sprawdzać to w tescie
     fun mockSoccerField(): Optional<SoccerField> {
-        val soccerField: SoccerField = SoccerField()
+        val soccerField: SoccerField = SoccerField.build {  }
 //        soccerField.id = SOCCER_FIELD
 
         return Optional.ofNullable(soccerField)
