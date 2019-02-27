@@ -1,8 +1,8 @@
-package com.pk.ysf.controller
+package com.pk.ysf.api.controller
 
+import com.pk.ysf.api.service.spec.BookingService
 import com.pk.ysf.apimodels.dto.BookingDetails
 import com.pk.ysf.apimodels.dto.BookingInput
-import com.pk.ysf.service.spec.BookingService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity

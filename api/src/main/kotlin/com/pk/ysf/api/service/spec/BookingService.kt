@@ -1,4 +1,4 @@
-package com.pk.ysf.service.spec
+package com.pk.ysf.api.service.spec
 
 import com.pk.ysf.apimodels.dto.BookingDetails
 import com.pk.ysf.apimodels.dto.BookingInput

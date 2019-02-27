@@ -1,4 +1,4 @@
-package com.pk.ysf.util
+package com.pk.ysf.api.util
 
 class DateUtil {
 

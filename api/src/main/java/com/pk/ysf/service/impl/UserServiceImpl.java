@@ -1,14 +1,14 @@
 package com.pk.ysf.service.impl;
 
+import com.pk.ysf.api.repository.BookingRepository;
+import com.pk.ysf.api.repository.RoleRepository;
+import com.pk.ysf.api.repository.UserRepository;
 import com.pk.ysf.apimodels.entity.Booking;
 import com.pk.ysf.apimodels.entity.Role;
 import com.pk.ysf.apimodels.entity.UserEntity;
 import com.pk.ysf.apimodels.entity.UserRole;
 import com.pk.ysf.apimodels.exception.*;
 import com.pk.ysf.domain.Constants;
-import com.pk.ysf.repository.BookingRepository;
-import com.pk.ysf.repository.RoleRepository;
-import com.pk.ysf.repository.UserRepository;
 import com.pk.ysf.service.UserService;
 import com.pk.ysf.service.dtoModel.BookingDTO;
 import com.pk.ysf.service.dtoModel.UserDTO;

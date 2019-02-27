@@ -1,4 +1,4 @@
-package com.pk.ysf.service.mapper
+package com.pk.ysf.api.service.mapper
 
 import java.util.stream.Collectors
 

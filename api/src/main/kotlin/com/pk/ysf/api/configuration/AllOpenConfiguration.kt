@@ -1,4 +1,4 @@
-package com.pk.ysf.configuration
+package com.pk.ysf.api.configuration
 
 import org.springframework.context.annotation.Configuration
 

@@ -1,4 +1,4 @@
-package com.pk.ysf.repository
+package com.pk.ysf.api.repository
 
 import com.pk.ysf.apimodels.entity.Booking
 import org.springframework.data.jpa.repository.JpaRepository

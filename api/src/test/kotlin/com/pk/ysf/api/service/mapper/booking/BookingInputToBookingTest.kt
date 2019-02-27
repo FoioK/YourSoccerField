@@ -1,9 +1,10 @@
+package com.pk.ysf.api.service.mapper.booking
+
 import com.pk.ysf.apimodels.dto.BookingInput
+import com.pk.ysf.api.repository.SoccerFieldRepository
+import com.pk.ysf.api.util.DateUtil
 import com.pk.ysf.apimodels.entity.Booking
 import com.pk.ysf.apimodels.entity.SoccerField
-import com.pk.ysf.repository.SoccerFieldRepository
-import com.pk.ysf.service.mapper.booking.BookingInputToBooking
-import com.pk.ysf.util.DateUtil
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
