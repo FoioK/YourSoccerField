@@ -1,4 +1,4 @@
-package com.pk.ysf.api.service.aspect
+package com.pk.ysf.api.aspect
 
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
@@ -15,11 +15,11 @@ class CustomValidator @Autowired constructor(
 
     @Before(value = "@annotation(com.pk.ysf.api.annotation.ValidInput)")
     @Throws(Throwable::class)
-    fun exampleValid(joinPoint: JoinPoint) {
-        validate(joinPoint.args.toList())
+    fun validate(joinPoint: JoinPoint) {
+        validateProcess(joinPoint.args.toList())
     }
 
-    private fun validate(params: List<Any>) {
+    private fun validateProcess(params: List<Any>) {
         repeat(params.size) {
             val constraint = validator.validate(params[it])
             if (!constraint.isEmpty()) {

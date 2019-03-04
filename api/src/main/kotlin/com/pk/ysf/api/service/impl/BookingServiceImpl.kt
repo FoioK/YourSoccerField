@@ -1,5 +1,6 @@
 package com.pk.ysf.api.service.impl
 
+import com.pk.ysf.api.annotation.ValidInput
 import com.pk.ysf.api.repository.BookingRepository
 import com.pk.ysf.api.repository.SoccerFieldRepository
 import com.pk.ysf.api.service.mapper.booking.BookingInputToBooking
@@ -34,6 +35,7 @@ open class BookingServiceImpl @Autowired constructor(
 ) : BookingService {
 
     @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).BOOKINGS_POST_CREATE)")
+    @ValidInput
     override fun create(@RequestBody bookingInput: BookingInput): BookingDetails {
         if (!this.validation(bookingInput)) {
             throw AppException(
