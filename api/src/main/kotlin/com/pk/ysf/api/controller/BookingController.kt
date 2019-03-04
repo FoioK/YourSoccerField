@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
-import javax.validation.Valid
 
 @RestController
 @RequestMapping("\${spring.data.rest.base-path}/bookings")
@@ -23,7 +22,7 @@ class BookingController @Autowired constructor(
             consumes = [MediaType.APPLICATION_JSON_UTF8_VALUE],
             produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
     )
-    fun create(@Valid @RequestBody bookingInput: BookingInput): ResponseEntity<BookingDetails> {
+    fun create(@RequestBody bookingInput: BookingInput): ResponseEntity<BookingDetails> {
         val bookingDetails: BookingDetails = this.bookingService.create(bookingInput)
 
         return ResponseEntity
