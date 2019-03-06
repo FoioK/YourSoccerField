@@ -57,9 +57,7 @@ open class BookingServiceImpl @Autowired constructor(
                 DateTimeFormatter.ofPattern(DateUtil.shortPattern)
         )
         val executionTime: LocalTime = LocalTime.parse(bookingInput.executionTime)
-
-        // TODO do wyje **!!**
-        val openHour: OpenHour = soccerField.openHour!!
+        val openHour: OpenHour = soccerField.openHour
 
         if (!this.checkIsSoccerFieldOpen(bookingStartDate, executionTime, openHour)) {
             return false
@@ -72,16 +70,15 @@ open class BookingServiceImpl @Autowired constructor(
         )
     }
 
-    private fun getSoccerFieldById(soccerFieldId: Long): SoccerField {
-        return this.soccerFieldRepository
-                .findById(soccerFieldId)
-                .orElseThrow {
-                    MissingEntityException(
-                            "Cannot find soccer field with id $soccerFieldId",
-                            ErrorCode.NOT_FOUND_BY_ID
-                    )
-                }
-    }
+    private fun getSoccerFieldById(soccerFieldId: Long): SoccerField =
+            this.soccerFieldRepository
+                    .findById(soccerFieldId)
+                    .orElseThrow {
+                        MissingEntityException(
+                                "Cannot find soccer field with id $soccerFieldId",
+                                ErrorCode.NOT_FOUND_BY_ID
+                        )
+                    }
 
     private fun checkIsSoccerFieldOpen(
             bookingStartDate: LocalDateTime,
@@ -110,43 +107,37 @@ open class BookingServiceImpl @Autowired constructor(
         return true
     }
 
-    // TODO kasacja *!!*
-    private fun findOpenTimeByDayOfWeek(dayOfWeek: DayOfWeek, openHour: OpenHour): LocalTime {
-        when (dayOfWeek.value) {
-            1 -> return openHour.s1!!
-            2 -> return openHour.s2!!
-            3 -> return openHour.s3!!
-            4 -> return openHour.s4!!
-            5 -> return openHour.s5!!
-            6 -> return openHour.s6!!
-            7 -> return openHour.s7!!
-        }
+    private fun findOpenTimeByDayOfWeek(dayOfWeek: DayOfWeek, openHour: OpenHour): LocalTime =
+            when (dayOfWeek.value) {
+                1 -> openHour.s1
+                2 -> openHour.s2
+                3 -> openHour.s3
+                4 -> openHour.s4
+                5 -> openHour.s5
+                6 -> openHour.s6
+                7 -> openHour.s7
+                else -> throw AppException(
+                        "Error occurred while find open time by day of week",
+                        HttpStatus.BAD_REQUEST,
+                        ErrorCode.OPEN_HOUR_GET_VALUE
+                )
+            }
 
-        throw AppException(
-                "Error occurred while find open time by day of week",
-                HttpStatus.BAD_REQUEST,
-                ErrorCode.OPEN_HOUR_GET_VALUE
-        )
-    }
-
-    // TODO kasacja *!!*
-    private fun findCloseTimeByDayOfWeek(dayOfWeek: DayOfWeek, openHour: OpenHour): LocalTime {
-        when (dayOfWeek.value) {
-            1 -> return openHour.e1!!
-            2 -> return openHour.e2!!
-            3 -> return openHour.e3!!
-            4 -> return openHour.e4!!
-            5 -> return openHour.e5!!
-            6 -> return openHour.e6!!
-            7 -> return openHour.e7!!
-        }
-
-        throw AppException(
-                "Error occurred while find close time by day of week",
-                HttpStatus.BAD_REQUEST,
-                ErrorCode.OPEN_HOUR_GET_VALUE
-        )
-    }
+    private fun findCloseTimeByDayOfWeek(dayOfWeek: DayOfWeek, openHour: OpenHour): LocalTime =
+            when (dayOfWeek.value) {
+                1 -> openHour.e1
+                2 -> openHour.e2
+                3 -> openHour.e3
+                4 -> openHour.e4
+                5 -> openHour.e5
+                6 -> openHour.e6
+                7 -> openHour.e7
+                else -> throw AppException(
+                        "Error occurred while find close time by day of week",
+                        HttpStatus.BAD_REQUEST,
+                        ErrorCode.OPEN_HOUR_GET_VALUE
+                )
+            }
 
     private fun checkIsSoccerFieldFree(
             soccerFieldId: Long,
@@ -178,27 +169,25 @@ open class BookingServiceImpl @Autowired constructor(
             bookings: List<Booking>,
             bookingStartTime: LocalTime,
             bookingEndTime: LocalTime
-    ): Long {
-        return bookings.stream()
-                .filter { booking ->
-                    val startTime: LocalTime = booking.startDate.toLocalTime()
-                    val endTime: LocalTime = this.sumLocalTimes(
-                            startTime,
-                            booking.executionTime
-                    )
+    ): Long = bookings.stream()
+            .filter { booking ->
+                val startTime: LocalTime = booking.startDate.toLocalTime()
+                val endTime: LocalTime = this.sumLocalTimes(
+                        startTime,
+                        booking.executionTime
+                )
 
-                    if (bookingStartTime == startTime || bookingEndTime == endTime) {
-                        return@filter true
-                    }
-
-                    if (bookingStartTime.isAfter(startTime) || bookingStartTime.isBefore(endTime)) {
-                        return@filter true
-                    }
-
-                    return@filter bookingEndTime.isAfter(startTime) && bookingEndTime.isBefore(endTime)
+                if (bookingStartTime == startTime || bookingEndTime == endTime) {
+                    return@filter true
                 }
-                .count()
-    }
+
+                if (bookingStartTime.isAfter(startTime) || bookingStartTime.isBefore(endTime)) {
+                    return@filter true
+                }
+
+                return@filter bookingEndTime.isAfter(startTime) && bookingEndTime.isBefore(endTime)
+            }
+            .count()
 
     private fun sumLocalTimes(one: LocalTime, two: LocalTime): LocalTime {
         val sum: LocalTime = one.plusHours(two.hour.toLong()).minusMinutes(two.minute.toLong())
