@@ -8,7 +8,7 @@ data class Address(
 
         @Id
         @GeneratedValue
-        val id: Long?,
+        val id: Long,
 
         @Column(nullable = false, length = 64)
         val city: String,
@@ -25,12 +25,26 @@ data class Address(
         @OneToMany(mappedBy = "address")
         val SoccerFields: List<SoccerField>
 ) {
-    constructor() : this(
-            0,
-            "",
-            "",
-            "",
+
+    private constructor(builder: Builder) : this(
+            builder.id,
+            builder.city,
+            builder.street,
+            builder.apartmentNumber,
             emptyList(),
             emptyList()
     )
+
+    companion object {
+        inline fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
+    }
+
+    class Builder {
+        var id: Long = 0
+        var city: String = ""
+        var street: String = ""
+        var apartmentNumber: String = ""
+
+        fun build() = Address(this)
+    }
 }
