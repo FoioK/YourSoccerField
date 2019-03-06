@@ -20,29 +20,27 @@ open class BookingInputToBooking @Autowired constructor(
         private val soccerFieldRepository: SoccerFieldRepository
 ) : BaseMapper<BookingInput, Booking> {
 
-    override fun map(from: BookingInput): Booking {
-        return Booking(
-                0,
-                from.userCode,
-                LocalDateTime.parse(
-                        from.startDate,
-                        DateTimeFormatter.ofPattern(DateUtil.shortPattern)
-                ),
-                LocalTime.parse(from.executionTime),
-                BigDecimal(from.amount),
-                from.isPayed,
-                this.mapSoccerField(from.soccerField)
-        )
-    }
+    override fun map(from: BookingInput): Booking =
+            Booking(
+                    0,
+                    from.userCode,
+                    LocalDateTime.parse(
+                            from.startDate,
+                            DateTimeFormatter.ofPattern(DateUtil.shortPattern)
+                    ),
+                    LocalTime.parse(from.executionTime),
+                    BigDecimal(from.amount),
+                    from.isPayed,
+                    mapSoccerField(from.soccerField)
+            )
 
-    private fun mapSoccerField(soccerFieldId: Long): SoccerField {
-        return this.soccerFieldRepository
-                .findById(soccerFieldId)
-                .orElseThrow {
-                    MissingEntityException(
-                            "Cannot find soccer field with id $soccerFieldId",
-                            ErrorCode.NOT_FOUND_BY_ID
-                    )
-                }
-    }
+    private fun mapSoccerField(soccerFieldId: Long): SoccerField =
+            this.soccerFieldRepository
+                    .findById(soccerFieldId)
+                    .orElseThrow {
+                        MissingEntityException(
+                                "Cannot find soccer field with id $soccerFieldId",
+                                ErrorCode.NOT_FOUND_BY_ID
+                        )
+                    }
 }

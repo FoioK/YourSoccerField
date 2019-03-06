@@ -6,9 +6,8 @@ interface BaseMapper<F, T> {
 
     fun map(from: F): T
 
-    fun mapAll(collections: Collection<F>): Collection<T> {
-        return collections.stream()
-                .map { from -> map(from) }
-                .collect(Collectors.toList())
-    }
+    fun mapAll(collections: Collection<F>): Collection<T> =
+            collections.stream()
+                    .map { from -> map(from) }
+                    .collect(Collectors.toList())
 }

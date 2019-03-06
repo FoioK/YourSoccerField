@@ -10,16 +10,15 @@ import java.time.format.DateTimeFormatter
 @Component
 class BookingToBookingDetails : BaseMapper<Booking, BookingDetails> {
 
-    override fun map(from: Booking): BookingDetails {
-        return BookingDetails(
-                from.id,
-                from.userCode,
-                from.startDate.format(DateTimeFormatter.ofPattern(DateUtil.shortPattern)),
-                from.executionTime.toString(),
-                from.amount.toString(),
-                from.isPayed,
-                from.soccerField?.id
-        )
-    }
+    override fun map(from: Booking): BookingDetails =
+            BookingDetails(
+                    from.id,
+                    from.userCode,
+                    from.startDate.format(DateTimeFormatter.ofPattern(DateUtil.shortPattern)),
+                    from.executionTime.toString(),
+                    from.amount.toString(),
+                    from.isPayed,
+                    from.soccerField.id
+            )
 
 }
