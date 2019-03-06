@@ -177,31 +177,25 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
         };
 
         this.openHourFromDTO = dto -> {
-            OpenHour openHour = new OpenHour();
-            openHour.setId(dto.getId());
 
-            openHour.setS1(dto.getS1());
-            openHour.setE1(dto.getE1());
-
-            openHour.setS2(dto.getS2());
-            openHour.setE2(dto.getE2());
-
-            openHour.setS3(dto.getS3());
-            openHour.setE3(dto.getE3());
-
-            openHour.setS4(dto.getS4());
-            openHour.setE4(dto.getE4());
-
-            openHour.setS5(dto.getS5());
-            openHour.setE5(dto.getE5());
-
-            openHour.setS6(dto.getS6());
-            openHour.setE6(dto.getE6());
-
-            openHour.setS7(dto.getS7());
-            openHour.setE7(dto.getE7());
-
-            return openHour;
+            return new OpenHour(
+                    dto.getId(),
+                    dto.getS1(),
+                    dto.getE1(),
+                    dto.getS2(),
+                    dto.getE2(),
+                    dto.getS3(),
+                    dto.getE3(),
+                    dto.getS4(),
+                    dto.getE4(),
+                    dto.getS5(),
+                    dto.getE5(),
+                    dto.getS6(),
+                    dto.getE6(),
+                    dto.getS7(),
+                    dto.getE7(),
+                    new ArrayList<>()
+            );
         };
     }
 
