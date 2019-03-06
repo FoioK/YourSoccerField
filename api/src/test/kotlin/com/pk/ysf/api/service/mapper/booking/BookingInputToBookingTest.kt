@@ -1,8 +1,8 @@
 package com.pk.ysf.api.service.mapper.booking
 
-import com.pk.ysf.apimodels.dto.BookingInput
 import com.pk.ysf.api.repository.SoccerFieldRepository
 import com.pk.ysf.api.util.DateUtil
+import com.pk.ysf.apimodels.dto.BookingInput
 import com.pk.ysf.apimodels.entity.Booking
 import com.pk.ysf.apimodels.entity.SoccerField
 import org.junit.Before
@@ -12,6 +12,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.springframework.test.context.junit4.SpringRunner
+import java.math.BigDecimal
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.util.*
@@ -30,13 +31,21 @@ class BookingInputToBookingTest {
     @Before
     fun init() {
         Mockito.`when`(soccerFieldRepository.findById(SOCCER_FIELD))
-                .thenReturn(mockSoccerField())
+                .thenReturn(getSoccerFieldMock())
     }
 
-    // TODO jak będzie builder w soccerField.kt to dodać budowanie wraz z id i sprawdzać to w tescie
-    fun mockSoccerField(): Optional<SoccerField> {
-        val soccerField: SoccerField = SoccerField.build {  }
-//        soccerField.id = SOCCER_FIELD
+    private fun getSoccerFieldMock(): Optional<SoccerField> {
+        val soccerField: SoccerField = SoccerField.build {
+            id = SOCCER_FIELD
+            name = SOCCER_FIELD_NAME
+            width = SOCCER_FIELD_WIDTH
+            length = SOCCER_FIELD_LENGTH
+            price = SOCCER_FIELD_PRICE
+            isLighting = IS_LIGHTING
+            isFenced = IS_FENCED
+            isLockerRoom = IS_LOCKER_ROOM
+            description = DESCRIPTION
+        }
 
         return Optional.ofNullable(soccerField)
     }
@@ -47,7 +56,17 @@ class BookingInputToBookingTest {
         const val EXECUTION_TIME = "01:30"
         const val AMOUNT = "125.00"
         const val IS_PAYED = true
-        const val SOCCER_FIELD = 1L
+
+        private const val SOCCER_FIELD = 1L
+        private const val SOCCER_FIELD_NAME = "SoccerField"
+        private const val SOCCER_FIELD_WIDTH = 40
+        private const val SOCCER_FIELD_LENGTH = 60
+        private const val PRICE = "120.00"
+        private val SOCCER_FIELD_PRICE: BigDecimal = BigDecimal(PRICE)
+        private const val IS_LIGHTING = true
+        private const val IS_FENCED = false
+        private const val IS_LOCKER_ROOM = true
+        private const val DESCRIPTION = "Soccer field description"
     }
 
     @Test
@@ -62,7 +81,16 @@ class BookingInputToBookingTest {
         assertNotNull(booking.amount)
         assertEquals(AMOUNT, booking.amount.toString())
         assertEquals(IS_PAYED, booking.isPayed)
-        // TODO dodpisać test po dodaniu implementacji mockSoccerField()
+
+        assertEquals(SOCCER_FIELD, booking.soccerField.id)
+        assertEquals(SOCCER_FIELD_NAME, booking.soccerField.name)
+        assertEquals(SOCCER_FIELD_WIDTH, booking.soccerField.width)
+        assertEquals(SOCCER_FIELD_LENGTH, booking.soccerField.length)
+        assertEquals(SOCCER_FIELD_PRICE, booking.soccerField.price)
+        assertEquals(IS_LIGHTING, booking.soccerField.isLighting)
+        assertEquals(IS_FENCED, booking.soccerField.isFenced)
+        assertEquals(IS_LOCKER_ROOM, booking.soccerField.isLockerRoom)
+        assertEquals(DESCRIPTION, booking.soccerField.description)
     }
 
     @Test
@@ -80,7 +108,7 @@ class BookingInputToBookingTest {
             assertNotNull(it.amount)
             assertEquals(AMOUNT, it.amount.toString())
             assertEquals(IS_PAYED, it.isPayed)
-            // TODO dodpisać test po dodaniu implementacji mockSoccerField()
+            assertEquals(SOCCER_FIELD, it.soccerField.id)
         }
     }
 
