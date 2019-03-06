@@ -28,7 +28,7 @@ data class Booking(
         val isPayed: Boolean,
 
         @ManyToOne
-        val soccerField: SoccerField?
+        val soccerField: SoccerField
 ) {
 
     private constructor(builder: Builder) : this(
@@ -53,7 +53,7 @@ data class Booking(
         var executionTime: LocalTime = LocalTime.now()
         var amount: BigDecimal = BigDecimal.ZERO
         var isPayed: Boolean = false
-        var soccerField: SoccerField? = null
+        var soccerField: SoccerField = SoccerField.build {  }
 
         fun build() = Booking(this)
     }

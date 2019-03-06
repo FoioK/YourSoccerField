@@ -19,7 +19,7 @@ data class SoccerField(
             CascadeType.REFRESH,
             CascadeType.DETACH]
         )
-        val address: Address?,
+        val address: Address,
 
         @ManyToOne(cascade = [
             CascadeType.PERSIST,
@@ -27,7 +27,7 @@ data class SoccerField(
             CascadeType.REFRESH,
             CascadeType.DETACH]
         )
-        val surface: Surface?,
+        val surface: Surface,
 
         @Column(nullable = false)
         val width: Int,
@@ -58,7 +58,7 @@ data class SoccerField(
             CascadeType.REFRESH,
             CascadeType.DETACH]
         )
-        val openHour: OpenHour?
+        val openHour: OpenHour
 ) {
 
     private constructor(builder: Builder) : this(
@@ -73,7 +73,7 @@ data class SoccerField(
             builder.isFenced,
             builder.isLockerRoom,
             builder.description,
-            builder.bookingsId,
+            emptyList(),
             builder.openHour
     )
 
@@ -84,8 +84,8 @@ data class SoccerField(
     class Builder {
         var id: Long = 0
         var name: String = ""
-        var address: Address? = null
-        var surface: Surface? = null
+        var address: Address = Address.build { }
+        var surface: Surface = Surface.build { }
         var width: Int = 0
         var length: Int = 0
         var price: BigDecimal = BigDecimal.ZERO
@@ -93,8 +93,7 @@ data class SoccerField(
         var isFenced: Boolean = false
         var isLockerRoom: Boolean = false
         var description: String = ""
-        var bookingsId: List<Booking> = emptyList()
-        var openHour: OpenHour? = null
+        var openHour: OpenHour = OpenHour.build { }
 
         fun build() = SoccerField(this)
     }

@@ -8,7 +8,7 @@ data class BookingDetails(
         val executionTime: String,
         val amount: String,
         val isPayed: Boolean,
-        val soccerField: Long?
+        val soccerField: Long
 
 ) {
 
@@ -34,7 +34,7 @@ data class BookingDetails(
         var executionTime: String = ""
         var amount: String = ""
         var isPayed: Boolean = false
-        var soccerField: Long? = null
+        var soccerField: Long = 0
 
         fun build() = BookingDetails(this)
     }
