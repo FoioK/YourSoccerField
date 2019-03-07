@@ -155,7 +155,7 @@ open class BookingServiceImpl @Autowired constructor(
                         bookingStartDate.dayOfMonth
                 )
 
-        if (this.filterBookingByStartAndEndTime(bookings, bookingStartTime, bookingEndTime) > 0) {
+        if (this.findConflictWithExistBooking(bookings, bookingStartTime, bookingEndTime) > 0) {
             throw BookingException(
                     "Is another booking on this time",
                     ErrorCode.BOOKING_CONFLICT
@@ -165,7 +165,7 @@ open class BookingServiceImpl @Autowired constructor(
         return true
     }
 
-    private fun filterBookingByStartAndEndTime(
+    private fun findConflictWithExistBooking(
             bookings: List<Booking>,
             bookingStartTime: LocalTime,
             bookingEndTime: LocalTime
@@ -181,7 +181,7 @@ open class BookingServiceImpl @Autowired constructor(
                     return@filter true
                 }
 
-                if (bookingStartTime.isAfter(startTime) || bookingStartTime.isBefore(endTime)) {
+                if (bookingStartTime.isAfter(startTime) && bookingStartTime.isBefore(endTime)) {
                     return@filter true
                 }
 
@@ -190,7 +190,7 @@ open class BookingServiceImpl @Autowired constructor(
             .count()
 
     private fun sumLocalTimes(one: LocalTime, two: LocalTime): LocalTime {
-        val sum: LocalTime = one.plusHours(two.hour.toLong()).minusMinutes(two.minute.toLong())
+        val sum: LocalTime = one.plusHours(two.hour.toLong()).plusMinutes(two.minute.toLong())
 
         return if (sum.isBefore(one)) LocalTime.of(23, 59, 59, 59) else sum
     }
