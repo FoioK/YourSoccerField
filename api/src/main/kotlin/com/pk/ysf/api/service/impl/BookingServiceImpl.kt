@@ -6,7 +6,7 @@ import com.pk.ysf.api.repository.SoccerFieldRepository
 import com.pk.ysf.api.service.mapper.booking.BookingInputToBooking
 import com.pk.ysf.api.service.mapper.booking.BookingToBookingDetails
 import com.pk.ysf.api.service.spec.BookingService
-import com.pk.ysf.api.util.DateUtil
+import com.pk.ysf.api.util.SHORT_DATE_PATTERN
 import com.pk.ysf.apimodels.dto.BookingDetails
 import com.pk.ysf.apimodels.dto.BookingInput
 import com.pk.ysf.apimodels.entity.Booking
@@ -54,7 +54,7 @@ open class BookingServiceImpl @Autowired constructor(
         val soccerField: SoccerField = this.getSoccerFieldById(bookingInput.soccerField)
         val bookingStartDate: LocalDateTime = LocalDateTime.parse(
                 bookingInput.startDate,
-                DateTimeFormatter.ofPattern(DateUtil.shortPattern)
+                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
         )
         val executionTime: LocalTime = LocalTime.parse(bookingInput.executionTime)
         val openHour: OpenHour = soccerField.openHour

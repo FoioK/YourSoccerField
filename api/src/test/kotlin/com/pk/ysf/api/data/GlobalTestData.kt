@@ -1,6 +1,6 @@
 package com.pk.ysf.api.data
 
-import com.pk.ysf.api.util.DateUtil
+import com.pk.ysf.api.util.SHORT_DATE_PATTERN
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -15,7 +15,7 @@ const val USER_CODE = 1L
 const val START_DATE_STRING = "2019-05-05 11:00"
 val START_DATE: LocalDateTime = LocalDateTime.parse(
         START_DATE_STRING,
-        DateTimeFormatter.ofPattern(DateUtil.shortPattern)
+        DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
 )
 
 const val EXECUTION_TIME_STRING = "02:30"

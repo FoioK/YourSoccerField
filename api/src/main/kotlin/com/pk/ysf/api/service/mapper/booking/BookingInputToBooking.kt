@@ -2,7 +2,7 @@ package com.pk.ysf.api.service.mapper.booking
 
 import com.pk.ysf.api.repository.SoccerFieldRepository
 import com.pk.ysf.api.service.mapper.BaseMapper
-import com.pk.ysf.api.util.DateUtil
+import com.pk.ysf.api.util.SHORT_DATE_PATTERN
 import com.pk.ysf.apimodels.dto.BookingInput
 import com.pk.ysf.apimodels.entity.Booking
 import com.pk.ysf.apimodels.entity.SoccerField
@@ -26,7 +26,7 @@ open class BookingInputToBooking @Autowired constructor(
                     from.userCode,
                     LocalDateTime.parse(
                             from.startDate,
-                            DateTimeFormatter.ofPattern(DateUtil.shortPattern)
+                            DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
                     ),
                     LocalTime.parse(from.executionTime),
                     BigDecimal(from.amount),
