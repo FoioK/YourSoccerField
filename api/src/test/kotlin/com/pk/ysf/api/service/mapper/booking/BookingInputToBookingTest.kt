@@ -34,7 +34,7 @@ class BookingInputToBookingTest {
 
     @Test
     fun correctMapBookingInput() {
-        val booking: Booking = bookingInputToBooking.map(correctBookingInput())
+        val booking: Booking = bookingInputToBooking.map(bookingInputMock())
 
         assertEquals(USER_CODE, booking.userCode)
         assertNotNull(booking.startDate)
@@ -59,7 +59,7 @@ class BookingInputToBookingTest {
     @Test
     fun correctMapAll() {
         val bookings: Collection<Booking> = bookingInputToBooking.mapAll(
-                listOf(correctBookingInput(), correctBookingInput(), correctBookingInput())
+                listOf(bookingInputMock(), bookingInputMock(), bookingInputMock())
         )
 
         bookings.forEach {

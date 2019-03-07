@@ -1,10 +1,24 @@
 package com.pk.ysf.api.data
 
+import com.pk.ysf.apimodels.dto.BookingDetails
 import com.pk.ysf.apimodels.dto.BookingInput
 import com.pk.ysf.apimodels.entity.Booking
 
-fun correctBookingInput(): BookingInput =
+fun bookingInputMock(
+        startDate: String = START_DATE_STRING
+): BookingInput =
         BookingInput.build {
+            this.userCode = USER_CODE
+            this.startDate = startDate
+            this.executionTime = EXECUTION_TIME_STRING
+            this.amount = AMOUNT_STRING
+            this.isPayed = IS_PAYED
+            this.soccerField = SOCCER_FIELD_ID
+        }
+
+fun bookingDetailsMock(): BookingDetails =
+        BookingDetails.build {
+            id = BOOKING_ID
             userCode = USER_CODE
             startDate = START_DATE_STRING
             executionTime = EXECUTION_TIME_STRING
