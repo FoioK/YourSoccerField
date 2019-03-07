@@ -24,7 +24,7 @@ class BookingController @Autowired constructor(
     )
     fun create(@RequestBody bookingInput: BookingInput): ResponseEntity<BookingDetails> {
         val bookingDetails: BookingDetails = this.bookingService.create(bookingInput)
-
+        // TODO poprawić odpowiedź, dodać HttpServletRequest do parametrów i zwrócić dokładne URI
         return ResponseEntity
                 .created(URI.create("/bookings/${bookingDetails.id}"))
                 .body(bookingDetails)

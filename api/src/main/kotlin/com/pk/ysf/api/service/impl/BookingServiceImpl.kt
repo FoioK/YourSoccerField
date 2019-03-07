@@ -33,7 +33,7 @@ open class BookingServiceImpl @Autowired constructor(
         private val bookingInputToBooking: BookingInputToBooking,
         private val bookingToBookingDetails: BookingToBookingDetails
 ) : BookingService {
-
+//TODO do poprawy wszystkie wyjątki, zmiana struktury na domyślną
     @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).BOOKINGS_POST_CREATE)")
     @ValidInput
     override fun create(@RequestBody bookingInput: BookingInput): BookingDetails {
