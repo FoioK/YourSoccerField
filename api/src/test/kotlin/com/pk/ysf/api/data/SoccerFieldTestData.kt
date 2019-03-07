@@ -14,6 +14,7 @@ fun soccerFieldMock(): SoccerField =
             isFenced = SOCCER_FIELD_IS_FENCED
             isLockerRoom = SOCCER_FIELD_IS_LOCKER_ROOM
             description = DESCRIPTION
+            openHour = openHourMock()
         }
 
 fun soccerFieldMockOptional(): Optional<SoccerField> =
