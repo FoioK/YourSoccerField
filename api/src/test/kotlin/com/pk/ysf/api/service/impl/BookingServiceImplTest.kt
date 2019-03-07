@@ -1,45 +1,54 @@
 package com.pk.ysf.api.service.impl
 
-import com.pk.ysf.api.service.spec.BookingService
-import com.pk.ysf.apimodels.entity.SoccerField
+import com.pk.ysf.api.data.SOCCER_FIELD_ID
+import com.pk.ysf.api.data.bookingMock
+import com.pk.ysf.api.data.correctBookingInput
+import com.pk.ysf.api.data.soccerFieldMockOptional
+import com.pk.ysf.api.repository.BookingRepository
+import com.pk.ysf.api.repository.SoccerFieldRepository
+import com.pk.ysf.api.service.mapper.booking.BookingInputToBooking
+import com.pk.ysf.api.service.mapper.booking.BookingToBookingDetails
+import com.pk.ysf.apimodels.dto.BookingDetails
+import de.jodamob.kotlin.testrunner.KotlinTestRunner
+import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
-import org.springframework.test.context.junit4.SpringRunner
-import java.math.BigDecimal
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 
-@RunWith(SpringRunner::class)
+@RunWith(KotlinTestRunner::class)
 class BookingServiceImplTest {
 
     @InjectMocks
-    lateinit var bookingService: BookingService
+    lateinit var bookingService: BookingServiceImpl
 
-    companion object {
-        const val ID = 3L
-        const val NAME = "Test Soccer Field"
-//        const val ADDRESS =
-//        const val SURFACE =
-        const val WIDTH = 35
-        const val LENGTH = 70
-        val PRICE = BigDecimal.TEN
-        const val IS_LIGHTING = true
-        const val IS_FENCED = true
-        const val IS_LOCKER_ROOM = true
-        const val DESCRIPTION = "Test description"
+    @Mock
+    lateinit var soccerFieldRepository: SoccerFieldRepository
+
+    @Mock
+    lateinit var bookingRepository: BookingRepository
+
+    @Mock
+    lateinit var  bookingInputToBooking: BookingInputToBooking
+
+    @Mock
+    lateinit var bookingToBookingDetails: BookingToBookingDetails
+
+    @Before
+    fun init() {
+        MockitoAnnotations.initMocks(this)
+
+        Mockito.`when`(soccerFieldRepository.findById(SOCCER_FIELD_ID))
+                .thenReturn(soccerFieldMockOptional())
+
+        Mockito.`when`(bookingRepository.findAllByDate(soccerFieldId = SOCCER_FIELD_ID))
+                .thenReturn(listOf(bookingMock()))
     }
 
-    private fun getCorrectSoccerField(): SoccerField {
-        return SoccerField.build {
-            id = ID
-            name = NAME
-            // address
-            // surface
-            width = WIDTH
-            length = LENGTH
-            price = PRICE
-            isLighting = IS_LIGHTING
-            isFenced = IS_FENCED
-            isLockerRoom = IS_LOCKER_ROOM
-            description = DESCRIPTION
-        }
+    @Test
+    fun shouldCreateBooking() {
+        val bookingDetails: BookingDetails = bookingService.create(correctBookingInput())
     }
 }
