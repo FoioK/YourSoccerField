@@ -1,6 +1,5 @@
 package com.pk.ysf.oauth2server.service;
 
-import com.pk.ysf.apimodels.exception.ErrorCode;
 import com.pk.ysf.apimodels.exception.MissingEntityException;
 import com.pk.ysf.apimodels.exception.UnactivatedUserException;
 import com.pk.ysf.apimodels.entity.CustomUserDetail;
@@ -31,9 +30,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         List<UserEntity> users = userRepository.findByEmail(email)
-                .orElseThrow(() -> new MissingEntityException(
-                        "User email not found",
-                        ErrorCode.NOT_FOUND_BY_EMAIL));
+                .orElseThrow(() -> new MissingEntityException("User email not found"));
 
         UserEntity userEntity = findActiveUser(users);
 
@@ -57,12 +54,10 @@ public class CustomUserDetailService implements UserDetailsService {
             return userEntity;
         } else if (users.size() == 1) {
             throw new UnactivatedUserException(
-                    "Login operation is not allowed for non-activated users",
-                    ErrorCode.UNACTIVATED_USER);
+                    "Login operation is not allowed for non-activated users"
+            );
         } else {
-            throw new MissingEntityException(
-                    "User email not found",
-                    ErrorCode.NOT_FOUND_BY_EMAIL);
+            throw new MissingEntityException("User email not found");
         }
     }
 }

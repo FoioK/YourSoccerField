@@ -2,7 +2,6 @@ package com.pk.ysf.service.mapper.impl;
 
 import com.pk.ysf.api.repository.SoccerFieldRepository;
 import com.pk.ysf.api.service.mapper.BaseMapper;
-import com.pk.ysf.apimodels.exception.ErrorCode;
 import com.pk.ysf.apimodels.exception.MissingEntityException;
 import com.pk.ysf.apimodels.entity.Booking;
 import com.pk.ysf.apimodels.entity.SoccerField;
@@ -41,10 +40,7 @@ public class BookingFromDTO implements BaseMapper<BookingDTO, Booking> {
     private SoccerField getSoccerFieldById(Long soccerFieldId) {
         return this.soccerFieldRepository
                 .findById(soccerFieldId)
-                .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find soccer field with id " + soccerFieldId,
-                        ErrorCode.NOT_FOUND_BY_ID
-                ));
+                .orElseThrow(() -> new MissingEntityException("Cannot find soccer field with id " + soccerFieldId));
     }
 
     @NotNull

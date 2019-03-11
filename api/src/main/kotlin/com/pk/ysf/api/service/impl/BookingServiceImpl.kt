@@ -12,12 +12,11 @@ import com.pk.ysf.apimodels.dto.BookingInput
 import com.pk.ysf.apimodels.entity.Booking
 import com.pk.ysf.apimodels.entity.OpenHour
 import com.pk.ysf.apimodels.entity.SoccerField
-import com.pk.ysf.apimodels.exception.AppException
 import com.pk.ysf.apimodels.exception.BookingException
-import com.pk.ysf.apimodels.exception.ErrorCode
 import com.pk.ysf.apimodels.exception.MissingEntityException
+import com.pk.ysf.apimodels.exception.OpenHourException
+import com.pk.ysf.apimodels.exception.ValidationException
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RequestBody
@@ -33,16 +32,12 @@ open class BookingServiceImpl @Autowired constructor(
         private val bookingInputToBooking: BookingInputToBooking,
         private val bookingToBookingDetails: BookingToBookingDetails
 ) : BookingService {
-//TODO do poprawy wszystkie wyjątki, zmiana struktury na domyślną
+
     @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).BOOKINGS_POST_CREATE)")
     @ValidInput
     override fun create(@RequestBody bookingInput: BookingInput): BookingDetails {
         if (!this.validation(bookingInput)) {
-            throw AppException(
-                    "Error occurred during data validation",
-                    HttpStatus.PRECONDITION_FAILED,
-                    ErrorCode.INVALID_INPUT
-            )
+            throw ValidationException("Error occurred during data validation")
         }
 
         val booking: Booking = this.bookingInputToBooking.map(bookingInput)
@@ -74,10 +69,7 @@ open class BookingServiceImpl @Autowired constructor(
             this.soccerFieldRepository
                     .findById(soccerFieldId)
                     .orElseThrow {
-                        MissingEntityException(
-                                "Cannot find soccer field with id $soccerFieldId",
-                                ErrorCode.NOT_FOUND_BY_ID
-                        )
+                        MissingEntityException("Cannot find soccer field with id $soccerFieldId")
                     }
 
     private fun checkIsSoccerFieldOpen(
@@ -91,17 +83,11 @@ open class BookingServiceImpl @Autowired constructor(
         val bookingStartTime: LocalTime = bookingStartDate.toLocalTime()
 
         if (openTime.isAfter(bookingStartTime)) {
-            throw BookingException(
-                    "Soccer field is not open yet",
-                    ErrorCode.SOCCER_FIELD_NOT_OPEN
-            )
+            throw BookingException("Soccer field is not open yet")
         }
 
         if (closeTime.isBefore(this.sumLocalTimes(bookingStartTime, executionTime))) {
-            throw BookingException(
-                    "Soccer field is then closed",
-                    ErrorCode.SOCCER_FIELD_CLOSED
-            )
+            throw BookingException("Soccer field is then closed")
         }
 
         return true
@@ -116,10 +102,8 @@ open class BookingServiceImpl @Autowired constructor(
                 5 -> openHour.s5
                 6 -> openHour.s6
                 7 -> openHour.s7
-                else -> throw AppException(
-                        "Error occurred while find open time by day of week",
-                        HttpStatus.BAD_REQUEST,
-                        ErrorCode.OPEN_HOUR_GET_VALUE
+                else -> throw OpenHourException(
+                        "Error occurred while find open time by day of week"
                 )
             }
 
@@ -132,10 +116,8 @@ open class BookingServiceImpl @Autowired constructor(
                 5 -> openHour.e5
                 6 -> openHour.e6
                 7 -> openHour.e7
-                else -> throw AppException(
-                        "Error occurred while find close time by day of week",
-                        HttpStatus.BAD_REQUEST,
-                        ErrorCode.OPEN_HOUR_GET_VALUE
+                else -> throw OpenHourException(
+                        "Error occurred while find close time by day of week"
                 )
             }
 
@@ -156,10 +138,7 @@ open class BookingServiceImpl @Autowired constructor(
                 )
 
         if (this.findConflictWithExistBooking(bookings, bookingStartTime, bookingEndTime) > 0) {
-            throw BookingException(
-                    "Is another booking on this time",
-                    ErrorCode.BOOKING_CONFLICT
-            )
+            throw BookingException("Is another booking on this time")
         }
 
         return true
