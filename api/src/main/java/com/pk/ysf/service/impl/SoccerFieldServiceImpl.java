@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.pk.ysf.api.repository.AddressRepository;
 import com.pk.ysf.api.repository.BookingRepository;
 import com.pk.ysf.api.repository.SoccerFieldRepository;
-import com.pk.ysf.apimodels.exception.ErrorCode;
 import com.pk.ysf.apimodels.exception.MissingEntityException;
 import com.pk.ysf.apimodels.entity.*;
 import com.pk.ysf.service.SoccerFieldService;
@@ -202,28 +201,19 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     private Address getAddressById(Long addressId) {
         return this.addressRepository
                 .findById(addressId)
-                .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find address with id " + addressId,
-                        ErrorCode.NOT_FOUND_BY_ID
-                ));
+                .orElseThrow(() -> new MissingEntityException("Cannot find address with id " + addressId));
     }
 
     private Surface getSurfaceById(Long surfaceId) {
         return this.soccerFieldRepository
                 .findSurfaceById(surfaceId)
-                .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find surface with id " + surfaceId,
-                        ErrorCode.NOT_FOUND_BY_ID
-                ));
+                .orElseThrow(() -> new MissingEntityException("Cannot find surface with id " + surfaceId));
     }
 
     private OpenHour getOpenHourById(Long openHourId) {
         return this.soccerFieldRepository
                 .findOpenHourById(openHourId)
-                .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find open hour with id " + openHourId,
-                        ErrorCode.NOT_FOUND_BY_ID
-                ));
+                .orElseThrow(() -> new MissingEntityException("Cannot find open hour with id " + openHourId));
     }
 
     @Override
@@ -246,10 +236,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     public SoccerFieldDTO getById(Long soccerFieldId) {
         SoccerField soccerField = this.soccerFieldRepository
                 .findById(soccerFieldId)
-                .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find soccer field with id " + soccerFieldId,
-                        ErrorCode.NOT_FOUND_BY_ID
-                ));
+                .orElseThrow(() -> new MissingEntityException("Cannot find soccer field with id " + soccerFieldId));
 
         return this.soccerFieldToDTO.createFromEntity(soccerField);
     }

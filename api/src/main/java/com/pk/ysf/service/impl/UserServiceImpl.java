@@ -49,7 +49,11 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
-            BookingRepository bookingRepository, @Qualifier("encoder") PasswordEncoder passwordEncoder, CustomAccessTokenConverter customAccessTokenConverter, JwtTokenStore jwtTokenStore, JwtAccessTokenConverter jwtAccessTokenConverter) {
+            BookingRepository bookingRepository,
+            @Qualifier("encoder") PasswordEncoder passwordEncoder,
+            CustomAccessTokenConverter customAccessTokenConverter,
+            JwtTokenStore jwtTokenStore,
+            JwtAccessTokenConverter jwtAccessTokenConverter) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bookingRepository = bookingRepository;
@@ -133,22 +137,15 @@ public class UserServiceImpl implements UserService {
     private void validationUserDTOModel(UserDTO userDTO) {
         if (userDTO == null || userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
             throw new CreateEntityException(
-                    "Cannot create user with incorrect password",
-                    ErrorCode.INCORRECT_PASSWORD
-            );
+                    "Cannot create user with incorrect password");
         }
 
         if (isUserWithSameEMail(userDTO.getEmail())) {
-            throw new DuplicatEntityException(
-                    "Already exist user with this email address",
-                    ErrorCode.DUPLICATE_USER_EMAIL);
+            throw new DuplicateEntityException("Already exist user with this email address");
         }
 
         if (isUserWithSameNickname(userDTO.getNickname())) {
-            throw new DuplicatEntityException(
-                    "Already exist user with this nickname",
-                    ErrorCode.DUPLICATE_USER_NICKNAME
-            );
+            throw new DuplicateEntityException("Already exist user with this nickname");
         }
     }
 
@@ -178,8 +175,7 @@ public class UserServiceImpl implements UserService {
         }
 
         throw new MissingEntityException(
-                "Cannot find next user code value",
-                ErrorCode.NOT_FOUND_NEXT_USER_CODE
+                "Cannot find next user code value"
         );
     }
 
@@ -187,9 +183,7 @@ public class UserServiceImpl implements UserService {
         Long lastUserCode = this.userRepository
                 .findLastUserCode()
                 .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find last user code",
-                        ErrorCode.NOT_FOUND_LAST_USER_CODE
-                )).longValue();
+                        "Cannot find last user code")).longValue();
 
         this.userRepository.insertNextUserCode(lastUserCode + 1);
     }
@@ -204,17 +198,14 @@ public class UserServiceImpl implements UserService {
         if (isUserRoleAndFirstSearch) {
             if (this.insertRole(name) == null) {
                 throw new CreateEntityException(
-                        "Error occurred while insert user role record",
-                        ErrorCode.INSERT_ERROR
-                );
+                        "Error occurred while insert user role record");
             }
 
             return findRoleByName(name, false);
         }
 
         throw new MissingEntityException(
-                "Cannot find role with name " + name,
-                ErrorCode.NOT_FOUND_BY_NAME
+                "Cannot find role with name " + name
         );
     }
 
@@ -230,8 +221,7 @@ public class UserServiceImpl implements UserService {
 
         if (!userRole.isPresent()) {
             throw new CreateEntityException(
-                    "Error occurred while map user to role",
-                    ErrorCode.INSERT_ERROR
+                    "Error occurred while map user to role"
             );
         }
     }
@@ -239,8 +229,7 @@ public class UserServiceImpl implements UserService {
     private void updateNextUserCode(Long actualCode) {
         if (this.userRepository.updateNextUserCode(actualCode + 1) == 0) {
             throw new UpdateEntityException(
-                    "Cannot update next user code",
-                    ErrorCode.UPDATE_NEXT_USER_CODE
+                    "Cannot update next user code"
             );
         }
     }
@@ -249,8 +238,7 @@ public class UserServiceImpl implements UserService {
     public List<BookingDTO> getAllBookingsByUserId(Long userId) {
         UserEntity user = this.userRepository.findById(userId)
                 .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find user with id " + userId,
-                        ErrorCode.NOT_FOUND_BY_ID
+                        "Cannot find user with id " + userId
                 ));
 
         if (user.getCode() == null) {

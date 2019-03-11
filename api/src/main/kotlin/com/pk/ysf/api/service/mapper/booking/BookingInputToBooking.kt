@@ -6,7 +6,6 @@ import com.pk.ysf.api.util.SHORT_DATE_PATTERN
 import com.pk.ysf.apimodels.dto.BookingInput
 import com.pk.ysf.apimodels.entity.Booking
 import com.pk.ysf.apimodels.entity.SoccerField
-import com.pk.ysf.apimodels.exception.ErrorCode
 import com.pk.ysf.apimodels.exception.MissingEntityException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -38,9 +37,6 @@ open class BookingInputToBooking @Autowired constructor(
             this.soccerFieldRepository
                     .findById(soccerFieldId)
                     .orElseThrow {
-                        MissingEntityException(
-                                "Cannot find soccer field with id $soccerFieldId",
-                                ErrorCode.NOT_FOUND_BY_ID
-                        )
+                        MissingEntityException("Cannot find soccer field with id $soccerFieldId")
                     }
 }
