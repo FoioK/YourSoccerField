@@ -49,6 +49,25 @@ class OpenHour(
         val soccerField: List<SoccerField>
 ) {
 
+    constructor() : this(
+            id = 0,
+            s1 = LocalTime.MIN,
+            e1 = LocalTime.MIN,
+            s2 = LocalTime.MIN,
+            e2 = LocalTime.MIN,
+            s3 = LocalTime.MIN,
+            e3 = LocalTime.MIN,
+            s4 = LocalTime.MIN,
+            e4 = LocalTime.MIN,
+            s5 = LocalTime.MIN,
+            e5 = LocalTime.MIN,
+            s6 = LocalTime.MIN,
+            e6 = LocalTime.MIN,
+            s7 = LocalTime.MIN,
+            e7 = LocalTime.MIN,
+            soccerField = emptyList()
+    )
+
     private constructor(builder: Builder) : this(
             builder.id,
             builder.s1,
