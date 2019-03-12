@@ -1,4 +1,4 @@
-package com.pk.ysf.api.configuration
+package com.pk.ysf.api.security
 
 import com.pk.ysf.apimodels.entity.CustomUserDetail
 import org.springframework.boot.autoconfigure.domain.EntityScan
@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.MethodParameter
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.support.WebDataBinderFactory
 import org.springframework.web.context.request.NativeWebRequest
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
@@ -45,4 +47,7 @@ class WebMvcConfiguration : WebMvcConfigurer {
                             null
                         }
             }
+
+    @Bean
+    fun encoder(): PasswordEncoder = BCryptPasswordEncoder()
 }
