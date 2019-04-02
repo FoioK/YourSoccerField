@@ -20,12 +20,6 @@ class UserEntity {
     @Column(nullable = false, length = 64)
     var email: String? = null
 
-    @Column(nullable = false, length = 64)
-    var password: String? = null
-
-    @Column(nullable = false)
-    var isActive: Boolean = false
-
     @Column(nullable = false, length = 32, table = "user_detail")
     var firstName: String? = null
 
@@ -37,7 +31,4 @@ class UserEntity {
 
     @Column(nullable = false, table = "user_detail")
     var createTime: LocalDateTime? = null
-
-    @Transient
-    var grantedAuthorityList: Collection<GrantedAuthority> = ArrayList()
 }
