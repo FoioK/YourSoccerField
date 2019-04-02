@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse
 @Order(Ordered.HIGHEST)
 class CorsFilter : Filter {
 
-    override fun init(filterConfig: FilterConfig) {
-
-    }
+    override fun init(filterConfig: FilterConfig) = Unit
 
     override fun doFilter(servletRequest: ServletRequest, servletResponse: ServletResponse, filterChain: FilterChain) {
         val response: HttpServletResponse = servletResponse as HttpServletResponse
@@ -31,7 +29,5 @@ class CorsFilter : Filter {
         }
     }
 
-    override fun destroy() {
-
-    }
+    override fun destroy() = Unit
 }
