@@ -1,15 +1,14 @@
 package com.pk.ysf.service.impl;
 
 import com.pk.ysf.api.repository.BookingRepository;
-import com.pk.ysf.api.repository.RoleRepository;
 import com.pk.ysf.api.repository.UserRepository;
 import com.pk.ysf.api.security.CustomAccessTokenConverter;
 import com.pk.ysf.apimodels.entity.Booking;
-import com.pk.ysf.apimodels.entity.Role;
 import com.pk.ysf.apimodels.entity.UserEntity;
-import com.pk.ysf.apimodels.entity.UserRole;
-import com.pk.ysf.apimodels.exception.*;
-import com.pk.ysf.domain.Constants;
+import com.pk.ysf.apimodels.exception.CreateEntityException;
+import com.pk.ysf.apimodels.exception.DuplicateEntityException;
+import com.pk.ysf.apimodels.exception.MissingEntityException;
+import com.pk.ysf.apimodels.exception.UpdateEntityException;
 import com.pk.ysf.service.UserService;
 import com.pk.ysf.service.dtoModel.BookingDTO;
 import com.pk.ysf.service.dtoModel.UserDTO;
@@ -34,7 +33,6 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final BookingRepository bookingRepository;
 
     private PasswordEncoder passwordEncoder;
@@ -48,14 +46,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(
             UserRepository userRepository,
-            RoleRepository roleRepository,
             BookingRepository bookingRepository,
             @Qualifier("encoder") PasswordEncoder passwordEncoder,
             CustomAccessTokenConverter customAccessTokenConverter,
             JwtTokenStore jwtTokenStore,
             JwtAccessTokenConverter jwtAccessTokenConverter) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.bookingRepository = bookingRepository;
         this.passwordEncoder = passwordEncoder;
         this.setUserMapper();
@@ -68,8 +64,6 @@ public class UserServiceImpl implements UserService {
             userEntity.setId(dto.getId());
             userEntity.setCode(dto.getCode());
             userEntity.setEmail(dto.getEmail());
-            userEntity.setPassword(passwordEncoder.encode(dto.getPassword()));
-            userEntity.setActive(dto.isActive());
             userEntity.setFirstName(dto.getFirstName());
             userEntity.setSecondName(dto.getSecondName());
             userEntity.setNickname(dto.getNickname());
@@ -83,7 +77,6 @@ public class UserServiceImpl implements UserService {
             userDTO.setId(entity.getId());
             userDTO.setCode(entity.getCode());
             userDTO.setEmail(entity.getEmail());
-            userDTO.setActive(entity.isActive());
             userDTO.setFirstName(entity.getFirstName());
             userDTO.setSecondName(entity.getSecondName());
             userDTO.setNickname(entity.getNickname());
@@ -123,8 +116,6 @@ public class UserServiceImpl implements UserService {
         userDTO.setCreateTime(LocalDateTime.now().toString());
 
         Long userCode = this.findNextUserCode(true);
-        Role role = this.findRoleByName(Constants.USER_ROLE.getValue(), true);
-        this.insertUserRole(userCode, role);
 
         userDTO.setCode(userCode);
         UserEntity userEntity = userRepository.save(userFromDTO.createFromDTO(userDTO));
@@ -186,44 +177,6 @@ public class UserServiceImpl implements UserService {
                         "Cannot find last user code")).longValue();
 
         this.userRepository.insertNextUserCode(lastUserCode + 1);
-    }
-
-    private Role findRoleByName(String name, boolean isUserRoleAndFirstSearch) {
-        Optional<Role> role = this.roleRepository.findByName(name);
-
-        if (role.isPresent()) {
-            return role.get();
-        }
-
-        if (isUserRoleAndFirstSearch) {
-            if (this.insertRole(name) == null) {
-                throw new CreateEntityException(
-                        "Error occurred while insert user role record");
-            }
-
-            return findRoleByName(name, false);
-        }
-
-        throw new MissingEntityException(
-                "Cannot find role with name " + name
-        );
-    }
-
-    private Role insertRole(String name) {
-        Role role = new Role(null, name, Collections.emptyList(), Collections.emptyList());
-
-        return this.roleRepository.save(role);
-    }
-
-    private void insertUserRole(Long userCode, Role role) {
-        this.entityManager.persist(new UserRole(null, userCode, role));
-        Optional<UserRole> userRole = this.userRepository.findUserRoleByUserCode(userCode);
-
-        if (!userRole.isPresent()) {
-            throw new CreateEntityException(
-                    "Error occurred while map user to role"
-            );
-        }
     }
 
     private void updateNextUserCode(Long actualCode) {

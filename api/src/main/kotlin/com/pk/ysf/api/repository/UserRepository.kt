@@ -1,7 +1,6 @@
 package com.pk.ysf.api.repository
 
 import com.pk.ysf.apimodels.entity.UserEntity
-import com.pk.ysf.apimodels.entity.UserRole
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
@@ -36,11 +35,6 @@ interface UserRepository : JpaRepository<UserEntity, Long> {
     @Transactional
     @Query(value = insertNextUserCodeQuery, nativeQuery = true)
     fun insertNextUserCode(@Param("code") code: Long): Int
-
-
-    @Suppress("SpringDataRepositoryMethodReturnTypeInspection")
-    @Query(value = findUserRoleByUserCodeQuery)
-    fun findUserRoleByUserCode(@Param("userCode") userCode: Long): Optional<UserRole>
 
     companion object {
 

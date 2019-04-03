@@ -1,6 +1,5 @@
 package com.pk.ysf.api.security
 
-import com.pk.ysf.util.CustomUserAuthenticationConverter
 import org.springframework.boot.autoconfigure.security.oauth2.resource.JwtAccessTokenConverterConfigurer
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
@@ -137,11 +136,4 @@ class CustomAccessTokenConverter : AccessTokenConverter, JwtAccessTokenConverter
         return response
     }
 
-    fun setUserTokenConverter(userTokenConverter: UserAuthenticationConverter) {
-        this.userTokenConverter = userTokenConverter
-    }
-
-    fun setIncludeGrantType(includeGrantType: Boolean) {
-        this.includeGrantType = includeGrantType
-    }
 }

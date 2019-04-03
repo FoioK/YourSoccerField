@@ -1,6 +1,5 @@
 package com.pk.ysf.api.security
 
-import com.pk.ysf.apimodels.entity.CustomUserDetail
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
@@ -8,6 +7,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.MethodParameter
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.User
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.support.WebDataBinderFactory
@@ -31,7 +31,7 @@ class WebMvcConfiguration : WebMvcConfigurer {
             object : HandlerMethodArgumentResolver {
 
                 override fun supportsParameter(parameters: MethodParameter): Boolean =
-                        parameters.parameterType == CustomUserDetail::class.java
+                        parameters.parameterType == User::class.java
 
                 override fun resolveArgument(
                         parameter: MethodParameter,
