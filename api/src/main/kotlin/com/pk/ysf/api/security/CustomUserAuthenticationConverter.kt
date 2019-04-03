@@ -12,8 +12,6 @@ private const val EMAIL: String = "email"
 
 class CustomUserAuthenticationConverter : UserAuthenticationConverter {
 
-    private var defaultAuthorities: Collection<GrantedAuthority> = emptyList()
-
     override fun extractAuthentication(map: Map<String, *>): Authentication? =
             if (map.containsKey(UserAuthenticationConverter.USERNAME))
                 UsernamePasswordAuthenticationToken(

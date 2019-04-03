@@ -1,8 +1,6 @@
 package com.pk.ysf.apimodels.entity
 
-import org.springframework.security.core.GrantedAuthority
 import java.time.LocalDateTime
-import java.util.*
 import javax.persistence.*
 
 @Entity
