@@ -2,7 +2,6 @@ package com.pk.ysf.service.impl;
 
 import com.pk.ysf.api.repository.BookingRepository;
 import com.pk.ysf.api.repository.UserRepository;
-import com.pk.ysf.api.security.CustomAccessTokenConverter;
 import com.pk.ysf.apimodels.entity.Booking;
 import com.pk.ysf.apimodels.entity.UserEntity;
 import com.pk.ysf.apimodels.exception.CreateEntityException;
@@ -17,14 +16,10 @@ import com.pk.ysf.service.mapper.BaseToDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -40,17 +35,11 @@ public class UserServiceImpl implements UserService {
     private BaseToDTO<UserEntity, UserDTO> userToDTO;
     private BaseToDTO<Booking, BookingDTO> bookingToDTO;
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Autowired
     public UserServiceImpl(
             UserRepository userRepository,
             BookingRepository bookingRepository,
-            @Qualifier("encoder") PasswordEncoder passwordEncoder,
-            CustomAccessTokenConverter customAccessTokenConverter,
-            JwtTokenStore jwtTokenStore,
-            JwtAccessTokenConverter jwtAccessTokenConverter) {
+            @Qualifier("encoder") PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.bookingRepository = bookingRepository;
         this.passwordEncoder = passwordEncoder;

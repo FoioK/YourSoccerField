@@ -26,7 +26,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 @Service
-open class BookingServiceImpl @Autowired constructor(
+class BookingServiceImpl @Autowired constructor(
         private val soccerFieldRepository: SoccerFieldRepository,
         private val bookingRepository: BookingRepository,
         private val bookingInputToBooking: BookingInputToBooking,
