@@ -61,6 +61,22 @@ data class SoccerField(
         val openHour: OpenHour
 ) {
 
+    constructor() : this(
+            id = 0,
+            name = "",
+            address = Address.build { },
+            surface = Surface.build { },
+            width = 0,
+            length = 0,
+            price = BigDecimal.ZERO,
+            isLighting = false,
+            isFenced = false,
+            isLockerRoom = false,
+            description = "",
+            bookingsId = emptyList(),
+            openHour = OpenHour.build { }
+    )
+
     private constructor(builder: Builder) : this(
             builder.id,
             builder.name,

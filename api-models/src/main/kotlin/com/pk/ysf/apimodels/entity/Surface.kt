@@ -13,8 +13,14 @@ data class Surface(
         val name: String,
 
         @OneToMany(mappedBy = "surface")
-        val SoccerFields: List<SoccerField>
+        val soccerFields: List<SoccerField>
 ) {
+
+    constructor() : this(
+            id = 0,
+            name = "",
+            soccerFields = emptyList()
+    )
 
     private constructor(builder: Builder) : this(
             builder.id,
