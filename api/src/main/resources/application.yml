@@ -17,11 +17,11 @@ security:
       jwt:
         key-value: |
           -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwSgjDCD/CP5TW2EcowNi
-          xaxcxV4TTGeM6PA4/N0JoBD7uOQdxRk1mtOWBZmBnZ8ptTsQJg84tsaUn7EpS9Wn
-          bXZHUEHseQk4pMmAC/9C1x/peMW+3oSIBWzkKQV8Qj0dLfJzgguc1jE8urGCOAM/
-          g+cWIgqZHCRGdNlr1GFq1ow2V2s/sBwP03AKN3MMPPDUlshsiPJTqvRChEWYxmNE
-          KGmJs1LRXeHgp4ZNtcWc22LYw8G2rdbwhVlkG9VAsMi6XcidmZfn+KBvCvgVCZ9S
-          UMyH+ZPiKcf4WhaM2MSutKWEwuotz6w23LN47RP7E5EQYTX754jbkpQASz43GPyD
-          eQIDAQAB
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2dhkCFy8zchY2W7GzVjG
+          o+QBcoluOXRXmtwNffjLZp9KyTQ4Z0fY1n1pYn9ARAT/CJrMH75XIZxF53Kr6sI3
+          1ZR1KHlLCcqg7R4Z3koCTblAVJPDKfSswG6eboW6bg+bc2/omwxhUpdzxGwtAtOG
+          O5qXzwJg6sTMozbQn6T3xzWdKFwsrtDV6mLIt4jY5myM/DWXFEIGrh171R85LGCD
+          ngjSzQrMMvzgAbmSVLWMOjfPVOoLMiOzUZJgc0zqdHO7VHaxYm/bVeyPAOqWzR72
+          xUAP2zrpF/57XswuTmck4VyHcs4ixHvqa44VPTVY9sahLxtf8crv/Baj0igLuZri
+          owIDAQAB
           -----END PUBLIC KEY-----

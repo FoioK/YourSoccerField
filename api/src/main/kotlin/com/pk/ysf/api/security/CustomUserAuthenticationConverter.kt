@@ -5,10 +5,11 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.User
+import org.springframework.security.oauth2.common.exceptions.InvalidTokenException
 import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter
 import org.springframework.util.StringUtils
 
-private const val EMAIL: String = "email"
+private const val USER_NAME: String = "user_name"
 
 class CustomUserAuthenticationConverter : UserAuthenticationConverter {
 
@@ -20,7 +21,11 @@ class CustomUserAuthenticationConverter : UserAuthenticationConverter {
             else null
 
     private fun getUserDetail(map: Map<String, *>): User =
-            User(map[EMAIL] as String, "", emptyList())
+            User(
+                    (map[USER_NAME] ?: throw InvalidTokenException("Token not contain username")) as String,
+                    "",
+                    emptyList()
+            )
 
     private fun getAuthorities(map: Map<String, *>): Collection<GrantedAuthority>? {
         val authorities = map[UserAuthenticationConverter.AUTHORITIES]
