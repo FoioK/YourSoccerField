@@ -33,7 +33,7 @@ class BookingServiceImpl @Autowired constructor(
         private val bookingToBookingDetails: BookingToBookingDetails
 ) : BookingService {
 
-    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).BOOKINGS_POST_CREATE)")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.api.security.Permissions).BOOKINGS_POST_CREATE)")
     @ValidInput
     override fun create(@RequestBody bookingInput: BookingInput): BookingDetails {
         if (!this.validation(bookingInput)) {
