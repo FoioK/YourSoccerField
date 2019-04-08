@@ -1,6 +1,6 @@
 package com.pk.ysf.api.repository
 
-import com.pk.ysf.apimodels.entity.UserEntity
+import com.pk.ysf.api.model.entity.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query

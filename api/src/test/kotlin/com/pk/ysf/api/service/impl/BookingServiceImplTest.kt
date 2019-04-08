@@ -8,9 +8,9 @@ import com.pk.ysf.api.repository.BookingRepository
 import com.pk.ysf.api.service.mapper.booking.BookingInputToBooking
 import com.pk.ysf.api.service.mapper.booking.BookingToBookingDetails
 import com.pk.ysf.api.validation.booking.BookingValidator
-import com.pk.ysf.apimodels.dto.BookingDetails
-import com.pk.ysf.apimodels.dto.BookingInput
-import com.pk.ysf.apimodels.entity.Booking
+import com.pk.ysf.api.model.dto.BookingDetails
+import com.pk.ysf.api.model.dto.BookingInput
+import com.pk.ysf.api.model.entity.Booking
 import de.jodamob.kotlin.testrunner.KotlinTestRunner
 import org.junit.Before
 import org.junit.Test

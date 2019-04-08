@@ -1,8 +1,8 @@
 package com.pk.ysf.api.repository
 
-import com.pk.ysf.apimodels.entity.OpenHour
-import com.pk.ysf.apimodels.entity.SoccerField
-import com.pk.ysf.apimodels.entity.Surface
+import com.pk.ysf.api.model.entity.OpenHour
+import com.pk.ysf.api.model.entity.SoccerField
+import com.pk.ysf.api.model.entity.Surface
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

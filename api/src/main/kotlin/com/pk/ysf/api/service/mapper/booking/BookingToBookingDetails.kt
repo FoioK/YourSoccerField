@@ -2,8 +2,8 @@ package com.pk.ysf.api.service.mapper.booking
 
 import com.pk.ysf.api.service.mapper.BaseMapper
 import com.pk.ysf.api.util.SHORT_DATE_PATTERN
-import com.pk.ysf.apimodels.dto.BookingDetails
-import com.pk.ysf.apimodels.entity.Booking
+import com.pk.ysf.api.model.dto.BookingDetails
+import com.pk.ysf.api.model.entity.Booking
 import org.springframework.stereotype.Component
 import java.time.format.DateTimeFormatter
 

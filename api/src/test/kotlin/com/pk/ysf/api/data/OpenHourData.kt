@@ -1,6 +1,6 @@
 package com.pk.ysf.api.data
 
-import com.pk.ysf.apimodels.entity.OpenHour
+import com.pk.ysf.api.model.entity.OpenHour
 
 fun openHourMock(): OpenHour =
         OpenHour.build {

@@ -1,8 +1,8 @@
 package com.pk.ysf.api.data
 
-import com.pk.ysf.apimodels.dto.BookingDetails
-import com.pk.ysf.apimodels.dto.BookingInput
-import com.pk.ysf.apimodels.entity.Booking
+import com.pk.ysf.api.model.dto.BookingDetails
+import com.pk.ysf.api.model.dto.BookingInput
+import com.pk.ysf.api.model.entity.Booking
 
 fun bookingInputMock(
         startDate: String = START_DATE_STRING
