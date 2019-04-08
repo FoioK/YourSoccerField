@@ -6,10 +6,10 @@ import com.pk.ysf.api.service.mapper.booking.BookingInputToBooking
 import com.pk.ysf.api.service.mapper.booking.BookingToBookingDetails
 import com.pk.ysf.api.service.spec.BookingService
 import com.pk.ysf.api.validation.booking.BookingValidator
-import com.pk.ysf.apimodels.dto.BookingDetails
-import com.pk.ysf.apimodels.dto.BookingInput
-import com.pk.ysf.apimodels.entity.Booking
-import com.pk.ysf.apimodels.exception.ValidationException
+import com.pk.ysf.api.model.dto.BookingDetails
+import com.pk.ysf.api.model.dto.BookingInput
+import com.pk.ysf.api.model.entity.Booking
+import com.pk.ysf.api.model.exception.ValidationException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service

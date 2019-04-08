@@ -1,6 +1,6 @@
 package com.pk.ysf.api.aspect
 
-import com.pk.ysf.apimodels.exception.InvalidInputException
+import com.pk.ysf.api.model.exception.InvalidInputException
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before

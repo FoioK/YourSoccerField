@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackages = ["com.pk.ysf"])
-@EntityScan("com.pk.ysf.apimodels.*")
+@EntityScan("com.pk.ysf.api.model.*")
 class WebMvcConfiguration : WebMvcConfigurer {
 
     override fun addArgumentResolvers(argumentResolvers: MutableList<HandlerMethodArgumentResolver>) {

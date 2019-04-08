@@ -3,10 +3,10 @@ package com.pk.ysf.api.service.mapper.booking
 import com.pk.ysf.api.repository.SoccerFieldRepository
 import com.pk.ysf.api.service.mapper.BaseMapper
 import com.pk.ysf.api.util.SHORT_DATE_PATTERN
-import com.pk.ysf.apimodels.dto.BookingInput
-import com.pk.ysf.apimodels.entity.Booking
-import com.pk.ysf.apimodels.entity.SoccerField
-import com.pk.ysf.apimodels.exception.MissingEntityException
+import com.pk.ysf.api.model.dto.BookingInput
+import com.pk.ysf.api.model.entity.Booking
+import com.pk.ysf.api.model.entity.SoccerField
+import com.pk.ysf.api.model.exception.MissingEntityException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.math.BigDecimal

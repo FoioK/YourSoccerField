@@ -1,4 +1,4 @@
-package com.pk.ysf.apimodels.dto
+package com.pk.ysf.api.model.dto
 
 data class BookingDetails(
 

@@ -3,8 +3,8 @@ package com.pk.ysf.api.service.mapper.booking
 import com.pk.ysf.api.data.*
 import com.pk.ysf.api.repository.SoccerFieldRepository
 import com.pk.ysf.api.util.SHORT_DATE_PATTERN
-import com.pk.ysf.apimodels.dto.BookingInput
-import com.pk.ysf.apimodels.entity.Booking
+import com.pk.ysf.api.model.dto.BookingInput
+import com.pk.ysf.api.model.entity.Booking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

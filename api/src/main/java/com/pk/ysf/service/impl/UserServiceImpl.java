@@ -1,13 +1,13 @@
 package com.pk.ysf.service.impl;
 
+import com.pk.ysf.api.model.entity.Booking;
 import com.pk.ysf.api.repository.BookingRepository;
 import com.pk.ysf.api.repository.UserRepository;
-import com.pk.ysf.apimodels.entity.Booking;
-import com.pk.ysf.apimodels.entity.UserEntity;
-import com.pk.ysf.apimodels.exception.CreateEntityException;
-import com.pk.ysf.apimodels.exception.DuplicateEntityException;
-import com.pk.ysf.apimodels.exception.MissingEntityException;
-import com.pk.ysf.apimodels.exception.UpdateEntityException;
+import com.pk.ysf.api.model.entity.UserEntity;
+import com.pk.ysf.api.model.exception.CreateEntityException;
+import com.pk.ysf.api.model.exception.DuplicateEntityException;
+import com.pk.ysf.api.model.exception.MissingEntityException;
+import com.pk.ysf.api.model.exception.UpdateEntityException;
 import com.pk.ysf.service.UserService;
 import com.pk.ysf.service.dtoModel.BookingDTO;
 import com.pk.ysf.service.dtoModel.UserDTO;

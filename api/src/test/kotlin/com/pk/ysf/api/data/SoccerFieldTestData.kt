@@ -1,6 +1,6 @@
 package com.pk.ysf.api.data
 
-import com.pk.ysf.apimodels.entity.SoccerField
+import com.pk.ysf.api.model.entity.SoccerField
 import java.util.*
 
 fun soccerFieldMock(): SoccerField =
