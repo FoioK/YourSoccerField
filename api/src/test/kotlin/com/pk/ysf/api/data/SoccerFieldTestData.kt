@@ -1,9 +1,11 @@
 package com.pk.ysf.api.data
 
+import com.pk.ysf.api.model.entity.OpenHour
 import com.pk.ysf.api.model.entity.SoccerField
-import java.util.*
 
-fun soccerFieldMock(): SoccerField =
+fun soccerFieldMock(
+        openHour: OpenHour = openHourMock()
+): SoccerField =
         SoccerField.build {
             id = SOCCER_FIELD_ID
             name = SOCCER_FIELD_NAME
@@ -14,8 +16,5 @@ fun soccerFieldMock(): SoccerField =
             isFenced = SOCCER_FIELD_IS_FENCED
             isLockerRoom = SOCCER_FIELD_IS_LOCKER_ROOM
             description = DESCRIPTION
-            openHour = openHourMock()
+            this.openHour = openHour
         }
-
-fun soccerFieldMockOptional(): Optional<SoccerField> =
-        Optional.ofNullable(soccerFieldMock())

@@ -5,12 +5,13 @@ import com.pk.ysf.api.model.dto.BookingInput
 import com.pk.ysf.api.model.entity.Booking
 
 fun bookingInputMock(
-        startDate: String = START_DATE_STRING
+        startDate: String = START_DATE_STRING,
+        executionTime: String = EXECUTION_TIME_STRING
 ): BookingInput =
         BookingInput.build {
             this.userCode = USER_CODE
             this.startDate = startDate
-            this.executionTime = EXECUTION_TIME_STRING
+            this.executionTime = executionTime
             this.amount = AMOUNT_STRING
             this.isPayed = IS_PAYED
             this.soccerField = SOCCER_FIELD_ID
