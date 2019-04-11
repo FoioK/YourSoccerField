@@ -2,7 +2,7 @@ package com.pk.ysf.api.service.mapper.booking
 
 import com.pk.ysf.api.data.*
 import com.pk.ysf.api.model.dto.BookingDetails
-import org.junit.Test
+import kotlin.test.Test
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.springframework.test.context.junit4.SpringRunner

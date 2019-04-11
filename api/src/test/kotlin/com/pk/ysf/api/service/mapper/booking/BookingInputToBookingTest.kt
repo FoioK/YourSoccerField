@@ -6,7 +6,7 @@ import com.pk.ysf.api.util.SHORT_DATE_PATTERN
 import com.pk.ysf.api.model.dto.BookingInput
 import com.pk.ysf.api.model.entity.Booking
 import org.junit.Before
-import org.junit.Test
+import kotlin.test.Test
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -14,6 +14,7 @@ import org.mockito.Mockito
 import org.springframework.test.context.junit4.SpringRunner
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
+import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
@@ -29,7 +30,7 @@ class BookingInputToBookingTest {
     @Before
     fun init() {
         Mockito.`when`(soccerFieldRepository.findById(SOCCER_FIELD_ID))
-                .thenReturn(soccerFieldMockOptional())
+                .thenReturn(Optional.ofNullable(soccerFieldMock()))
     }
 
     @Test

@@ -13,7 +13,7 @@ import com.pk.ysf.api.model.dto.BookingInput
 import com.pk.ysf.api.model.entity.Booking
 import de.jodamob.kotlin.testrunner.KotlinTestRunner
 import org.junit.Before
-import org.junit.Test
+import kotlin.test.Test
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
