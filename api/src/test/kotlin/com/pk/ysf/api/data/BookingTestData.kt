@@ -3,6 +3,7 @@ package com.pk.ysf.api.data
 import com.pk.ysf.api.model.dto.BookingDetails
 import com.pk.ysf.api.model.dto.BookingInput
 import com.pk.ysf.api.model.entity.Booking
+import java.time.LocalDateTime
 
 fun bookingInputMock(
         startDate: String = START_DATE_STRING,
@@ -28,13 +29,15 @@ fun bookingDetailsMock(): BookingDetails =
             soccerField = SOCCER_FIELD_ID
         }
 
-fun bookingMock(): Booking =
+fun bookingMock(
+        startDate: LocalDateTime = START_DATE
+): Booking =
         Booking.build {
-            id = BOOKING_ID
-            userCode = USER_CODE
-            startDate = START_DATE
-            executionTime = EXECUTION_TIME
-            amount = AMOUNT
-            isPayed = IS_PAYED
-            soccerField = soccerFieldMock()
+            this.id = BOOKING_ID
+            this.userCode = USER_CODE
+            this.startDate = startDate
+            this.executionTime = EXECUTION_TIME
+            this.amount = AMOUNT
+            this.isPayed = IS_PAYED
+            this.soccerField = soccerFieldMock()
         }
