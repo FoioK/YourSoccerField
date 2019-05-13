@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: Your Soccer Field
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: "jdbc:mysql://127.0.0.1:3306/ysf"
+    username: "ysf_user"
+    password: "admin"
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 800
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org:
+      security: debug
+      springframework:
+        web: debug
+      hibernate: debug

@@ -1,41 +1,15 @@
 spring:
-  application:
-    name: Your Soccer Field
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: "jdbc:mysql://127.0.0.1:3306/ysf"
-    username: "ysf_user"
-    password: "admin"
-    testOnBorrow: true
-    testWhileIdle: true
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 30000
-    validationQuery: SELECT 1
-    max-active: 15
-    max-idle: 10
-    max-wait: 800
-  jpa:
-    hibernate:
-      ddl-auto: update
   data:
     rest:
-      basePath: /api
-
-server:
-  address: 127.0.0.37
-  port: 8080
+      base-path: /api
+  main:
+    allow-bean-definition-overriding: true
 
 project:
   name: YourSoccerField
   version: 0.4.0
   description: Idea assumes that, the user registering to our application and loging into it, can book a place, where
     he can play football.
-
-logging:
-  level:
-    org:
-      springframework:
-        security: DEBUG
 
 security:
   oauth2:

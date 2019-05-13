@@ -62,7 +62,7 @@ public class UserController {
             value = "/admin/authenticate",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).USERS_GET_ADMIN_AUTHENTICATE)")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.api.security.Permissions).USERS_GET_ADMIN_AUTHENTICATE)")
     public ResponseEntity<Map<String, Boolean>> adminPaneAuthenticate() {
         return new ResponseEntity<>(
                 Collections.singletonMap("success", true),
@@ -75,7 +75,7 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).USERS_PUT_UPDATE)")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.api.security.Permissions).USERS_PUT_UPDATE)")
     public ResponseEntity<Void> updateUser(
             @PathVariable Long userId,
             @RequestBody UserDTO userDTO
@@ -101,7 +101,7 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAuthority(T(com.pk.ysf.util.Permissions).USERS_DELETE_BY_ID)")
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.api.security.Permissions).USERS_DELETE_BY_ID)")
     public ResponseEntity<Void> deleteUser(
             @PathVariable Long userId
     ) {

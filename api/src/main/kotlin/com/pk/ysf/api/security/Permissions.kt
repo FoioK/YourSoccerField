@@ -1,0 +1,28 @@
+package com.pk.ysf.api.security
+
+enum class Permissions {
+
+    // ADMIN
+    USERS_GET_ALL,
+    // ADMIN
+    USERS_GET_ADMIN_AUTHENTICATE,
+    // ADMIN
+    USERS_PUT_UPDATE,
+    // ADMIN
+    USERS_DELETE_BY_ID,
+
+    // ADMIN
+    SOCCERFIELDS_GET_ALL,
+    // ADMIN
+    SOCCERFIELDS_POST_CREATE,
+    // ADMIN, USER
+    SOCCERFIELDS_GET_BY_ID,
+    // ADMIN
+    SOCCERFIELDS_PUT_UPDATE,
+    // ADMIN
+    SOCCERFIELDS_DELETE_BY_ID,
+
+    // ADMIN, USER
+    BOOKINGS_POST_CREATE
+
+}

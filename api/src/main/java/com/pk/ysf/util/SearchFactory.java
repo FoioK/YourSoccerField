@@ -1,7 +1,7 @@
 package com.pk.ysf.util;
 
 import com.pk.ysf.service.dtoModel.SearchModel;
-import com.pk.ysf.apimodels.model.SoccerField;
+import com.pk.ysf.api.model.entity.SoccerField;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
