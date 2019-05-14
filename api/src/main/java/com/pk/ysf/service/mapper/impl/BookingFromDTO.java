@@ -1,10 +1,10 @@
 package com.pk.ysf.service.mapper.impl;
 
+import com.pk.ysf.api.model.entity.Booking;
 import com.pk.ysf.api.repository.SoccerFieldRepository;
-import com.pk.ysf.api.service.mapper.BaseMapper;
 import com.pk.ysf.api.model.exception.MissingEntityException;
-import com.pk.ysf.apimodels.entity.Booking;
 import com.pk.ysf.api.model.entity.SoccerField;
+import com.pk.ysf.api.service.mapper.BaseMapper;
 import com.pk.ysf.service.dtoModel.BookingDTO;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
