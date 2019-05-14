@@ -1,6 +1,6 @@
 package com.pk.ysf.api.model.dto
 
-data class SurfaceList(
+data class SurfaceDetails(
 
         val id: Long,
         val name: String
@@ -20,7 +20,7 @@ data class SurfaceList(
         var id: Long = 0
         var name: String = ""
 
-        fun build() = SurfaceList(this)
+        fun build() = SurfaceDetails(this)
     }
 
 }
