@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("\${spring.data.rest.base-path}/bookings")
+@RequestMapping("\${spring.data.rest.base-path}/surfaces")
 class SurfacesController @Autowired constructor(
         private val surfaceService: SurfaceService
 ) {
