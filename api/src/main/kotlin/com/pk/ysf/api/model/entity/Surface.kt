@@ -7,20 +7,14 @@ data class Surface(
 
         @Id
         @GeneratedValue
-        val id: Long?,
+        val id: Long = 0,
 
         @Column(nullable = false, length = 64)
-        val name: String,
+        val name: String = "",
 
         @OneToMany(mappedBy = "surface")
-        val soccerFields: List<SoccerField>
+        val soccerFields: List<SoccerField> = emptyList()
 ) {
-
-    constructor() : this(
-            id = 0,
-            name = "",
-            soccerFields = emptyList()
-    )
 
     private constructor(builder: Builder) : this(
             builder.id,

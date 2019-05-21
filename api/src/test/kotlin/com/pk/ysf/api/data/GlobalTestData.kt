@@ -12,6 +12,7 @@ const val SOCCER_FIELD_ID = 1L
 const val BOOKING_ID = 3L
 const val USER_CODE = 1L
 const val OPEN_HOUR_ID = 4L
+const val SURFACE_ID = 5L
 
 const val START_DATE_STRING = "2019-05-05 11:00"
 val START_DATE: LocalDateTime = LocalDateTime.parse(
@@ -41,3 +42,5 @@ const val SOCCER_FIELD_IS_LIGHTING = true
 const val SOCCER_FIELD_IS_FENCED = false
 const val SOCCER_FIELD_IS_LOCKER_ROOM = true
 const val DESCRIPTION = "Soccer field description"
+
+const val SURFACE_NAME = "Natural"
