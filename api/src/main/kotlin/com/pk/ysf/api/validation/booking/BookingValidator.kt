@@ -1,8 +1,5 @@
 package com.pk.ysf.api.validation.booking
 
-import com.pk.ysf.api.repository.BookingRepository
-import com.pk.ysf.api.repository.SoccerFieldRepository
-import com.pk.ysf.api.util.SHORT_DATE_PATTERN
 import com.pk.ysf.api.model.dto.BookingInput
 import com.pk.ysf.api.model.entity.Booking
 import com.pk.ysf.api.model.entity.OpenHour
@@ -10,12 +7,15 @@ import com.pk.ysf.api.model.entity.SoccerField
 import com.pk.ysf.api.model.exception.BookingException
 import com.pk.ysf.api.model.exception.MissingEntityException
 import com.pk.ysf.api.model.exception.OpenHourException
+import com.pk.ysf.api.repository.BookingRepository
+import com.pk.ysf.api.repository.SoccerFieldRepository
+import com.pk.ysf.api.util.stringToDateTime
+import com.pk.ysf.api.util.stringToTime
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
 @Component
 class BookingValidator @Autowired constructor(
@@ -25,10 +25,7 @@ class BookingValidator @Autowired constructor(
 
     fun validate(bookingInput: BookingInput): Boolean {
         val soccerField: SoccerField = this.getSoccerFieldById(bookingInput.soccerField)
-        val bookingStartDate: LocalDateTime = LocalDateTime.parse(
-                bookingInput.startDate,
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        )
+        val bookingStartDate: LocalDateTime = stringToDateTime(bookingInput.startDate)
         val executionTime: LocalTime = LocalTime.parse(bookingInput.executionTime)
         val openHour: OpenHour = soccerField.openHour
 
@@ -149,6 +146,6 @@ class BookingValidator @Autowired constructor(
     private fun sumLocalTimes(one: LocalTime, two: LocalTime): LocalTime {
         val sum: LocalTime = one.plusHours(two.hour.toLong()).plusMinutes(two.minute.toLong())
 
-        return if (sum.isBefore(one)) LocalTime.of(23, 59, 59, 59) else sum
+        return if (sum.isBefore(one)) stringToTime("23:59") else sum
     }
 }

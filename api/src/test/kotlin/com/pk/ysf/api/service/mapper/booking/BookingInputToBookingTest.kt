@@ -2,9 +2,9 @@ package com.pk.ysf.api.service.mapper.booking
 
 import com.pk.ysf.api.data.*
 import com.pk.ysf.api.repository.SoccerFieldRepository
-import com.pk.ysf.api.util.SHORT_DATE_PATTERN
 import com.pk.ysf.api.model.dto.BookingInput
 import com.pk.ysf.api.model.entity.Booking
+import com.pk.ysf.api.util.dateTimeToString
 import org.junit.Before
 import kotlin.test.Test
 import org.junit.runner.RunWith
@@ -39,7 +39,7 @@ class BookingInputToBookingTest {
 
         assertEquals(USER_CODE, booking.userCode)
         assertNotNull(booking.startDate)
-        assertEquals(START_DATE_STRING, booking.startDate.format(DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)))
+        assertEquals(START_DATE_STRING, dateTimeToString(booking.startDate))
         assertNotNull(booking.executionTime)
         assertEquals(EXECUTION_TIME_STRING, booking.executionTime.toString())
         assertNotNull(booking.amount)
@@ -66,7 +66,7 @@ class BookingInputToBookingTest {
         bookings.forEach {
             assertEquals(USER_CODE, it.userCode)
             assertNotNull(it.startDate)
-            assertEquals(START_DATE_STRING, it.startDate.format(DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)))
+            assertEquals(START_DATE_STRING, dateTimeToString(it.startDate))
             assertNotNull(it.executionTime)
             assertEquals(EXECUTION_TIME_STRING, it.executionTime.toString())
             assertNotNull(it.amount)
