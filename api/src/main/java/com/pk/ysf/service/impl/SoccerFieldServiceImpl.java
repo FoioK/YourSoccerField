@@ -153,28 +153,28 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     private void setOpenHourMapper() {
         this.openHourToDTO = entity -> {
             OpenHourDTO openHourDTO = new OpenHourDTO();
-            openHourDTO.setId(entity.getId());
-
-            openHourDTO.setS1(entity.getS1());
-            openHourDTO.setE1(entity.getE1());
-
-            openHourDTO.setS2(entity.getS2());
-            openHourDTO.setE2(entity.getE2());
-
-            openHourDTO.setS3(entity.getS3());
-            openHourDTO.setE3(entity.getE3());
-
-            openHourDTO.setS4(entity.getS4());
-            openHourDTO.setE4(entity.getE4());
-
-            openHourDTO.setS5(entity.getS5());
-            openHourDTO.setE5(entity.getE5());
-
-            openHourDTO.setS6(entity.getS6());
-            openHourDTO.setE6(entity.getE6());
-
-            openHourDTO.setS7(entity.getS7());
-            openHourDTO.setE7(entity.getE7());
+//            openHourDTO.setId(entity.getId());
+//
+//            openHourDTO.setS1(entity.getS1());
+//            openHourDTO.setE1(entity.getE1());
+//
+//            openHourDTO.setS2(entity.getS2());
+//            openHourDTO.setE2(entity.getE2());
+//
+//            openHourDTO.setS3(entity.getS3());
+//            openHourDTO.setE3(entity.getE3());
+//
+//            openHourDTO.setS4(entity.getS4());
+//            openHourDTO.setE4(entity.getE4());
+//
+//            openHourDTO.setS5(entity.getS5());
+//            openHourDTO.setE5(entity.getE5());
+//
+//            openHourDTO.setS6(entity.getS6());
+//            openHourDTO.setE6(entity.getE6());
+//
+//            openHourDTO.setS7(entity.getS7());
+//            openHourDTO.setE7(entity.getE7());
 
             return openHourDTO;
         };
