@@ -11,39 +11,39 @@ class OpenHour(
         val id: Long,
 
         @Column(nullable = false)
-        val s1: LocalTime,
+        val mondayStart: LocalTime,
         @Column(nullable = false)
-        val e1: LocalTime,
+        val mondayEnd: LocalTime,
 
         @Column(nullable = false)
-        val s2: LocalTime,
+        val tuesdayStart: LocalTime,
         @Column(nullable = false)
-        val e2: LocalTime,
+        val tuesdayEnd: LocalTime,
 
         @Column(nullable = false)
-        val s3: LocalTime,
+        val wednesdayStart: LocalTime,
         @Column(nullable = false)
-        val e3: LocalTime,
+        val wednesdayEnd: LocalTime,
 
         @Column(nullable = false)
-        val s4: LocalTime,
+        val thursdayStart: LocalTime,
         @Column(nullable = false)
-        val e4: LocalTime,
+        val thursdayEnd: LocalTime,
 
         @Column(nullable = false)
-        val s5: LocalTime,
+        val fridayStart: LocalTime,
         @Column(nullable = false)
-        val e5: LocalTime,
+        val fridayEnd: LocalTime,
 
         @Column(nullable = false)
-        val s6: LocalTime,
+        val saturdayStart: LocalTime,
         @Column(nullable = false)
-        val e6: LocalTime,
+        val saturdayEnd: LocalTime,
 
         @Column(nullable = false)
-        val s7: LocalTime,
+        val sundayStart: LocalTime,
         @Column(nullable = false)
-        val e7: LocalTime,
+        val sundayEnd: LocalTime,
 
         @OneToMany(mappedBy = "openHour")
         val soccerField: List<SoccerField>
@@ -51,20 +51,20 @@ class OpenHour(
 
     constructor() : this(
             id = 0,
-            s1 = LocalTime.MIN,
-            e1 = LocalTime.MIN,
-            s2 = LocalTime.MIN,
-            e2 = LocalTime.MIN,
-            s3 = LocalTime.MIN,
-            e3 = LocalTime.MIN,
-            s4 = LocalTime.MIN,
-            e4 = LocalTime.MIN,
-            s5 = LocalTime.MIN,
-            e5 = LocalTime.MIN,
-            s6 = LocalTime.MIN,
-            e6 = LocalTime.MIN,
-            s7 = LocalTime.MIN,
-            e7 = LocalTime.MIN,
+            mondayStart = LocalTime.MIN,
+            mondayEnd = LocalTime.MIN,
+            tuesdayStart = LocalTime.MIN,
+            tuesdayEnd = LocalTime.MIN,
+            wednesdayStart = LocalTime.MIN,
+            wednesdayEnd = LocalTime.MIN,
+            thursdayStart = LocalTime.MIN,
+            thursdayEnd = LocalTime.MIN,
+            fridayStart = LocalTime.MIN,
+            fridayEnd = LocalTime.MIN,
+            saturdayStart = LocalTime.MIN,
+            saturdayEnd = LocalTime.MIN,
+            sundayStart = LocalTime.MIN,
+            sundayEnd = LocalTime.MIN,
             soccerField = emptyList()
     )
 
