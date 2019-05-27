@@ -73,13 +73,13 @@ class BookingValidator @Autowired constructor(
 
     private fun findOpenTimeByDayOfWeek(dayOfWeek: DayOfWeek, openHour: OpenHour): LocalTime =
             when (dayOfWeek.value) {
-                1 -> openHour.s1
-                2 -> openHour.s2
-                3 -> openHour.s3
-                4 -> openHour.s4
-                5 -> openHour.s5
-                6 -> openHour.s6
-                7 -> openHour.s7
+                1 -> openHour.mondayStart
+                2 -> openHour.tuesdayStart
+                3 -> openHour.wednesdayStart
+                4 -> openHour.thursdayStart
+                5 -> openHour.fridayStart
+                6 -> openHour.saturdayStart
+                7 -> openHour.sundayStart
                 else -> throw OpenHourException(
                         "Error occurred while find open time by day of week"
                 )
@@ -87,13 +87,13 @@ class BookingValidator @Autowired constructor(
 
     private fun findCloseTimeByDayOfWeek(dayOfWeek: DayOfWeek, openHour: OpenHour): LocalTime =
             when (dayOfWeek.value) {
-                1 -> openHour.e1
-                2 -> openHour.e2
-                3 -> openHour.e3
-                4 -> openHour.e4
-                5 -> openHour.e5
-                6 -> openHour.e6
-                7 -> openHour.e7
+                1 -> openHour.mondayEnd
+                2 -> openHour.tuesdayEnd
+                3 -> openHour.wednesdayEnd
+                4 -> openHour.thursdayEnd
+                5 -> openHour.fridayEnd
+                6 -> openHour.saturdayEnd
+                7 -> openHour.sundayEnd
                 else -> throw OpenHourException(
                         "Error occurred while find close time by day of week"
                 )
