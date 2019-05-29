@@ -12,8 +12,8 @@ import java.util.*
 @Repository
 interface SoccerFieldRepository : JpaRepository<SoccerField, Long> {
 
-    @Query(value = findByAddressContainsQuery, nativeQuery = true)
-    fun findByAddressContains(@Param("street") street: String): List<SoccerField>
+    @Query(value = findByAddressContainingQuery, nativeQuery = true)
+    fun findByAddressContaining(@Param("value") value: String): List<SoccerField>
 
     @Query(value = findExampleTenQuery, nativeQuery = true)
     fun findExampleTen(): List<SoccerField>
@@ -37,9 +37,10 @@ interface SoccerFieldRepository : JpaRepository<SoccerField, Long> {
 
     companion object {
 
-        const val findByAddressContainsQuery = "SELECT * FROM soccer_field sf " +
-                "JOIN address a ON a.id = sf.address_id " +
-                "WHERE a.street LIKE CONCAT(:street, '%')"
+        const val findByAddressContainingQuery =
+                "Select * FROM soccer_field sf " +
+                        "JOIN address a ON a.id = sf.address_id WHERE " +
+                        "a.street LIKE %?1% OR a.city LIKE %?1%"
 
         const val findExampleTenQuery = "SELECT * FROM soccer_field " +
                 "ORDER BY RAND() LIMIT 10"
