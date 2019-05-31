@@ -9,7 +9,6 @@ import com.pk.ysf.api.model.exception.DuplicateEntityException;
 import com.pk.ysf.api.model.exception.MissingEntityException;
 import com.pk.ysf.api.model.exception.UpdateEntityException;
 import com.pk.ysf.service.UserService;
-import com.pk.ysf.service.dtoModel.BookingDTO;
 import com.pk.ysf.service.dtoModel.UserDTO;
 import com.pk.ysf.service.mapper.BaseFromDTO;
 import com.pk.ysf.service.mapper.BaseToDTO;
@@ -33,7 +32,6 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
     private BaseFromDTO<UserEntity, UserDTO> userFromDTO;
     private BaseToDTO<UserEntity, UserDTO> userToDTO;
-    private BaseToDTO<Booking, BookingDTO> bookingToDTO;
 
     @Autowired
     public UserServiceImpl(
@@ -76,17 +74,17 @@ public class UserServiceImpl implements UserService {
     }
 
     private void setBookingMapper() {
-        this.bookingToDTO = entity -> {
-            BookingDTO bookingDTO = new BookingDTO();
-            bookingDTO.setId(entity.getId());
-            bookingDTO.setUserCode(entity.getUserCode());
-            bookingDTO.setStartDate(Objects.requireNonNull(entity.getStartDate()).toString());
-            bookingDTO.setExecutionTime(Objects.requireNonNull(entity.getExecutionTime()).toString());
-            bookingDTO.setSoccerField(Objects.requireNonNull(entity.getSoccerField()).getId());
-            bookingDTO.setPayed(entity.isPayed());
-
-            return bookingDTO;
-        };
+//        this.bookingToDTO = entity -> {
+//            BookingDTO bookingDTO = new BookingDTO();
+//            bookingDTO.setId(entity.getId());
+//            bookingDTO.setUserCode(entity.getUserCode());
+//            bookingDTO.setStartDate(Objects.requireNonNull(entity.getStartDate()).toString());
+//            bookingDTO.setExecutionTime(Objects.requireNonNull(entity.getExecutionTime()).toString());
+//            bookingDTO.setSoccerField(Objects.requireNonNull(entity.getSoccerField()).getId());
+//            bookingDTO.setPayed(entity.isPayed());
+//
+//            return bookingDTO;
+//        };
     }
 
     @Override
@@ -176,22 +174,22 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public List<BookingDTO> getAllBookingsByUserId(Long userId) {
-        UserEntity user = this.userRepository.findById(userId)
-                .orElseThrow(() -> new MissingEntityException(
-                        "Cannot find user with id " + userId
-                ));
-
-        if (user.getCode() == null) {
-            return Collections.emptyList();
-        }
-
-        List<Booking> bookings = this.bookingRepository
-                .findAllByUserCode(user.getCode());
-
-        return new ArrayList<>(this.bookingToDTO.mapAllFromEntities(bookings));
-    }
+//    @Override
+//    public List<BookingDTO> getAllBookingsByUserId(Long userId) {
+//        UserEntity user = this.userRepository.findById(userId)
+//                .orElseThrow(() -> new MissingEntityException(
+//                        "Cannot find user with id " + userId
+//                ));
+//
+//        if (user.getCode() == null) {
+//            return Collections.emptyList();
+//        }
+//
+//        List<Booking> bookings = this.bookingRepository
+//                .findAllByUserCode(user.getCode());
+//
+//        return new ArrayList<>(this.bookingToDTO.mapAllFromEntities(bookings));
+//    }
 
     @Override
     public Optional<UserDTO> updateUser(Long userId, UserDTO userDTO) {

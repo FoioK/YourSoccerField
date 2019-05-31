@@ -47,16 +47,16 @@ public class UserController {
         );
     }
 
-    @GetMapping(
-            value = "/{userId}/bookings",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<?> getAllBookings(@PathVariable Long userId) {
-        return new ResponseEntity<>(
-                this.userService.getAllBookingsByUserId(userId),
-                HttpStatus.OK
-        );
-    }
+//    @GetMapping(
+//            value = "/{userId}/bookings",
+//            produces = MediaType.APPLICATION_JSON_VALUE
+//    )
+//    public ResponseEntity<?> getAllBookings(@PathVariable Long userId) {
+//        return new ResponseEntity<>(
+//                this.userService.getAllBookingsByUserId(userId),
+//                HttpStatus.OK
+//        );
+//    }
 
     @GetMapping(
             value = "/admin/authenticate",
