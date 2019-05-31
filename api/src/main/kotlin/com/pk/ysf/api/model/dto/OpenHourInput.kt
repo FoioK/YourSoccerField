@@ -1,26 +1,73 @@
 package com.pk.ysf.api.model.dto
 
-data class OpenHourInput (
+import com.pk.ysf.api.validation.TIME_PATTERN
+import com.pk.ysf.api.validation.TIME_PATTERN_MESSAGE
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Pattern
 
+data class OpenHourInput(
+
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val mondayStart: String,
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val mondayEnd: String,
 
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val tuesdayStart: String,
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val tuesdayEnd: String,
 
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val wednesdayStart: String,
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val wednesdayEnd: String,
 
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val thursdayStart: String,
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val thursdayEnd: String,
 
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val fridayStart: String,
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val fridayEnd: String,
 
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val saturdayStart: String,
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val saturdayEnd: String,
 
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val sundayStart: String,
+
+        @field:NotNull
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val sundayEnd: String
 
 ) {

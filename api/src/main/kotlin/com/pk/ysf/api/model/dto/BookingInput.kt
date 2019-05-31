@@ -1,8 +1,6 @@
 package com.pk.ysf.api.model.dto
 
-import com.pk.ysf.api.validation.AMOUNT_PATTERN
-import com.pk.ysf.api.validation.DATE_PATTERN
-import com.pk.ysf.api.validation.TIME_PATTERN
+import com.pk.ysf.api.validation.*
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Pattern
@@ -13,24 +11,15 @@ data class BookingInput(
         @field:Positive var userCode: Long = 0,
 
         @field:NotNull
-        @field:Pattern(
-                message = "invalid format",
-                regexp = DATE_PATTERN
-        )
+        @field:Pattern(message = DATE_PATTERN_MESSAGE, regexp = DATE_PATTERN)
         val startDate: String = "",
 
         @field:NotNull
-        @field:Pattern(
-                message = "must match with HH:MM pattern",
-                regexp = TIME_PATTERN
-        )
+        @field:Pattern(message = TIME_PATTERN_MESSAGE, regexp = TIME_PATTERN)
         val executionTime: String = "",
 
         @field:NotBlank
-        @field:Pattern(
-                message = "invalid format",
-                regexp = AMOUNT_PATTERN
-        )
+        @field:Pattern(message = AMOUNT_PATTERN_MESSAGE, regexp = AMOUNT_PATTERN)
         val amount: String = "",
 
         val isPayed: Boolean = false,

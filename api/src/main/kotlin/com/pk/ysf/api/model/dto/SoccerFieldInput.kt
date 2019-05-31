@@ -1,20 +1,22 @@
 package com.pk.ysf.api.model.dto
 
-import com.pk.ysf.service.dtoModel.AddressDTO
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Positive
 
 data class SoccerFieldInput(
 
-        val name: String,
-        val address: AddressDTO,
-        val surfaceId: Long,
-        val width: Int,
-        val length: Int,
+        @field:NotBlank val name: String,
+        @field:NotNull val address: AddressDTO,
+        @field:Positive val surfaceId: Long,
+        @field:Positive val width: Int,
+        @field:Positive val length: Int,
         val price: String,
-        val isLighting: Boolean,
-        val isFenced: Boolean,
-        val isLockerRoom: Boolean,
-        val description: String,
-        val openHour: OpenHourInput
+        @field:NotNull val isLighting: Boolean,
+        @field:NotNull val isFenced: Boolean,
+        @field:NotNull val isLockerRoom: Boolean,
+        @field:NotNull val description: String,
+        @field:NotNull val openHour: OpenHourInput
 
 ) {
 
