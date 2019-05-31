@@ -1,5 +1,6 @@
 package com.pk.ysf.api.service.impl
 
+import com.pk.ysf.api.annotation.ValidInput
 import com.pk.ysf.api.model.dto.BookingDetails
 import com.pk.ysf.api.model.dto.SearchModel
 import com.pk.ysf.api.model.dto.SoccerFieldDetails
@@ -61,11 +62,12 @@ class SoccerFieldServiceImpl @Autowired constructor(
                 .toList()
     }
 
-    override fun getAllBookings(soccerFieldId: Long): List<BookingDetails> =
+    override fun findAllBookings(soccerFieldId: Long): List<BookingDetails> =
             bookingToBookingDetails
                     .mapAll(bookingRepository.findAllBySoccerField(soccerFieldId))
                     .toList()
 
+    @ValidInput
     override fun create(requestBody: SoccerFieldInput): SoccerFieldDetails {
         val soccerField: SoccerField = this.soccerFieldInputToSoccerField.map(requestBody)
         val createdResource: SoccerField = this.soccerFieldRepository.save(soccerField)

@@ -19,7 +19,7 @@ interface SoccerFieldService {
 
     fun findByCustomCriteria(encodedObject: String): List<SoccerFieldDetails>
 
-    fun getAllBookings(soccerFieldId: Long): List<BookingDetails>
+    fun findAllBookings(soccerFieldId: Long): List<BookingDetails>
 
     @PreAuthorize("hasAuthority(T(com.pk.ysf.api.security.Permissions).SOCCERFIELDS_POST_CREATE)")
     fun create(requestBody: SoccerFieldInput): SoccerFieldDetails
