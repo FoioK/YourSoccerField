@@ -248,7 +248,7 @@ public class SoccerFieldServiceImpl implements SoccerFieldService {
     @Override
     public List<SoccerFieldDTO> getByAddressContains(String street) {
         List<SoccerField> soccerFields = this.soccerFieldRepository
-                .findByAddressContains(street);
+                .findByAddressContaining(street);
 
         return new ArrayList<>(
                 this.soccerFieldToDTO.mapAllFromEntities(soccerFields)
