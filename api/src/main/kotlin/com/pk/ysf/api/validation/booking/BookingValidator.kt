@@ -1,8 +1,5 @@
 package com.pk.ysf.api.validation.booking
 
-import com.pk.ysf.api.repository.BookingRepository
-import com.pk.ysf.api.repository.SoccerFieldRepository
-import com.pk.ysf.api.util.SHORT_DATE_PATTERN
 import com.pk.ysf.api.model.dto.BookingInput
 import com.pk.ysf.api.model.entity.Booking
 import com.pk.ysf.api.model.entity.OpenHour
@@ -10,12 +7,15 @@ import com.pk.ysf.api.model.entity.SoccerField
 import com.pk.ysf.api.model.exception.BookingException
 import com.pk.ysf.api.model.exception.MissingEntityException
 import com.pk.ysf.api.model.exception.OpenHourException
+import com.pk.ysf.api.repository.BookingRepository
+import com.pk.ysf.api.repository.SoccerFieldRepository
+import com.pk.ysf.api.util.stringToDateTime
+import com.pk.ysf.api.util.stringToTime
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
 @Component
 class BookingValidator @Autowired constructor(
@@ -25,10 +25,7 @@ class BookingValidator @Autowired constructor(
 
     fun validate(bookingInput: BookingInput): Boolean {
         val soccerField: SoccerField = this.getSoccerFieldById(bookingInput.soccerField)
-        val bookingStartDate: LocalDateTime = LocalDateTime.parse(
-                bookingInput.startDate,
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        )
+        val bookingStartDate: LocalDateTime = stringToDateTime(bookingInput.startDate)
         val executionTime: LocalTime = LocalTime.parse(bookingInput.executionTime)
         val openHour: OpenHour = soccerField.openHour
 
@@ -73,13 +70,13 @@ class BookingValidator @Autowired constructor(
 
     private fun findOpenTimeByDayOfWeek(dayOfWeek: DayOfWeek, openHour: OpenHour): LocalTime =
             when (dayOfWeek.value) {
-                1 -> openHour.s1
-                2 -> openHour.s2
-                3 -> openHour.s3
-                4 -> openHour.s4
-                5 -> openHour.s5
-                6 -> openHour.s6
-                7 -> openHour.s7
+                1 -> openHour.mondayStart
+                2 -> openHour.tuesdayStart
+                3 -> openHour.wednesdayStart
+                4 -> openHour.thursdayStart
+                5 -> openHour.fridayStart
+                6 -> openHour.saturdayStart
+                7 -> openHour.sundayStart
                 else -> throw OpenHourException(
                         "Error occurred while find open time by day of week"
                 )
@@ -87,13 +84,13 @@ class BookingValidator @Autowired constructor(
 
     private fun findCloseTimeByDayOfWeek(dayOfWeek: DayOfWeek, openHour: OpenHour): LocalTime =
             when (dayOfWeek.value) {
-                1 -> openHour.e1
-                2 -> openHour.e2
-                3 -> openHour.e3
-                4 -> openHour.e4
-                5 -> openHour.e5
-                6 -> openHour.e6
-                7 -> openHour.e7
+                1 -> openHour.mondayEnd
+                2 -> openHour.tuesdayEnd
+                3 -> openHour.wednesdayEnd
+                4 -> openHour.thursdayEnd
+                5 -> openHour.fridayEnd
+                6 -> openHour.saturdayEnd
+                7 -> openHour.sundayEnd
                 else -> throw OpenHourException(
                         "Error occurred while find close time by day of week"
                 )
@@ -149,6 +146,6 @@ class BookingValidator @Autowired constructor(
     private fun sumLocalTimes(one: LocalTime, two: LocalTime): LocalTime {
         val sum: LocalTime = one.plusHours(two.hour.toLong()).plusMinutes(two.minute.toLong())
 
-        return if (sum.isBefore(one)) LocalTime.of(23, 59, 59, 59) else sum
+        return if (sum.isBefore(one)) stringToTime("23:59") else sum
     }
 }

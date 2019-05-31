@@ -6,7 +6,7 @@ import com.pk.ysf.api.model.entity.Booking
 import com.pk.ysf.api.model.exception.BookingException
 import com.pk.ysf.api.repository.BookingRepository
 import com.pk.ysf.api.repository.SoccerFieldRepository
-import com.pk.ysf.api.util.SHORT_DATE_PATTERN
+import com.pk.ysf.api.util.stringToDateTime
 import de.jodamob.kotlin.testrunner.KotlinTestRunner
 import org.junit.Before
 import org.junit.runner.RunWith
@@ -117,18 +117,9 @@ class BookingValidatorTest {
 
     @Test
     fun soccerFieldShouldBeFree() {
-        val bookingMock8: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 08:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock11: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 11:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock1530: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 15:30",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
+        val bookingMock8: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 08:00"))
+        val bookingMock11: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 11:00"))
+        val bookingMock1530: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 15:30"))
 
         Mockito.`when`(bookingRepository.findAllByDate(
                 any(Long::class.java),
@@ -165,18 +156,9 @@ class BookingValidatorTest {
 
     @Test(expected = BookingException::class)
     fun soccerFieldShouldNotBeFree1() {
-        val bookingMock8: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 08:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock11: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 11:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock1530: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 15:30",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
+        val bookingMock8: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 08:00"))
+        val bookingMock11: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 11:00"))
+        val bookingMock1530: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 15:30"))
 
         Mockito.`when`(bookingRepository.findAllByDate(
                 any(Long::class.java),
@@ -193,18 +175,9 @@ class BookingValidatorTest {
 
     @Test(expected = BookingException::class)
     fun soccerFieldShouldNotBeFree2() {
-        val bookingMock8: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 08:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock11: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 11:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock1530: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 15:30",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
+        val bookingMock8: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 08:00"))
+        val bookingMock11: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 11:00"))
+        val bookingMock1530: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 15:30"))
 
         Mockito.`when`(bookingRepository.findAllByDate(
                 any(Long::class.java),
@@ -221,18 +194,9 @@ class BookingValidatorTest {
 
     @Test(expected = BookingException::class)
     fun soccerFieldShouldNotBeFree3() {
-        val bookingMock8: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 08:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock11: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 11:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock1530: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 15:30",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
+        val bookingMock8: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 08:00"))
+        val bookingMock11: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 11:00"))
+        val bookingMock1530: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 15:30"))
 
         Mockito.`when`(bookingRepository.findAllByDate(
                 any(Long::class.java),
@@ -249,18 +213,9 @@ class BookingValidatorTest {
 
     @Test(expected = BookingException::class)
     fun soccerFieldShouldNotBeFree4() {
-        val bookingMock8: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 08:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock11: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 11:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock1530: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 15:30",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
+        val bookingMock8: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 08:00"))
+        val bookingMock11: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 11:00"))
+        val bookingMock1530: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 15:30"))
 
         Mockito.`when`(bookingRepository.findAllByDate(
                 any(Long::class.java),
@@ -277,18 +232,9 @@ class BookingValidatorTest {
 
     @Test(expected = BookingException::class)
     fun soccerFieldShouldNotBeFree5() {
-        val bookingMock8: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 08:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock11: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 11:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock1530: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 15:30",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
+        val bookingMock8: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 08:00"))
+        val bookingMock11: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 11:00"))
+        val bookingMock1530: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 15:30"))
 
         Mockito.`when`(bookingRepository.findAllByDate(
                 any(Long::class.java),
@@ -305,18 +251,9 @@ class BookingValidatorTest {
 
     @Test(expected = BookingException::class)
     fun soccerFieldShouldNotBeFree6() {
-        val bookingMock8: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 08:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock11: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 11:00",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
-        val bookingMock1530: Booking = bookingMock(startDate = LocalDateTime.parse(
-                "2019-05-05 15:30",
-                DateTimeFormatter.ofPattern(SHORT_DATE_PATTERN)
-        ))
+        val bookingMock8: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 08:00"))
+        val bookingMock11: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 11:00"))
+        val bookingMock1530: Booking = bookingMock(startDate = stringToDateTime("2019-05-05 15:30"))
 
         Mockito.`when`(bookingRepository.findAllByDate(
                 any(Long::class.java),
