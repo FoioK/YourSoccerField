@@ -1,6 +1,8 @@
 package com.pk.ysf.api.service.spec
 
+import com.pk.ysf.api.model.dto.BookingDetails
 import com.pk.ysf.api.model.dto.SoccerFieldDetails
+import com.pk.ysf.api.model.dto.SoccerFieldInput
 import org.springframework.security.access.prepost.PreAuthorize
 
 interface SoccerFieldService {
@@ -13,6 +15,13 @@ interface SoccerFieldService {
 
     fun findExampleTen(): List<SoccerFieldDetails>
 
-    fun findByStreetContains(value: String): List<SoccerFieldDetails>
+    fun findByAddressContaining(value: String): List<SoccerFieldDetails>
+
+    fun findByCustomCriteria(encodedObject: String): List<SoccerFieldDetails>
+
+    fun getAllBookings(soccerFieldId: Long): List<BookingDetails>
+
+    @PreAuthorize("hasAuthority(T(com.pk.ysf.api.security.Permissions).SOCCERFIELDS_POST_CREATE)")
+    fun create(requestBody: SoccerFieldInput): SoccerFieldDetails
 
 }

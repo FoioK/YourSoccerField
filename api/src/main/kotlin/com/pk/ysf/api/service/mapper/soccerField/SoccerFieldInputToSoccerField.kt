@@ -8,7 +8,7 @@ import com.pk.ysf.api.model.exception.MissingEntityException
 import com.pk.ysf.api.repository.SurfaceRepository
 import com.pk.ysf.api.service.mapper.BaseMapper
 import com.pk.ysf.api.service.mapper.openHour.OpenHourInputToOpenHour
-import com.pk.ysf.service.dtoModel.AddressDTO
+import com.pk.ysf.api.model.dto.AddressDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.math.BigDecimal
@@ -39,10 +39,10 @@ class SoccerFieldInputToSoccerField @Autowired constructor(
 
     private fun mapAddress(from: AddressDTO): Address =
             Address(
-                    from.id,
-                    from.city,
-                    from.street,
-                    from.apartmentNumber,
+                    from.id!!,
+                    from.city!!,
+                    from.street!!,
+                    from.apartmentNumber!!,
                     Collections.emptyList(),
                     Collections.emptyList()
             )

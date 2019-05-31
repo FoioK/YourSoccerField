@@ -1,9 +1,11 @@
 package com.pk.ysf.api.service.util
 
+import com.google.gson.Gson
 import com.pk.ysf.api.model.dto.SearchModel
 import com.pk.ysf.api.model.entity.SoccerField
 import com.pk.ysf.api.model.exception.CriteriaSearchException
 import org.springframework.stereotype.Component
+import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 
@@ -13,8 +15,8 @@ class SearchFactory {
     @PersistenceContext
     private val entityManager: EntityManager? = null
 
-    fun getSoccerFieldByCustomCriteria(searchModel: SearchModel): List<SoccerField> {
-        if(entityManager == null) {
+    fun getSoccerFieldsByCustomCriteria(searchModel: SearchModel): List<SoccerField> {
+        if (entityManager == null) {
             throw CriteriaSearchException("Not found entity manager")
         }
 
@@ -108,5 +110,12 @@ class SearchFactory {
         ))
 
         return entityManager.createQuery(query.select(root)).resultList
+    }
+
+    fun parseToModel(encodedObject: String): SearchModel {
+        val decodedObject = String(Base64.getDecoder().decode(encodedObject))
+        val gson = Gson()
+
+        return gson.fromJson(decodedObject, SearchModel::class.java)
     }
 }
