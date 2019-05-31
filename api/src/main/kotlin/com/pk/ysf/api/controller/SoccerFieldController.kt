@@ -12,7 +12,7 @@ import java.net.URI
 import javax.servlet.http.HttpServletRequest
 
 @RestController
-@RequestMapping("\${spring.data.rest.base-path}/bookings")
+@RequestMapping("\${spring.data.rest.base-path}/soccerFields")
 class SoccerFieldController @Autowired constructor(
         private val soccerFieldService: SoccerFieldService
 ) {
