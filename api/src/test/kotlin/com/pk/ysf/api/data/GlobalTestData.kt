@@ -10,7 +10,7 @@ const val IS_PAYED = true
 
 const val SOCCER_FIELD_ID = 1L
 const val BOOKING_ID = 3L
-const val USER_CODE = 1L
+const val USER_CODE = "2be91eb5-7d42-4b70-b279-2a1e022e51c2"
 const val OPEN_HOUR_ID = 4L
 const val SURFACE_ID = 5L
 
