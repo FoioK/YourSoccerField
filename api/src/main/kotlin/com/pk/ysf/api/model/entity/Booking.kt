@@ -13,7 +13,7 @@ data class Booking(
         val id: Long,
 
         @Column(nullable = false)
-        val userCode: Long,
+        val userCode: String,
 
         @Column(nullable = false)
         val startDate: LocalDateTime,
@@ -48,7 +48,7 @@ data class Booking(
     class Builder {
 
         var id: Long = 0
-        var userCode: Long = 0
+        var userCode: String = ""
         var startDate: LocalDateTime = LocalDateTime.now()
         var executionTime: LocalTime = LocalTime.now()
         var amount: BigDecimal = BigDecimal.ZERO

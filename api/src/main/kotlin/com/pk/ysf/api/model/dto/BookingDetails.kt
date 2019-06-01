@@ -3,7 +3,7 @@ package com.pk.ysf.api.model.dto
 data class BookingDetails(
 
         val id: Long,
-        val userCode: Long,
+        val userCode: String,
         val startDate: String,
         val executionTime: String,
         val amount: String,
@@ -29,7 +29,7 @@ data class BookingDetails(
     class Builder {
 
         var id: Long = 0
-        var userCode: Long = 0
+        var userCode: String = ""
         var startDate: String = ""
         var executionTime: String = ""
         var amount: String = ""

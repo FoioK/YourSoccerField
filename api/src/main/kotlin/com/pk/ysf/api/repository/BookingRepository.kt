@@ -10,7 +10,7 @@ import java.time.LocalDate
 @Repository
 interface BookingRepository : JpaRepository<Booking, Long> {
 
-    fun findAllByUserCode(userCode: Long): List<Booking>
+    fun findAllByUserCode(userCode: String): List<Booking>
 
     @Query(value = findAllByDateQuery, nativeQuery = true)
     fun findAllByDate(

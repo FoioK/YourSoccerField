@@ -8,7 +8,7 @@ import javax.validation.constraints.Positive
 
 data class BookingInput(
 
-        @field:Positive var userCode: Long = 0,
+        @field:Positive var userCode: String = "",
 
         @field:NotNull
         @field:Pattern(message = DATE_PATTERN_MESSAGE, regexp = DATE_PATTERN)
@@ -43,7 +43,7 @@ data class BookingInput(
 
     class Builder {
 
-        var userCode: Long = 0
+        var userCode: String = ""
         var startDate: String = ""
         var executionTime: String = ""
         var amount: String = ""
