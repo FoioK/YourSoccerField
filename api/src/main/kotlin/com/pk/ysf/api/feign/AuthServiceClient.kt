@@ -12,8 +12,6 @@ interface AuthServiceClient {
     @PostMapping("/oauth/token")
     fun login(
             @RequestHeader(HttpHeaders.AUTHORIZATION) authorization: String,
-            @RequestHeader(HttpHeaders.CONTENT_TYPE) contentType: String,
-
             @RequestParam("username") username: String,
             @RequestParam("password") password: String,
             @RequestParam("grant_type") grantType: String
@@ -22,8 +20,6 @@ interface AuthServiceClient {
     @PostMapping("/users")
     fun register(
             @RequestHeader(HttpHeaders.AUTHORIZATION) authorization: String,
-            @RequestHeader(HttpHeaders.CONTENT_TYPE) contentType: String,
-
             @RequestBody authRegisterModel: AuthRegisterModel
     ): ResponseEntity<String>
 

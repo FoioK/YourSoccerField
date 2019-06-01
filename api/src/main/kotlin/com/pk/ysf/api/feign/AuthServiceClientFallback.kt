@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component
 @Component
 class AuthServiceClientFallback : AuthServiceClient {
 
-    override fun login(authorization: String, contentType: String, username: String, password: String, grantType: String): ResponseEntity<String> {
+    override fun login(authorization: String, username: String, password: String, grantType: String): ResponseEntity<String> {
         TODO("not implemented")
     }
 
-    override fun register(authorization: String, contentType: String, authRegisterModel: AuthRegisterModel): ResponseEntity<String> {
+    override fun register(authorization: String, authRegisterModel: AuthRegisterModel): ResponseEntity<String> {
         TODO("not implemented")
     }
 
