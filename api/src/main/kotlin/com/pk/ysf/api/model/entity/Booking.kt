@@ -49,8 +49,8 @@ data class Booking(
 
         var id: Long = 0
         var userCode: String = ""
-        var startDate: LocalDateTime = LocalDateTime.now()
-        var executionTime: LocalTime = LocalTime.now()
+        var startDate: LocalDateTime = LocalDateTime.MIN
+        var executionTime: LocalTime = LocalTime.MIN
         var amount: BigDecimal = BigDecimal.ZERO
         var isPayed: Boolean = false
         var soccerField: SoccerField = SoccerField.build {  }
