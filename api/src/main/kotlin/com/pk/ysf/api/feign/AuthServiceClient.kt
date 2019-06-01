@@ -1,6 +1,8 @@
 package com.pk.ysf.api.feign
 
 import com.pk.ysf.api.model.dto.AuthRegisterModel
+import com.pk.ysf.api.model.dto.LoginResponse
+import com.pk.ysf.api.model.dto.RegisterResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
@@ -15,12 +17,12 @@ interface AuthServiceClient {
             @RequestParam("username") username: String,
             @RequestParam("password") password: String,
             @RequestParam("grant_type") grantType: String
-    ): ResponseEntity<String>
+    ): ResponseEntity<LoginResponse>
 
     @PostMapping("/users")
     fun register(
             @RequestHeader(HttpHeaders.AUTHORIZATION) authorization: String,
             @RequestBody authRegisterModel: AuthRegisterModel
-    ): ResponseEntity<String>
+    ): ResponseEntity<RegisterResponse>
 
 }
