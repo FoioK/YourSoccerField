@@ -26,6 +26,7 @@
         <java.version>1.8</java.version>
         <kotlin.version>1.3.21</kotlin.version>
         <kotlin.runner.version>0.3.1</kotlin.runner.version>
+        <spring-openfeign-core.version>2.1.1.RELEASE</spring-openfeign-core.version>
         <spring-cloud-starter-oauth2.version>2.0.0.RELEASE</spring-cloud-starter-oauth2.version>
         <spring.security.jwt.version>1.0.9.RELEASE</spring.security.jwt.version>
         <camel.core.version>2.23.0</camel.core.version>
@@ -62,6 +63,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+            <version>${spring-openfeign-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
