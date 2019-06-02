@@ -13,6 +13,9 @@ data class SoccerField(
         @Column(nullable = false, length = 128)
         val name: String,
 
+        @Column(nullable = false)
+        val userCode: String,
+
         @ManyToOne(cascade = [
             CascadeType.PERSIST,
             CascadeType.MERGE,
@@ -64,6 +67,7 @@ data class SoccerField(
     constructor() : this(
             id = 0,
             name = "",
+            userCode = "",
             address = Address.build { },
             surface = Surface.build { },
             width = 0,
@@ -80,6 +84,7 @@ data class SoccerField(
     private constructor(builder: Builder) : this(
             builder.id,
             builder.name,
+            builder.userCode,
             builder.address,
             builder.surface,
             builder.width,
@@ -100,6 +105,7 @@ data class SoccerField(
     class Builder {
         var id: Long = 0
         var name: String = ""
+        var userCode: String = ""
         var address: Address = Address.build { }
         var surface: Surface = Surface.build { }
         var width: Int = 0
