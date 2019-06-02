@@ -9,7 +9,7 @@ data class UserReference (
         val email: String,
         val firstName: String,
         val secondName: String,
-        val nickname: String,
+        val username: String,
         val createTime: LocalDateTime
 
 ) {
@@ -20,7 +20,7 @@ data class UserReference (
             builder.email,
             builder.firstName,
             builder.secondName,
-            builder.nickname,
+            builder.username,
             builder.createTime
     )
 
@@ -34,7 +34,7 @@ data class UserReference (
         var email: String = ""
         var firstName: String = ""
         var secondName: String = ""
-        var nickname: String = ""
+        var username: String = ""
         var createTime: LocalDateTime = LocalDateTime.MIN
 
         fun build() = UserReference(this)

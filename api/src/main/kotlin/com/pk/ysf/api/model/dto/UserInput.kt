@@ -6,7 +6,7 @@ data class UserInput(
         val email: String,
         val firstName: String,
         val secondName: String,
-        val nickname: String
+        val username: String
 
 ) {
 
@@ -14,7 +14,7 @@ data class UserInput(
             builder.email,
             builder.firstName,
             builder.secondName,
-            builder.nickname
+            builder.username
     )
 
     companion object {
@@ -25,7 +25,7 @@ data class UserInput(
         var email: String = ""
         var firstName: String = ""
         var secondName: String = ""
-        var nickname: String = ""
+        var username: String = ""
 
         fun build() = UserInput(this)
     }

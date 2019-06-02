@@ -26,10 +26,12 @@ data class User(
         val secondName: String,
 
         @Column(nullable = false, length = 64)
-        val nickname: String,
+        val username: String,
 
         @Column(nullable = false)
-        val createTime: LocalDateTime
+        val createTime: LocalDateTime,
+
+        val isActive: Boolean
 
 ) {
 
@@ -39,8 +41,9 @@ data class User(
             builder.email,
             builder.firstName,
             builder.secondName,
-            builder.nickname,
-            builder.createTime
+            builder.username,
+            builder.createTime,
+            builder.isActive
     )
 
     companion object {
@@ -53,8 +56,9 @@ data class User(
         val email: String = ""
         val firstName: String = ""
         val secondName: String = ""
-        val nickname: String = ""
+        val username: String = ""
         val createTime: LocalDateTime = LocalDateTime.MIN
+        var isActive: Boolean = false
 
         fun build() = User(this)
     }
