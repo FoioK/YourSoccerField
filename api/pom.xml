@@ -29,7 +29,7 @@
         <spring-cloud-starter-oauth2.version>2.0.0.RELEASE</spring-cloud-starter-oauth2.version>
         <spring.security.jwt.version>1.0.9.RELEASE</spring.security.jwt.version>
         <camel.core.version>2.23.0</camel.core.version>
-        <hibernate.version>5.3.6.Final</hibernate.version>
+        <hibernate.version>5.3.20.Final</hibernate.version>
         <spring-fox.version>2.9.2</spring-fox.version>
         <jaxb-api.version>2.3.0</jaxb-api.version>
         <javax-validation.version>2.0.0.Final</javax-validation.version>
